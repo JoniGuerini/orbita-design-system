@@ -26,6 +26,9 @@ export const releases = [
       {
         name: 'Site',
         items: [
+          ['novo', 'Dourado na troca da cor da marca, ao lado de Pêssego, Violeta, Azul, Verde e Rosa', '/'],
+          ['correcao', 'Com Dourado e Verde, os links do tema claro descem um tom e passam de 4,5:1', '/recursos/acessibilidade'],
+          ['correcao', 'Com Dourado e Azul, a série de gráfico da mesma cor troca de lugar com a 1ª: nada se repete, e a ordem segue validada para daltonismo', '/graficos/visao-geral'],
           ['correcao', 'Na troca da cor da marca, a bolinha do Pêssego não imita mais a cor escolhida', '/'],
           ['correcao', 'Subir o servidor não regrava mais a data dos tokens quando nada mudou', '/recursos/tokens'],
         ],
