@@ -360,10 +360,16 @@ export async function buildTokens({ quiet = false } = {}) {
     contrast,
   };
 
-  const js = `// Gerado por scripts/build-tokens.mjs — não edite à mão.\nconst data = ${JSON.stringify(data, null, 2)};\n\nexport const { generatedAt, prefix, modes, defaultMode, palettes, tokens, contrast } = data;\nexport default data;\n`;
+  const renderJs = (d) => `// Gerado por scripts/build-tokens.mjs — não edite à mão.\nconst data = ${JSON.stringify(d, null, 2)};\n\nexport const { generatedAt, prefix, modes, defaultMode, palettes, tokens, contrast } = data;\nexport default data;\n`;
+
+  // A data só muda quando os tokens mudam: rodar de novo sem mexer em nada não altera o arquivo (nem o git).
+  const jsPath = path.join(ROOT, 'ds', 'tokens.js');
+  const previous = await readFile(jsPath, 'utf8').catch(() => '');
+  const previousAt = previous.match(/"generatedAt": "([^"]+)"/)?.[1];
+  if (previousAt && previous === renderJs({ ...data, generatedAt: previousAt })) data.generatedAt = previousAt;
 
   await writeFile(path.join(ROOT, 'ds', 'tokens.css'), `${css}\n`);
-  await writeFile(path.join(ROOT, 'ds', 'tokens.js'), js);
+  await writeFile(jsPath, renderJs(data));
 
   if (!quiet) {
     const failed = contrast.filter((c) => !c.pass);
