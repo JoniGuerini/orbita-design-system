@@ -18,6 +18,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 - A referência que vale para componentes é o painel “Roteiro”: botões de ícone sem fundo, chips em pílula só com contorno, rótulos pequenos e apagados (“00 · Sobre”), ações inline mínimas (“Na cena +”), texto de leitura com respiro.
 - A referência serve aos **componentes**, não para copiar telas: o Início é uma landing de design system (hero, colagem de componentes, números, fundamentos, padrões, roadmap), não um painel.
 - Consistência com o próprio app vale mais que invenção: o hover das Abas é igual ao da `.doc-nav`; Seleção usa lista própria (nada de menu nativo do sistema); Toast tem posição configurável.
+- **Barra de rolagem sobreposta** em todo o app (`ds/js/scrollbar.js` + `components/scrollbar.css`): a nativa some e fica só a barra, sem trilho nem setas. Ela aparece enquanto a pessoa rola e some ~1 s depois de parar. Dá para arrastá-la. Funciona por delegação (qualquer área que rola, inclusive dentro de `<dialog>`). O recuo nas pontas é `--ds-scrollbar-start/end`; o painel principal começa abaixo da topbar. Para desligar numa área, use `--ds-scrollbar: none` (abas e `.doc-nav`). No navegador do app com o painel oculto, a rolagem não dispara eventos: para testar, use rolagem real ou um screenshot para forçar o desenho.
 - Componentes consomem só tokens semânticos.
 
 ## Vetos

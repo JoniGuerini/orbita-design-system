@@ -7,6 +7,7 @@ import { initTheme, bindThemeControls, setTheme } from '../ds/js/theme.js';
 import { initLocale, setLocale, getLocalePreference, locale, LOCALES, LOCALE_NAMES } from '../ds/js/i18n.js';
 import { attachMenu } from '../ds/js/menu.js';
 import { initTooltips } from '../ds/js/tooltip.js';
+import { initScrollbars } from '../ds/js/scrollbar.js';
 import { createShell, renderSidebarNav, setActiveNavItem } from '../ds/js/shell.js';
 import { createCommandPalette } from '../ds/js/command-palette.js';
 import { navigation, pages, findPage } from './nav.js';
@@ -65,6 +66,7 @@ applyStrings();
 if (EMBED) bindEmbedThemeControls();
 else bindThemeControls();
 initTooltips();
+initScrollbars();
 
 /** A bolinha de Novidades some depois que a versão atual foi vista. */
 const newsSeen = () => {

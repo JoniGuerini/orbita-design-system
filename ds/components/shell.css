@@ -367,6 +367,9 @@
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
+  /* a barra de rolagem começa abaixo da topbar e para antes do canto arredondado */
+  --ds-scrollbar-start: var(--ds-layout-topbar);
+  --ds-scrollbar-end: var(--ds-space-200);
 }
 
 .ds-topbar {

@@ -1,0 +1,107 @@
+/* Barra de rolagem sobreposta — comportamento em ds/js/scrollbar.js
+ *
+ * Com [data-ds-scrollbars] em <html>, a barra nativa some em todo o app e, por cima de qualquer
+ * área que rola, aparece só a barra: sem trilho, sem setas. Ela surge enquanto a pessoa rola e
+ * some um instante depois de parar. Sem o JS, fica a barra nativa fina de base.css.
+ *
+ * Ajuste por área (variáveis CSS na própria área que rola):
+ *   --ds-scrollbar-start / --ds-scrollbar-end  recuo nas pontas do trilho (ex.: a altura de uma topbar fixa)
+ *   --ds-scrollbar: none                        não mostra a barra ali (listas horizontais de abas, por exemplo)
+ */
+
+/* não herdam: o recuo do painel principal não passa para as áreas que rolam dentro dele */
+@property --ds-scrollbar-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --ds-scrollbar-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --ds-scrollbar {
+  syntax: '*';
+  inherits: false;
+}
+
+[data-ds-scrollbars],
+[data-ds-scrollbars] * {
+  scrollbar-width: none !important;
+}
+
+[data-ds-scrollbars]::-webkit-scrollbar,
+[data-ds-scrollbars] ::-webkit-scrollbar {
+  display: none !important;
+  width: 0;
+  height: 0;
+}
+
+/* A área de pegar (12 px) é transparente; a barra visível é o ::before, mais fina. */
+.ds-scrollbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--ds-z-popover);
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+  user-select: none;
+  transition: opacity var(--ds-duration-slow) var(--ds-easing-standard);
+}
+
+.ds-scrollbar::before {
+  content: '';
+  position: absolute;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-border-field);
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    width var(--ds-duration-fast) var(--ds-easing-standard),
+    height var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-scrollbar--y::before {
+  top: 0;
+  right: 3px;
+  bottom: 0;
+  width: 6px;
+}
+
+.ds-scrollbar--x::before {
+  right: 0;
+  bottom: 3px;
+  left: 0;
+  height: 6px;
+}
+
+.ds-scrollbar[data-visible] {
+  opacity: 1;
+  pointer-events: auto;
+  transition-duration: var(--ds-duration-fast);
+}
+
+.ds-scrollbar:hover::before,
+.ds-scrollbar[data-active]::before {
+  background: var(--ds-color-fg-subtle);
+}
+
+.ds-scrollbar--y:hover::before,
+.ds-scrollbar--y[data-active]::before {
+  width: 8px;
+}
+
+.ds-scrollbar--x:hover::before,
+.ds-scrollbar--x[data-active]::before {
+  height: 8px;
+}
+
+@media print {
+  .ds-scrollbar {
+    display: none;
+  }
+}

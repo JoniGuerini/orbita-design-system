@@ -17,6 +17,7 @@
   padding-block: var(--ds-space-100);
   overflow-x: auto;
   scrollbar-width: none;
+  --ds-scrollbar: none;
   box-shadow: inset 0 -1px 0 var(--ds-color-border-subtle);
 }
 

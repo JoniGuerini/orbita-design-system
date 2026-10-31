@@ -100,6 +100,7 @@ pre {
   display: none !important;
 }
 
+/* Barra nativa fina; com ds/js/scrollbar.js ela some e dá lugar à sobreposta (components/scrollbar.css). */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--ds-color-border-strong) transparent;
