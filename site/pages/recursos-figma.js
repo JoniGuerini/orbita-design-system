@@ -40,7 +40,7 @@ const LIMITS = [
   ['Alguns componentes ficam mais simples', 'Tabela, gráficos e composer viram exemplos montados, sem todos os comportamentos da web.'],
   ['Fontes', 'Inter, Inter Tight e JetBrains Mono precisam estar disponíveis. Sem uma delas, o plugin usa Inter no mesmo peso e avisa no fim.'],
   ['Sombras não têm modo', 'Os estilos de sombra vêm em pares (Escuro/… e Claro/…); nos componentes, a sombra usa a cor de overlay, que tem modo.'],
-  ['Plano gratuito: um modo só', 'O plano gratuito do Figma aceita um modo por coleção de variáveis. Em Modos, escolha “Só Escuro” ou “Só Claro”; quando o arquivo for para um plano pago, rode de novo com Claro e Escuro e o que já existe é atualizado, sem duplicar.'],
+  ['Plano gratuito: um modo e 3 páginas', 'Em Modos, escolha “Só Escuro” ou “Só Claro”. O Órbita usa exatamente 3 páginas e aproveita a “Page 1” vazia do arquivo novo. Publicar como biblioteca pede plano pago; quando o arquivo for para um, rode de novo com Claro e Escuro e o que já existe é atualizado, sem duplicar.'],
   ['Só no app para desktop', 'Plugins de desenvolvimento não rodam no Figma do navegador.'],
 ];
 

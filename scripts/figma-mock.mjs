@@ -364,9 +364,10 @@ class VariableCollection {
 
 /* ───────── O objeto figma ───────── */
 
-export function createMockFigma({ missingFonts = [], maxModes = Infinity } = {}) {
+export function createMockFigma({ missingFonts = [], maxModes = Infinity, maxPages = Infinity } = {}) {
   const figma = {
     _maxModes: maxModes,
+    _maxPages: maxPages,
     _collections: [],
     _variables: [],
     _textStyles: [],
@@ -393,7 +394,14 @@ export function createMockFigma({ missingFonts = [], maxModes = Infinity } = {})
   figma.createText = () => place(new TextNode(figma));
   figma.createRectangle = () => place(new ShapeNode('RECTANGLE', figma));
   figma.createEllipse = () => place(new ShapeNode('ELLIPSE', figma));
-  figma.createPage = () => { const p = reg(new PageNode(figma, 'Page')); figma.root.children.push(p); return p; };
+  figma.createPage = () => {
+    // o plano gratuito do Figma aceita 3 páginas por arquivo (mensagem igual à do Figma)
+    const max = figma._maxPages;
+    if (figma.root.children.length >= max) fail(`in createPage: The Starter plan only comes with ${max} pages. Upgrade to Professional for unlimited pages: https://www.figma.com/pricing`);
+    const p = reg(new PageNode(figma, 'Page'));
+    figma.root.children.push(p);
+    return p;
+  };
   figma.setCurrentPageAsync = async (p) => { if (!p._loaded) fail('setCurrentPageAsync: carregue a página antes'); figma.currentPage = p; };
   figma.loadAllPagesAsync = async () => figma.root.children.forEach((p) => (p._loaded = true));
   figma.loadFontAsync = async (f) => {

@@ -88,13 +88,15 @@ try {
   const overflows = overflowsIn(figma);
   if (overflows.length) problems.push(`conteúdo vazando da linha: ${overflows.slice(0, 40).join('; ')}${overflows.length > 40 ? ` e mais ${overflows.length - 40}` : ''}`);
 
-  // plano gratuito: um modo só por coleção. Gerar só o Escuro tem de funcionar, pedir os dois tem de explicar
-  // a recusa e, quando o arquivo vai para um plano pago, o Claro entra sem duplicar nem trocar ids.
-  const free = createMockFigma({ maxModes: 1 });
+  // plano gratuito: um modo por coleção e 3 páginas por arquivo. Gerar só o Escuro tem de caber (a Page 1 vazia
+  // vira uma página do Órbita), pedir os dois modos tem de explicar a recusa e, quando o arquivo vai para um
+  // plano pago, o Claro entra sem duplicar nem trocar ids.
+  const free = createMockFigma({ maxModes: 1, maxPages: 3 });
   const semModes = (fig) => fig._collections.find((c) => c.name === 'Semânticos').modes.map((m) => m.name).join(' · ');
   const stages = (fig, mode) => fig.root.children.flatMap((p) => p.findAll((n) => n.name === `Modo ${mode}`)).length;
   const solo = await run('Plano gratuito', free, { modes: ['Escuro'] });
   const f1 = census(free);
+  if (f1.pages.join(' · ') !== 'Órbita · Fundamentos · Órbita · Ícones · Órbita · Componentes') problems.push(`plano gratuito: páginas ${f1.pages.join(' · ')}`);
   if (semModes(free) !== 'Escuro') problems.push(`plano gratuito: Semânticos ficou com os modos ${semModes(free)}`);
   if (stages(free, 'Claro') || !stages(free, 'Escuro')) problems.push(`plano gratuito: prévias Claro ${stages(free, 'Claro')}, Escuro ${stages(free, 'Escuro')}`);
   const soloOverflows = overflowsIn(free);
@@ -102,7 +104,14 @@ try {
   let refused = '';
   try { await run('Dois modos no plano gratuito', free); } catch (err) { refused = err.message; }
   if (!/Só Escuro/.test(refused)) problems.push(`plano gratuito: pedir os dois modos devia explicar a recusa (veio: ${refused || 'nada'})`);
+  // com a Page 1 ocupada não cabe: a recusa de página também tem de vir explicada
+  const crowded = createMockFigma({ maxModes: 1, maxPages: 3 });
+  crowded.root.children[0].appendChild(crowded.createFrame());
+  let noRoom = '';
+  try { await run('Página ocupada no plano gratuito', crowded, { modes: ['Escuro'] }); } catch (err) { noRoom = err.message; }
+  if (!/3 páginas/.test(noRoom)) problems.push(`plano gratuito: faltar página devia explicar a recusa (veio: ${noRoom || 'nada'})`);
   free._maxModes = Infinity; // o arquivo foi para um time com plano pago
+  free._maxPages = Infinity;
   await run('Plano pago', free);
   const f2 = census(free);
   const moved = Object.keys(f1.keys).filter((k) => (k.startsWith('cmp/') || k.startsWith('set/') || k.startsWith('icon/')) && f2.keys[k] !== f1.keys[k]);
@@ -138,7 +147,7 @@ try {
   console.log(`✓ ${second.label}: mesmos ${c2.byType.COMPONENT ?? 0} componentes e ${c2.byType.COMPONENT_SET ?? 0} conjuntos, ids preservados (${second.ms} ms)`);
   console.log(`  páginas: ${c2.pages.join(' · ')}`);
   console.log(`  nós: ${Object.entries(c2.byType).map(([k, v]) => `${k.toLowerCase()} ${v}`).join(', ')}`);
-  console.log(`✓ plano gratuito: só o modo Escuro (${solo.ms} ms); pedir os dois explica a recusa; no plano pago o Claro entra com os mesmos ids`);
+  console.log(`✓ plano gratuito: só o modo Escuro, em 3 páginas (${solo.ms} ms); faltar modo ou página explica a recusa; no plano pago o Claro entra com os mesmos ids`);
   if (problems.length) {
     console.error(`✗ ${problems.join('\n✗ ')}`);
     process.exitCode = 1;

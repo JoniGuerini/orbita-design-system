@@ -406,9 +406,33 @@ function live(key, type) {
   return n;
 }
 
+/** Página vazia com o nome padrão do Figma (“Page 1”, “Página 1”): todo arquivo novo traz uma. */
+async function blankDefaultPage() {
+  for (var p of figma.root.children) {
+    if (!/^(Page|Página) \d+$/.test(p.name)) continue;
+    await p.loadAsync();
+    if (!p.children.length) return p;
+  }
+  return null;
+}
+
+/** createPage com a recusa do plano gratuito explicada (o Figma responde em inglês, com link de preço). */
+function addPage() {
+  try {
+    return figma.createPage();
+  } catch (err) {
+    if (/Starter plan|\d+ pages/.test(String(err && err.message))) {
+      throw new Error('O plano gratuito do Figma aceita 3 páginas por arquivo, e o Órbita usa 3 (Fundamentos, Ícones e Componentes). Apague as outras páginas do arquivo, ou use um arquivo novo, e rode de novo.');
+    }
+    throw err;
+  }
+}
+
 async function ensurePage(name) {
   var page = ORB.pages[name] || figma.root.children.find(function (p) { return p.name === name; });
-  if (!page) page = figma.createPage();
+  // a página vazia do arquivo novo vira uma do Órbita: o plano gratuito aceita 3 páginas, e o Órbita usa 3
+  if (!page) page = await blankDefaultPage();
+  if (!page) page = addPage();
   page.name = name;
   await page.loadAsync();
   ORB.pages[name] = page;

@@ -11,14 +11,15 @@ export const releases = [
     version: '0.6.1',
     date: '2026-10-31',
     title: 'Plugin no plano gratuito',
-    summary: 'O plugin do Figma passou a funcionar no plano gratuito, que aceita um modo só por coleção de variáveis: você escolhe os modos na janela e completa depois, sem duplicar nada.',
+    summary: 'O plugin do Figma passou a funcionar no plano gratuito, que aceita um modo por coleção de variáveis e 3 páginas por arquivo: você escolhe os modos na janela e completa depois, sem duplicar nada.',
     groups: [
       {
         name: 'Figma',
         items: [
           ['novo', 'Modos na janela do plugin: Claro e Escuro, Só Escuro ou Só Claro. A escolha fica guardada no computador', '/recursos/figma'],
+          ['melhoria', 'A “Page 1” vazia do arquivo novo vira uma página do Órbita: as 3 páginas cabem no plano gratuito', '/recursos/figma'],
           ['melhoria', 'Num arquivo gerado com um modo só, rodar de novo com Claro e Escuro acrescenta o outro modo e mantém os componentes e as instâncias', '/recursos/figma'],
-          ['correcao', 'A recusa do plano gratuito (“Limited to 1 modes only”) virou uma explicação em português, com o que fazer', '/recursos/figma'],
+          ['correcao', 'As recusas do plano gratuito (modos e páginas) viraram explicações em português, com o que fazer', '/recursos/figma'],
           ['melhoria', 'O teste do plugin simula o plano gratuito e a passagem para um plano pago', '/recursos/figma'],
         ],
       },
