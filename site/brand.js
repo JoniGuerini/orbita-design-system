@@ -12,7 +12,10 @@ export const BRANDS = [
   { value: 'pink', label: 'Rosa' },
 ];
 
-const steps = palettes.find((p) => p.name === 'brand').steps.map((s) => s.step);
+const brandPalette = palettes.find((p) => p.name === 'brand');
+const steps = brandPalette.steps.map((s) => s.step);
+// A troca redefine --ds-color-brand-*: a bolinha do pêssego usa o tom fixo para não imitar a marca escolhida.
+const peachSwatch = brandPalette.steps.find((s) => s.step === '400').hex;
 let active = 'brand';
 
 export const getBrand = () => active;
@@ -27,4 +30,5 @@ export function applyBrand(name) {
   }
 }
 
-export const brandOptions = () => BRANDS.map((b) => ({ ...b, swatch: `var(--ds-color-${b.value}-400)` }));
+export const brandOptions = () =>
+  BRANDS.map((b) => ({ ...b, swatch: b.value === 'brand' ? peachSwatch : `var(--ds-color-${b.value}-400)` }));
