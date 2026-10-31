@@ -14,6 +14,7 @@
  * Ambos → { update(options), setLoading(bool), destroy(), el }. Até 7 faixas de cor; acima disso, use uma tabela.
  */
 import { createFrame, formatter, textWidth, fitText, labelStep, tag, escapeHtml, round, clamp, FONTS } from './core.js';
+import { locale, msg, dateFormat } from '../i18n.js';
 
 const GAP = 2;
 const SEQ_INDEX = { 3: [2, 4, 7], 4: [1, 3, 5, 7], 5: [1, 2, 4, 6, 7], 6: [1, 2, 3, 5, 6, 7], 7: [1, 2, 3, 4, 5, 6, 7] };
@@ -183,11 +184,11 @@ export function heatmap(host, input) {
       const c = i % geo.C;
       const v = o.values[r]?.[c];
       const { color } = geo.scale.color(v == null ? null : +v);
-      return { title: `${o.rows[r]} · ${o.columns[c]}`, rows: [{ color, mark: 'rect', value: v == null ? 'Sem dado' : geo.fmt(v), name: v == null ? '' : o.valueLabel ?? '' }] };
+      return { title: `${o.rows[r]} · ${o.columns[c]}`, rows: [{ color, mark: 'rect', value: v == null ? msg('chart.noValue') : geo.fmt(v), name: v == null ? '' : o.valueLabel ?? '' }] };
     },
   });
 
-  const summary = () => `${o.title ?? o.label ?? 'Mapa de calor'}. Mapa de calor com ${o.rows.length} linhas e ${o.columns.length} colunas`;
+  const summary = () => msg('chart.summaryHeatmap', o.title ?? o.label ?? msg('chart.heatmap'), o.rows.length, o.columns.length);
   frame.setLabel(summary());
   frame.onResize(render);
   render();
@@ -209,10 +210,24 @@ export function heatmap(host, input) {
 /* ───────── Calendário ───────── */
 
 const DAY = 86400000;
-const WEEKDAYS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-const MONTH = new Intl.DateTimeFormat('pt-BR', { month: 'short' });
-const MONTH_LONG = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' });
-const FULL = new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' });
+const dateCache = new Map();
+/** Datas do calendário no idioma atual; dias da semana curtos e sem ponto (Dom, Seg… · Sun, Mon…). */
+function dates() {
+  if (!dateCache.has(locale())) {
+    const weekday = dateFormat({ weekday: 'short' });
+    dateCache.set(locale(), {
+      // 7 de janeiro de 2024 foi um domingo
+      weekdays: Array.from({ length: 7 }, (_, d) => {
+        const s = weekday.format(new Date(2024, 0, 7 + d)).replace('.', '');
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }),
+      month: dateFormat({ month: 'short' }),
+      monthLong: dateFormat({ month: 'long', year: 'numeric' }),
+      full: dateFormat({ day: 'numeric', month: 'short', year: 'numeric' }),
+    });
+  }
+  return dateCache.get(locale());
+}
 
 const parseDay = (d) => {
   if (d instanceof Date) return new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -261,7 +276,7 @@ export function calendarHeatmap(host, input) {
 
     let labels = '';
     [1, 3, 5].forEach((d) => {
-      labels += tag('text', { x: left - 10, y: top + d * (size + GAP) + size / 2, class: 'ds-chart__tick', 'text-anchor': 'end', 'dominant-baseline': 'middle' }, WEEKDAYS[d]);
+      labels += tag('text', { x: left - 10, y: top + d * (size + GAP) + size / 2, class: 'ds-chart__tick', 'text-anchor': 'end', 'dominant-baseline': 'middle' }, dates().weekdays[d]);
     });
     let svg = '';
     let lastMonth = -1;
@@ -274,7 +289,7 @@ export function calendarHeatmap(host, input) {
       if (date.getMonth() !== lastMonth) {
         lastMonth = date.getMonth();
         if (x - lastX >= 30 && (c === 0 ? dateAt(0).getDate() <= 21 : true)) {
-          svg += tag('text', { x, y: top - 8, class: 'ds-chart__tick' }, escapeHtml(MONTH.format(date).replace('.', '')));
+          svg += tag('text', { x, y: top - 8, class: 'ds-chart__tick' }, escapeHtml(dates().month.format(date).replace('.', '')));
           lastX = x;
         }
       }
@@ -300,7 +315,7 @@ export function calendarHeatmap(host, input) {
     frame.plot.innerHTML = `<div style="display:flex;min-width:0">
         <svg class="ds-chart__svg" width="${left}" height="${H}" viewBox="0 0 ${left} ${H}" style="flex:none" aria-hidden="true">${labels}</svg>
         <div class="ds-chart__scroll" style="flex:1;min-width:0"><svg class="ds-chart__svg" width="${width}" height="${H}" viewBox="0 0 ${width} ${H}" style="max-width:none" aria-hidden="true">${svg}</svg></div>
-      </div>${o.scaleLegend === false ? '' : scaleLegend({ ...o, scaleLabels: o.scaleLabels ?? ['Menos', 'Mais'] }, scale, fmt)}`;
+      </div>${o.scaleLegend === false ? '' : scaleLegend({ ...o, scaleLabels: o.scaleLabels ?? [msg('chart.less'), msg('chart.more')] }, scale, fmt)}`;
     const scroller = frame.plot.querySelector('.ds-chart__scroll');
     scroller.scrollLeft = keep ?? scroller.scrollWidth;
     geo = { n, offset, left, top, size, fmt, scale, values };
@@ -310,7 +325,7 @@ export function calendarHeatmap(host, input) {
     values.forEach((v, i) => {
       const d = dateAt(i);
       const key = `${d.getFullYear()}-${d.getMonth()}`;
-      const m = months.get(key) ?? { label: MONTH_LONG.format(d), total: 0, active: 0, max: 0, maxDay: null };
+      const m = months.get(key) ?? { label: dates().monthLong.format(d), total: 0, active: 0, max: 0, maxDay: null };
       if (v) {
         m.total += v;
         m.active += 1;
@@ -322,8 +337,8 @@ export function calendarHeatmap(host, input) {
       months.set(key, m);
     });
     frame.setTable({
-      columns: [{ label: 'Mês' }, { label: 'Total', num: true }, { label: 'Dias com registro', num: true }, { label: 'Maior dia', num: true }],
-      rows: [...months.values()].map((m) => [m.label, fmt(m.total), String(m.active), m.maxDay ? `${fmt(m.max)} · ${FULL.format(m.maxDay)}` : '—']),
+      columns: [{ label: msg('chart.month') }, { label: msg('chart.total'), num: true }, { label: msg('chart.daysWithData'), num: true }, { label: msg('chart.biggestDay'), num: true }],
+      rows: [...months.values()].map((m) => [m.label, fmt(m.total), String(m.active), m.maxDay ? `${fmt(m.max)} · ${dates().full.format(m.maxDay)}` : '—']),
     });
     frame.refresh();
   }
@@ -372,11 +387,11 @@ export function calendarHeatmap(host, input) {
     describe(i) {
       const v = geo.values[i];
       const label = o.valueLabel ? ` ${o.valueLabel}` : '';
-      return { title: `${WEEKDAYS[dateAt(i).getDay()]}, ${FULL.format(dateAt(i))}`, rows: [{ color: geo.scale.color(v).color, mark: 'rect', value: v == null ? 'Sem dado' : `${geo.fmt(v)}${label}`, name: '' }] };
+      return { title: `${dates().weekdays[dateAt(i).getDay()]}, ${dates().full.format(dateAt(i))}`, rows: [{ color: geo.scale.color(v).color, mark: 'rect', value: v == null ? msg('chart.noValue') : `${geo.fmt(v)}${label}`, name: '' }] };
     },
   });
 
-  const summary = () => `${o.title ?? o.label ?? 'Calendário'}. Mapa de calor em calendário com ${o.values.length} dias`;
+  const summary = () => msg('chart.summaryCalendar', o.title ?? o.label ?? msg('chart.calendar'), o.values.length);
   frame.setLabel(summary());
   frame.onResize(render);
   render();

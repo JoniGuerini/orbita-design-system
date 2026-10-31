@@ -48,11 +48,13 @@ ds/                  ← o design system em si
                      gráficos, shell, ⌘K…)
   icons/icons.js     126 ícones próprios + função icon() + <ds-icon>
   js/                theme, tooltip, menu, select, tabs, modal, toast, shell, command-palette,
-                     composer (conversa), form (validação), filters (barra de filtros)
+                     composer (conversa), form (validação), filters (barra de filtros),
+                     i18n + messages (idioma e os textos dos componentes em PT, EN e ES)
   js/charts.js       gráficos em SVG: barras, linhas e áreas, rosca, heatmap, calendário,
                      dispersão, indicador, sparkline e medidor (núcleo em js/charts/)
 site/                ← o site de documentação (usa o DS)
-  nav.js             mapa do site: sidebar, rotas, breadcrumb e busca
+  nav.js             mapa do site: sidebar, rotas, breadcrumb e busca (nomes nos três idiomas)
+  i18n.js            textos do shell e da busca em PT, EN e ES
   docs.css           layout das páginas de documentação (cabeçalho, nav da página, seções, tabelas)
   doc-nav.js         navegação "nesta página" (rolagem + seção ativa)
   component-doc.*    peças das páginas de componente: playground com código, tokens usados, acessibilidade
@@ -102,6 +104,17 @@ enhanceForm(document.querySelector('form'), { onSubmit: (data) => salvar(data) }
 ```
 
 O app shell aceita `createShell(el, { persist: false })` para demonstrações que não devem salvar preferências; abra o site com `?embed` para o mesmo efeito.
+
+### Idiomas
+
+Os textos dos componentes (validação, “Fechar”, “Nenhum resultado”, gráficos) e a formatação de números e datas seguem o idioma: português, inglês ou espanhol. Por padrão vale o idioma do sistema; o que não for um dos três vira inglês.
+
+```js
+import { setLocale, locale } from './ds/js/i18n.js';
+
+setLocale('en');        // 'pt-BR' | 'en' | 'es' | 'system' — salva a escolha e avisa com ds:localechange
+locale();               // 'en'
+```
 
 Todos os gráficos seguem o tema sozinhos (as cores são tokens `--ds-color-chart-*`), têm tooltip no hover e no teclado, legenda que esconde séries e uma vista em tabela. As 8 cores de série têm ordem fixa, validada para daltonismo nos dois temas: não recicle nem invente uma 9ª — agrupe em “Outros”.
 

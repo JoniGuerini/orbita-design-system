@@ -13,6 +13,7 @@
  * Padrão ARIA: combobox + listbox com aria-activedescendant.
  */
 import { icon } from '../icons/icons.js';
+import { msg } from './i18n.js';
 
 const normalize = (s) =>
   String(s ?? '')
@@ -49,30 +50,43 @@ export function filterCommands(items, query) {
 
 let instances = 0;
 
-export function createCommandPalette({ items, placeholder = 'Buscar páginas, tokens e ações…', label = 'Busca rápida', hotkeys = true }) {
+export function createCommandPalette({ items, placeholder, label, hotkeys = true }) {
   // a primeira paleta mantém os ids de sempre; as outras ganham sufixo (sem ids repetidos)
   const n = ++instances;
   const pre = n === 1 ? 'ds-command' : `ds-command-${n}`;
   const dialog = document.createElement('dialog');
   dialog.className = 'ds-command';
-  dialog.setAttribute('aria-label', label);
   dialog.innerHTML = `
     <div class="ds-command__search">
       ${icon('search', { size: 20 })}
       <input class="ds-command__input" type="text" role="combobox" aria-expanded="true" aria-controls="${pre}-list"
-        aria-autocomplete="list" autocomplete="off" spellcheck="false" aria-label="${escape(label)}" placeholder="${escape(placeholder)}">
+        aria-autocomplete="list" autocomplete="off" spellcheck="false">
       <kbd class="ds-kbd">Esc</kbd>
     </div>
-    <div class="ds-command__list" id="${pre}-list" role="listbox" aria-label="Resultados"></div>
+    <div class="ds-command__list" id="${pre}-list" role="listbox"></div>
     <footer class="ds-command__footer" aria-hidden="true">
-      <span><kbd class="ds-kbd">↑</kbd><kbd class="ds-kbd">↓</kbd> navegar</span>
-      <span><kbd class="ds-kbd">↵</kbd> abrir</span>
-      <span><kbd class="ds-kbd">Esc</kbd> fechar</span>
+      <span><kbd class="ds-kbd">↑</kbd><kbd class="ds-kbd">↓</kbd> <span data-label="navigate"></span></span>
+      <span><kbd class="ds-kbd">↵</kbd> <span data-label="open"></span></span>
+      <span><kbd class="ds-kbd">Esc</kbd> <span data-label="close"></span></span>
     </footer>`;
   document.body.append(dialog);
 
   const input = dialog.querySelector('.ds-command__input');
   const list = dialog.querySelector('.ds-command__list');
+
+  // textos no idioma atual, refeitos quando o idioma muda; label e placeholder aceitam função para acompanhar também
+  const text = (value, key) => (typeof value === 'function' ? value() : value ?? msg(key));
+  function labels() {
+    const name = text(label, 'palette.label');
+    dialog.setAttribute('aria-label', name);
+    input.setAttribute('aria-label', name);
+    input.placeholder = text(placeholder, 'palette.placeholder');
+    list.setAttribute('aria-label', msg('palette.results'));
+    dialog.querySelectorAll('[data-label]').forEach((el) => (el.textContent = msg(`palette.${el.dataset.label}`)));
+    if (dialog.open) render();
+  }
+  labels();
+  document.documentElement.addEventListener('ds:localechange', labels);
   let results = [];
   let active = 0;
   let returnFocus = null;
@@ -90,7 +104,7 @@ export function createCommandPalette({ items, placeholder = 'Buscar páginas, to
     active = Math.min(active, Math.max(results.length - 1, 0));
 
     if (!results.length) {
-      list.innerHTML = `<p class="ds-command__empty">Nada encontrado para “${escape(input.value)}”.</p>`;
+      list.innerHTML = `<p class="ds-command__empty">${escape(msg('palette.empty', input.value))}</p>`;
       input.removeAttribute('aria-activedescendant');
       return;
     }
@@ -201,6 +215,7 @@ export function createCommandPalette({ items, placeholder = 'Buscar páginas, to
 
   function destroy() {
     document.removeEventListener('keydown', onKey);
+    document.documentElement.removeEventListener('ds:localechange', labels);
     close();
     dialog.remove();
   }

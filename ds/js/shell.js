@@ -8,6 +8,7 @@
  * A cada mudança, o shell dispara "ds:shellchange" com { sidebar, mobile, mobileOpen }.
  */
 import { icon } from '../icons/icons.js';
+import { msg } from './i18n.js';
 
 const SIDEBAR_KEY = 'ds-sidebar';
 const GROUPS_KEY = 'ds-nav-groups';
@@ -48,7 +49,7 @@ export function createShell(root, { persist = true, initial } = {}) {
   function sync() {
     const mobile = isMobile();
     const expanded = mobile ? isMobileOpen() : !isCollapsed();
-    const label = mobile ? (expanded ? 'Fechar menu' : 'Abrir menu') : expanded ? 'Recolher menu' : 'Expandir menu';
+    const label = msg(mobile ? (expanded ? 'shell.closeMenu' : 'shell.openMenu') : expanded ? 'shell.collapse' : 'shell.expand');
     for (const btn of toggles) {
       btn.setAttribute('aria-expanded', String(expanded));
       btn.setAttribute('aria-label', label);
@@ -80,6 +81,7 @@ export function createShell(root, { persist = true, initial } = {}) {
 
   toggles.forEach((btn) => btn.addEventListener('click', toggle));
   scrim?.addEventListener('click', () => setMobileOpen(false));
+  document.documentElement.addEventListener('ds:localechange', sync);
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && isMobile() && isMobileOpen()) {

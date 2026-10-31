@@ -16,6 +16,7 @@
  * Cada posição tem a própria região (role="status", aria-live="polite"), criada quando é usada.
  */
 import { icon } from '../icons/icons.js';
+import { msg } from './i18n.js';
 
 const DURATION = 2200;
 const DURATION_WITH_ACTION = 5000;
@@ -70,7 +71,7 @@ export function toastContent(message, { icon: name, tone = 'neutral', action, di
   return `<span class="ds-toast__icon">${icon(glyph, { size: toned ? 14 : 18 })}</span>
     <span class="ds-toast__message">${escape(message)}</span>
     ${action ? `<button type="button" class="ds-toast__action" data-toast-action>${escape(action.label)}</button>` : ''}
-    ${dismissible ? `<button type="button" class="ds-toast__close" data-toast-close aria-label="Fechar aviso">${icon('x', { size: 16 })}</button>` : ''}`;
+    ${dismissible ? `<button type="button" class="ds-toast__close" data-toast-close aria-label="${msg('toast.close')}">${icon('x', { size: 16 })}</button>` : ''}`;
 }
 
 export const toastClasses = ({ tone = 'neutral' } = {}) => `ds-toast${tone !== 'neutral' ? ` ds-toast--${tone}` : ''}`;
@@ -157,7 +158,7 @@ function legacyCopy(text) {
   return ok;
 }
 
-export async function copyText(text, label = 'Copiado') {
+export async function copyText(text, label = msg('toast.copied')) {
   let ok = false;
   try {
     await navigator.clipboard.writeText(text);
@@ -166,5 +167,5 @@ export async function copyText(text, label = 'Copiado') {
     ok = legacyCopy(text);
   }
   if (ok) toast(`${label}: ${text}`);
-  else toast('Não foi possível copiar', { icon: 'alert-circle' });
+  else toast(msg('toast.copyFailed'), { icon: 'alert-circle' });
 }

@@ -24,6 +24,7 @@
  * - Múltipla: listbox com aria-multiselectable="true"; Espaço e Enter alternam sem fechar.
  */
 import { icon } from '../icons/icons.js';
+import { msg } from './i18n.js';
 
 let uid = 0;
 let current = null;
@@ -32,7 +33,6 @@ const instances = new WeakMap();
 const normalize = (s) => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const escape = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
-const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
 /** Destaca o trecho encontrado sem mudar o texto lido pelo leitor de tela. */
 function highlight(label, query) {
@@ -48,11 +48,11 @@ export function enhanceSelect(select, config = {}) {
   const multiple = select.multiple;
   const opts = {
     search: config.search ?? select.hasAttribute('data-search'),
-    searchPlaceholder: config.searchPlaceholder ?? select.dataset.searchPlaceholder ?? 'Buscar…',
+    searchPlaceholder: config.searchPlaceholder ?? select.dataset.searchPlaceholder ?? msg('select.search'),
     display: config.display ?? select.dataset.display ?? 'chips',
     max: Number(config.max ?? select.dataset.max) || Infinity,
     footer: config.footer ?? select.hasAttribute('data-footer'),
-    placeholder: config.placeholder ?? select.dataset.placeholder ?? (multiple ? 'Escolha uma ou mais opções' : ''),
+    placeholder: config.placeholder ?? select.dataset.placeholder ?? (multiple ? msg('select.placeholderMultiple') : ''),
   };
 
   const id = select.id || `ds-select-${++uid}`;
@@ -103,7 +103,7 @@ export function enhanceSelect(select, config = {}) {
         ${opts.display === 'chips' ? '<ul class="ds-select__chips" role="list"></ul>' : ''}
         <button type="button" class="ds-select__combobox"><span class="ds-select__summary"></span><span class="ds-visually-hidden" data-sr></span></button>
       </div>
-      <button type="button" class="ds-select__clear" tabindex="-1" aria-label="Limpar seleção" hidden>${icon('x', { size: 14 })}</button>
+      <button type="button" class="ds-select__clear" tabindex="-1" aria-label="${msg('select.clear')}" hidden>${icon('x', { size: 14 })}</button>
       ${chevron}`;
     wrapper.append(control);
     trigger = control.querySelector('.ds-select__combobox');
@@ -193,7 +193,7 @@ export function enhanceSelect(select, config = {}) {
     const chosen = selectedOptions();
     const chip = (o) => `<li class="ds-select__chip-item"><span class="ds-chip ds-chip--sm ds-chip--removable ds-select__chip">
       <span class="ds-select__chip-label">${escape(o.textContent.trim())}</span>
-      <button type="button" class="ds-chip__remove" tabindex="-1" data-remove="${o.index}" aria-label="Remover ${escape(o.textContent.trim())}"${select.disabled ? ' disabled' : ''}>${icon('x', { size: 12 })}</button>
+      <button type="button" class="ds-chip__remove" tabindex="-1" data-remove="${o.index}" aria-label="${escape(msg('common.remove', o.textContent.trim()))}"${select.disabled ? ' disabled' : ''}>${icon('x', { size: 12 })}</button>
     </span></li>`;
     chipsEl.innerHTML = chosen.map(chip).join('');
     if (!chosen.length || !wrapper.isConnected) return;
@@ -231,11 +231,11 @@ export function enhanceSelect(select, config = {}) {
     const names = chosen.map((o) => o.textContent.trim()).join(', ');
     clearBtn.hidden = n === 0 || select.disabled;
     if (opts.display === 'count') {
-      summaryEl.textContent = n ? plural(n, 'selecionado', 'selecionados') : opts.placeholder;
+      summaryEl.textContent = n ? msg('select.selected', n) : opts.placeholder;
       srEl.textContent = n ? `: ${names}` : '';
     } else {
       summaryEl.textContent = n ? '' : opts.placeholder;
-      srEl.textContent = n ? `${plural(n, 'selecionado', 'selecionados')}: ${names}` : '';
+      srEl.textContent = n ? `${msg('select.selected', n)}: ${names}` : '';
       layoutChips();
     }
     summaryEl.toggleAttribute('data-placeholder', n === 0);
@@ -279,7 +279,7 @@ export function enhanceSelect(select, config = {}) {
 
     const name = labelText();
     popup.innerHTML = `
-      ${opts.search ? `<div class="ds-select-popup__search"><div class="ds-field ds-field--sm">${icon('search', { size: 16 })}<input class="ds-field__input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="${listId}"${name ? ` aria-label="Buscar em ${escape(name)}"` : ''} placeholder="${escape(opts.searchPlaceholder)}" autocomplete="off" spellcheck="false"></div></div>` : ''}
+      ${opts.search ? `<div class="ds-select-popup__search"><div class="ds-field ds-field--sm">${icon('search', { size: 16 })}<input class="ds-field__input" type="text" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="${listId}"${name ? ` aria-label="${escape(msg('select.searchIn', name))}"` : ''} placeholder="${escape(opts.searchPlaceholder)}" autocomplete="off" spellcheck="false"></div></div>` : ''}
       <div class="ds-select-popup__list" role="listbox" id="${listId}" tabindex="-1"${labelId ? ` aria-labelledby="${labelId}"` : ''}${multiple ? ' aria-multiselectable="true"' : ''}>${body}</div>
       <p class="ds-select-popup__empty" role="status" hidden></p>
       ${multiple && Number.isFinite(opts.max) ? `<p class="ds-select-popup__note" hidden>${icon('info', { size: 14 })}<span>Limite de ${opts.max}. Desmarque uma opção para escolher outra.</span></p>` : ''}
@@ -310,7 +310,7 @@ export function enhanceSelect(select, config = {}) {
     const count = popup.querySelector('.ds-select-popup__count');
     if (count) {
       const n = selectedOptions().length;
-      count.textContent = Number.isFinite(opts.max) ? `${n} de ${opts.max}` : plural(n, 'selecionado', 'selecionados');
+      count.textContent = Number.isFinite(opts.max) ? msg('select.count', n, opts.max) : msg('select.selected', n);
       popup.querySelector('[data-clear-all]').disabled = n === 0;
       popup.querySelector('[data-select-all]').disabled = limit || ![...entries.values()].some((e) => enabled(e.index) && !select.options[e.index].selected);
     }
@@ -334,7 +334,7 @@ export function enhanceSelect(select, config = {}) {
     });
     const empty = popup.querySelector('.ds-select-popup__empty');
     empty.hidden = visible > 0;
-    empty.textContent = visible ? '' : `Nada encontrado para “${raw}”`;
+    empty.textContent = visible ? '' : msg('select.empty', raw);
     listEl.hidden = visible === 0;
     if (!enabled(active)) setActive(first());
     refreshOptions();

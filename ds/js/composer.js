@@ -18,6 +18,7 @@
  *   composerHtml(opts), messageHtml(opts), attachmentHtml(file), typingHtml(label), streamText(el, paragraphs, opts)
  */
 import { icon } from '../icons/icons.js';
+import { msg, numberFormat } from './i18n.js';
 
 let uid = 0;
 
@@ -34,7 +35,7 @@ const normalize = (s) =>
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
 
-const NF = new Intl.NumberFormat('pt-BR');
+const fmt = (n) => numberFormat().format(n);
 const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function formatBytes(n) {
@@ -53,13 +54,13 @@ export function attachmentHtml({ name, size, type, id, removable = false }) {
     <span class="ds-attachment__icon" aria-hidden="true">${icon(ic, { size: 14 })}</span>
     <span class="ds-attachment__name">${esc(name)}</span>
     ${size != null ? `<span class="ds-attachment__size">${formatBytes(size)}</span>` : ''}
-    ${removable ? `<button type="button" class="ds-attachment__remove" data-remove="${esc(id)}" aria-label="Remover ${esc(name)}">${icon('x', { size: 14 })}</button>` : ''}
+    ${removable ? `<button type="button" class="ds-attachment__remove" data-remove="${esc(id)}" aria-label="${esc(msg('common.remove', name))}">${icon('x', { size: 14 })}</button>` : ''}
   </span>`;
 }
 
 function commandChip(command) {
   return `<span class="ds-composer__command">${icon(command.icon ?? 'slash', { size: 14 })}<span>${esc(command.label)}</span>
-    <button type="button" class="ds-attachment__remove" data-remove="command" aria-label="Remover comando ${esc(command.label)}">${icon('x', { size: 14 })}</button></span>`;
+    <button type="button" class="ds-attachment__remove" data-remove="command" aria-label="${esc(msg('composer.removeCommand', command.label))}">${icon('x', { size: 14 })}</button></span>`;
 }
 
 const sendIcon = (busy) => (busy ? '<span class="ds-composer__stop" aria-hidden="true"></span>' : icon('arrow-up', { size: 18, strokeWidth: 2 }));
@@ -70,8 +71,8 @@ const sendIcon = (busy) => (busy ? '<span class="ds-composer__stop" aria-hidden=
  */
 export function composerHtml({
   id = `ds-composer-${++uid}`,
-  label = 'Mensagem',
-  placeholder = 'Escreva uma mensagem ou / para comandos',
+  label = msg('composer.label'),
+  placeholder = msg('composer.placeholder'),
   value = '',
   attachments = [],
   command = null,
@@ -98,39 +99,39 @@ export function composerHtml({
     <div class="ds-composer__bar">
       ${
         attach
-          ? `<button type="button" class="ds-icon-btn ds-icon-btn--muted" data-attach aria-label="Anexar arquivo" data-ds-tooltip="Anexar arquivo">${icon('paperclip', { size: 18 })}</button>
+          ? `<button type="button" class="ds-icon-btn ds-icon-btn--muted" data-attach aria-label="${msg('composer.attach')}" data-ds-tooltip="${msg('composer.attach')}">${icon('paperclip', { size: 18 })}</button>
              <input type="file" multiple hidden data-file tabindex="-1">`
           : ''
       }
-      ${commands ? `<button type="button" class="ds-icon-btn ds-icon-btn--muted" data-commands aria-label="Comandos" data-ds-tooltip="Comandos" data-ds-tooltip-kbd="/">${icon('slash', { size: 18 })}</button>` : ''}
-      ${mic ? `<button type="button" class="ds-icon-btn ds-icon-btn--muted" data-mic aria-label="Ditar" data-ds-tooltip="Ditar">${icon('mic', { size: 18 })}</button>` : ''}
+      ${commands ? `<button type="button" class="ds-icon-btn ds-icon-btn--muted" data-commands aria-label="${msg('composer.commands')}" data-ds-tooltip="${msg('composer.commands')}" data-ds-tooltip-kbd="/">${icon('slash', { size: 18 })}</button>` : ''}
+      ${mic ? `<button type="button" class="ds-icon-btn ds-icon-btn--muted" data-mic aria-label="${msg('composer.dictate')}" data-ds-tooltip="${msg('composer.dictate')}">${icon('mic', { size: 18 })}</button>` : ''}
       <span class="ds-composer__spacer"></span>
-      <span class="ds-composer__count" data-count aria-hidden="true"${showCount ? '' : ' hidden'}>${maxLength ? `${NF.format(len)} / ${NF.format(maxLength)}` : ''}</span>
-      <button type="button" class="ds-composer__send" data-send aria-label="${busy ? 'Parar resposta' : 'Enviar mensagem'}" data-ds-tooltip="${busy ? 'Parar resposta' : 'Enviar'}" data-ds-tooltip-kbd="${busy ? 'Esc' : '↵'}"${!busy && !canSend ? ' aria-disabled="true"' : ''}>${sendIcon(busy)}</button>
+      <span class="ds-composer__count" data-count aria-hidden="true"${showCount ? '' : ' hidden'}>${maxLength ? `${fmt(len)} / ${fmt(maxLength)}` : ''}</span>
+      <button type="button" class="ds-composer__send" data-send aria-label="${msg(busy ? 'composer.stop' : 'composer.send')}" data-ds-tooltip="${msg(busy ? 'composer.stop' : 'composer.sendShort')}" data-ds-tooltip-kbd="${busy ? 'Esc' : '↵'}"${!busy && !canSend ? ' aria-disabled="true"' : ''}>${sendIcon(busy)}</button>
     </div>
-    <div class="ds-composer__menu" id="${id}-menu" role="listbox" aria-label="Comandos" hidden></div>
+    <div class="ds-composer__menu" id="${id}-menu" role="listbox" aria-label="${msg('composer.commands')}" hidden></div>
   </div>
   ${
     hint
       ? `<p class="ds-composer__hint" id="${id}-hint">
-          <span><kbd class="ds-kbd">Enter</kbd> envia</span>
-          <span><kbd class="ds-kbd">Shift</kbd> + <kbd class="ds-kbd">Enter</kbd> quebra linha</span>
-          ${commands ? '<span><kbd class="ds-kbd">/</kbd> comandos</span>' : ''}
+          <span><kbd class="ds-kbd">Enter</kbd> ${msg('composer.hintSend')}</span>
+          <span><kbd class="ds-kbd">Shift</kbd> + <kbd class="ds-kbd">Enter</kbd> ${msg('composer.hintNewline')}</span>
+          ${commands ? `<span><kbd class="ds-kbd">/</kbd> ${msg('composer.hintCommands')}</span>` : ''}
         </p>`
       : ''
   }`;
 }
 
 /** Indicador "escrevendo" (pontos param com movimento reduzido). */
-export function typingHtml(label = 'Órbita está escrevendo') {
+export function typingHtml(label = msg('composer.typing', 'Órbita')) {
   return `<div class="ds-typing"><span class="ds-typing__dots" aria-hidden="true"><i></i><i></i><i></i></span><span>${esc(label)}</span></div>`;
 }
 
 const MESSAGE_ACTIONS = [
-  ['copy', 'copy', 'Copiar resposta'],
-  ['retry', 'refresh', 'Gerar de novo'],
-  ['like', 'thumbs-up', 'Gostei'],
-  ['dislike', 'thumbs-down', 'Não gostei'],
+  ['copy', 'copy', 'composer.copy'],
+  ['retry', 'refresh', 'composer.retry'],
+  ['like', 'thumbs-up', 'composer.like'],
+  ['dislike', 'thumbs-down', 'composer.dislike'],
 ];
 
 /**
@@ -145,13 +146,13 @@ export function messageHtml({ role = 'assistant', id, author = 'Órbita', time, 
   if (role === 'user') {
     const footer =
       status === 'error'
-        ? `<p class="ds-message__error"><span>${icon('alert-circle', { size: 16 })}Não foi enviada.</span><button type="button" class="ds-inline-action" data-action="resend">${icon('refresh', { size: 16 })}Tentar de novo</button></p>`
+        ? `<p class="ds-message__error"><span>${icon('alert-circle', { size: 16 })}${msg('composer.notSent')}</span><button type="button" class="ds-inline-action" data-action="resend">${icon('refresh', { size: 16 })}${msg('composer.tryAgain')}</button></p>`
         : time || meta
-          ? `<p class="ds-message__meta">${esc(meta ?? 'Enviada')}${time ? ` · <time>${esc(time)}</time>` : ''}</p>`
+          ? `<p class="ds-message__meta">${esc(meta ?? msg('composer.sent'))}${time ? ` · <time>${esc(time)}</time>` : ''}</p>`
           : '';
-    return `<article ${attrs} aria-label="Você disse">${files}${body ? `<div class="ds-message__body">${body}</div>` : ''}${footer}</article>`;
+    return `<article ${attrs} aria-label="${msg('composer.youSaid')}">${files}${body ? `<div class="ds-message__body">${body}</div>` : ''}${footer}</article>`;
   }
-  return `<article ${attrs} aria-label="${esc(author)} respondeu">
+  return `<article ${attrs} aria-label="${esc(msg('composer.replied', author))}">
     <header class="ds-message__head"><span class="ds-message__mark" aria-hidden="true">Ó</span><span class="ds-message__author">${esc(author)}</span>${time ? `<time>${esc(time)}</time>` : ''}</header>
     ${files}
     <div class="ds-message__body" data-body>${body}</div>
@@ -159,9 +160,9 @@ export function messageHtml({ role = 'assistant', id, author = 'Órbita', time, 
     ${meta ? `<p class="ds-message__meta">${esc(meta)}</p>` : ''}
     ${
       actions
-        ? `<div class="ds-message__actions" role="group" aria-label="Ações da resposta">${MESSAGE_ACTIONS.map(
-            ([action, ic, label]) =>
-              `<button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted" data-action="${action}" aria-label="${label}" data-ds-tooltip="${label}"${action === 'like' || action === 'dislike' ? ' aria-pressed="false"' : ''}>${icon(ic, { size: 16 })}</button>`,
+        ? `<div class="ds-message__actions" role="group" aria-label="${msg('composer.replyActions')}">${MESSAGE_ACTIONS.map(
+            ([action, ic, key]) =>
+              `<button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted" data-action="${action}" aria-label="${msg(key)}" data-ds-tooltip="${msg(key)}"${action === 'like' || action === 'dislike' ? ' aria-pressed="false"' : ''}>${icon(ic, { size: 16 })}</button>`,
           ).join('')}</div>`
         : ''
     }
@@ -219,8 +220,8 @@ export function streamText(el, paragraphs, { delay = 32, signal } = {}) {
 
 export function createComposer(host, options = {}) {
   const o = {
-    label: 'Mensagem',
-    placeholder: 'Escreva uma mensagem ou / para comandos',
+    label: msg('composer.label'),
+    placeholder: msg('composer.placeholder'),
     commands: [],
     maxLength: 4000,
     attach: true,
@@ -277,7 +278,7 @@ export function createComposer(host, options = {}) {
     root.toggleAttribute('data-over', !!over);
     if (o.maxLength) {
       countEl.hidden = len < o.maxLength * 0.8;
-      countEl.textContent = `${NF.format(len)} / ${NF.format(o.maxLength)}`;
+      countEl.textContent = `${fmt(len)} / ${fmt(o.maxLength)}`;
     }
     if (busy || canSend()) sendBtn.removeAttribute('aria-disabled');
     else sendBtn.setAttribute('aria-disabled', 'true');
@@ -317,11 +318,11 @@ export function createComposer(host, options = {}) {
               </div>`,
             )
             .join('')
-        : `<p class="ds-composer__empty">Nenhum comando com “${esc(query)}”.</p>`);
+        : `<p class="ds-composer__empty">${esc(msg('composer.noCommandFor', query))}</p>`);
     const wasOpen = !menu.hidden;
     menu.hidden = false;
     setActive(active);
-    if (!wasOpen) announce(options$.length ? `${options$.length} comandos. Use as setas e Enter.` : 'Nenhum comando.');
+    if (!wasOpen) announce(options$.length ? msg('composer.commandCount', options$.length) : msg('composer.noCommands'));
   }
 
   function closeMenu() {
@@ -350,7 +351,7 @@ export function createComposer(host, options = {}) {
     autosize();
     sync();
     input.focus();
-    announce(`Comando ${c.label} escolhido.`);
+    announce(msg('composer.commandChosen', c.label));
   }
 
   function checkSlash() {
@@ -368,14 +369,14 @@ export function createComposer(host, options = {}) {
     for (const f of list) attachments.push({ id: `${id}-f${++fileSeq}`, name: f.name, size: f.size, type: f.type });
     renderTokens();
     sync();
-    announce(list.length === 1 ? `${list[0].name} anexado.` : `${list.length} arquivos anexados.`);
+    announce(list.length === 1 ? msg('composer.attachedOne', list[0].name) : msg('composer.attachedMany', list.length));
   }
 
   /* enviar e parar */
   function send() {
     if (busy) return stop();
     if (!canSend()) {
-      if (o.maxLength && input.value.length > o.maxLength) announce(`A mensagem passou de ${NF.format(o.maxLength)} caracteres.`);
+      if (o.maxLength && input.value.length > o.maxLength) announce(msg('composer.tooLong', o.maxLength));
       return;
     }
     const payload = { text: input.value.trim(), attachments: attachments.map(({ id: _, ...a }) => a), command: command?.id ?? null };
@@ -442,7 +443,7 @@ export function createComposer(host, options = {}) {
       command = null;
       renderTokens();
       sync();
-      announce(`Comando ${removed.label} removido.`);
+      announce(msg('composer.commandRemoved', removed.label));
     }
   };
 
@@ -466,12 +467,12 @@ export function createComposer(host, options = {}) {
     if (remove) {
       const key = remove.dataset.remove;
       if (key === 'command') {
-        announce(`Comando ${command?.label ?? ''} removido.`);
+        announce(msg('composer.commandRemoved', command?.label ?? ''));
         command = null;
       } else {
         const a = attachments.find((x) => x.id === key);
         attachments = attachments.filter((x) => x.id !== key);
-        if (a) announce(`${a.name} removido.`);
+        if (a) announce(msg('composer.removed', a.name));
       }
       renderTokens();
       sync();
@@ -541,9 +542,9 @@ export function createComposer(host, options = {}) {
     setBusy(on) {
       busy = !!on;
       root.toggleAttribute('data-busy', busy);
-      const label = busy ? 'Parar resposta' : 'Enviar mensagem';
+      const label = msg(busy ? 'composer.stop' : 'composer.send');
       sendBtn.setAttribute('aria-label', label);
-      sendBtn.dataset.dsTooltip = busy ? 'Parar resposta' : 'Enviar';
+      sendBtn.dataset.dsTooltip = msg(busy ? 'composer.stop' : 'composer.sendShort');
       sendBtn.dataset.dsTooltipKbd = busy ? 'Esc' : '↵';
       sendBtn.innerHTML = sendIcon(busy);
       sync();

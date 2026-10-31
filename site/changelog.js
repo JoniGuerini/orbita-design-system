@@ -1,17 +1,25 @@
 /**
  * Histórico de versões do Órbita — fonte da página Novidades e do indicador da sidebar.
  * Tipos: 'novo' | 'melhoria' | 'correcao'.
+ * Títulos e resumos em T(pt-BR, en, es): em `releases` e `upcoming` eles são getters no idioma atual.
  */
+import { tr } from '../ds/js/i18n.js';
+
+const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
 export const CURRENT_VERSION = '0.6.1';
 export const SEEN_KEY = 'ds-novidades-vista';
 
-export const releases = [
+const RELEASES = [
   {
     version: '0.6.1',
     date: '2026-10-31',
-    title: 'Plugin no plano gratuito',
-    summary: 'O plugin do Figma passou a funcionar no plano gratuito, que aceita um modo por coleção de variáveis e 3 páginas por arquivo: você escolhe os modos na janela e completa depois, sem duplicar nada.',
+    title: T('Plugin no plano gratuito', 'Plugin on the free plan', 'Plugin en el plan gratuito'),
+    summary: T(
+      'O plugin do Figma passou a funcionar no plano gratuito, que aceita um modo por coleção de variáveis e 3 páginas por arquivo: você escolhe os modos na janela e completa depois, sem duplicar nada.',
+      'The Figma plugin now works on the free plan, which allows one mode per variable collection and 3 pages per file: you pick the modes in the window and add the rest later, without duplicating anything.',
+      'El plugin de Figma ahora funciona en el plan gratuito, que admite un modo por colección de variables y 3 páginas por archivo: eliges los modos en la ventana y completas después, sin duplicar nada.',
+    ),
     groups: [
       {
         name: 'Figma',
@@ -38,8 +46,12 @@ export const releases = [
   {
     version: '0.6.0',
     date: '2026-10-31',
-    title: 'Plugin completo',
-    summary: 'O plugin do Figma passou a cobrir o design system inteiro: 7 blocos novos, as variações que faltavam e as correções que só apareceram rodando no Figma de verdade.',
+    title: T('Plugin completo', 'Complete plugin', 'Plugin completo'),
+    summary: T(
+      'O plugin do Figma passou a cobrir o design system inteiro: 7 blocos novos, as variações que faltavam e as correções que só apareceram rodando no Figma de verdade.',
+      'The Figma plugin now covers the whole design system: 7 new blocks, the missing variants, and the fixes that only showed up when running in the real Figma.',
+      'El plugin de Figma ahora cubre todo el design system: 7 bloques nuevos, las variantes que faltaban y las correcciones que solo aparecieron al ejecutarlo en Figma de verdad.',
+    ),
     groups: [
       {
         name: 'Figma',
@@ -65,8 +77,12 @@ export const releases = [
   {
     version: '0.5.0',
     date: '2026-10-31',
-    title: 'Plugin do Figma',
-    summary: 'Os componentes do Órbita dentro do Figma, sem redesenhar: um plugin que você importa pelo manifesto e que gera variáveis, estilos, ícones e 35 blocos de documentação nos modos Claro e Escuro.',
+    title: T('Plugin do Figma', 'Figma plugin', 'Plugin de Figma'),
+    summary: T(
+      'Os componentes do Órbita dentro do Figma, sem redesenhar: um plugin que você importa pelo manifesto e que gera variáveis, estilos, ícones e 35 blocos de documentação nos modos Claro e Escuro.',
+      'Órbita’s components inside Figma, without redrawing: a plugin you import from its manifest that generates variables, styles, icons, and 35 documentation blocks in Light and Dark modes.',
+      'Los componentes de Órbita dentro de Figma, sin redibujar: un plugin que importas desde el manifiesto y que genera variables, estilos, íconos y 35 bloques de documentación en los modos Claro y Oscuro.',
+    ),
     groups: [
       {
         name: 'Figma',
@@ -84,8 +100,12 @@ export const releases = [
   {
     version: '0.4.1',
     date: '2026-10-31',
-    title: 'Contraste em dia',
-    summary: 'As três pendências de acessibilidade foram resolvidas: contorno de campos, switch desligado e texto apagado no tema claro. O build agora mede 70 combinações.',
+    title: T('Contraste em dia', 'Contrast sorted', 'Contraste al día'),
+    summary: T(
+      'As três pendências de acessibilidade foram resolvidas: contorno de campos, switch desligado e texto apagado no tema claro. O build agora mede 70 combinações.',
+      'The three open accessibility issues are fixed: field borders, the off switch, and faded text in the light theme. The build now measures 70 pairs.',
+      'Se resolvieron los tres pendientes de accesibilidad: el borde de los campos, el switch apagado y el texto atenuado en el tema claro. El build ahora mide 70 combinaciones.',
+    ),
     groups: [
       {
         name: 'Acessibilidade',
@@ -102,8 +122,12 @@ export const releases = [
   {
     version: '0.4.0',
     date: '2026-10-31',
-    title: 'Recursos',
-    summary: 'O que o time precisa para adotar e evoluir o Órbita: guia de acessibilidade com as pendências à vista, tokens exportados para o Figma e o caminho de uma contribuição.',
+    title: T('Recursos', 'Resources', 'Recursos'),
+    summary: T(
+      'O que o time precisa para adotar e evoluir o Órbita: guia de acessibilidade com as pendências à vista, tokens exportados para o Figma e o caminho de uma contribuição.',
+      'What the team needs to adopt and evolve Órbita: an accessibility guide with open issues in plain sight, tokens exported to Figma, and the path for a contribution.',
+      'Lo que el equipo necesita para adoptar y hacer crecer Órbita: una guía de accesibilidad con los pendientes a la vista, tokens exportados a Figma y el camino de una contribución.',
+    ),
     groups: [
       {
         name: 'Recursos',
@@ -127,8 +151,12 @@ export const releases = [
   {
     version: '0.3.0',
     date: '2026-10-31',
-    title: 'Padrões',
-    summary: 'Como as peças se encaixam em telas reais: app shell, conversa, formulários, estados vazios e busca — cada padrão com um exemplo que funciona de verdade.',
+    title: T('Padrões', 'Patterns', 'Patrones'),
+    summary: T(
+      'Como as peças se encaixam em telas reais: app shell, conversa, formulários, estados vazios e busca — cada padrão com um exemplo que funciona de verdade.',
+      'How the pieces fit together in real screens: app shell, chat, forms, empty states, and search — each pattern with an example that actually works.',
+      'Cómo encajan las piezas en pantallas reales: app shell, conversación, formularios, estados vacíos y búsqueda — cada patrón con un ejemplo que funciona de verdad.',
+    ),
     groups: [
       {
         name: 'Padrões',
@@ -162,8 +190,12 @@ export const releases = [
   {
     version: '0.2.0',
     date: '2026-10-31',
-    title: 'Gráficos',
-    summary: 'Uma seção inteira de gráficos: seis formas, indicadores e uma paleta validada para daltonismo nos dois temas. Tudo em SVG, sem dependências.',
+    title: T('Gráficos', 'Charts', 'Gráficos'),
+    summary: T(
+      'Uma seção inteira de gráficos: seis formas, indicadores e uma paleta validada para daltonismo nos dois temas. Tudo em SVG, sem dependências.',
+      'A whole section of charts: six shapes, indicators, and a palette validated for color blindness in both themes. All in SVG, with no dependencies.',
+      'Una sección entera de gráficos: seis formas, indicadores y una paleta validada para daltonismo en los dos temas. Todo en SVG, sin dependencias.',
+    ),
     groups: [
       {
         name: 'Gráficos',
@@ -194,8 +226,12 @@ export const releases = [
   {
     version: '0.1.0',
     date: '2026-10-31',
-    title: 'Primeira versão',
-    summary: 'Fundamentos completos, 16 componentes documentados e o app shell. A base para começar a construir.',
+    title: T('Primeira versão', 'First version', 'Primera versión'),
+    summary: T(
+      'Fundamentos completos, 16 componentes documentados e o app shell. A base para começar a construir.',
+      'Complete foundations, 16 documented components, and the app shell. The base to start building on.',
+      'Fundamentos completos, 16 componentes documentados y el app shell. La base para empezar a construir.',
+    ),
     groups: [
       {
         name: 'Fundamentos',
@@ -240,15 +276,28 @@ export const releases = [
   },
 ];
 
+/** Cada campo traduzido vira um getter no idioma atual (as listas de itens seguem como estão). */
+function live(source) {
+  const out = {};
+  for (const [key, value] of Object.entries(source)) Object.defineProperty(out, key, { enumerable: true, get: () => tr(value) });
+  return out;
+}
+
+export const releases = RELEASES.map(live);
+
 export const upcoming = [
   {
     version: '1.0',
-    title: 'Estável',
-    status: ['brand', 'Próximo'],
-    text: 'API congelada e pronta para escalar.',
-    items: ['Pacote para instalar', 'Testes visuais com data-state', 'Compromisso de compatibilidade'],
+    title: T('Estável', 'Stable', 'Estable'),
+    status: T(['brand', 'Próximo'], ['brand', 'Next'], ['brand', 'Próximo']),
+    text: T('API congelada e pronta para escalar.', 'A frozen API, ready to scale.', 'API congelada y lista para escalar.'),
+    items: T(
+      ['Pacote para instalar', 'Testes visuais com data-state', 'Compromisso de compatibilidade'],
+      ['An installable package', 'Visual tests with data-state', 'A compatibility promise'],
+      ['Paquete para instalar', 'Pruebas visuales con data-state', 'Compromiso de compatibilidad'],
+    ),
   },
-];
+].map(live);
 
 export const TYPES = {
   novo: ['brand', 'Novo'],

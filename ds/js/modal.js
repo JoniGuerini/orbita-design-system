@@ -19,6 +19,7 @@
  *   const unbind = bindModalTriggers(document);
  */
 import { icon } from '../icons/icons.js';
+import { msg } from './i18n.js';
 
 let uid = 0;
 const escape = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
@@ -31,7 +32,7 @@ function exitDuration(el) {
 }
 
 /** HTML interno do modal — usado pela API e pelas prévias estáticas da documentação. */
-export function modalContent({ id = `ds-modal-${++uid}`, eyebrow, title, body, tone, icon: glyph, actions = [], dismissible = true, closeLabel = 'Fechar' } = {}) {
+export function modalContent({ id = `ds-modal-${++uid}`, eyebrow, title, body, tone, icon: glyph, actions = [], dismissible = true, closeLabel = msg('common.close') } = {}) {
   const lead = glyph ?? (tone === 'danger' ? 'alert-triangle' : null);
   return `
     <header class="ds-modal__header">
@@ -170,7 +171,7 @@ export function openModal(options = {}) {
 }
 
 /** Confirmação: resolve true se a pessoa confirmou. Em tom de perigo, o foco começa em "Cancelar". */
-export function confirmModal({ title, body, eyebrow, confirmLabel = 'Confirmar', cancelLabel = 'Cancelar', tone, icon: glyph } = {}) {
+export function confirmModal({ title, body, eyebrow, confirmLabel = msg('modal.confirm'), cancelLabel = msg('modal.cancel'), tone, icon: glyph } = {}) {
   const danger = tone === 'danger';
   return openModal({
     title,

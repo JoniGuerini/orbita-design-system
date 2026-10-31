@@ -4,11 +4,14 @@
 import '../ds/icons/icons.js';
 import { icon } from '../ds/icons/icons.js';
 import { initTheme, bindThemeControls, setTheme } from '../ds/js/theme.js';
+import { initLocale, setLocale, getLocalePreference, locale, LOCALES, LOCALE_NAMES } from '../ds/js/i18n.js';
+import { attachMenu } from '../ds/js/menu.js';
 import { initTooltips } from '../ds/js/tooltip.js';
 import { createShell, renderSidebarNav, setActiveNavItem } from '../ds/js/shell.js';
 import { createCommandPalette } from '../ds/js/command-palette.js';
 import { navigation, pages, findPage } from './nav.js';
 import { CURRENT_VERSION, SEEN_KEY } from './changelog.js';
+import { t, applyStrings } from './i18n.js';
 
 /*
  * Modo demonstração (?embed): o app roda dentro de um iframe nas páginas de documentação
@@ -57,6 +60,8 @@ function bindEmbedThemeControls() {
 const applyTheme = EMBED ? embedTheme : setTheme;
 
 initTheme();
+initLocale();
+applyStrings();
 if (EMBED) bindEmbedThemeControls();
 else bindThemeControls();
 initTooltips();
@@ -72,24 +77,30 @@ const newsSeen = () => {
 
 // o cartão da conta mostra a versão atual (Órbita 0.2)
 const shortVersion = CURRENT_VERSION.replace(/\.0$/, '');
-document.querySelectorAll('.ds-account').forEach((card) => {
-  card.dataset.dsTooltip = `Órbita ${shortVersion} · novidades`;
-  const title = card.querySelector('.ds-account__title');
-  if (title) title.textContent = `Órbita ${shortVersion}`;
-});
+function renderAccount() {
+  document.querySelectorAll('.ds-account').forEach((card) => {
+    card.dataset.dsTooltip = t('accountTooltip', shortVersion);
+    const title = card.querySelector('.ds-account__title');
+    if (title) title.textContent = `Órbita ${shortVersion}`;
+  });
+}
+renderAccount();
 
 const navEl = document.getElementById('sidebar-nav');
 const content = document.getElementById('conteudo');
 const breadcrumb = document.getElementById('breadcrumb');
 
-renderSidebarNav(
-  navEl,
-  navigation.map((group) => ({
-    id: group.id,
-    label: group.label,
-    items: group.items.map((item) => ({ label: item.label, icon: item.icon, href: `#${item.path}`, dot: item.dot && !newsSeen() })),
-  })),
-);
+function renderSidebar() {
+  renderSidebarNav(
+    navEl,
+    navigation.map((group) => ({
+      id: group.id,
+      label: group.label,
+      items: group.items.map((item) => ({ label: item.label, icon: item.icon, href: `#${item.path}`, dot: item.dot && !newsSeen() })),
+    })),
+  );
+}
+renderSidebar();
 
 const shell = createShell(
   document.getElementById('shell'),
@@ -97,24 +108,59 @@ const shell = createShell(
 );
 const go = (path) => (location.hash = path);
 
+const applyLocale = (preference) => setLocale(preference, { persist: !EMBED });
+
 const palette = createCommandPalette({
-  placeholder: 'Buscar páginas e ações…',
+  placeholder: () => t('palettePlaceholder'),
   items: () => [
     ...pages.map((page) => ({
       id: page.path,
       label: page.label,
-      group: page.group ?? 'Geral',
+      group: page.group ?? t('general'),
       icon: page.icon,
       description: page.description,
       keywords: page.topics,
-      hint: page.load ? undefined : 'Em breve',
+      hint: page.load ? undefined : t('soon'),
       perform: () => go(page.path),
     })),
-    { id: 'theme-dark', label: 'Usar tema escuro', group: 'Ações', icon: 'moon', keywords: ['dark'], perform: () => applyTheme('dark') },
-    { id: 'theme-light', label: 'Usar tema claro', group: 'Ações', icon: 'sun', keywords: ['light'], perform: () => applyTheme('light') },
-    { id: 'theme-system', label: 'Seguir tema do sistema', group: 'Ações', icon: 'monitor', keywords: ['system', 'automático'], perform: () => applyTheme('system') },
-    { id: 'sidebar', label: 'Recolher ou expandir menu', group: 'Ações', icon: 'panel-left', hint: `${palette.modifierLabel} B`, keywords: ['sidebar', 'barra lateral'], perform: () => shell.toggle() },
+    { id: 'theme-dark', label: t('useDark'), group: t('actions'), icon: 'moon', keywords: ['dark', 'escuro', 'oscuro'], perform: () => applyTheme('dark') },
+    { id: 'theme-light', label: t('useLight'), group: t('actions'), icon: 'sun', keywords: ['light', 'claro'], perform: () => applyTheme('light') },
+    { id: 'theme-system', label: t('useSystem'), group: t('actions'), icon: 'monitor', keywords: ['system', 'sistema', 'automático'], perform: () => applyTheme('system') },
+    ...LOCALES.map((l) => ({ id: `locale-${l}`, label: `${t('language')}: ${LOCALE_NAMES[l]}`, group: t('actions'), icon: 'globe', keywords: ['idioma', 'language', 'lenguaje'], perform: () => applyLocale(l) })),
+    { id: 'sidebar', label: t('toggleMenu'), group: t('actions'), icon: 'panel-left', hint: `${palette.modifierLabel} B`, keywords: ['sidebar', 'barra lateral'], perform: () => shell.toggle() },
   ],
+});
+
+/* ───────── Idioma ───────── */
+
+const localeChip = document.querySelector('[data-locale-menu]');
+const SHORT = { 'pt-BR': 'PT', en: 'EN', es: 'ES' };
+let localeMenu = null;
+
+function renderLocaleMenu() {
+  localeMenu?.destroy();
+  localeChip.querySelector('[data-label]').textContent = SHORT[locale()];
+  localeChip.setAttribute('aria-label', `${t('language')}: ${LOCALE_NAMES[locale()]}`);
+  localeMenu = attachMenu(localeChip, {
+    label: t('language'),
+    value: EMBED ? locale() : getLocalePreference(),
+    options: [
+      { value: 'system', label: t('languageSystem', LOCALE_NAMES[locale()]), icon: 'monitor' },
+      { type: 'separator' },
+      ...LOCALES.map((l) => ({ value: l, label: LOCALE_NAMES[l] })),
+    ],
+    onChange: applyLocale,
+  });
+}
+renderLocaleMenu();
+
+// trocar o idioma refaz tudo que tem texto: shell, sidebar, seletor e a página aberta
+document.documentElement.addEventListener('ds:localechange', () => {
+  applyStrings();
+  renderAccount();
+  renderSidebar();
+  renderLocaleMenu();
+  route();
 });
 
 document.querySelectorAll('[data-kbd-mod]').forEach((el) => (el.textContent = palette.modifierLabel));
@@ -136,9 +182,9 @@ const escape = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 function renderBreadcrumb(page) {
   const crumbs = [];
-  if (page?.path !== '/') crumbs.push({ label: 'Início', href: '#/' });
+  if (page?.path !== '/') crumbs.push({ label: t('home'), href: '#/' });
   if (page?.group) crumbs.push({ label: page.group });
-  crumbs.push({ label: page ? page.label : 'Página não encontrada', current: true });
+  crumbs.push({ label: page ? page.label : t('notFound'), current: true });
   breadcrumb.innerHTML = `<ol>${crumbs
     .map((c, i) => {
       const sep = i ? icon('chevron-right', { size: 14 }) : '';
@@ -185,7 +231,7 @@ async function route() {
 
   setActiveNavItem(navEl, page ? `#${page.path}` : null);
   renderBreadcrumb(page);
-  document.title = !page ? 'Página não encontrada · Órbita' : page.path === '/' ? 'Órbita Design System' : `${page.label} · Órbita`;
+  document.title = !page ? `${t('notFound')} · Órbita` : page.path === '/' ? 'Órbita Design System' : `${page.label} · Órbita`;
 
   const mod = await (page?.load?.() ?? import(page ? './pages/placeholder.js' : './pages/not-found.js'));
   await Promise.all([].concat(mod.styles ?? []).map(loadStyles));
@@ -204,4 +250,4 @@ addEventListener('hashchange', route);
 route();
 
 // a página que embute o app (mesma origem) controla a demonstração por aqui
-if (EMBED) window.orbitaEmbed = { shell, palette, go, setTheme: embedTheme, root: document.getElementById('shell') };
+if (EMBED) window.orbitaEmbed = { shell, palette, go, setTheme: embedTheme, setLocale: applyLocale, root: document.getElementById('shell') };

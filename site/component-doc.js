@@ -11,6 +11,14 @@ import { icon } from '../ds/icons/icons.js';
 import { tokens } from '../ds/tokens.js';
 import { attachMenu } from '../ds/js/menu.js';
 import { copyText } from '../ds/js/toast.js';
+import { tr } from '../ds/js/i18n.js';
+import { T } from './i18n.js';
+
+const TEXT = T(
+  { copy: 'Copiar código', copied: 'Código copiado', stageTheme: 'Tema do palco', dark: 'Escuro', light: 'Claro', token: 'Token', role: 'Papel' },
+  { copy: 'Copy code', copied: 'Code copied', stageTheme: 'Stage theme', dark: 'Dark', light: 'Light', token: 'Token', role: 'Role' },
+  { copy: 'Copiar código', copied: 'Código copiado', stageTheme: 'Tema del escenario', dark: 'Oscuro', light: 'Claro', token: 'Token', role: 'Función' },
+);
 
 export const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -18,7 +26,7 @@ const byName = new Map(tokens.map((t) => [t.name, t]));
 
 /* ───────── Bloco de código com copiar ───────── */
 
-export function codeBlock(code, { label = 'Copiar código' } = {}) {
+export function codeBlock(code, { label = tr(TEXT).copy } = {}) {
   return `<div class="cd-code">
     <pre class="ds-code"><code>${escapeHtml(code)}</code></pre>
     <button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted cd-code__copy" data-copy-code aria-label="${label}" data-ds-tooltip="${label}">${icon('copy', { size: 16 })}</button>
@@ -28,12 +36,13 @@ export function codeBlock(code, { label = 'Copiar código' } = {}) {
 /* ───────── Playground ───────── */
 
 export function playgroundMarkup(id, { wide = false } = {}) {
+  const t = tr(TEXT);
   return `<div class="cd-playground${wide ? ' cd-playground--wide' : ''}" data-playground="${id}">
     <div class="cd-playground__stage" data-stage data-theme="dark">
       <div class="cd-playground__preview" data-preview></div>
-      <div class="ds-segmented cd-playground__theme" role="radiogroup" aria-label="Tema do palco">
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="true" aria-label="Escuro">${icon('moon', { size: 16 })}</button>
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="false" aria-label="Claro">${icon('sun', { size: 16 })}</button>
+      <div class="ds-segmented cd-playground__theme" role="radiogroup" aria-label="${t.stageTheme}">
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="true" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="false" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
       </div>
     </div>
     <div class="cd-playground__controls" data-controls></div>
@@ -123,7 +132,7 @@ export function mountPlayground(root, { id, controls, text, render, code, mount 
 export function mountCodeCopy(root) {
   const onClick = (event) => {
     const btn = event.target.closest('[data-copy-code]');
-    if (btn) copyText(btn.parentElement.querySelector('code').textContent, 'Código copiado');
+    if (btn) copyText(btn.parentElement.querySelector('code').textContent, tr(TEXT).copied);
     const token = event.target.closest('[data-copy-token]');
     if (token) copyText(token.dataset.copyToken);
   };
@@ -142,8 +151,9 @@ function tokenValue(t, mode) {
 }
 
 export function tokenTable(groups) {
+  const t = tr(TEXT);
   return `<div class="doc-table cd-tokens">
-    <div class="doc-table__head" aria-hidden="true"><span>Token</span><span>Papel</span><span>Escuro</span><span>Claro</span></div>
+    <div class="doc-table__head" aria-hidden="true"><span>${t.token}</span><span>${t.role}</span><span>${t.dark}</span><span>${t.light}</span></div>
     ${groups
       .map(([name, role]) => {
         const t = byName.get(name);

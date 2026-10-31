@@ -8,14 +8,17 @@
  *   Só onde a nova ordem passou no validador de daltonismo (ΔE ≥ 8 entre vizinhas, ≥ 15 com visão típica).
  */
 import { palettes, tokens } from '../ds/tokens.js';
+import { tr } from '../ds/js/i18n.js';
+
+const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
 export const BRANDS = [
-  { value: 'brand', label: 'Pêssego' },
-  { value: 'amber', label: 'Dourado', darkText: true, swapSeries: true },
-  { value: 'violet', label: 'Violeta' },
-  { value: 'blue', label: 'Azul', swapSeries: true },
-  { value: 'green', label: 'Verde', darkText: true },
-  { value: 'pink', label: 'Rosa' },
+  { value: 'brand', label: T('Pêssego', 'Peach', 'Melocotón') },
+  { value: 'amber', label: T('Dourado', 'Gold', 'Dorado'), darkText: true, swapSeries: true },
+  { value: 'violet', label: T('Violeta', 'Violet', 'Violeta') },
+  { value: 'blue', label: T('Azul', 'Blue', 'Azul'), swapSeries: true },
+  { value: 'green', label: T('Verde', 'Green', 'Verde'), darkText: true },
+  { value: 'pink', label: T('Rosa', 'Pink', 'Rosa') },
 ];
 
 const brandPalette = palettes.find((p) => p.name === 'brand');
@@ -60,5 +63,8 @@ export function applyBrand(name) {
   style.textContent = brandCss(brand);
 }
 
+/** Opções do menu no idioma atual. */
 export const brandOptions = () =>
-  BRANDS.map((b) => ({ ...b, swatch: b.value === 'brand' ? peachSwatch : `var(--ds-color-${b.value}-400)` }));
+  BRANDS.map((b) => ({ ...b, label: tr(b.label), swatch: b.value === 'brand' ? peachSwatch : `var(--ds-color-${b.value}-400)` }));
+
+export const brandLabel = (value) => tr(BRANDS.find((b) => b.value === value)?.label);

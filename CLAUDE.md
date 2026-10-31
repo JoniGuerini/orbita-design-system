@@ -6,7 +6,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 
 ## Quem pede e como julga
 
-- Conversa em português do Brasil; todo texto do site e do plugin é em PT-BR, curto e direto.
+- Conversa em português do Brasil. O texto original é PT-BR, curto e direto; o site também fala inglês e espanhol (veja Idiomas).
 - Julga pelo **refinamento visual**, não só pela completude. Prefere menos elementos a mais enfeite.
 - **Figma: entregue o manifesto e deixe a conferência com ele.** Depois de mudar `figma/plugin/*`, rode `npm run figma` e `npm run figma:test`, passe o caminho de `dist/figma-plugin/manifest.json` e diga o que vale olhar. Não valide pedaço por pedaço pelo conector do Figma com capturas — em 31/10/2026 isso levou mais de uma hora, e ele confere tudo em 5 minutos. O conector só serve para uma dúvida pontual da API, com um teste pequeno e descartável.
 
@@ -26,6 +26,14 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 - Nunca o ícone de *sparkles* (estrela grande + pequena) — saiu da biblioteca. Novidades usa `megaphone`.
 - Nada de enfeite “vibe coded”, como o badge “Versão 0.1 · veja as novidades” no hero.
 - Contornos discretos: chips, botões e a busca da sidebar mantêm `border.control` fino (o rótulo já identifica). Campos, seleção, composer e switch usam `border.field` (3:1).
+
+## Idiomas
+
+- PT-BR, inglês e espanhol. O padrão segue o idioma do sistema; o que o Órbita não tiver vira **inglês**. O seletor fica na topbar, ao lado do tema (Sistema · Português · English · Español), e a escolha fica salva (`ds-locale`).
+- `ds/js/i18n.js`: `locale()`, `setLocale()`, `tr()`, `msg()`, Intl no idioma atual e o evento `ds:localechange`. Textos dos componentes do DS em `ds/js/messages.js` (chave nova = nos três idiomas). Nada de `'pt-BR'` fixo em `Intl`.
+- Site: textos em `T(pt, en, es)`. Shell e busca em `site/i18n.js` (o `index.html` usa `data-i18n` e `data-i18n-attr`); nomes e descrições das páginas em `site/nav.js` (getters no idioma atual); cada página tem um `COPY = T({…}, {…}, {…})` e lê `tr(COPY)` ao renderizar. Trocar o idioma redesenha a página aberta. Os caminhos (`#/componentes/botao`) ficam em português.
+- Componentes que ficam abertos (busca ⌘K, shell) se atualizam sozinhos com `ds:localechange`; os que a página cria são recriados no redesenho.
+- Em andamento (31/10/2026): fase 1 feita — base, textos do DS, shell, sidebar, busca, Início, Primeiros passos, 404 e títulos e resumos das versões. Faltam, uma fase e um commit cada: Fundamentos, Componentes, Gráficos, Padrões, Recursos, Novidades (itens das versões e tipos) e, por último, o plugin do Figma. A versão no changelog (0.7.0 · Idiomas) entra quando o site estiver todo traduzido.
 
 ## Como trabalhar aqui
 

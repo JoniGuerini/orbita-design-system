@@ -20,6 +20,7 @@ import {
   createFrame, normalizeSeries, formatter, axisFormatter, niceTicks, linear, textWidth, fitText, labelStep,
   tag, escapeHtml, yAxis, monotonePath, linePath, segments, FONTS, round,
 } from './core.js';
+import { msg } from '../i18n.js';
 
 export function lineChart(host, input) {
   let source = input;
@@ -138,7 +139,7 @@ export function lineChart(host, input) {
     if (o.target?.value != null) {
       const ty = round(Math.round(y(o.target.value)) + 0.5, 1);
       svg += tag('line', { x1: left, x2: left + plotW, y1: ty, y2: ty, class: 'ds-chart__target' });
-      const label = `${o.target.label ?? 'Meta'} · ${fmt(o.target.value)}`;
+      const label = `${o.target.label ?? msg('chart.goal')} · ${fmt(o.target.value)}`;
       svg += tag('text', { x: left + 4, y: ty - 7, class: 'ds-chart__target-label' }, escapeHtml(label));
     }
 
@@ -192,7 +193,7 @@ export function lineChart(host, input) {
     geo = { x, y, n, left, plotW, top, plotH, tops, vs, step: n > 1 ? plotW / (n - 1) : plotW };
 
     frame.setTable({
-      columns: [{ label: o.categoryLabel ?? 'Período' }, ...o.series.map((s) => ({ label: s.name ?? 'Valor', num: true }))],
+      columns: [{ label: o.categoryLabel ?? msg('chart.period') }, ...o.series.map((s) => ({ label: s.name ?? msg('chart.value'), num: true }))],
       rows: o.categories.map((cat, i) => [o.tooltipLabels?.[i] ?? cat, ...o.series.map((s) => (s.values[i] == null ? '—' : fmt(s.values[i])))]),
     });
     frame.refresh();
@@ -235,16 +236,14 @@ export function lineChart(host, input) {
       const fmt = formatter(o.format);
       const rows = visible().map((s) => ({ color: stroke(s), mark: 'line', value: s.values[i] == null ? '—' : fmt(s.values[i]), name: s.name ?? '' }));
       const notes = [];
-      if (o.stacked && rows.length > 1) notes.push(`Total: ${fmt(visible().reduce((a, s) => a + (s.values[i] ?? 0), 0))}`);
-      if (o.target?.value != null) notes.push(`${o.target.label ?? 'Meta'}: ${fmt(o.target.value)}`);
+      if (o.stacked && rows.length > 1) notes.push(`${msg('chart.total')}: ${fmt(visible().reduce((a, s) => a + (s.values[i] ?? 0), 0))}`);
+      if (o.target?.value != null) notes.push(`${o.target.label ?? msg('chart.goal')}: ${fmt(o.target.value)}`);
       return { title: o.tooltipLabels?.[i] ?? o.categories[i], rows, note: notes.join(' · ') || undefined };
     },
   });
 
   function summary() {
-    const kind = o.stacked ? 'áreas empilhadas' : o.area ? 'área' : 'linhas';
-    const series = o.series.length > 1 ? `, ${o.series.length} séries` : '';
-    return `${o.title ?? o.label ?? 'Gráfico'}. Gráfico de ${kind}, ${o.categories.length} pontos${series}`;
+    return msg('chart.summaryLine', o.title ?? o.label ?? msg('chart.chart'), o.stacked ? 'stacked' : o.area ? 'area' : 'line', o.categories.length, o.series.length);
   }
 
   frame.setLabel(summary());

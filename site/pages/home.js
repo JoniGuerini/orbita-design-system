@@ -2,39 +2,162 @@ import { icon, iconList } from '../../ds/icons/icons.js';
 import { palettes, tokens, contrast, generatedAt } from '../../ds/tokens.js';
 import { attachMenu } from '../../ds/js/menu.js';
 import { getThemePreference, setTheme } from '../../ds/js/theme.js';
+import { tr, numberFormat, dateFormat } from '../../ds/js/i18n.js';
 import { navigation } from '../nav.js';
-import { BRANDS, applyBrand, getBrand, brandOptions } from '../brand.js';
+import { applyBrand, getBrand, brandOptions, brandLabel } from '../brand.js';
 import { releases, upcoming, CURRENT_VERSION } from '../changelog.js';
+import { T } from '../i18n.js';
+
+/* ───────── Textos ───────── */
+
+const COPY = T(
+  {
+    themes: { dark: 'Escuro', light: 'Claro', system: 'Sistema' },
+    stats: ['cores em OKLCH', 'tokens de cor', 'estilos de texto', 'ícones próprios', 'contrastes WCAG'],
+    statsLabel: 'O sistema em números',
+    ready: 'Pronto',
+    kpi: 'Receita',
+    previews: {
+      button: ['Botão', 'Primário chapado, contorno, ghost e de ícone.', 'Criar', 'Cancelar'],
+      chip: ['Chip', 'Pílula com contorno que vira seletor.', 'Direto', 'Escuro'],
+      menu: ['Menu', 'Lista de opções com seleção e teclado.', 'Escuro', 'Claro'],
+      panel: ['Painel', 'Rótulo, título, controles e seções.', 'Abertura', 'Detalhes'],
+    },
+    hero: {
+      title: 'Vamos construir com refinamento.',
+      lead: 'O Órbita reúne tokens, tipografia, ícones, componentes e gráficos para que cada tela nasça consistente, acessível e cuidada nos detalhes.',
+      start: 'Começar agora',
+      components: 'Ver componentes',
+      try: 'Experimente ao vivo',
+    },
+    collage: {
+      eyebrow: 'Exemplo',
+      title: (v) => `Lançamento da versão ${v}`,
+      tone: 'Tom direto',
+      dark: 'Escuro',
+      section: 'Fundamentos prontos',
+      text: 'Cores, tipografia e ícones já estão em tokens, nos dois temas.',
+      demo: 'Ver demonstração',
+      template: 'Escolher modelo',
+      examples: 'Exemplos',
+      badges: ['Pronto', 'Novo', 'Beta'],
+      search: 'Buscar',
+    },
+    foundations: { title: 'As decisões que sustentam tudo', desc: 'Cada decisão visual vira um token. Os componentes só consomem tokens — por isso o sistema muda inteiro quando a marca muda.' },
+    components: { title: 'Planos, calmos e precisos', desc: (n) => `Contornos finos, nada de brilho. ${n} componentes, cada um com anatomia, estados e acessibilidade.`, all: 'Ver todos' },
+    charts: { title: 'Dados que se leem de relance', desc: 'Cores em ordem fixa validadas para daltonismo, marcas finas e tooltip também no teclado. Todo gráfico vira tabela com um clique.', overview: 'Ver visão geral' },
+    patterns: 'Como as peças se encaixam',
+    roadmap: { title: 'Do token ao componente', history: 'Histórico de versões' },
+    footer: (colors, count, date) => `${colors} cores · ${count} tokens semânticos e de fundação · gerado em ${date}`,
+    brand: 'Cor da marca',
+    theme: 'Tema',
+  },
+  {
+    themes: { dark: 'Dark', light: 'Light', system: 'System' },
+    stats: ['OKLCH colors', 'color tokens', 'text styles', 'custom icons', 'WCAG contrast checks'],
+    statsLabel: 'The system in numbers',
+    ready: 'Done',
+    kpi: 'Revenue',
+    previews: {
+      button: ['Button', 'Flat primary, outline, ghost, and icon.', 'Create', 'Cancel'],
+      chip: ['Chip', 'An outlined pill that becomes a picker.', 'Direct', 'Dark'],
+      menu: ['Menu', 'A list of options with selection and keyboard support.', 'Dark', 'Light'],
+      panel: ['Panel', 'Label, title, controls, and sections.', 'Opening', 'Details'],
+    },
+    hero: {
+      title: 'Let’s build with refinement.',
+      lead: 'Órbita brings together tokens, typography, icons, components, and charts so every screen starts out consistent, accessible, and carefully detailed.',
+      start: 'Get started',
+      components: 'See components',
+      try: 'Try it live',
+    },
+    collage: {
+      eyebrow: 'Example',
+      title: (v) => `Version ${v} launch`,
+      tone: 'Direct tone',
+      dark: 'Dark',
+      section: 'Foundations ready',
+      text: 'Color, typography, and icons are already tokens, in both themes.',
+      demo: 'Watch demo',
+      template: 'Choose template',
+      examples: 'Examples',
+      badges: ['Done', 'New', 'Beta'],
+      search: 'Search',
+    },
+    foundations: { title: 'The decisions that hold it all up', desc: 'Every visual decision becomes a token. Components only consume tokens — that’s why the whole system changes when the brand does.' },
+    components: { title: 'Flat, calm, and precise', desc: (n) => `Thin outlines, no shine. ${n} components, each with anatomy, states, and accessibility.`, all: 'See all' },
+    charts: { title: 'Data you can read at a glance', desc: 'Colors in a fixed order validated for color blindness, thin marks, and tooltips that work from the keyboard too. Every chart turns into a table with one click.', overview: 'See overview' },
+    patterns: 'How the pieces fit together',
+    roadmap: { title: 'From token to component', history: 'Version history' },
+    footer: (colors, count, date) => `${colors} colors · ${count} semantic and foundation tokens · generated on ${date}`,
+    brand: 'Brand color',
+    theme: 'Theme',
+  },
+  {
+    themes: { dark: 'Oscuro', light: 'Claro', system: 'Sistema' },
+    stats: ['colores en OKLCH', 'tokens de color', 'estilos de texto', 'íconos propios', 'contrastes WCAG'],
+    statsLabel: 'El sistema en números',
+    ready: 'Listo',
+    kpi: 'Ingresos',
+    previews: {
+      button: ['Botón', 'Primario plano, contorno, ghost y de ícono.', 'Crear', 'Cancelar'],
+      chip: ['Chip', 'Píldora con contorno que se vuelve selector.', 'Directo', 'Oscuro'],
+      menu: ['Menú', 'Lista de opciones con selección y teclado.', 'Oscuro', 'Claro'],
+      panel: ['Panel', 'Etiqueta, título, controles y secciones.', 'Apertura', 'Detalles'],
+    },
+    hero: {
+      title: 'Construyamos con refinamiento.',
+      lead: 'Órbita reúne tokens, tipografía, íconos, componentes y gráficos para que cada pantalla nazca consistente, accesible y cuidada en los detalles.',
+      start: 'Empezar ahora',
+      components: 'Ver componentes',
+      try: 'Pruébalo en vivo',
+    },
+    collage: {
+      eyebrow: 'Ejemplo',
+      title: (v) => `Lanzamiento de la versión ${v}`,
+      tone: 'Tono directo',
+      dark: 'Oscuro',
+      section: 'Fundamentos listos',
+      text: 'Color, tipografía e íconos ya están en tokens, en los dos temas.',
+      demo: 'Ver demostración',
+      template: 'Elegir plantilla',
+      examples: 'Ejemplos',
+      badges: ['Listo', 'Nuevo', 'Beta'],
+      search: 'Buscar',
+    },
+    foundations: { title: 'Las decisiones que lo sostienen todo', desc: 'Cada decisión visual se vuelve un token. Los componentes solo consumen tokens — por eso todo el sistema cambia cuando cambia la marca.' },
+    components: { title: 'Planos, tranquilos y precisos', desc: (n) => `Contornos finos, nada de brillo. ${n} componentes, cada uno con anatomía, estados y accesibilidad.`, all: 'Ver todos' },
+    charts: { title: 'Datos que se leen de un vistazo', desc: 'Colores en un orden fijo validado para daltonismo, marcas finas y tooltip también con el teclado. Todo gráfico se vuelve tabla con un clic.', overview: 'Ver visión general' },
+    patterns: 'Cómo encajan las piezas',
+    roadmap: { title: 'Del token al componente', history: 'Historial de versiones' },
+    footer: (colors, count, date) => `${colors} colores · ${count} tokens semánticos y de fundación · generado el ${date}`,
+    brand: 'Color de marca',
+    theme: 'Tema',
+  },
+);
 
 /* ───────── Dados ───────── */
 
 const group = (id) => navigation.find((g) => g.id === id);
-const fundamentos = group('fundamentos').items;
-const componentes = group('componentes').items;
-const padroes = group('padroes').items;
-const recursos = group('recursos').items;
-const graficos = group('graficos').items.filter((item) => item.path !== '/graficos/visao-geral');
+const items = (id) => group(id).items;
 
-const THEMES = [
-  { value: 'dark', label: 'Escuro', icon: 'moon' },
-  { value: 'light', label: 'Claro', icon: 'sun' },
-  { value: 'system', label: 'Sistema', icon: 'monitor' },
-];
+const THEME_ICONS = { dark: 'moon', light: 'sun', system: 'monitor' };
+const themes = (c) => Object.entries(THEME_ICONS).map(([value, ic]) => ({ value, label: c.themes[value], icon: ic }));
 
 const colorCount = palettes.reduce((n, p) => n + p.steps.length, 0);
 const passed = contrast.filter((c) => c.pass).length;
-const generated = new Date(generatedAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
 
-const stats = [
-  [colorCount, 'cores em OKLCH'],
-  [tokens.filter((t) => t.type === 'color' && t.themed).length, 'tokens de cor'],
-  [tokens.filter((t) => t.type === 'typography').length, 'estilos de texto'],
-  [iconList.length, 'ícones próprios'],
-  [`${passed}/${contrast.length}`, 'contrastes WCAG'],
-];
+const stats = (c) =>
+  [
+    colorCount,
+    tokens.filter((t) => t.type === 'color' && t.themed).length,
+    tokens.filter((t) => t.type === 'typography').length,
+    iconList.length,
+    `${passed}/${contrast.length}`,
+  ].map((value, i) => [value, c.stats[i]]);
 
-const roadmap = [
-  ...[...releases].reverse().map((r) => [`v${r.version.replace(/\.0$/, '')}`, r.title, ['success', 'Pronto'], r.summary]),
+const roadmap = (c) => [
+  ...[...releases].reverse().map((r) => [`v${r.version.replace(/\.0$/, '')}`, r.title, ['success', c.ready], r.summary]),
   ...upcoming.map((u) => [`v${u.version}`, u.title, u.status, `${u.text} ${u.items.join(', ')}.`]),
 ];
 
@@ -104,10 +227,11 @@ const chartPreviews = {
       <path class="pv-chart__axis" d="M12 80.5H152M12.5 8V80"/>
       ${DOTS.map(([x, y, s]) => `<circle class="pv-chart__dot" cx="${x + 8}" cy="${y}" r="4" style="fill:${series(s)}"/>`).join('')}
     </svg>`,
+  // valores formatados no idioma atual (R$ 1,3 mi · R$1.3M · 1,3 M R$)
   '/graficos/indicadores': () => `<div class="pv pv-kpi">
-      <span class="pv-kpi__label">Receita</span>
-      <span class="pv-kpi__value">R$ 1,3 mi</span>
-      <span class="pv-kpi__delta">${icon('trending-up', { size: 14 })}+12,4%</span>
+      <span class="pv-kpi__label">${tr(COPY).kpi}</span>
+      <span class="pv-kpi__value">${numberFormat({ style: 'currency', currency: 'BRL', notation: 'compact', maximumFractionDigits: 1 }).format(1300000)}</span>
+      <span class="pv-kpi__delta">${icon('trending-up', { size: 14 })}${numberFormat({ style: 'percent', maximumFractionDigits: 1, signDisplay: 'always' }).format(0.124)}</span>
       <span class="pv-kpi__meter"><span></span></span>
     </div>`,
 };
@@ -116,31 +240,31 @@ const chartPreviews = {
 
 const chev = `<span class="ds-chip__chevron">${icon('chevron-down', { size: 14 })}</span>`;
 
-const componentPreviews = [
-  ['/componentes/botao', 'Botão', 'Primário chapado, contorno, ghost e de ícone.', `<div class="pv pv-stack">
-      <span class="ds-btn ds-btn--primary ds-btn--sm">${icon('pencil', { size: 16 })}Criar</span>
-      <span class="ds-btn ds-btn--secondary ds-btn--sm">Cancelar</span>
+const componentPreviews = ({ previews: p }) => [
+  ['/componentes/botao', p.button[0], p.button[1], `<div class="pv pv-stack">
+      <span class="ds-btn ds-btn--primary ds-btn--sm">${icon('pencil', { size: 16 })}${p.button[2]}</span>
+      <span class="ds-btn ds-btn--secondary ds-btn--sm">${p.button[3]}</span>
       <span class="ds-icon-btn ds-icon-btn--outline">${icon('more-horizontal')}</span>
     </div>`],
-  ['/componentes/chip', 'Chip', 'Pílula com contorno que vira seletor.', `<div class="pv pv-stack">
-      <span class="ds-chip"><span class="ds-chip__icon">${icon('pencil', { size: 16 })}</span>Direto${chev}</span>
-      <span class="ds-chip">Escuro${chev}</span>
+  ['/componentes/chip', p.chip[0], p.chip[1], `<div class="pv pv-stack">
+      <span class="ds-chip"><span class="ds-chip__icon">${icon('pencil', { size: 16 })}</span>${p.chip[2]}${chev}</span>
+      <span class="ds-chip">${p.chip[3]}${chev}</span>
     </div>`],
-  ['/componentes/menu', 'Menu', 'Lista de opções com seleção e teclado.', `<div class="pv pv-menu">
+  ['/componentes/menu', p.menu[0], p.menu[1], `<div class="pv pv-menu">
       <div class="pv-menu__list">
-        <span class="ds-menu__item" aria-checked="true">${icon('moon', { size: 18 })}<span>Escuro</span>${icon('check', { size: 16, className: 'ds-menu__check' })}</span>
-        <span class="ds-menu__item">${icon('sun', { size: 18 })}<span>Claro</span></span>
+        <span class="ds-menu__item" aria-checked="true">${icon('moon', { size: 18 })}<span>${p.menu[2]}</span>${icon('check', { size: 16, className: 'ds-menu__check' })}</span>
+        <span class="ds-menu__item">${icon('sun', { size: 18 })}<span>${p.menu[3]}</span></span>
       </div>
     </div>`],
-  ['/componentes/painel', 'Painel', 'Rótulo, título, controles e seções.', `<div class="pv pv-panel">
-      <p class="ds-section__head"><span class="ds-section__stamp">00</span><span>Abertura</span></p>
+  ['/componentes/painel', p.panel[0], p.panel[1], `<div class="pv pv-panel">
+      <p class="ds-section__head"><span class="ds-section__stamp">00</span><span>${p.panel[2]}</span></p>
       <span class="pv-panel__line"></span><span class="pv-panel__line pv-panel__line--short"></span>
-      <span class="ds-inline-action">${icon('file-text', { size: 16 })}Detalhes${icon('plus', { size: 14, className: 'ds-inline-action__plus' })}</span>
+      <span class="ds-inline-action">${icon('file-text', { size: 16 })}${p.panel[3]}${icon('plus', { size: 14, className: 'ds-inline-action__plus' })}</span>
     </div>`],
 ];
 
-const listItems = (items) => `<ul class="home-list__items" role="list">
-  ${items
+const listItems = (list) => `<ul class="home-list__items" role="list">
+  ${list
     .map(
       (p) => `<li><a class="home-list__item" href="#${p.path}">
         <span class="home-list__icon">${icon(p.icon, { size: 20 })}</span>
@@ -154,20 +278,22 @@ const listItems = (items) => `<ul class="home-list__items" role="list">
 /* ───────── Página ───────── */
 
 export default function renderHome() {
+  const c = tr(COPY);
+  const generated = dateFormat({ day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(generatedAt));
   return `
   <div class="page page--home">
     <section class="home-hero" aria-labelledby="home-title">
       <div class="home-hero__content">
-        <h1 class="home-hero__title" id="home-title">Vamos construir com refinamento.</h1>
-        <p class="home-hero__lead">O Órbita reúne tokens, tipografia, ícones, componentes e gráficos para que cada tela nasça consistente, acessível e cuidada nos detalhes.</p>
+        <h1 class="home-hero__title" id="home-title">${c.hero.title}</h1>
+        <p class="home-hero__lead">${c.hero.lead}</p>
         <div class="home-hero__actions">
-          <a class="ds-btn ds-btn--primary ds-btn--lg" href="#/primeiros-passos">${icon('zap', { size: 20 })}Começar agora</a>
-          <a class="ds-btn ds-btn--secondary ds-btn--lg" href="#/componentes/botao">Ver componentes</a>
+          <a class="ds-btn ds-btn--primary ds-btn--lg" href="#/primeiros-passos">${icon('zap', { size: 20 })}${c.hero.start}</a>
+          <a class="ds-btn ds-btn--secondary ds-btn--lg" href="#/componentes/botao">${c.hero.components}</a>
         </div>
         <div class="home-hero__try">
-          <span>Experimente ao vivo</span>
-          <button type="button" class="ds-chip" data-menu="brand"><span class="ds-chip__icon">${icon('palette', { size: 16 })}</span><span data-label>Pêssego</span>${chev}</button>
-          <button type="button" class="ds-chip" data-menu="theme"><span class="ds-chip__icon">${icon('moon', { size: 16 })}</span><span data-label>Escuro</span>${chev}</button>
+          <span>${c.hero.try}</span>
+          <button type="button" class="ds-chip" data-menu="brand"><span class="ds-chip__icon">${icon('palette', { size: 16 })}</span><span data-label>${brandLabel(getBrand())}</span>${chev}</button>
+          <button type="button" class="ds-chip" data-menu="theme"><span class="ds-chip__icon">${icon('moon', { size: 16 })}</span><span data-label>${c.themes.dark}</span>${chev}</button>
         </div>
       </div>
 
@@ -175,51 +301,51 @@ export default function renderHome() {
         <div class="collage-card collage-card--wide">
           <div class="collage-card__head">
             <div>
-              <p class="ds-panel__eyebrow">Exemplo</p>
-              <p class="collage-card__title">Lançamento da versão ${CURRENT_VERSION.replace(/\.0$/, '')}</p>
+              <p class="ds-panel__eyebrow">${c.collage.eyebrow}</p>
+              <p class="collage-card__title">${c.collage.title(CURRENT_VERSION.replace(/\.0$/, ''))}</p>
             </div>
             <div class="collage-card__icons"><span class="ds-icon-btn">${icon('stack')}</span><span class="ds-icon-btn">${icon('x')}</span></div>
           </div>
           <div class="collage-card__chips">
-            <span class="ds-chip ds-chip--sm"><span class="ds-chip__icon">${icon('pencil', { size: 14 })}</span>Tom direto${chev}</span>
-            <span class="ds-chip ds-chip--sm">Escuro${chev}</span>
+            <span class="ds-chip ds-chip--sm"><span class="ds-chip__icon">${icon('pencil', { size: 14 })}</span>${c.collage.tone}${chev}</span>
+            <span class="ds-chip ds-chip--sm">${c.collage.dark}${chev}</span>
             <span class="collage-card__meta">~3 min</span>
           </div>
-          <p class="ds-section__head"><span class="ds-section__stamp">01</span><span>Fundamentos prontos</span></p>
-          <p class="collage-card__text">Cores, tipografia e ícones já estão em tokens, nos dois temas.</p>
-          <span class="ds-inline-action">${icon('video', { size: 16 })}Ver demonstração${icon('plus', { size: 14, className: 'ds-inline-action__plus' })}</span>
+          <p class="ds-section__head"><span class="ds-section__stamp">01</span><span>${c.collage.section}</span></p>
+          <p class="collage-card__text">${c.collage.text}</p>
+          <span class="ds-inline-action">${icon('video', { size: 16 })}${c.collage.demo}${icon('plus', { size: 14, className: 'ds-inline-action__plus' })}</span>
         </div>
         <div class="collage-card">
           <div class="collage-card__buttons">
-            <span class="ds-btn ds-btn--primary">${icon('video', { size: 18 })}Escolher modelo</span>
-            <span class="ds-btn ds-btn--ghost">${icon('star', { size: 18 })}Exemplos</span>
+            <span class="ds-btn ds-btn--primary">${icon('video', { size: 18 })}${c.collage.template}</span>
+            <span class="ds-btn ds-btn--ghost">${icon('star', { size: 18 })}${c.collage.examples}</span>
           </div>
         </div>
         <div class="collage-card">
           <div class="collage-card__badges">
-            <span class="ds-badge ds-badge--success"><span class="ds-badge__dot"></span>Pronto</span>
-            <span class="ds-badge ds-badge--brand">Novo</span>
-            <span class="ds-badge">Beta</span>
+            <span class="ds-badge ds-badge--success"><span class="ds-badge__dot"></span>${c.collage.badges[0]}</span>
+            <span class="ds-badge ds-badge--brand">${c.collage.badges[1]}</span>
+            <span class="ds-badge">${c.collage.badges[2]}</span>
           </div>
-          <div class="ds-field collage-card__field">${icon('search', { size: 18 })}<span class="ds-field__placeholder">Buscar</span><kbd class="ds-kbd">⌘K</kbd></div>
+          <div class="ds-field collage-card__field">${icon('search', { size: 18 })}<span class="ds-field__placeholder">${c.collage.search}</span><kbd class="ds-kbd">⌘K</kbd></div>
         </div>
       </div>
     </section>
 
-    <section class="home-stats" aria-label="O sistema em números">
-      ${stats.map(([value, label]) => `<div class="home-stat"><p class="home-stat__value">${value}</p><p class="home-stat__label">${label}</p></div>`).join('')}
+    <section class="home-stats" aria-label="${c.statsLabel}">
+      ${stats(c).map(([value, label]) => `<div class="home-stat"><p class="home-stat__value">${value}</p><p class="home-stat__label">${label}</p></div>`).join('')}
     </section>
 
     <section class="home-section" aria-labelledby="fundamentos-title">
       <header class="home-section__header">
         <div>
-          <p class="home-section__eyebrow">Fundamentos</p>
-          <h2 class="home-section__title" id="fundamentos-title">As decisões que sustentam tudo</h2>
-          <p class="home-section__desc">Cada decisão visual vira um token. Os componentes só consomem tokens — por isso o sistema muda inteiro quando a marca muda.</p>
+          <p class="home-section__eyebrow">${group('fundamentos').label}</p>
+          <h2 class="home-section__title" id="fundamentos-title">${c.foundations.title}</h2>
+          <p class="home-section__desc">${c.foundations.desc}</p>
         </div>
       </header>
       <div class="tile-grid">
-        ${fundamentos
+        ${items('fundamentos')
           .map(
             (item) => `<a class="tile" href="#${item.path}">
               <span class="tile__preview" aria-hidden="true">${previews[item.path]?.() ?? icon(item.icon, { size: 28 })}</span>
@@ -234,14 +360,14 @@ export default function renderHome() {
     <section class="home-section" aria-labelledby="componentes-title">
       <header class="home-section__header">
         <div>
-          <p class="home-section__eyebrow">Componentes</p>
-          <h2 class="home-section__title" id="componentes-title">Planos, calmos e precisos</h2>
-          <p class="home-section__desc">Contornos finos, nada de brilho. ${componentes.length} componentes, cada um com anatomia, estados e acessibilidade.</p>
+          <p class="home-section__eyebrow">${group('componentes').label}</p>
+          <h2 class="home-section__title" id="componentes-title">${c.components.title}</h2>
+          <p class="home-section__desc">${c.components.desc(items('componentes').length)}</p>
         </div>
-        <a class="ds-btn ds-btn--ghost" href="#/componentes/botao">Ver todos${icon('arrow-right', { size: 18 })}</a>
+        <a class="ds-btn ds-btn--ghost" href="#/componentes/botao">${c.components.all}${icon('arrow-right', { size: 18 })}</a>
       </header>
       <div class="tile-grid tile-grid--4">
-        ${componentPreviews
+        ${componentPreviews(c)
           .map(
             ([href, label, desc, preview]) => `<a class="tile" href="#${href}">
               <span class="tile__preview" aria-hidden="true" inert>${preview}</span>
@@ -256,14 +382,15 @@ export default function renderHome() {
     <section class="home-section" aria-labelledby="graficos-title">
       <header class="home-section__header">
         <div>
-          <p class="home-section__eyebrow">Gráficos</p>
-          <h2 class="home-section__title" id="graficos-title">Dados que se leem de relance</h2>
-          <p class="home-section__desc">Cores em ordem fixa validadas para daltonismo, marcas finas e tooltip também no teclado. Todo gráfico vira tabela com um clique.</p>
+          <p class="home-section__eyebrow">${group('graficos').label}</p>
+          <h2 class="home-section__title" id="graficos-title">${c.charts.title}</h2>
+          <p class="home-section__desc">${c.charts.desc}</p>
         </div>
-        <a class="ds-btn ds-btn--ghost" href="#/graficos/visao-geral">Ver visão geral${icon('arrow-right', { size: 18 })}</a>
+        <a class="ds-btn ds-btn--ghost" href="#/graficos/visao-geral">${c.charts.overview}${icon('arrow-right', { size: 18 })}</a>
       </header>
       <div class="tile-grid tile-grid--3">
-        ${graficos
+        ${items('graficos')
+          .filter((item) => item.path !== '/graficos/visao-geral')
           .map(
             (item) => `<a class="tile" href="#${item.path}">
               <span class="tile__preview" aria-hidden="true" inert>${chartPreviews[item.path]?.() ?? icon(item.icon, { size: 28 })}</span>
@@ -277,18 +404,18 @@ export default function renderHome() {
 
     <div class="home-split">
       <section class="ds-card home-list" aria-labelledby="padroes-title">
-        <p class="home-section__eyebrow">Padrões</p>
-        <h2 class="home-list__title" id="padroes-title">Como as peças se encaixam</h2>
-        ${listItems(padroes)}
-        <p class="home-section__eyebrow home-list__eyebrow">Recursos</p>
-        ${listItems(recursos)}
+        <p class="home-section__eyebrow">${group('padroes').label}</p>
+        <h2 class="home-list__title" id="padroes-title">${c.patterns}</h2>
+        ${listItems(items('padroes'))}
+        <p class="home-section__eyebrow home-list__eyebrow">${group('recursos').label}</p>
+        ${listItems(items('recursos'))}
       </section>
 
       <section class="ds-card home-list" aria-labelledby="novidades-title">
         <p class="home-section__eyebrow">Roadmap</p>
-        <h2 class="home-list__title" id="novidades-title">Do token ao componente</h2>
+        <h2 class="home-list__title" id="novidades-title">${c.roadmap.title}</h2>
         <ol class="home-roadmap" role="list">
-          ${roadmap
+          ${roadmap(c)
             .map(
               ([stamp, title, [tone, status], text]) => `<li class="home-roadmap__item">
                 <p class="ds-section__head"><span class="ds-section__stamp">${stamp}</span><span class="home-roadmap__title">${title}</span><span class="ds-badge ds-badge--sm${tone === 'neutral' ? '' : ` ds-badge--${tone}`}">${status}</span></p>
@@ -297,18 +424,20 @@ export default function renderHome() {
             )
             .join('')}
         </ol>
-        <a class="ds-inline-action" href="#/novidades">${icon('history', { size: 16 })}Histórico de versões${icon('arrow-right', { size: 14 })}</a>
+        <a class="ds-inline-action" href="#/novidades">${icon('history', { size: 16 })}${c.roadmap.history}${icon('arrow-right', { size: 14 })}</a>
       </section>
     </div>
 
     <footer class="site-footer">
       <p>Órbita Design System · v${CURRENT_VERSION}</p>
-      <p>${colorCount} cores · ${tokens.length} tokens semânticos e de fundação · gerado em ${generated}</p>
+      <p>${c.footer(colorCount, tokens.length, generated)}</p>
     </footer>
   </div>`;
 }
 
 export function mount(root) {
+  const c = tr(COPY);
+  const THEMES = themes(c);
   const brandChip = root.querySelector('[data-menu="brand"]');
   const themeChip = root.querySelector('[data-menu="theme"]');
   const setLabel = (chip, options, value) => {
@@ -317,20 +446,19 @@ export function mount(root) {
     if (option?.icon) chip.querySelector('.ds-chip__icon').innerHTML = icon(option.icon, { size: 16 });
   };
 
-  setLabel(brandChip, BRANDS, getBrand());
   const brandMenu = attachMenu(brandChip, {
-    label: 'Cor da marca',
+    label: c.brand,
     value: getBrand(),
     options: brandOptions(),
     onChange: (value) => {
       applyBrand(value);
-      setLabel(brandChip, BRANDS, value);
+      setLabel(brandChip, brandOptions(), value);
     },
   });
 
   setLabel(themeChip, THEMES, getThemePreference());
   const themeMenu = attachMenu(themeChip, {
-    label: 'Tema',
+    label: c.theme,
     value: getThemePreference(),
     options: THEMES,
     onChange: (value) => setTheme(value),

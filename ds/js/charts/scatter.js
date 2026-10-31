@@ -13,6 +13,7 @@
  * (até 24 px), então ninguém precisa acertar o centro.
  */
 import { createFrame, paint, formatter, axisFormatter, niceTicks, linear, textWidth, tag, escapeHtml, yAxis, xAxis, round, FONTS } from './core.js';
+import { msg } from '../i18n.js';
 
 const HIT = 24;
 let warned = false;
@@ -136,9 +137,9 @@ export function scatterChart(host, input) {
 
     const fs = formatter(o.size?.format);
     frame.setTable({
-      columns: [{ label: o.pointLabel ?? 'Ponto' }, ...(o.series.length > 1 ? [{ label: 'Série' }] : []), { label: o.x.label ?? 'x', num: true }, { label: o.y.label ?? 'y', num: true }, ...(bubbles ? [{ label: o.size?.label ?? 'Tamanho', num: true }] : [])],
+      columns: [{ label: o.pointLabel ?? msg('chart.point') }, ...(o.series.length > 1 ? [{ label: msg('chart.series') }] : []), { label: o.x.label ?? 'x', num: true }, { label: o.y.label ?? 'y', num: true }, ...(bubbles ? [{ label: o.size?.label ?? 'Tamanho', num: true }] : [])],
       rows: o.series.flatMap((s) =>
-        s.points.map((p, k) => [p.label ?? `${s.name ?? 'Ponto'} ${k + 1}`, ...(o.series.length > 1 ? [s.name ?? ''] : []), fx(+p.x), fy(+p.y), ...(bubbles ? [p.size == null ? '—' : fs(+p.size)] : [])]),
+        s.points.map((p, k) => [p.label ?? `${s.name ?? msg('chart.point')} ${k + 1}`, ...(o.series.length > 1 ? [s.name ?? ''] : []), fx(+p.x), fy(+p.y), ...(bubbles ? [p.size == null ? '—' : fs(+p.size)] : [])]),
       ),
     });
     frame.refresh();
@@ -179,13 +180,13 @@ export function scatterChart(host, input) {
         { value: geo.fy(p.y), name: o.y.label ?? 'y' },
       ];
       if (p.size != null) rows.push({ value: formatter(o.size?.format)(+p.size), name: o.size?.label ?? 'Tamanho' });
-      return { title: p.label ?? p.s.name ?? 'Ponto', rows, note: p.label && o.series.length > 1 ? p.s.name : undefined };
+      return { title: p.label ?? p.s.name ?? msg('chart.point'), rows, note: p.label && o.series.length > 1 ? p.s.name : undefined };
     },
   });
 
   function summary() {
     const n = o.series.reduce((a, s) => a + s.points.length, 0);
-    return `${o.title ?? o.label ?? 'Gráfico'}. Gráfico de dispersão com ${n} pontos`;
+    return msg('chart.summaryScatter', o.title ?? o.label ?? msg('chart.chart'), n);
   }
 
   frame.setLabel(summary());

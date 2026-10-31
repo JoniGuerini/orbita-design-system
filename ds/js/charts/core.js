@@ -8,6 +8,7 @@
  * Os gráficos em si ficam em bar.js, line.js, donut.js, heatmap.js, scatter.js e figures.js.
  */
 import { icon } from '../../icons/icons.js';
+import { locale, msg } from '../i18n.js';
 
 let uid = 0;
 export const nextId = (prefix = 'chart') => `ds-${prefix}-${++uid}`;
@@ -25,22 +26,25 @@ export const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)'
 
 /* ───────── Números ───────── */
 
-const NF = (options) => new Intl.NumberFormat('pt-BR', options);
+// no idioma atual: o gráfico pega o formato quando é desenhado (trocar o idioma redesenha a página)
+const NF = (options) => new Intl.NumberFormat(locale(), options);
 
-const PRESETS = {
-  number: NF({ maximumFractionDigits: 1 }).format,
-  integer: NF({ maximumFractionDigits: 0 }).format,
-  compact: NF({ notation: 'compact', maximumFractionDigits: 1 }).format,
-  percent: NF({ style: 'percent', maximumFractionDigits: 1 }).format,
-  currency: NF({ style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format,
-  'currency-compact': NF({ style: 'currency', currency: 'BRL', notation: 'compact', maximumFractionDigits: 1 }).format,
-};
-
-const AXIS = {
-  percent: NF({ style: 'percent', maximumFractionDigits: 0 }).format,
-  currency: PRESETS['currency-compact'],
-  'currency-compact': PRESETS['currency-compact'],
-};
+const byLocale = new Map();
+function presets() {
+  if (!byLocale.has(locale())) {
+    const p = {
+      number: NF({ maximumFractionDigits: 1 }).format,
+      integer: NF({ maximumFractionDigits: 0 }).format,
+      compact: NF({ notation: 'compact', maximumFractionDigits: 1 }).format,
+      percent: NF({ style: 'percent', maximumFractionDigits: 1 }).format,
+      currency: NF({ style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format,
+      'currency-compact': NF({ style: 'currency', currency: 'BRL', notation: 'compact', maximumFractionDigits: 1 }).format,
+    };
+    const axis = { percent: NF({ style: 'percent', maximumFractionDigits: 0 }).format, currency: p['currency-compact'], 'currency-compact': p['currency-compact'] };
+    byLocale.set(locale(), { p, axis });
+  }
+  return byLocale.get(locale());
+}
 
 /**
  * Formatação de valores: um preset ('number', 'integer', 'compact', 'percent' — razão 0–1 —,
@@ -49,14 +53,16 @@ const AXIS = {
 export function formatter(format = 'number') {
   if (typeof format === 'function') return format;
   if (format && typeof format === 'object') return NF(format).format;
-  return PRESETS[format] ?? PRESETS.number;
+  const { p } = presets();
+  return p[format] ?? p.number;
 }
 
 /** Eixos arredondam e compactam a partir de mil (0 · 1 mil · 2 mil). */
 export function axisFormatter(format = 'number', axisFormat) {
   if (axisFormat) return formatter(axisFormat);
   if (typeof format === 'function' || (format && typeof format === 'object')) return formatter(format);
-  return AXIS[format] ?? PRESETS.compact;
+  const { p, axis } = presets();
+  return axis[format] ?? p.compact;
 }
 
 /* ───────── Escalas ───────── */
@@ -240,8 +246,6 @@ export function texturePatterns(id, colors) {
 
 /* ───────── Moldura ───────── */
 
-const TABLE_ON = 'Ver como gráfico';
-const TABLE_OFF = 'Ver como tabela';
 
 /**
  * Monta a <figure> do gráfico dentro de `host`.
@@ -267,7 +271,7 @@ export function createFrame(host, options, { kind, describe: summary } = {}) {
               ${options.actions ?? ''}
               ${
                 options.table !== false
-                  ? `<button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted ds-chart__toggle" data-chart-toggle aria-pressed="false" aria-label="${TABLE_OFF}" data-ds-tooltip="${TABLE_OFF}">${icon('table', { size: 16 })}</button>`
+                  ? `<button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted ds-chart__toggle" data-chart-toggle aria-pressed="false" aria-label="${msg('chart.asTable')}" data-ds-tooltip="${msg('chart.asTable')}">${icon('table', { size: 16 })}</button>`
                   : ''
               }
             </div>
@@ -294,7 +298,7 @@ export function createFrame(host, options, { kind, describe: summary } = {}) {
   const toggle = $('[data-chart-toggle]');
   const cleanups = [];
 
-  plot.setAttribute('aria-label', [options.title ?? options.label ?? 'Gráfico', summary].filter(Boolean).join('. '));
+  plot.setAttribute('aria-label', [options.title ?? options.label ?? msg('chart.chart'), summary].filter(Boolean).join('. '));
 
   /* Tabela: o gêmeo acessível de todo gráfico */
   const onToggle = () => {
@@ -304,7 +308,7 @@ export function createFrame(host, options, { kind, describe: summary } = {}) {
     legendEl.hidden = showTable || !legendEl.childElementCount;
     tableEl.hidden = !showTable;
     toggle.setAttribute('aria-pressed', String(showTable));
-    const label = showTable ? TABLE_ON : TABLE_OFF;
+    const label = msg(showTable ? 'chart.asChart' : 'chart.asTable');
     toggle.setAttribute('aria-label', label);
     toggle.dataset.dsTooltip = label;
     toggle.innerHTML = icon(showTable ? 'bar-chart' : 'table', { size: 16 });
@@ -525,7 +529,7 @@ export function createFrame(host, options, { kind, describe: summary } = {}) {
         legendEl.append(el);
       }
       legendEl.setAttribute('role', 'group');
-      legendEl.setAttribute('aria-label', onToggle ? 'Séries — clique para mostrar ou esconder' : 'Legenda');
+      legendEl.setAttribute('aria-label', msg(onToggle ? 'chart.legendHint' : 'chart.legend'));
       legendEl.hidden = figure.dataset.view === 'table';
     },
     /** { caption?, columns: [{ label, num? }], rows: [[...cells]] } */
@@ -539,14 +543,14 @@ export function createFrame(host, options, { kind, describe: summary } = {}) {
               .join('')}</tr>`,
         )
         .join('');
-      tableEl.innerHTML = `<div class="ds-table-wrap" role="region" tabindex="0" aria-label="${escapeHtml(caption ?? options.title ?? 'Dados do gráfico')}">
+      tableEl.innerHTML = `<div class="ds-table-wrap" role="region" tabindex="0" aria-label="${escapeHtml(caption ?? options.title ?? msg('chart.data'))}">
         <table class="ds-table ds-table--compact"><thead><tr>${head}</tr></thead><tbody>${bodyRows}</tbody></table></div>`;
     },
     setLoading(on) {
       figure.toggleAttribute('data-loading', !!on);
       figure.setAttribute('aria-busy', String(!!on));
     },
-    empty(text = options.empty ?? 'Sem dados para mostrar.') {
+    empty(text = options.empty ?? msg('chart.noData')) {
       plot.innerHTML = `<div class="ds-chart__empty" style="height:${options.height ?? 240}px">${icon('bar-chart', { size: 20 })}<span>${escapeHtml(text)}</span></div>`;
     },
     destroy() {

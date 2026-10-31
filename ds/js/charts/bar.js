@@ -20,6 +20,7 @@ import {
   createFrame, normalizeSeries, formatter, axisFormatter, niceTicks, linear, textWidth, fitText, labelStep,
   barPath, tag, escapeHtml, yAxis, xAxis, texturePatterns, clamp, FONTS,
 } from './core.js';
+import { msg } from '../i18n.js';
 
 const GAP = 2;
 const MAX_BAR = 24;
@@ -72,8 +73,8 @@ export function barChart(host, input) {
       );
     } else if (o.diverging && (o.positiveLabel || o.negativeLabel)) {
       frame.setLegend([
-        { name: o.positiveLabel ?? 'Acima', color: 'var(--ds-color-chart-div-6)' },
-        { name: o.negativeLabel ?? 'Abaixo', color: 'var(--ds-color-chart-div-2)' },
+        { name: o.positiveLabel ?? msg('chart.above'), color: 'var(--ds-color-chart-div-6)' },
+        { name: o.negativeLabel ?? msg('chart.below'), color: 'var(--ds-color-chart-div-2)' },
       ]);
     } else frame.setLegend([]);
   }
@@ -268,8 +269,8 @@ export function barChart(host, input) {
 
     // Tabela: os números de verdade, mesmo os que o gráfico não rotula.
     const raw = formatter(o.format);
-    const cols = [{ label: o.categoryLabel ?? 'Categoria' }, ...o.series.map((s) => ({ label: s.name ?? 'Valor', num: true }))];
-    if (isStack() && o.series.length > 1) cols.push({ label: 'Total', num: true });
+    const cols = [{ label: o.categoryLabel ?? msg('chart.category') }, ...o.series.map((s) => ({ label: s.name ?? msg('chart.value'), num: true }))];
+    if (isStack() && o.series.length > 1) cols.push({ label: msg('chart.total'), num: true });
     frame.setTable({
       columns: cols,
       rows: o.categories.map((cat, c) => {
@@ -328,17 +329,14 @@ export function barChart(host, input) {
       if (o.ordinal && c > 0) {
         const prev = vs[0].values[c - 1];
         const cur = vs[0].values[c];
-        if (prev && cur != null) note = `${pct(cur / prev)} da etapa anterior`;
+        if (prev && cur != null) note = msg('chart.ofPrevious', pct(cur / prev));
       }
       return { title: o.tooltipLabels?.[c] ?? o.categories[c], rows, note };
     },
   });
 
   function summary() {
-    const kind = o.orientation === 'horizontal' ? 'barras horizontais' : 'colunas';
-    const layout = { stacked: ', empilhadas', percent: ', empilhadas em 100%' }[o.layout] ?? '';
-    const series = o.series.length > 1 ? `, ${o.series.length} séries` : '';
-    return `${o.title ?? o.label ?? 'Gráfico'}. Gráfico de ${kind}${layout}, ${o.categories.length} categorias${series}`;
+    return msg('chart.summaryBar', o.title ?? o.label ?? msg('chart.chart'), o.orientation === 'horizontal', o.layout, o.categories.length, o.series.length);
   }
 
   frame.setLabel(summary());

@@ -12,6 +12,7 @@
  */
 import { icon } from '../../icons/icons.js';
 import { formatter, escapeHtml, round, linePath, monotonePath, clamp } from './core.js';
+import { msg } from '../i18n.js';
 
 /**
  * Linha de tendência sem eixos: tom de contexto, o ponto atual na cor de destaque.
@@ -58,13 +59,13 @@ export function statTile({ label, value, format = 'number', delta, deltaFormat =
     const sign = delta > 0 ? '+' : delta < 0 ? '−' : '';
     const text = `${sign}${formatter(deltaFormat)(Math.abs(delta))}`;
     const ic = dir === 'up' ? 'trending-up' : dir === 'down' ? 'trending-down' : 'minus';
-    const meaning = { good: 'melhora', bad: 'piora', neutral: 'estável' }[tone];
+    const meaning = msg({ good: 'chart.better', bad: 'chart.worse', neutral: 'chart.stable' }[tone]);
     deltaHtml = `<p class="ds-stat__delta" data-tone="${tone}">
       <span class="ds-stat__change">${icon(ic, { size: 16 })}<span>${escapeHtml(text)}</span><span class="ds-visually-hidden"> (${meaning})</span></span>
       ${deltaLabel ? `<span class="ds-stat__period">${escapeHtml(deltaLabel)}</span>` : ''}
     </p>`;
   }
-  const spark = trend?.length ? `<div class="ds-stat__trend">${sparkline(trend, { width: hero ? 160 : 112, height: hero ? 44 : 32, label: trendLabel ?? `Tendência de ${label}` })}</div>` : '';
+  const spark = trend?.length ? `<div class="ds-stat__trend">${sparkline(trend, { width: hero ? 160 : 112, height: hero ? 44 : 32, label: trendLabel ?? msg('chart.trendOf', label) })}</div>` : '';
   const tagName = href ? 'a' : 'article';
   return `<${tagName} class="ds-stat${hero ? ' ds-stat--hero' : ''}${className ? ` ${className}` : ''}"${href ? ` href="${escapeHtml(href)}"` : ''}>
     <p class="ds-stat__label">${escapeHtml(label)}</p>
@@ -84,11 +85,11 @@ export function meter({ label, value, max = 1, min = 0, format, thresholds = { w
   const fmt = format ? formatter(format) : (v) => formatter('percent')((v - min) / (max - min || 1));
   const valueText = fmt(value);
   const maxText = format ? formatter(format)(max) : null;
-  const status = { warning: 'atenção', danger: 'crítico', success: 'ok', brand: '' }[t] ?? '';
-  return `<div class="ds-meter ds-meter--${t}${size === 'sm' ? ' ds-meter--sm' : ''}${className ? ` ${className}` : ''}" role="meter" aria-valuemin="${min}" aria-valuemax="${max}" aria-valuenow="${value}" aria-valuetext="${escapeHtml(`${valueText}${maxText ? ` de ${maxText}` : ''}${status ? `, ${status}` : ''}`)}" aria-label="${escapeHtml(label)}">
+  const status = { warning: msg('chart.warning'), danger: msg('chart.critical'), success: msg('chart.ok') }[t] ?? '';
+  return `<div class="ds-meter ds-meter--${t}${size === 'sm' ? ' ds-meter--sm' : ''}${className ? ` ${className}` : ''}" role="meter" aria-valuemin="${min}" aria-valuemax="${max}" aria-valuenow="${value}" aria-valuetext="${escapeHtml(`${valueText}${maxText ? ` ${msg('chart.of')} ${maxText}` : ''}${status ? `, ${status}` : ''}`)}" aria-label="${escapeHtml(label)}">
     <div class="ds-meter__head">
       <span class="ds-meter__label">${escapeHtml(label)}</span>
-      <span class="ds-meter__value">${t === 'warning' || t === 'danger' ? icon(t === 'danger' ? 'alert-circle' : 'alert-triangle', { size: 16 }) : ''}<strong>${escapeHtml(valueText)}</strong>${maxText ? `<span> de ${escapeHtml(maxText)}</span>` : ''}</span>
+      <span class="ds-meter__value">${t === 'warning' || t === 'danger' ? icon(t === 'danger' ? 'alert-circle' : 'alert-triangle', { size: 16 }) : ''}<strong>${escapeHtml(valueText)}</strong>${maxText ? `<span> ${msg('chart.of')} ${escapeHtml(maxText)}</span>` : ''}</span>
     </div>
     <div class="ds-meter__track"><span class="ds-meter__fill" style="--value:${round(ratio, 4)}"></span></div>
     ${caption ? `<p class="ds-meter__caption">${escapeHtml(caption)}</p>` : ''}

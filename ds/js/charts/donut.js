@@ -14,6 +14,7 @@
  * Use para ver a proporção de relance, com até 6 fatias. Para comparar valores próximos, use barras.
  */
 import { createFrame, formatter, paint, escapeHtml, tag, round, clamp, texturePatterns } from './core.js';
+import { msg } from '../i18n.js';
 
 const GAP = 2;
 
@@ -24,7 +25,7 @@ export function donutChart(host, input) {
   let geo = null;
 
   function normalize(opts) {
-    return { format: 'number', center: 'total', centerLabel: 'Total', maxSegments: 6, size: 200, thickness: 24, items: [], ...opts };
+    return { format: 'number', center: 'total', centerLabel: msg('chart.total'), maxSegments: 6, size: 200, thickness: 24, items: [], ...opts };
   }
 
   /** Cor segue a entidade (posição original); a cauda vira “Outros”. */
@@ -34,7 +35,7 @@ export function donutChart(host, input) {
     const keep = new Set([...items].sort((a, b) => b.value - a.value).slice(0, o.maxSegments - 1));
     const kept = items.filter((it) => keep.has(it));
     const rest = items.filter((it) => !keep.has(it));
-    return [...kept, { name: o.otherLabel ?? 'Outros', value: rest.reduce((a, it) => a + it.value, 0), paint: 'var(--ds-color-chart-other)', folded: rest }];
+    return [...kept, { name: o.otherLabel ?? msg('chart.others'), value: rest.reduce((a, it) => a + it.value, 0), paint: 'var(--ds-color-chart-other)', folded: rest }];
   }
 
   function arc(cx, cy, R, r, a0, a1) {
@@ -120,8 +121,8 @@ export function donutChart(host, input) {
     setCenter(null);
 
     frame.setTable({
-      columns: [{ label: o.categoryLabel ?? 'Categoria' }, { label: o.valueLabel ?? 'Valor', num: true }, { label: '%', num: true }],
-      rows: [...segs.flatMap((s) => (s.folded ? s.folded.map((f) => [f.name, fmt(f.value), pct(f.value / total)]) : [[s.name, fmt(s.value), pct(s.share)]])), ['Total', fmt(total), pct(1)]],
+      columns: [{ label: o.categoryLabel ?? msg('chart.category') }, { label: o.valueLabel ?? msg('chart.value'), num: true }, { label: '%', num: true }],
+      rows: [...segs.flatMap((s) => (s.folded ? s.folded.map((f) => [f.name, fmt(f.value), pct(f.value / total)]) : [[s.name, fmt(s.value), pct(s.share)]])), [msg('chart.total'), fmt(total), pct(1)]],
     });
     frame.refresh();
   }
@@ -183,7 +184,7 @@ export function donutChart(host, input) {
   });
 
   function summary() {
-    return `${o.title ?? o.label ?? 'Gráfico'}. Gráfico de rosca com ${Math.min(o.items.length, o.maxSegments)} fatias`;
+    return msg('chart.summaryDonut', o.title ?? o.label ?? msg('chart.chart'), Math.min(o.items.length, o.maxSegments));
   }
 
   frame.setLabel(summary());

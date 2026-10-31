@@ -738,3 +738,8 @@
     padding: var(--ds-space-250);
   }
 }
+
+/* Seletor de idioma na topbar: neutro como o seletor de tema ao lado */
+.ds-topbar__locale .ds-chip__icon {
+  color: var(--ds-color-fg-muted);
+}

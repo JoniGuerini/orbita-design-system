@@ -13,10 +13,25 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=JetBrains+Mono:wght@400..600&display=swap" />
 
     <script>
-      // aplica tema e estado da sidebar antes do primeiro paint (sem "piscar")
+      // aplica tema, idioma e estado da sidebar antes do primeiro paint (sem "piscar")
       try {
         var t = localStorage.getItem('ds-theme');
         if (t === 'light' || t === 'dark' || t === 'system') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+      try {
+        var l = null;
+        try { l = localStorage.getItem('ds-locale'); } catch (e) {}
+        if (l !== 'pt-BR' && l !== 'en' && l !== 'es') {
+          l = 'en';
+          var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+          for (var i = 0; i < langs.length; i++) {
+            var x = String(langs[i]).toLowerCase();
+            if (x.indexOf('pt') === 0) { l = 'pt-BR'; break; }
+            if (x.indexOf('es') === 0) { l = 'es'; break; }
+            if (x.indexOf('en') === 0) { l = 'en'; break; }
+          }
+        }
+        document.documentElement.lang = l;
       } catch (e) {}
     </script>
 
@@ -26,7 +41,7 @@
     <script type="module" src="site/app.js"></script>
   </head>
   <body>
-    <a class="ds-skip-link" href="#conteudo" data-skip-link>Pular para o conteúdo</a>
+    <a class="ds-skip-link" href="#conteudo" data-skip-link data-i18n="skip">Pular para o conteúdo</a>
 
     <div class="ds-shell" id="shell">
       <script>
@@ -36,9 +51,9 @@
         } catch (e) {}
       </script>
 
-      <aside class="ds-sidebar" id="sidebar" aria-label="Barra lateral">
+      <aside class="ds-sidebar" id="sidebar" aria-label="Barra lateral" data-i18n-attr="aria-label:sidebar">
         <div class="ds-sidebar__header">
-          <a class="ds-brand" href="#/" aria-label="Órbita, ir para o início">Órbita</a>
+          <a class="ds-brand" href="#/" aria-label="Órbita, ir para o início" data-i18n-attr="aria-label:goHome">Órbita</a>
           <button type="button" class="ds-icon-btn ds-icon-btn--outline ds-icon-btn--lg ds-sidebar__toggle" data-shell-toggle aria-controls="sidebar" data-ds-tooltip-placement="right">
             <ds-icon name="panel-left" class="ds-sidebar__toggle-collapse"></ds-icon>
             <ds-icon name="x" class="ds-sidebar__toggle-close"></ds-icon>
@@ -46,21 +61,21 @@
         </div>
 
         <div class="ds-sidebar__search">
-          <button type="button" class="ds-field ds-sidebar-search" data-command-open data-ds-tooltip="Buscar" data-ds-tooltip-placement="right" aria-keyshortcuts="Meta+K Control+K">
+          <button type="button" class="ds-field ds-sidebar-search" data-command-open data-ds-tooltip="Buscar" data-i18n-attr="data-ds-tooltip:search" data-ds-tooltip-placement="right" aria-keyshortcuts="Meta+K Control+K">
             <ds-icon name="search" size="20"></ds-icon>
-            <span class="ds-field__placeholder">Buscar no Órbita</span>
+            <span class="ds-field__placeholder" data-i18n="searchOrbita">Buscar no Órbita</span>
             <span class="ds-sidebar-search__kbd" aria-hidden="true"><kbd class="ds-kbd" data-kbd-mod>⌘</kbd><kbd class="ds-kbd">K</kbd></span>
           </button>
         </div>
 
-        <nav class="ds-sidebar__nav" id="sidebar-nav" aria-label="Principal"></nav>
+        <nav class="ds-sidebar__nav" id="sidebar-nav" aria-label="Principal" data-i18n-attr="aria-label:mainNav"></nav>
 
         <div class="ds-sidebar__footer">
           <a class="ds-account" href="#/novidades" data-ds-tooltip="Órbita 0.2 · novidades" data-ds-tooltip-placement="right">
             <span class="ds-avatar"><ds-icon name="package" size="20"></ds-icon></span>
             <span class="ds-account__text">
               <span class="ds-account__title">Órbita 0.2</span>
-              <span class="ds-account__subtitle">Ver o que há de novo</span>
+              <span class="ds-account__subtitle" data-i18n="whatsNew">Ver o que há de novo</span>
             </span>
             <ds-icon name="chevron-right" class="ds-account__chevron"></ds-icon>
           </a>
@@ -75,15 +90,18 @@
             <button type="button" class="ds-icon-btn ds-icon-btn--outline ds-topbar__menu" data-shell-toggle aria-controls="sidebar">
               <ds-icon name="menu"></ds-icon>
             </button>
-            <nav class="ds-breadcrumb" id="breadcrumb" aria-label="Você está em"></nav>
+            <nav class="ds-breadcrumb" id="breadcrumb" aria-label="Você está em" data-i18n-attr="aria-label:youAreHere"></nav>
             <div class="ds-topbar__spacer"></div>
-            <button type="button" class="ds-icon-btn ds-topbar__search" data-command-open aria-label="Buscar">
+            <button type="button" class="ds-icon-btn ds-topbar__search" data-command-open aria-label="Buscar" data-i18n-attr="aria-label:search">
               <ds-icon name="search"></ds-icon>
             </button>
-            <div class="ds-segmented" role="radiogroup" aria-label="Tema">
-              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="dark" aria-label="Escuro" data-ds-tooltip="Tema escuro" data-ds-tooltip-placement="bottom"><ds-icon name="moon" size="16"></ds-icon></button>
-              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="light" aria-label="Claro" data-ds-tooltip="Tema claro" data-ds-tooltip-placement="bottom"><ds-icon name="sun" size="16"></ds-icon></button>
-              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="system" aria-label="Sistema" data-ds-tooltip="Seguir o sistema" data-ds-tooltip-placement="bottom"><ds-icon name="monitor" size="16"></ds-icon></button>
+            <button type="button" class="ds-chip ds-chip--sm ds-topbar__locale" data-locale-menu data-i18n-attr="data-ds-tooltip:language" data-ds-tooltip="Idioma" data-ds-tooltip-placement="bottom">
+              <span class="ds-chip__icon"><ds-icon name="globe" size="16"></ds-icon></span><span data-label>PT</span>
+            </button>
+            <div class="ds-segmented" role="radiogroup" aria-label="Tema" data-i18n-attr="aria-label:theme">
+              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="dark" aria-label="Escuro" data-ds-tooltip="Tema escuro" data-i18n-attr="aria-label:dark; data-ds-tooltip:darkTheme" data-ds-tooltip-placement="bottom"><ds-icon name="moon" size="16"></ds-icon></button>
+              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="light" aria-label="Claro" data-ds-tooltip="Tema claro" data-i18n-attr="aria-label:light; data-ds-tooltip:lightTheme" data-ds-tooltip-placement="bottom"><ds-icon name="sun" size="16"></ds-icon></button>
+              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="system" aria-label="Sistema" data-ds-tooltip="Seguir o sistema" data-i18n-attr="aria-label:system; data-ds-tooltip:followSystem" data-ds-tooltip-placement="bottom"><ds-icon name="monitor" size="16"></ds-icon></button>
             </div>
           </header>
 

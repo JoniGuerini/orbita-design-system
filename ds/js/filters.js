@@ -22,6 +22,7 @@
  */
 import { icon } from '../icons/icons.js';
 import { attachMenu } from './menu.js';
+import { msg, formatNumber } from './i18n.js';
 
 let uid = 0;
 const escape = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
@@ -64,14 +65,14 @@ export function filtersFromQuery(query, config) {
 }
 
 export function createFilters(host, config) {
-  const { label = 'Filtros', search = {}, fields = [], toggles = [], sort, noun = ['resultado', 'resultados'], onChange } = config;
+  const { label = msg('filters.label'), search = {}, fields = [], toggles = [], sort, noun, onChange } = config;
   const id = `ds-filters-${++uid}`;
   const base = defaults(config);
   let state = { ...base, ...(config.value ?? {}) };
   let count = null;
 
   const optionLabel = (field, value) => field.options.find((o) => o.value === value)?.label ?? '';
-  const plural = (n) => `${n.toLocaleString('pt-BR')} ${n === 1 ? noun[0] : noun[1]}`;
+  const plural = (n) => (noun ? `${formatNumber(n)} ${n === 1 ? noun[0] : noun[1]}` : msg('filters.results', n));
 
   host.innerHTML = `<div class="ds-filters" role="search" aria-label="${escape(label)}">
     <div class="ds-filters__bar">
@@ -79,8 +80,8 @@ export function createFilters(host, config) {
         search !== false
           ? `<label class="ds-field ds-filters__search">
               ${icon('search', { size: 18 })}
-              <input class="ds-field__input" type="search" data-filter-search placeholder="${escape(search.placeholder ?? 'Buscar')}" aria-label="${escape(search.label ?? search.placeholder ?? 'Buscar')}" autocomplete="off" spellcheck="false">
-              <button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted ds-field__action" data-filter-clear-search aria-label="Limpar busca" hidden>${icon('x', { size: 16 })}</button>
+              <input class="ds-field__input" type="search" data-filter-search placeholder="${escape(search.placeholder ?? msg('common.search'))}" aria-label="${escape(search.label ?? search.placeholder ?? msg('common.search'))}" autocomplete="off" spellcheck="false">
+              <button type="button" class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted ds-field__action" data-filter-clear-search aria-label="${msg('filters.clearSearch')}" hidden>${icon('x', { size: 16 })}</button>
             </label>`
           : ''
       }
@@ -112,8 +113,8 @@ export function createFilters(host, config) {
     </div>
     <div class="ds-filters__summary">
       <p class="ds-filters__count" id="${id}-count" role="status" aria-live="polite" aria-atomic="true"></p>
-      <ul class="ds-filters__active" role="list" aria-label="Filtros ativos" data-filter-active></ul>
-      <button type="button" class="ds-inline-action ds-filters__clear" data-filter-clear hidden>${icon('x', { size: 14 })}Limpar tudo</button>
+      <ul class="ds-filters__active" role="list" aria-label="${msg('filters.active')}" data-filter-active></ul>
+      <button type="button" class="ds-inline-action ds-filters__clear" data-filter-clear hidden>${icon('x', { size: 14 })}${msg('filters.clearAll')}</button>
     </div>
   </div>`;
 
@@ -129,7 +130,7 @@ export function createFilters(host, config) {
     const menu = attachMenu(chip, {
       label: f.label,
       value: state[f.id],
-      options: [{ value: '', label: f.allLabel ?? 'Todos' }, ...f.options],
+      options: [{ value: '', label: f.allLabel ?? msg('filters.all') }, ...f.options],
       onChange: (value) => set({ [f.id]: value }),
     });
     return { f, chip, menu };
@@ -138,7 +139,7 @@ export function createFilters(host, config) {
   let sortMenu = null;
   if (sort) {
     const chip = root.querySelector('[data-filter-sort]');
-    sortMenu = attachMenu(chip, { label: sort.label ?? 'Ordenar', value: state[sort.id], options: sort.options, onChange: (value) => set({ [sort.id]: value }) });
+    sortMenu = attachMenu(chip, { label: sort.label ?? msg('filters.sort'), value: state[sort.id], options: sort.options, onChange: (value) => set({ [sort.id]: value }) });
   }
 
   /** Filtros ativos: busca, escolhas e liga/desliga (a ordenação fica de fora). */
@@ -162,13 +163,13 @@ export function createFilters(host, config) {
     toggles.forEach((t) => root.querySelector(`[data-filter-toggle="${CSS.escape(t.id)}"]`).setAttribute('aria-pressed', String(!!state[t.id])));
     if (sort) {
       const chip = root.querySelector('[data-filter-sort]');
-      chip.querySelector('[data-label]').textContent = `${sort.label ?? 'Ordenar'}: ${sort.options.find((o) => o.value === state[sort.id])?.label ?? ''}`;
+      chip.querySelector('[data-label]').textContent = `${sort.label ?? msg('filters.sort')}: ${sort.options.find((o) => o.value === state[sort.id])?.label ?? ''}`;
       sortMenu.setValue(state[sort.id]);
     }
     const list = actives();
     activeList.innerHTML = list
       .map(
-        (a) => `<li><span class="ds-chip ds-chip--sm ds-chip--removable">${escape(a.text)}<button type="button" class="ds-chip__remove" data-filter-remove="${escape(a.key)}" aria-label="Remover filtro ${escape(a.text)}">${icon('x', { size: 14 })}</button></span></li>`,
+        (a) => `<li><span class="ds-chip ds-chip--sm ds-chip--removable">${escape(a.text)}<button type="button" class="ds-chip__remove" data-filter-remove="${escape(a.key)}" aria-label="${escape(msg('filters.remove', a.text))}">${icon('x', { size: 14 })}</button></span></li>`,
       )
       .join('');
     activeList.hidden = !list.length;
@@ -246,7 +247,7 @@ export function createFilters(host, config) {
     clear,
     /** Contagem anunciada: "8 de 24 pedidos" com filtro, "24 pedidos" sem. */
     setCount(shown, total = shown) {
-      const text = actives().length || shown !== total ? `${shown.toLocaleString('pt-BR')} de ${plural(total)}` : plural(total);
+      const text = actives().length || shown !== total ? msg('filters.shownOf', shown, plural(total)) : plural(total);
       if (text === count) return;
       count = text;
       countEl.textContent = text;

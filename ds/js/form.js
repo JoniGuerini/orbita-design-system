@@ -25,24 +25,24 @@
  */
 import { icon } from '../icons/icons.js';
 import { enhanceSelect } from './select.js';
+import { msg } from './i18n.js';
 
 const escape = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
-const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 let uid = 0;
 
 const SKIP = new Set(['submit', 'button', 'reset', 'hidden', 'image', 'file']);
 
 const DEFAULTS = {
-  required: (f) => (f.kind === 'select' ? 'Escolha uma opção.' : f.kind === 'radio' ? 'Escolha uma opção.' : f.kind === 'check' ? 'Marque esta opção para continuar.' : f.kind === 'group' ? 'Marque pelo menos uma opção.' : 'Preencha este campo.'),
-  email: () => 'Use um e-mail no formato nome@empresa.com.',
-  url: () => 'Use um endereço completo, que comece com https://.',
-  number: () => 'Use só números.',
-  minlength: (f, v) => `Use pelo menos ${plural(f.el.minLength, 'caractere', 'caracteres')} (faltam ${f.el.minLength - v.length}).`,
-  maxlength: (f, v) => `Use no máximo ${plural(f.max, 'caractere', 'caracteres')} (sobram ${v.length - f.max}).`,
-  min: (f) => `Use um valor a partir de ${f.el.min}.`,
-  max: (f) => `Use um valor até ${f.el.max}.`,
-  pattern: (f) => f.el.title || 'Confira o formato.',
-  groupMin: (f) => `Marque pelo menos ${f.min}.`,
+  required: (f) => msg(f.kind === 'select' || f.kind === 'radio' ? 'form.requiredChoice' : f.kind === 'check' ? 'form.requiredCheck' : f.kind === 'group' ? 'form.requiredGroup' : 'form.required'),
+  email: () => msg('form.email'),
+  url: () => msg('form.url'),
+  number: () => msg('form.number'),
+  minlength: (f, v) => msg('form.minlength', f.el.minLength, f.el.minLength - v.length),
+  maxlength: (f, v) => msg('form.maxlength', f.max, v.length - f.max),
+  min: (f) => msg('form.min', f.el.min),
+  max: (f) => msg('form.max', f.el.max),
+  pattern: (f) => f.el.title || msg('form.pattern'),
+  groupMin: (f) => msg('form.groupMin', f.min),
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -248,7 +248,7 @@ export function enhanceForm(form, options = {}) {
       .filter((f) => errors.has(f.name))
       .map((f) => `<li><a href="#${escape(f.focusTarget()?.id ?? '')}" data-form-error="${escape(f.name)}">${escape(f.label)}: ${escape(errors.get(f.name).message.replace(/\.$/, '').replace(/^./, (c) => c.toLowerCase()))}</a></li>`)
       .join('');
-    const title = o.summaryTitle?.(errors.size) ?? `Revise ${plural(errors.size, 'campo', 'campos')} para continuar`;
+    const title = o.summaryTitle?.(errors.size) ?? msg('form.summary', errors.size);
     if (!summaryEl) {
       summaryEl = document.createElement('div');
       summaryEl.className = 'ds-alert ds-alert--danger ds-form__summary';
