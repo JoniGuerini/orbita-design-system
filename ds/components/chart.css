@@ -1,0 +1,810 @@
+/*
+ * Gráficos — moldura, marcas, tooltip, legenda e figuras (indicador, sparkline, medidor).
+ * Desenhados por ds/js/charts.js. Marcas usam --c (a cor da série); textos usam sempre fg.*.
+ *
+ * <div id="vendas"></div>  →  barChart(el, {...}) monta <figure class="ds-chart">
+ *
+ * Modificadores: .ds-chart--card (superfície com contorno) · [data-texture] (hachura de reserva)
+ * Personalize o anel dos pontos com --ds-chart-surface quando o gráfico estiver sobre outro fundo.
+ */
+
+.ds-chart {
+  --ds-chart-surface: var(--ds-color-bg-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-200);
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  color: var(--ds-color-fg-default);
+}
+
+.ds-chart--card {
+  padding: var(--ds-space-250) var(--ds-space-300) var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-chart-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+/* ───────── Cabeçalho ───────── */
+
+.ds-chart__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+}
+
+.ds-chart__titles {
+  min-width: 0;
+}
+
+.ds-chart__title {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.ds-chart__subtitle {
+  margin-top: 2px;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-chart__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+  margin: -4px -6px 0 auto;
+}
+
+.ds-chart__toggle[aria-pressed="true"] {
+  background: var(--ds-color-bg-selected);
+  color: var(--ds-color-fg-default);
+}
+
+/* ───────── Legenda ───────── */
+
+.ds-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--ds-space-050);
+  margin-inline: -8px;
+}
+
+.ds-chart__legend[hidden] {
+  display: none;
+}
+
+.ds-chart__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  min-height: 28px;
+  padding: 0 var(--ds-space-100);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+  transition:
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    opacity var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+button.ds-chart__legend-item:hover {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-chart__legend-item[aria-pressed="false"] {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-chart__legend-item[aria-pressed="false"] .ds-chart__key-mark {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--c);
+}
+
+.ds-chart__legend-item[aria-pressed="false"] .ds-chart__key-mark[data-mark="line"] {
+  background: transparent;
+  box-shadow: none;
+  border-top: 2px dotted var(--c);
+  height: 0;
+}
+
+/* Chave: espelha a marca — retângulo para barras e áreas, traço para linhas, ponto para dispersão */
+.ds-chart__key-mark {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--c);
+}
+
+.ds-chart__key-mark[data-mark="line"] {
+  width: 14px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.ds-chart__key-mark[data-mark="dot"] {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ───────── Área do gráfico ───────── */
+
+.ds-chart__body {
+  position: relative;
+  min-width: 0;
+}
+
+.ds-chart__body[hidden],
+.ds-chart__table[hidden] {
+  display: none;
+}
+
+.ds-chart__plot {
+  position: relative;
+  border-radius: var(--ds-radius-md);
+  outline: none;
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+  touch-action: pan-y;
+}
+
+.ds-chart__plot:focus-visible {
+  box-shadow: 0 0 0 2px var(--ds-color-bg-canvas), 0 0 0 4px var(--ds-color-border-focus);
+}
+
+/* Recarregando: mantém o desenho anterior, sem esqueleto nem pulo de layout */
+.ds-chart[data-loading] .ds-chart__plot {
+  opacity: 0.45;
+}
+
+.ds-chart__svg {
+  display: block;
+  overflow: visible;
+  font-family: var(--ds-font-family-sans);
+}
+
+.ds-chart__scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.ds-chart__scroll .ds-chart__svg {
+  max-width: none;
+}
+
+/* Texto do gráfico: sempre tokens de texto, nunca a cor da série */
+.ds-chart__tick {
+  fill: var(--ds-color-fg-subtle);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-chart__label {
+  fill: var(--ds-color-fg-muted);
+  font-size: 13px;
+  font-weight: var(--ds-font-weight-medium);
+}
+
+.ds-chart__value {
+  fill: var(--ds-color-fg-default);
+  font-size: 12px;
+  font-weight: var(--ds-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-chart__axis-label {
+  fill: var(--ds-color-fg-subtle);
+  font-size: 12px;
+  font-weight: var(--ds-font-weight-medium);
+}
+
+/* Grade e eixos: fio de 1 px, sólido, recessivo */
+.ds-chart__grid {
+  stroke: var(--ds-color-chart-grid);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.ds-chart__baseline {
+  stroke: var(--ds-color-chart-axis);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+/* Meta e limite: o único tracejado — significa "referência", não grade */
+.ds-chart__target {
+  stroke: var(--ds-color-fg-subtle);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  shape-rendering: crispEdges;
+}
+
+.ds-chart__target-label {
+  fill: var(--ds-color-fg-muted);
+  font-size: 12px;
+  font-weight: var(--ds-font-weight-medium);
+  paint-order: stroke;
+  stroke: var(--ds-chart-surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+/* ───────── Marcas ───────── */
+
+.ds-chart__bar,
+.ds-chart__cell,
+.ds-donut__seg {
+  fill: var(--c);
+  transition: opacity var(--ds-duration-fast) var(--ds-easing-standard), filter var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-chart__bar[data-active],
+.ds-donut__seg[data-active] {
+  filter: brightness(1.1) saturate(1.05);
+}
+
+.ds-chart__band {
+  fill: var(--ds-color-bg-hover);
+  pointer-events: none;
+}
+
+.ds-chart__line {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ds-chart__area {
+  fill: var(--c);
+  fill-opacity: 0.1;
+  stroke: none;
+}
+
+.ds-chart__area--stacked {
+  fill-opacity: 0.16;
+}
+
+.ds-chart__dot {
+  fill: var(--c);
+  stroke: var(--ds-chart-surface);
+  stroke-width: 2;
+  paint-order: stroke;
+}
+
+.ds-chart__dot--bubble {
+  fill-opacity: 0.85;
+}
+
+.ds-chart__dot[data-active] {
+  fill-opacity: 1;
+}
+
+.ds-chart__crosshair {
+  stroke: var(--ds-color-chart-axis);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+  pointer-events: none;
+}
+
+.ds-chart__point-ring {
+  fill: none;
+  stroke: var(--c, var(--ds-color-fg-default));
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+.ds-chart__cell-ring {
+  fill: none;
+  stroke: var(--ds-color-fg-default);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+/* Textura (opcional): hachura em 45° e 135°, para daltonismo total, impressão e alto contraste */
+.ds-chart[data-texture] .ds-chart__bar,
+.ds-chart[data-texture] .ds-donut__seg {
+  fill: var(--t, var(--c));
+}
+
+.ds-chart__hatch {
+  stroke: var(--ds-chart-surface);
+  stroke-width: 1.5;
+  stroke-opacity: 0.7;
+}
+
+@media print, (forced-colors: active) {
+  .ds-chart .ds-chart__bar,
+  .ds-chart .ds-donut__seg {
+    fill: var(--t, var(--c));
+  }
+}
+
+/* ───────── Tooltip ───────── */
+
+.ds-chart__tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  min-width: 132px;
+  max-width: min(280px, 100%);
+  padding: var(--ds-space-100) var(--ds-space-150);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-bg-raised);
+  border: 1px solid var(--ds-color-border-subtle);
+  box-shadow: var(--ds-shadow-md);
+  pointer-events: none;
+  transition: transform var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-chart__tooltip[hidden] {
+  display: none;
+}
+
+.ds-chart__tooltip-title {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.ds-chart__tooltip-rows {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.ds-chart__tooltip-title:only-child {
+  margin: 0;
+}
+
+.ds-chart__tooltip-row {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  column-gap: var(--ds-space-100);
+}
+
+.ds-chart__tooltip-row:not(:has(.ds-chart__key-mark)) {
+  grid-template-columns: auto 1fr;
+}
+
+/* O valor vem primeiro e forte; o nome da série, depois e apagado */
+.ds-chart__tooltip-value {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-sm);
+  font-weight: var(--ds-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ds-chart__tooltip-name {
+  overflow: hidden;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-chart__tooltip-note {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-caption);
+}
+
+/* ───────── Vazio, escala e tabela ───────── */
+
+.ds-chart__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-100);
+  border-radius: var(--ds-radius-lg);
+  border: 1px dashed var(--ds-color-border-default);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.ds-chart__scale {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ds-space-100);
+  margin-top: var(--ds-space-150);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-chart__scale-bins {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.ds-chart__scale-bin {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--c);
+}
+
+.ds-chart__table .ds-table-wrap {
+  max-height: 360px;
+}
+
+/* ───────── Rosca ───────── */
+
+.ds-donut {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-400);
+}
+
+.ds-donut[data-layout="stack"] {
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--ds-space-300);
+}
+
+.ds-donut__figure {
+  position: relative;
+  flex: none;
+  align-self: center;
+}
+
+.ds-donut__seg {
+  transition: opacity var(--ds-duration-fast) var(--ds-easing-standard), d var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.ds-donut__seg[data-dim] {
+  opacity: 0.5;
+}
+
+.ds-donut__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 22%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ds-donut__center-value {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-font-weight-semibold) 1.625rem/1.1 var(--ds-font-family-sans);
+  letter-spacing: -0.02em;
+}
+
+.ds-donut__center-label {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ds-donut__list {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  align-content: center;
+}
+
+.ds-donut__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto 3.5rem;
+  align-items: center;
+  gap: var(--ds-space-150);
+  min-height: 36px;
+  padding: 0 var(--ds-space-100);
+  border-radius: var(--ds-radius-sm);
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-donut__item + .ds-donut__item {
+  box-shadow: 0 -1px 0 var(--ds-color-border-subtle);
+}
+
+.ds-donut__item[data-active] {
+  background: var(--ds-color-bg-hover);
+  box-shadow: none;
+}
+
+.ds-donut__item[data-active] + .ds-donut__item {
+  box-shadow: none;
+}
+
+.ds-donut__name {
+  overflow: hidden;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-donut__value {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-sm);
+  font-weight: var(--ds-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.ds-donut__share {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+/* ───────── Entrada (uma vez, quando aparece) ───────── */
+
+.ds-chart[data-animate] .ds-chart__bar {
+  transform-box: fill-box;
+  animation: ds-chart-grow-y var(--ds-duration-slower) var(--ds-easing-emphasized) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.ds-chart[data-animate] .ds-chart__bar[data-end="top"],
+.ds-chart[data-animate] .ds-chart__bar[data-end="none"] { transform-origin: 50% 100%; }
+.ds-chart[data-animate] .ds-chart__bar[data-end="bottom"] { transform-origin: 50% 0; }
+.ds-chart[data-animate] .ds-chart__bar[data-end="right"] { transform-origin: 0 50%; animation-name: ds-chart-grow-x; }
+.ds-chart[data-animate] .ds-chart__bar[data-end="left"] { transform-origin: 100% 50%; animation-name: ds-chart-grow-x; }
+.ds-chart[data-animate] .ds-chart__bar[data-end="none-h"] { transform-origin: 0 50%; animation-name: ds-chart-grow-x; }
+
+.ds-chart[data-animate] .ds-chart__line {
+  stroke-dasharray: 1;
+  animation: ds-chart-draw 900ms var(--ds-easing-standard) both;
+}
+
+.ds-chart[data-animate] .ds-chart__area,
+.ds-chart[data-animate] .ds-chart__dot,
+.ds-chart[data-animate] .ds-chart__value,
+.ds-chart[data-animate] .ds-chart__cell,
+.ds-chart[data-animate] .ds-donut__seg {
+  animation: ds-chart-fade var(--ds-duration-slower) var(--ds-easing-standard) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.ds-chart[data-animate] .ds-chart__dot--end,
+.ds-chart[data-animate] .ds-chart__value {
+  animation-delay: 500ms;
+}
+
+@keyframes ds-chart-grow-y { from { transform: scaleY(0); } }
+@keyframes ds-chart-grow-x { from { transform: scaleX(0); } }
+@keyframes ds-chart-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes ds-chart-fade { from { opacity: 0; } }
+
+/* ───────── Indicador (stat) ───────── */
+
+.ds-stat {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: var(--ds-space-050);
+  min-width: 0;
+  padding: var(--ds-space-250) var(--ds-space-250) var(--ds-space-200);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-default);
+  text-decoration: none;
+}
+
+a.ds-stat {
+  transition: border-color var(--ds-duration-fast) var(--ds-easing-standard), background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+a.ds-stat:hover {
+  border-color: var(--ds-color-border-default);
+}
+
+.ds-stat__label {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+}
+
+/* Algarismos proporcionais no número grande; mesma família sans do resto */
+.ds-stat__value {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-font-weight-semibold) 1.75rem/2.25rem var(--ds-font-family-sans);
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+}
+
+.ds-stat__delta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px var(--ds-space-100);
+  min-height: 24px;
+  font: var(--ds-text-body-sm);
+}
+
+.ds-stat__change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: var(--ds-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-stat__delta[data-tone="good"] .ds-stat__change { color: var(--ds-color-success-fg); }
+.ds-stat__delta[data-tone="bad"] .ds-stat__change { color: var(--ds-color-danger-fg); }
+.ds-stat__delta[data-tone="neutral"] .ds-stat__change { color: var(--ds-color-fg-muted); }
+
+.ds-stat__period {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-stat__trend {
+  margin-top: var(--ds-space-150);
+  line-height: 0;
+}
+
+.ds-stat__trend .ds-sparkline {
+  width: 100%;
+}
+
+.ds-stat--hero {
+  padding: var(--ds-space-300);
+}
+
+.ds-stat--hero .ds-stat__value {
+  margin-top: var(--ds-space-100);
+  font-size: 3.5rem;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.ds-stat--hero .ds-stat__delta {
+  margin-top: var(--ds-space-150);
+}
+
+/* Sparkline: estica na largura do contêiner; o traço e o ponto não deformam */
+.ds-sparkline {
+  position: relative;
+  display: block;
+  width: var(--w, 112px);
+  height: var(--h, 32px);
+}
+
+.ds-sparkline svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ds-sparkline__line {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ds-sparkline__area {
+  fill: var(--c);
+  fill-opacity: 0.12;
+}
+
+.ds-sparkline__dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ds-color-chart-series-1);
+  box-shadow: 0 0 0 2px var(--ds-chart-surface, var(--ds-color-bg-surface));
+  translate: -50% -50%;
+}
+
+/* ───────── Medidor ───────── */
+
+.ds-meter {
+  --_fill: var(--ds-color-brand-solid);
+  --_track: var(--ds-color-brand-subtle);
+  --_icon: var(--ds-color-brand-fg);
+  display: grid;
+  gap: var(--ds-space-100);
+  min-width: 0;
+}
+
+/* Gravidade na escala de status dos gráficos: o crítico não se confunde com o pêssego da marca */
+.ds-meter--warning { --_fill: var(--ds-color-chart-status-warning); --_track: var(--ds-color-warning-subtle); --_icon: var(--ds-color-warning-fg); }
+.ds-meter--danger { --_fill: var(--ds-color-chart-status-critical); --_track: var(--ds-color-danger-subtle); --_icon: var(--ds-color-danger-fg); }
+.ds-meter--success { --_fill: var(--ds-color-chart-status-good); --_track: var(--ds-color-success-subtle); --_icon: var(--ds-color-success-fg); }
+
+.ds-meter__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+}
+
+.ds-meter__label {
+  overflow: hidden;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-meter__value {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-meter__value strong {
+  color: var(--ds-color-fg-default);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.ds-meter--warning .ds-meter__value strong,
+.ds-meter--danger .ds-meter__value strong {
+  color: var(--_icon);
+}
+
+.ds-meter__value .ds-icon {
+  align-self: center;
+  color: var(--_icon);
+}
+
+.ds-meter__track {
+  position: relative;
+  height: 8px;
+  border-radius: var(--ds-radius-full);
+  background: var(--_track);
+  overflow: hidden;
+}
+
+.ds-meter--sm .ds-meter__track {
+  height: 6px;
+}
+
+.ds-meter__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--value, 0) * 100%);
+  min-width: 4px;
+  border-radius: inherit;
+  background: var(--_fill);
+  transition: width var(--ds-duration-slow) var(--ds-easing-emphasized);
+}
+
+.ds-meter__caption {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-meter__fill,
+  .ds-donut__seg {
+    transition: none;
+  }
+}

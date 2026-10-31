@@ -1,0 +1,135 @@
+/* Página: Checkbox e radio (prefixo cr-) */
+
+/* ───────── Checkbox ou radio ───────── */
+
+.cr-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.cr-compare__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.cr-compare__stage {
+  flex: 1;
+  padding: var(--ds-space-400);
+  background: var(--ds-color-bg-canvas);
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+}
+
+/* ───────── Estados ───────── */
+
+.cr-states {
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow-x: auto;
+}
+
+.cr-states__grid {
+  display: grid;
+  grid-template-columns: 96px repeat(7, minmax(84px, 1fr));
+  align-items: center;
+  min-width: 720px;
+  padding: var(--ds-space-200) var(--ds-space-300) var(--ds-space-300);
+}
+
+.cr-states__head {
+  padding-block: var(--ds-space-100) var(--ds-space-200);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  text-align: center;
+}
+
+.cr-states__row {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-sm);
+}
+
+.cr-states__cell {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--ds-space-200);
+}
+
+.cr-states__cell > .ds-checkbox,
+.cr-states__cell > .ds-radio {
+  gap: 0;
+}
+
+.cr-states__cell--na {
+  color: var(--ds-color-fg-disabled);
+}
+
+/* ───────── Grupos ───────── */
+
+.cr-groups {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+.cr-group-preview {
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-height: 200px;
+}
+
+/* ───────── Selecionar todos ───────── */
+
+.cr-all {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--ds-space-150);
+}
+
+.cr-all__demo {
+  padding: var(--ds-space-400);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.cr-all__children {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-150);
+  margin: var(--ds-space-200) 0 0 9px;
+  padding-inline-start: var(--ds-space-250);
+  border-inline-start: 1px solid var(--ds-color-border-default);
+}
+
+.cr-all__code {
+  align-self: start;
+}
+
+/* ───────── Uso ───────── */
+
+.cr-usage {
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .cr-compare,
+  .cr-all {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cr-compare__stage,
+  .cr-all__demo {
+    padding: var(--ds-space-250);
+  }
+}

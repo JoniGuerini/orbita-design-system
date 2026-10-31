@@ -1,0 +1,299 @@
+/* Página: Avatar (prefixo av-) */
+
+.av-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-150);
+}
+
+.av-stage__name {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-md);
+}
+
+.av-code {
+  margin-top: var(--ds-space-150);
+}
+
+.av-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-100);
+  margin-top: var(--ds-space-200);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.av-note > .ds-icon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--ds-color-fg-subtle);
+}
+
+/* ───────── Tamanhos ───────── */
+
+.av-sizes {
+  display: grid;
+  --ds-avatar-ring: var(--ds-color-bg-surface);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.av-size {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-050);
+  padding: var(--ds-space-250);
+}
+
+.av-size + .av-size {
+  border-inline-start: 1px solid var(--ds-color-border-subtle);
+}
+
+.av-size__preview {
+  display: flex;
+  align-items: flex-end;
+  height: 72px;
+  margin-bottom: var(--ds-space-150);
+}
+
+.av-size__name {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-100);
+  font: var(--ds-text-label-md);
+}
+
+.av-size__name span {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+}
+
+.av-size__use {
+  margin-bottom: var(--ds-space-100);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+/* ───────── Tons ───────── */
+
+.av-tones {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.av-tones__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--ds-space-300) var(--ds-space-200);
+  padding: var(--ds-space-400);
+  background: var(--ds-color-bg-canvas);
+  border-inline-end: 1px solid var(--ds-color-border-subtle);
+}
+
+.av-tone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-075);
+  text-align: center;
+}
+
+.av-tone__name {
+  margin-top: var(--ds-space-050);
+  font: var(--ds-text-label-sm);
+}
+
+.av-tone__class {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+}
+
+.av-tones__try {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-400);
+}
+
+.av-tones__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-200);
+}
+
+.av-tones__field {
+  flex: 1;
+}
+
+.av-tones__result {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.av-tones__contrast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-100);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.av-tones__contrast > .ds-icon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--ds-color-success-fg);
+}
+
+/* ───────── Status ───────── */
+
+.av-status {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.av-status__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.av-status__name {
+  font: var(--ds-text-label-md);
+}
+
+.av-status__class {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+}
+
+/* ───────── Grupo ───────── */
+
+.av-groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-400) var(--ds-space-600);
+  padding: var(--ds-space-400);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.av-group-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-150);
+}
+
+.av-list {
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+  --ds-avatar-ring: var(--ds-color-bg-surface);
+}
+
+.av-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-150) var(--ds-space-250);
+}
+
+.av-list__item + .av-list__item {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.av-list__name {
+  font: var(--ds-text-label-md);
+}
+
+.av-list__meta {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+/* ───────── Uso ───────── */
+
+.av-usage__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .av-tones {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .av-tones__grid {
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--ds-color-border-subtle);
+  }
+
+  .av-status {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .av-sizes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .av-size,
+  .av-size + .av-size {
+    border-inline-start: 0;
+    border-top: 1px solid var(--ds-color-border-subtle);
+  }
+
+  .av-size:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .av-size:nth-child(even) {
+    border-inline-start: 1px solid var(--ds-color-border-subtle);
+  }
+
+  .av-tones__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: var(--ds-space-300) var(--ds-space-200);
+  }
+
+  .av-tones__try {
+    padding: var(--ds-space-300) var(--ds-space-250);
+  }
+
+  .av-status {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .av-groups {
+    padding: var(--ds-space-300) var(--ds-space-250);
+  }
+}

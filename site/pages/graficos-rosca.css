@@ -1,0 +1,320 @@
+/* Página: Gráficos · Rosca (prefixo gr-) */
+
+.gr-play {
+  width: 100%;
+}
+
+/* ───────── Variantes e estados ───────── */
+
+.gr-variants,
+.gr-states {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.gr-states {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gr-variant {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gr-variant__chart {
+  min-width: 0;
+  padding: var(--ds-space-250) var(--ds-space-250) var(--ds-space-200);
+}
+
+.gr-variant__body {
+  margin-top: auto;
+  padding: var(--ds-space-200) var(--ds-space-250) var(--ds-space-250);
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.gr-variant__name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-100);
+  min-height: 32px;
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.gr-variant__name code {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+}
+
+.gr-variant__text {
+  margin-top: 2px;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* Lado a lado × empilhada */
+.gr-layouts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: var(--ds-space-300);
+  align-items: start;
+  padding: var(--ds-space-250);
+}
+
+.gr-layouts__wide,
+.gr-layouts__narrow {
+  min-width: 0;
+}
+
+.gr-layouts__narrow {
+  padding-inline-start: var(--ds-space-300);
+  border-inline-start: 1px solid var(--ds-color-border-subtle);
+}
+
+.gr-layouts__label {
+  margin-bottom: var(--ds-space-150);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+/* Rosca ou barras */
+.gr-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.gr-compare__chart {
+  min-width: 0;
+  margin-block: var(--ds-space-100);
+  padding: var(--ds-space-200);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+}
+
+.gr-compare__chart .ds-chart {
+  --ds-chart-surface: var(--ds-color-bg-canvas);
+}
+
+/* ───────── Anatomia ───────── */
+
+.gr-anatomy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--ds-space-400);
+  align-items: center;
+  padding: var(--ds-space-400);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gr-anatomy__stage {
+  min-width: 0;
+  padding: var(--ds-space-300) var(--ds-space-200);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+}
+
+.gr-anat {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--ds-font-family-sans);
+}
+
+.gr-anat__center {
+  fill: var(--ds-color-fg-default);
+  font-size: 24px;
+  font-weight: var(--ds-font-weight-semibold);
+  letter-spacing: -0.02em;
+}
+
+.gr-anat__center-label {
+  fill: var(--ds-color-fg-subtle);
+  font-size: 12px;
+}
+
+.gr-anat__rule { stroke: var(--ds-color-border-subtle); }
+
+.gr-anat__name {
+  fill: var(--ds-color-fg-muted);
+  font-size: 13px;
+}
+
+.gr-anat__value {
+  fill: var(--ds-color-fg-default);
+  font-size: 13px;
+  font-weight: var(--ds-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.gr-anat__share {
+  fill: var(--ds-color-fg-subtle);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.gr-anat__dim {
+  fill: none;
+  stroke: var(--ds-color-fg-brand);
+  stroke-width: 1;
+}
+
+.gr-anat__ring {
+  fill: none;
+  stroke: var(--ds-color-fg-brand);
+  stroke-width: 1;
+}
+
+.gr-anat__callout circle {
+  fill: var(--ds-color-bg-canvas);
+  stroke: var(--ds-color-fg-brand);
+  stroke-width: 1;
+}
+
+.gr-anat__callout text {
+  fill: var(--ds-color-fg-brand);
+  font-size: 11px;
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.gr-anatomy__legend {
+  display: grid;
+  gap: var(--ds-space-200);
+}
+
+.gr-anatomy__legend li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: var(--ds-space-150);
+}
+
+.gr-anatomy__num {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--ds-color-fg-brand);
+  color: var(--ds-color-fg-brand);
+  font: var(--ds-font-weight-semibold) 0.6875rem/1 var(--ds-font-family-sans);
+}
+
+.gr-anatomy__title {
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.gr-anatomy__text {
+  margin-top: 2px;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Uso ───────── */
+
+.gr-usage__meter {
+  margin-block: var(--ds-space-050) var(--ds-space-100);
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+}
+
+/* ───────── API ───────── */
+
+.gr-api {
+  --doc-table-cols: 170px minmax(0, 1.1fr) 120px minmax(0, 1.6fr);
+}
+
+.gr-api__name {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-code-sm);
+}
+
+.gr-api__values,
+.gr-api__default {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-code-sm);
+  overflow-wrap: anywhere;
+}
+
+.gr-api__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.gr-api__code {
+  margin-top: var(--ds-space-200);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1280px) {
+  .gr-variants,
+  .gr-compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gr-states {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gr-anatomy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1280px) {
+  .gr-layouts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gr-layouts__narrow {
+    max-width: 300px;
+    padding: var(--ds-space-300) 0 0;
+    border-inline-start: 0;
+    border-top: 1px solid var(--ds-color-border-subtle);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .gr-anatomy {
+    padding: var(--ds-space-250);
+  }
+
+  /* o desenho mantém um tamanho legível e rola na horizontal */
+  .gr-anatomy__stage {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .gr-anat {
+    min-width: 460px;
+  }
+
+  .gr-variant__chart {
+    padding: var(--ds-space-200);
+  }
+
+  .gr-api {
+    --doc-table-cols: minmax(0, 1fr);
+  }
+
+  .gr-api .doc-table__head {
+    display: none;
+  }
+
+  .gr-api .doc-table__row {
+    gap: var(--ds-space-050);
+  }
+}

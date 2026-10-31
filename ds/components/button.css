@@ -1,0 +1,291 @@
+/*
+ * Botões — planos, sem brilho.
+ *   .ds-btn            variantes: primary, secondary, ghost, subtle, danger · tamanhos: sm, lg · forma: pill, block
+ *   .ds-icon-btn       só ícone; sem fundo por padrão · variantes: outline, subtle, muted · tamanhos: sm, lg · forma: round
+ *   .ds-inline-action  ação mínima dentro do texto ("Na cena +")
+ */
+
+.ds-btn {
+  --_h: var(--ds-size-control-md);
+  --_px: var(--ds-space-200);
+  --_radius: var(--ds-radius-md);
+  --_bg: transparent;
+  --_fg: var(--ds-color-fg-default);
+  --_border: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-100);
+  height: var(--_h);
+  padding-inline: var(--_px);
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
+  background-color: var(--_bg);
+  color: var(--_fg);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-btn:hover,
+.ds-btn[data-state="hover"] {
+  color: var(--_fg);
+}
+
+.ds-btn:disabled,
+.ds-btn[aria-disabled="true"] {
+  opacity: var(--ds-opacity-disabled);
+  pointer-events: none;
+}
+
+.ds-btn > .ds-icon {
+  margin-inline: -2px;
+}
+
+/* Estados forçados (documentação e testes visuais): data-state="hover|pressed|focus" */
+.ds-btn[data-state="focus"],
+.ds-icon-btn[data-state="focus"] {
+  outline: var(--ds-focus-ring-width) solid var(--ds-color-border-focus);
+  outline-offset: var(--ds-focus-ring-offset);
+}
+
+/* Variantes */
+.ds-btn--primary {
+  --_bg: var(--ds-color-brand-solid);
+  --_fg: var(--ds-color-brand-on-solid);
+}
+
+.ds-btn--primary:hover,
+.ds-btn--primary[data-state="hover"] {
+  --_bg: var(--ds-color-brand-solid-hover);
+}
+
+.ds-btn--primary:active,
+.ds-btn--primary[data-state="pressed"] {
+  --_bg: var(--ds-color-brand-solid-pressed);
+}
+
+.ds-btn--secondary {
+  --_border: var(--ds-color-border-control);
+}
+
+.ds-btn--secondary:hover,
+.ds-btn--secondary[data-state="hover"] {
+  --_bg: var(--ds-color-bg-hover);
+  --_border: var(--ds-color-border-strong);
+}
+
+.ds-btn--ghost:hover,
+.ds-btn--ghost[data-state="hover"] {
+  --_bg: var(--ds-color-bg-hover);
+}
+
+.ds-btn--ghost:active,
+.ds-btn--ghost[data-state="pressed"],
+.ds-btn--secondary:active,
+.ds-btn--secondary[data-state="pressed"] {
+  --_bg: var(--ds-color-bg-pressed);
+}
+
+.ds-btn--subtle {
+  --_bg: var(--ds-color-bg-muted);
+}
+
+.ds-btn--subtle:hover,
+.ds-btn--subtle[data-state="hover"] {
+  --_bg: color-mix(in srgb, var(--ds-color-bg-muted), var(--ds-color-fg-default) 6%);
+}
+
+.ds-btn--danger {
+  --_bg: var(--ds-color-danger-solid);
+  --_fg: var(--ds-color-danger-on-solid);
+}
+
+.ds-btn--danger:hover,
+.ds-btn--danger[data-state="hover"] {
+  --_bg: var(--ds-color-danger-solid-hover);
+}
+
+/* Tamanhos */
+.ds-btn--sm {
+  --_h: var(--ds-size-control-sm);
+  --_px: var(--ds-space-150);
+  --_radius: var(--ds-radius-sm);
+  gap: var(--ds-space-075);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+}
+
+.ds-btn--lg {
+  --_h: var(--ds-size-control-lg);
+  --_px: var(--ds-space-250);
+  font: var(--ds-text-label-lg);
+  letter-spacing: var(--ds-text-label-lg-tracking);
+}
+
+/* Formas */
+.ds-btn--pill {
+  --_radius: var(--ds-radius-full);
+}
+
+.ds-btn--block {
+  width: 100%;
+}
+
+/* ───────── Botão de ícone ───────── */
+
+.ds-icon-btn {
+  --_size: 36px;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: var(--_size);
+  height: var(--_size);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-sm);
+  background-color: transparent;
+  color: var(--ds-color-fg-default);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-icon-btn:hover,
+.ds-icon-btn[data-state="hover"] {
+  background-color: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-icon-btn:active,
+.ds-icon-btn[data-state="pressed"] {
+  background-color: var(--ds-color-bg-pressed);
+}
+
+.ds-icon-btn:disabled {
+  opacity: var(--ds-opacity-disabled);
+  pointer-events: none;
+}
+
+.ds-icon-btn--muted {
+  color: var(--ds-color-fg-muted);
+}
+
+.ds-icon-btn--outline {
+  border-color: var(--ds-color-border-control);
+}
+
+.ds-icon-btn--outline:hover,
+.ds-icon-btn--outline[data-state="hover"] {
+  border-color: var(--ds-color-border-strong);
+}
+
+.ds-icon-btn--subtle {
+  background-color: var(--ds-color-bg-muted);
+}
+
+.ds-icon-btn--subtle:hover,
+.ds-icon-btn--subtle[data-state="hover"] {
+  background-color: color-mix(in srgb, var(--ds-color-bg-muted), var(--ds-color-fg-default) 6%);
+}
+
+.ds-icon-btn--sm {
+  --_size: 28px;
+  border-radius: var(--ds-radius-xs);
+}
+
+.ds-icon-btn--lg {
+  --_size: 44px;
+  border-radius: var(--ds-radius-md);
+}
+
+.ds-icon-btn--round {
+  border-radius: var(--ds-radius-full);
+}
+
+/* ───────── Ação inline ───────── */
+
+.ds-inline-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  min-height: 28px;
+  margin-inline: -4px;
+  padding-inline: 4px;
+  border-radius: var(--ds-radius-xs);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-sm);
+  font-weight: var(--ds-font-weight-regular);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-inline-action:hover,
+.ds-inline-action[data-state="hover"] {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-inline-action:disabled,
+.ds-inline-action[aria-disabled="true"] {
+  opacity: var(--ds-opacity-muted);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Forte: um pouco mais de presença (ex.: "Ver o que mudou →") */
+.ds-inline-action--strong {
+  color: var(--ds-color-fg-default);
+  font-weight: var(--ds-font-weight-medium);
+}
+
+.ds-inline-action--strong:hover,
+.ds-inline-action--strong[data-state="hover"] {
+  color: var(--ds-color-fg-brand);
+}
+
+.ds-inline-action__plus {
+  margin-inline-start: var(--ds-space-050);
+  transition: transform var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+/* Seta de "ir para": anda um pouco no hover */
+.ds-inline-action__arrow {
+  transition: translate var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.ds-inline-action:hover .ds-inline-action__arrow,
+.ds-inline-action[data-state="hover"] .ds-inline-action__arrow {
+  translate: 2px 0;
+}
+
+/* Disclosure: <details class="ds-disclosure"><summary class="ds-inline-action">…</summary>…</details> */
+.ds-disclosure > summary {
+  list-style: none;
+}
+
+.ds-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ds-disclosure[open] > summary {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-disclosure[open] > summary .ds-inline-action__plus {
+  transform: rotate(45deg);
+}
+
+.ds-disclosure__content {
+  margin-top: var(--ds-space-200);
+}

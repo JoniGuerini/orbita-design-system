@@ -1,0 +1,154 @@
+/*
+ * Alerta — mensagem inline com tom, ícone, título, texto e ações.
+ *
+ * <div class="ds-alert ds-alert--danger" role="alert">
+ *   <span class="ds-alert__icon"><ds-icon name="alert-circle"></ds-icon></span>
+ *   <div class="ds-alert__body">
+ *     <p class="ds-alert__title">Não conseguimos salvar</p>
+ *     <p class="ds-alert__text">Suas alterações continuam aqui. Tente de novo em alguns segundos.</p>
+ *     <ul class="ds-alert__list"><li><a href="#campo">Nome do projeto: preencha este campo.</a></li></ul>
+ *     <div class="ds-alert__actions"><button class="ds-btn ds-btn--secondary ds-btn--sm">Tentar de novo</button></div>
+ *   </div>
+ *   <button class="ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted ds-alert__close" aria-label="Fechar">…</button>
+ * </div>
+ *
+ * Tons: neutro (padrão) · --info · --success · --warning · --danger. O tom nunca vem sozinho:
+ * ícone e texto dizem o mesmo que a cor.
+ * Variante: --compact (uma linha: título e texto lado a lado, ações à direita).
+ * role: "alert" quando aparece depois de uma ação (erro ao salvar); "status" para avisos que não
+ * interrompem; nenhum para alertas que já estão na página ao carregar.
+ */
+
+.ds-alert {
+  --_bg: var(--ds-color-bg-surface);
+  --_border: var(--ds-color-border-subtle);
+  --_icon: var(--ds-color-fg-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-150);
+  min-width: 0;
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--_bg);
+  border: 1px solid var(--_border);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-alert--info { --_bg: var(--ds-color-info-subtle); --_border: var(--ds-color-info-border); --_icon: var(--ds-color-info-fg); }
+.ds-alert--success { --_bg: var(--ds-color-success-subtle); --_border: var(--ds-color-success-border); --_icon: var(--ds-color-success-fg); }
+.ds-alert--warning { --_bg: var(--ds-color-warning-subtle); --_border: var(--ds-color-warning-border); --_icon: var(--ds-color-warning-fg); }
+.ds-alert--danger { --_bg: var(--ds-color-danger-subtle); --_border: var(--ds-color-danger-border); --_icon: var(--ds-color-danger-fg); }
+
+/* Alerta que recebe foco (resumo de erros): o anel aparece só pelo teclado ou pelo foco programático */
+.ds-alert[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.ds-alert[tabindex="-1"]:focus-visible,
+.ds-alert[data-focus-ring]:focus {
+  outline: 2px solid var(--ds-color-border-focus);
+  outline-offset: 2px;
+}
+
+.ds-alert__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  height: 22px;
+  color: var(--_icon);
+}
+
+.ds-alert__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--ds-space-050);
+  min-width: 0;
+}
+
+.ds-alert__title {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  line-height: 22px;
+}
+
+.ds-alert__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-alert__title + .ds-alert__text {
+  margin-top: -2px;
+}
+
+.ds-alert__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-050);
+  margin-top: var(--ds-space-050);
+  padding: 0;
+  list-style: none;
+}
+
+.ds-alert__list li {
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-alert__list a {
+  color: var(--ds-color-fg-default);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-alert__list a:hover {
+  text-decoration-color: currentColor;
+}
+
+.ds-alert__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100) var(--ds-space-200);
+  margin-top: var(--ds-space-100);
+}
+
+.ds-alert__meta {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.ds-alert__close {
+  flex: none;
+  margin: -5px -8px -5px 0;
+}
+
+/* Compacto: uma linha, para avisos dentro de painéis e barras */
+.ds-alert--compact {
+  align-items: center;
+  padding: var(--ds-space-100) var(--ds-space-150) var(--ds-space-100) var(--ds-space-200);
+  border-radius: var(--ds-radius-md);
+}
+
+.ds-alert--compact .ds-alert__body {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--ds-space-100);
+}
+
+.ds-alert--compact .ds-alert__title + .ds-alert__text {
+  margin-top: 0;
+}
+
+.ds-alert--compact .ds-alert__actions {
+  margin: 0 0 0 auto;
+}
+
+.ds-alert--compact .ds-alert__close {
+  margin-block: -4px;
+}

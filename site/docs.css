@@ -1,0 +1,263 @@
+/*
+ * Páginas de documentação (fundamentos, componentes, padrões).
+ * Estrutura: .doc-header → .doc-nav (fixa) → .doc-section…
+ */
+
+/* ───────── Cabeçalho ───────── */
+
+.doc-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--ds-space-400) var(--ds-space-600);
+  padding: var(--ds-space-500) 0 var(--ds-space-400);
+}
+
+.doc-header__eyebrow {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+}
+
+.doc-header__title {
+  margin-top: var(--ds-space-100);
+  font: var(--ds-text-display-md);
+  letter-spacing: var(--ds-text-display-md-tracking);
+}
+
+.doc-header__lead {
+  max-width: 56ch;
+  margin-top: var(--ds-space-200);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-lg);
+  letter-spacing: var(--ds-text-body-lg-tracking);
+}
+
+.doc-stats {
+  display: flex;
+}
+
+.doc-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  padding-inline: var(--ds-space-300);
+}
+
+.doc-stat + .doc-stat {
+  border-inline-start: 1px solid var(--ds-color-border-subtle);
+}
+
+.doc-stat:last-child {
+  padding-inline-end: 0;
+}
+
+.doc-stat__value {
+  font: var(--ds-text-heading-lg);
+  letter-spacing: var(--ds-text-heading-lg-tracking);
+  font-variant-numeric: tabular-nums;
+}
+
+.doc-stat__label {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  white-space: nowrap;
+}
+
+/* ───────── Navegação da página (fixa sob a topbar) ───────── */
+
+.doc-nav {
+  position: sticky;
+  top: var(--ds-layout-topbar);
+  z-index: 20;
+  display: flex;
+  gap: var(--ds-space-050);
+  margin-inline: calc(-1 * var(--ds-space-150));
+  padding: var(--ds-space-100) var(--ds-space-150);
+  background: var(--ds-color-bg-canvas);
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.doc-nav__link {
+  position: relative;
+  flex: none;
+  height: 36px;
+  padding-inline: var(--ds-space-150);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  white-space: nowrap;
+  transition:
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.doc-nav__link:hover {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.doc-nav__link[aria-current="true"] {
+  color: var(--ds-color-fg-default);
+}
+
+.doc-nav__link[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--ds-space-150);
+  bottom: calc(-1 * var(--ds-space-100) - 1px);
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ds-color-brand-solid);
+}
+
+/* ───────── Seções ───────── */
+
+.doc-section {
+  padding-top: var(--ds-space-1000);
+  scroll-margin-top: calc(var(--ds-layout-topbar) + 40px);
+}
+
+.doc-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--ds-space-200) var(--ds-space-400);
+  margin-bottom: var(--ds-space-400);
+}
+
+.doc-section__title {
+  font: var(--ds-text-heading-xl);
+  letter-spacing: var(--ds-text-heading-xl-tracking);
+}
+
+.doc-section__desc {
+  max-width: 62ch;
+  margin-top: var(--ds-space-100);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+}
+
+.doc-subhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+  margin: var(--ds-space-500) 0 var(--ds-space-200);
+  font: var(--ds-text-heading-sm);
+  letter-spacing: var(--ds-text-heading-sm-tracking);
+}
+
+.doc-subhead__meta {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+/* Tabela de documentação (linhas em grid) */
+.doc-table {
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.doc-table__head,
+.doc-table__row {
+  display: grid;
+  grid-template-columns: var(--doc-table-cols);
+  align-items: center;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-150) var(--ds-space-250);
+}
+
+.doc-table__head {
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.doc-table__row + .doc-table__row {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+/* Faça / Evite */
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.usage-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.usage-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  font: var(--ds-text-label-md);
+}
+
+.usage-card--do .usage-card__head .ds-icon { color: var(--ds-color-success-fg); }
+.usage-card--dont .usage-card__head .ds-icon { color: var(--ds-color-danger-fg); }
+.usage-card--tip .usage-card__head .ds-icon { color: var(--ds-color-fg-brand); }
+
+.usage-card__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.usage-card .ds-code {
+  margin-top: auto;
+}
+
+@media (max-width: 1100px) {
+  .doc-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc-stat:first-child {
+    padding-inline-start: 0;
+  }
+
+  .usage-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .doc-header__title {
+    font: var(--ds-text-display-sm);
+    letter-spacing: var(--ds-text-display-sm-tracking);
+  }
+
+  .doc-header__lead {
+    font: var(--ds-text-body-md);
+  }
+
+  .doc-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ds-space-200);
+  }
+
+  .doc-stat,
+  .doc-stat + .doc-stat {
+    padding: 0;
+    border: 0;
+  }
+
+  .doc-section {
+    padding-top: var(--ds-space-800);
+  }
+}

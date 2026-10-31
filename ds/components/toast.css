@@ -1,0 +1,162 @@
+/*
+ * Toast — aviso curto e passageiro (ds/js/toast.js)
+ *   tons: --success --warning --danger --info (neutro é o padrão)
+ *   partes: __icon, __message, __action (opcional), __close (quando dura até fechar)
+ *   regiões: .ds-toast-region--{top|bottom}-{start|center|end}, uma por posição
+ *   recuos ajustáveis: --ds-toast-offset-top (abaixo da topbar), --ds-toast-offset-bottom, --ds-toast-offset-inline
+ */
+
+.ds-toast-region {
+  --_top: var(--ds-toast-offset-top, calc(var(--ds-layout-topbar) + var(--ds-space-200)));
+  --_bottom: var(--ds-toast-offset-bottom, var(--ds-space-300));
+  --_inline: var(--ds-toast-offset-inline, var(--ds-space-300));
+  /* de onde o toast entra: de baixo sobe, de cima desce, das laterais desliza */
+  --_enter-x: 0px;
+  --_enter-y: 8px;
+
+  position: fixed;
+  z-index: var(--ds-z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+  max-width: calc(100vw - 2 * var(--_inline));
+  pointer-events: none;
+}
+
+/* Embaixo: o mais novo fica junto da borda */
+.ds-toast-region--bottom-center { inset: auto 0 var(--_bottom); align-items: center; max-width: none; }
+.ds-toast-region--bottom-start { inset: auto auto var(--_bottom) var(--_inline); align-items: flex-start; --_enter-x: -12px; --_enter-y: 0px; }
+.ds-toast-region--bottom-end { inset: auto var(--_inline) var(--_bottom) auto; align-items: flex-end; --_enter-x: 12px; --_enter-y: 0px; }
+
+/* Em cima: abaixo da topbar, e os novos entram por cima */
+.ds-toast-region--top-center { inset: var(--_top) 0 auto; align-items: center; flex-direction: column-reverse; max-width: none; --_enter-y: -8px; }
+.ds-toast-region--top-start { inset: var(--_top) auto auto var(--_inline); align-items: flex-start; flex-direction: column-reverse; --_enter-x: -12px; --_enter-y: 0px; }
+.ds-toast-region--top-end { inset: var(--_top) var(--_inline) auto auto; align-items: flex-end; flex-direction: column-reverse; --_enter-x: 12px; --_enter-y: 0px; }
+
+/* No celular, as laterais viram o centro do mesmo lado */
+@media (max-width: 767.98px) {
+  .ds-toast-region {
+    --_bottom: var(--ds-toast-offset-bottom, var(--ds-space-200));
+    --_inline: var(--ds-toast-offset-inline, var(--ds-space-200));
+  }
+
+  .ds-toast-region--bottom-start,
+  .ds-toast-region--bottom-end {
+    inset: auto 0 var(--_bottom);
+    align-items: center;
+    max-width: none;
+    --_enter-x: 0px;
+    --_enter-y: 8px;
+  }
+
+  .ds-toast-region--top-start,
+  .ds-toast-region--top-end {
+    inset: var(--_top) 0 auto;
+    align-items: center;
+    max-width: none;
+    --_enter-x: 0px;
+    --_enter-y: -8px;
+  }
+}
+
+.ds-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  max-width: min(480px, calc(100vw - 32px));
+  min-height: 40px;
+  padding: var(--ds-space-100) var(--ds-space-200) var(--ds-space-100) var(--ds-space-150);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-bg-inverse);
+  color: var(--ds-color-fg-inverse);
+  box-shadow: var(--ds-shadow-lg);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translate(var(--_enter-x, 0px), var(--_enter-y, 8px));
+  transition:
+    opacity var(--ds-duration-base) var(--ds-easing-standard),
+    transform var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.ds-toast[data-open] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Movimento reduzido: só aparece e some, sem deslizar */
+@media (prefers-reduced-motion: reduce) {
+  .ds-toast {
+    transform: none;
+  }
+}
+
+.ds-toast__icon {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+}
+
+.ds-toast__message {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-toast code {
+  font: var(--ds-text-code-sm);
+}
+
+/* Tons: o ícone ganha um círculo na cor do status (legível no fundo invertido dos dois temas) */
+.ds-toast--success { --_tone: var(--ds-color-success-solid); --_tone-fg: var(--ds-color-success-on-solid); }
+.ds-toast--warning { --_tone: var(--ds-color-warning-solid); --_tone-fg: var(--ds-color-warning-on-solid); }
+.ds-toast--danger { --_tone: var(--ds-color-danger-solid); --_tone-fg: var(--ds-color-danger-on-solid); }
+.ds-toast--info { --_tone: var(--ds-color-info-solid); --_tone-fg: var(--ds-color-info-on-solid); }
+
+.ds-toast:is(.ds-toast--success, .ds-toast--warning, .ds-toast--danger, .ds-toast--info) .ds-toast__icon {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--ds-radius-full);
+  background: var(--_tone);
+  color: var(--_tone-fg);
+}
+
+/* Ação e fechar */
+.ds-toast__action,
+.ds-toast__close {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  height: 28px;
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-color-fg-inverse);
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-toast__action {
+  margin-inline-start: var(--ds-space-100);
+  padding-inline: var(--ds-space-100);
+  font: var(--ds-text-label-md);
+  font-weight: var(--ds-font-weight-semibold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.ds-toast__close {
+  width: 28px;
+  margin-inline: var(--ds-space-050) calc(-1 * var(--ds-space-100));
+  opacity: 0.8;
+}
+
+.ds-toast__action:hover,
+.ds-toast__close:hover {
+  background: color-mix(in srgb, var(--ds-color-fg-inverse) 12%, transparent);
+  opacity: 1;
+}
+
+.ds-toast:has(.ds-toast__action, .ds-toast__close) {
+  padding-inline-end: var(--ds-space-100);
+}

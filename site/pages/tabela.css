@@ -1,0 +1,185 @@
+/* Página: Tabela (prefixo tl-) */
+
+/* tabelas largas rolam dentro do contêiner em vez de espremer as colunas */
+.ds-table.tl-wide {
+  min-width: 640px;
+}
+
+.tl-stage {
+  width: min(880px, 100%);
+}
+
+/* ───────── Demo: ordenar e selecionar ───────── */
+
+.tl-demo__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+  min-height: 40px;
+  margin-bottom: var(--ds-space-150);
+}
+
+.tl-demo__count {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-md);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───────── Exemplos lado a lado ───────── */
+
+.tl-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.tl-example {
+  display: block;
+  padding: var(--ds-space-250);
+}
+
+.tl-empty-action {
+  margin-top: var(--ds-space-100);
+}
+
+/* ───────── Anatomia ───────── */
+
+.tl-anatomy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.tl-anatomy__stage {
+  display: flex;
+  align-items: center;
+  padding: var(--ds-space-500) var(--ds-space-400);
+  background: var(--ds-color-bg-canvas);
+  border-inline-end: 1px solid var(--ds-color-border-subtle);
+}
+
+.tl-anatomy__stage .ds-table-wrap {
+  width: 100%;
+  overflow: visible;
+}
+
+.tl-pin {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-inline-start: var(--ds-space-075);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-inverse);
+  color: var(--ds-color-fg-inverse);
+  font: var(--ds-font-weight-semibold) 0.625rem/1 var(--ds-font-family-sans);
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+.tl-pin--check {
+  position: absolute;
+  margin: 0;
+  translate: 12px -22px;
+}
+
+.tl-anatomy__stage th.ds-table__check {
+  position: relative;
+}
+
+.tl-anatomy__legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-250);
+  padding: var(--ds-space-400);
+}
+
+.tl-anatomy__legend li {
+  display: flex;
+  gap: var(--ds-space-200);
+}
+
+.tl-anatomy__num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-inverse);
+  color: var(--ds-color-fg-inverse);
+  font: var(--ds-text-label-sm);
+}
+
+.tl-anatomy__title {
+  font: var(--ds-text-label-md);
+}
+
+.tl-anatomy__optional {
+  margin-inline-start: var(--ds-space-050);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.tl-anatomy__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Uso ───────── */
+
+.tl-usage__preview {
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.tl-usage__num {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-050);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-sm);
+}
+
+.tl-usage__num--good {
+  align-items: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .tl-pair,
+  .tl-anatomy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tl-anatomy__stage {
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--ds-color-border-subtle);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tl-example {
+    padding: var(--ds-space-150);
+  }
+
+  .tl-anatomy__stage {
+    padding: var(--ds-space-500) var(--ds-space-200) var(--ds-space-300);
+  }
+
+  .tl-anatomy__legend {
+    padding: var(--ds-space-300) var(--ds-space-250);
+  }
+}

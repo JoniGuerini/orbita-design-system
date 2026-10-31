@@ -1,0 +1,103 @@
+/*
+ * Barra de filtros — busca, filtros, ordenação, filtros ativos e contagem de resultados.
+ * Montada por ds/js/filters.js (createFilters), mas as classes funcionam em HTML feito à mão:
+ *
+ * <div class="ds-filters" role="search" aria-label="Filtrar pedidos">
+ *   <div class="ds-filters__bar">
+ *     <label class="ds-field ds-filters__search">…<input class="ds-field__input" type="search"></label>
+ *     <div class="ds-filters__controls"><button class="ds-chip ds-filters__field" data-active>Status: Pago ▾</button>…</div>
+ *     <button class="ds-chip ds-filters__sort">Ordenar: Mais recentes ▾</button>
+ *   </div>
+ *   <div class="ds-filters__summary">
+ *     <p class="ds-filters__count" role="status" aria-live="polite">8 de 24 pedidos</p>
+ *     <ul class="ds-filters__active">… .ds-chip--removable …</ul>
+ *     <button class="ds-inline-action ds-filters__clear">Limpar tudo</button>
+ *   </div>
+ * </div>
+ */
+
+.ds-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-150);
+  min-width: 0;
+}
+
+.ds-filters__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+}
+
+/* Busca na mesma altura dos chips (36 px) */
+.ds-filters__search {
+  --_h: 36px;
+  flex: 1 1 240px;
+  max-width: 360px;
+  border-radius: var(--ds-radius-full);
+  padding-inline: 14px 6px;
+}
+
+.ds-filters__search .ds-field__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.ds-filters__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-100);
+}
+
+/* Filtro com valor: mesmo peso visual de um chip selecionado */
+.ds-filters__field[data-active] {
+  background: var(--ds-color-bg-selected);
+  border-color: var(--ds-color-border-strong);
+}
+
+.ds-filters__sort {
+  margin-inline-start: auto;
+}
+
+.ds-filters__summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100) var(--ds-space-150);
+  min-height: 30px;
+}
+
+.ds-filters__count {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-filters__active {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-075);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-filters__active[hidden],
+.ds-filters__clear[hidden] {
+  display: none;
+}
+
+.ds-filters__clear {
+  margin-inline-start: var(--ds-space-050);
+}
+
+@media (max-width: 767.98px) {
+  .ds-filters__search {
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .ds-filters__sort {
+    margin-inline-start: 0;
+  }
+}

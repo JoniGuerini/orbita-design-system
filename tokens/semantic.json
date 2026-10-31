@@ -1,0 +1,607 @@
+{
+  "$description": "Tokens semânticos: é isso que os componentes consomem. Cada token tem valor para o tema escuro (padrão da marca) e claro.",
+  "$checks": [
+    [
+      "color.fg.default",
+      "color.bg.canvas",
+      4.5
+    ],
+    [
+      "color.fg.muted",
+      "color.bg.canvas",
+      4.5
+    ],
+    [
+      "color.fg.default",
+      "color.bg.sidebar",
+      4.5
+    ],
+    [
+      "color.fg.muted",
+      "color.bg.sidebar",
+      4.5
+    ],
+    [
+      "color.fg.muted",
+      "color.bg.raised",
+      4.5
+    ],
+    [
+      "color.fg.link",
+      "color.bg.canvas",
+      4.5
+    ],
+    [
+      "color.fg.brand",
+      "color.bg.canvas",
+      4.5
+    ],
+    [
+      "color.brand.on-solid",
+      "color.brand.solid",
+      4.5
+    ],
+    [
+      "color.brand.fg",
+      "color.brand.subtle",
+      4.5
+    ],
+    [
+      "color.fg.inverse",
+      "color.bg.inverse",
+      4.5
+    ],
+    [
+      "color.success.fg",
+      "color.success.subtle",
+      4.5
+    ],
+    [
+      "color.success.on-solid",
+      "color.success.solid",
+      4.5
+    ],
+    [
+      "color.warning.fg",
+      "color.warning.subtle",
+      4.5
+    ],
+    [
+      "color.warning.on-solid",
+      "color.warning.solid",
+      4.5
+    ],
+    [
+      "color.danger.fg",
+      "color.danger.subtle",
+      4.5
+    ],
+    [
+      "color.danger.on-solid",
+      "color.danger.solid",
+      4.5
+    ],
+    [
+      "color.info.fg",
+      "color.info.subtle",
+      4.5
+    ],
+    [
+      "color.info.on-solid",
+      "color.info.solid",
+      4.5
+    ],
+    [
+      "color.chart.series.1",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.2",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.3",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.4",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.5",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.6",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.7",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.chart.series.8",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.fg.subtle",
+      "color.bg.canvas",
+      4.5
+    ],
+    [
+      "color.fg.subtle",
+      "color.bg.surface",
+      4.5
+    ],
+    [
+      "color.fg.subtle",
+      "color.bg.raised",
+      4.5
+    ],
+    [
+      "color.fg.subtle",
+      "color.bg.sunken",
+      4.5
+    ],
+    [
+      "color.border.field",
+      "color.bg.canvas",
+      3
+    ],
+    [
+      "color.border.field",
+      "color.bg.surface",
+      3
+    ],
+    [
+      "color.border.field",
+      "color.bg.raised",
+      3
+    ],
+    [
+      "color.border.field",
+      "color.bg.sunken",
+      3
+    ],
+    [
+      "color.fg.muted",
+      "color.bg.sunken",
+      4.5
+    ]
+  ],
+  "color": {
+    "$type": "color",
+    "bg": {
+      "app": {
+        "dark": "{color.neutral.975}",
+        "light": "{color.neutral.100}",
+        "$description": "Fundo atrás dos painéis do app shell."
+      },
+      "canvas": {
+        "dark": "{color.neutral.925}",
+        "light": "{color.neutral.50}",
+        "$description": "Fundo do painel de conteúdo."
+      },
+      "sidebar": {
+        "dark": "{color.neutral.900}",
+        "light": "{color.neutral.25}"
+      },
+      "surface": {
+        "dark": "{color.neutral.900}",
+        "light": "{color.neutral.25}",
+        "$description": "Cards e blocos sobre o canvas."
+      },
+      "raised": {
+        "dark": "{color.neutral.850}",
+        "light": "{color.white}",
+        "$description": "Modais, popovers, painéis flutuantes."
+      },
+      "sunken": {
+        "dark": "{color.neutral.950}",
+        "light": "{color.neutral.100}",
+        "$description": "Campos e áreas rebaixadas."
+      },
+      "muted": {
+        "dark": "{color.neutral.750}",
+        "light": "{color.neutral.200}"
+      },
+      "inverse": {
+        "dark": "{color.neutral.100}",
+        "light": "{color.neutral.950}"
+      },
+      "hover": {
+        "dark": "alpha({color.white}, 0.05)",
+        "light": "alpha({color.neutral.975}, 0.045)"
+      },
+      "pressed": {
+        "dark": "alpha({color.white}, 0.08)",
+        "light": "alpha({color.neutral.975}, 0.08)"
+      },
+      "selected": {
+        "dark": "alpha({color.white}, 0.07)",
+        "light": "alpha({color.neutral.975}, 0.06)"
+      },
+      "overlay": {
+        "dark": "alpha({color.black}, 0.6)",
+        "light": "alpha({color.neutral.975}, 0.32)"
+      }
+    },
+    "fg": {
+      "default": {
+        "dark": "{color.neutral.100}",
+        "light": "{color.neutral.975}"
+      },
+      "muted": {
+        "dark": "{color.neutral.300}",
+        "light": "{color.neutral.650}"
+      },
+      "subtle": {
+        "dark": "{color.neutral.400}",
+        "light": "{color.neutral.550}",
+        "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos dois temas."
+      },
+      "disabled": {
+        "dark": "{color.neutral.600}",
+        "light": "{color.neutral.400}"
+      },
+      "inverse": {
+        "dark": "{color.neutral.975}",
+        "light": "{color.neutral.50}"
+      },
+      "brand": {
+        "dark": "{color.brand.400}",
+        "light": "{color.brand.700}"
+      },
+      "link": {
+        "dark": "{color.brand.300}",
+        "light": "{color.brand.700}"
+      },
+      "link-hover": {
+        "dark": "{color.brand.200}",
+        "light": "{color.brand.800}"
+      }
+    },
+    "border": {
+      "subtle": {
+        "dark": "alpha({color.white}, 0.06)",
+        "light": "alpha({color.neutral.975}, 0.07)"
+      },
+      "default": {
+        "dark": "alpha({color.white}, 0.1)",
+        "light": "alpha({color.neutral.975}, 0.11)"
+      },
+      "strong": {
+        "dark": "alpha({color.white}, 0.16)",
+        "light": "alpha({color.neutral.975}, 0.18)"
+      },
+      "control": {
+        "dark": "alpha({color.white}, 0.13)",
+        "light": "alpha({color.neutral.975}, 0.15)",
+        "$description": "Contorno de chips e botões com texto — o rótulo já identifica o controle (WCAG 1.4.11 não exige 3:1 aqui)."
+      },
+      "field": {
+        "dark": "alpha({color.white}, 0.38)",
+        "light": "alpha({color.neutral.975}, 0.48)",
+        "$description": "Contorno de campos, seleção, composer e switch desligado: o contorno é o que identifica o controle, então passa de 3:1 em todas as superfícies."
+      },
+      "field-hover": {
+        "dark": "alpha({color.white}, 0.52)",
+        "light": "alpha({color.neutral.975}, 0.62)",
+        "$description": "Contorno de campo no hover — mais forte que o de repouso."
+      },
+      "focus": {
+        "dark": "{color.brand.400}",
+        "light": "{color.brand.600}"
+      }
+    },
+    "brand": {
+      "solid": {
+        "dark": "{color.brand.400}",
+        "light": "{color.brand.500}"
+      },
+      "solid-hover": {
+        "dark": "{color.brand.300}",
+        "light": "{color.brand.400}"
+      },
+      "solid-pressed": {
+        "dark": "{color.brand.500}",
+        "light": "{color.brand.600}"
+      },
+      "subtle": {
+        "dark": "alpha({color.brand.400}, 0.14)",
+        "light": "{color.brand.50}"
+      },
+      "subtle-hover": {
+        "dark": "alpha({color.brand.400}, 0.2)",
+        "light": "{color.brand.100}"
+      },
+      "fg": {
+        "dark": "{color.brand.300}",
+        "light": "{color.brand.700}"
+      },
+      "border": {
+        "dark": "alpha({color.brand.400}, 0.32)",
+        "light": "{color.brand.200}"
+      },
+      "on-solid": {
+        "dark": "{color.brand.950}",
+        "light": "{color.brand.950}"
+      },
+      "indicator": {
+        "dark": "{color.brand.500}",
+        "light": "{color.brand.500}",
+        "$description": "Pontinho de notificação/novidade."
+      }
+    },
+    "success": {
+      "solid": {
+        "dark": "{color.green.400}",
+        "light": "{color.green.700}"
+      },
+      "solid-hover": {
+        "dark": "{color.green.300}",
+        "light": "{color.green.800}"
+      },
+      "subtle": {
+        "dark": "alpha({color.green.400}, 0.13)",
+        "light": "{color.green.50}"
+      },
+      "fg": {
+        "dark": "{color.green.300}",
+        "light": "{color.green.800}"
+      },
+      "border": {
+        "dark": "alpha({color.green.400}, 0.3)",
+        "light": "{color.green.200}"
+      },
+      "on-solid": {
+        "dark": "{color.green.950}",
+        "light": "{color.white}"
+      }
+    },
+    "warning": {
+      "solid": {
+        "dark": "{color.amber.400}",
+        "light": "{color.amber.400}"
+      },
+      "solid-hover": {
+        "dark": "{color.amber.300}",
+        "light": "{color.amber.500}"
+      },
+      "subtle": {
+        "dark": "alpha({color.amber.400}, 0.13)",
+        "light": "{color.amber.50}"
+      },
+      "fg": {
+        "dark": "{color.amber.300}",
+        "light": "{color.amber.800}"
+      },
+      "border": {
+        "dark": "alpha({color.amber.400}, 0.3)",
+        "light": "{color.amber.200}"
+      },
+      "on-solid": {
+        "dark": "{color.amber.950}",
+        "light": "{color.amber.950}"
+      }
+    },
+    "danger": {
+      "solid": {
+        "dark": "{color.red.400}",
+        "light": "{color.red.700}"
+      },
+      "solid-hover": {
+        "dark": "{color.red.300}",
+        "light": "{color.red.800}"
+      },
+      "subtle": {
+        "dark": "alpha({color.red.400}, 0.13)",
+        "light": "{color.red.50}"
+      },
+      "fg": {
+        "dark": "{color.red.300}",
+        "light": "{color.red.700}"
+      },
+      "border": {
+        "dark": "alpha({color.red.400}, 0.3)",
+        "light": "{color.red.200}"
+      },
+      "on-solid": {
+        "dark": "{color.red.950}",
+        "light": "{color.white}"
+      }
+    },
+    "info": {
+      "solid": {
+        "dark": "{color.blue.400}",
+        "light": "{color.blue.700}"
+      },
+      "solid-hover": {
+        "dark": "{color.blue.300}",
+        "light": "{color.blue.800}"
+      },
+      "subtle": {
+        "dark": "alpha({color.blue.400}, 0.13)",
+        "light": "{color.blue.50}"
+      },
+      "fg": {
+        "dark": "{color.blue.300}",
+        "light": "{color.blue.700}"
+      },
+      "border": {
+        "dark": "alpha({color.blue.400}, 0.3)",
+        "light": "{color.blue.200}"
+      },
+      "on-solid": {
+        "dark": "{color.blue.950}",
+        "light": "{color.white}"
+      }
+    },
+    "chart": {
+      "$description": "Cores de gráficos. Marcas usam estas cores; textos (rótulos, valores, legenda) usam sempre fg.*.",
+      "series": {
+        "1": {
+          "dark": "{color.brand.600}",
+          "light": "{color.brand.600}"
+        },
+        "2": {
+          "dark": "{color.blue.600}",
+          "light": "{color.blue.600}"
+        },
+        "3": {
+          "dark": "{color.pink.600}",
+          "light": "{color.pink.600}"
+        },
+        "4": {
+          "dark": "{color.amber.700}",
+          "light": "{color.amber.700}"
+        },
+        "5": {
+          "dark": "{color.teal.600}",
+          "light": "{color.teal.600}"
+        },
+        "6": {
+          "dark": "{color.red.600}",
+          "light": "{color.red.600}"
+        },
+        "7": {
+          "dark": "{color.violet.600}",
+          "light": "{color.violet.600}"
+        },
+        "8": {
+          "dark": "{color.green.600}",
+          "light": "{color.green.600}"
+        },
+        "$description": "Categóricas: identidade de série. Ordem fixa, nunca recicle. Validada contra daltonismo (ΔE ≥ 8 entre vizinhas) e visão normal (≥ 15), nos dois temas; as 3 primeiras também em todos os pares (dispersão)."
+      },
+      "muted": {
+        "dark": "{color.neutral.700}",
+        "light": "{color.neutral.300}",
+        "$description": "Ênfase: o contexto em cinza, para uma série se destacar."
+      },
+      "other": {
+        "dark": "{color.neutral.600}",
+        "light": "{color.neutral.400}",
+        "$description": "“Outros”: a cauda agrupada depois da 8ª série ou do 6º segmento."
+      },
+      "seq": {
+        "1": {
+          "dark": "{color.brand.900}",
+          "light": "{color.brand.100}"
+        },
+        "2": {
+          "dark": "{color.brand.800}",
+          "light": "{color.brand.300}"
+        },
+        "3": {
+          "dark": "{color.brand.700}",
+          "light": "{color.brand.400}"
+        },
+        "4": {
+          "dark": "{color.brand.600}",
+          "light": "{color.brand.500}"
+        },
+        "5": {
+          "dark": "{color.brand.500}",
+          "light": "{color.brand.600}"
+        },
+        "6": {
+          "dark": "{color.brand.400}",
+          "light": "{color.brand.700}"
+        },
+        "7": {
+          "dark": "{color.brand.300}",
+          "light": "{color.brand.800}"
+        },
+        "$description": "Sequencial: magnitude, de pouco (1) a muito (7). Um só tom; no escuro a âncora inverte (mais = mais claro)."
+      },
+      "ord": {
+        "1": {
+          "dark": "{color.brand.800}",
+          "light": "{color.brand.400}"
+        },
+        "2": {
+          "dark": "{color.brand.700}",
+          "light": "{color.brand.500}"
+        },
+        "3": {
+          "dark": "{color.brand.600}",
+          "light": "{color.brand.600}"
+        },
+        "4": {
+          "dark": "{color.brand.500}",
+          "light": "{color.brand.700}"
+        },
+        "5": {
+          "dark": "{color.brand.400}",
+          "light": "{color.brand.800}"
+        },
+        "$description": "Ordinal: etapas em sequência (funil, faixas). Mesmo tom, a ponta mais fraca ainda passa de 2:1 sobre a superfície."
+      },
+      "div": {
+        "1": {
+          "dark": "{color.blue.400}",
+          "light": "{color.blue.700}"
+        },
+        "2": {
+          "dark": "{color.blue.600}",
+          "light": "{color.blue.500}"
+        },
+        "3": {
+          "dark": "{color.blue.800}",
+          "light": "{color.blue.300}"
+        },
+        "4": {
+          "dark": "{color.neutral.750}",
+          "light": "{color.neutral.200}"
+        },
+        "5": {
+          "dark": "{color.brand.800}",
+          "light": "{color.brand.300}"
+        },
+        "6": {
+          "dark": "{color.brand.600}",
+          "light": "{color.brand.500}"
+        },
+        "7": {
+          "dark": "{color.brand.400}",
+          "light": "{color.brand.700}"
+        },
+        "$description": "Divergente: abaixo (1–3, frio) e acima (5–7, quente) de uma referência; 4 é o meio neutro."
+      },
+      "status": {
+        "$description": "Status em gráficos (medidor, séries que significam bom ou ruim). Reservado: nunca para identidade de série, e sempre com ícone e rótulo.",
+        "good": {
+          "dark": "{color.green.500}",
+          "light": "{color.green.600}"
+        },
+        "warning": {
+          "dark": "{color.amber.400}",
+          "light": "{color.amber.500}"
+        },
+        "critical": {
+          "dark": "{color.red.600}",
+          "light": "{color.red.600}"
+        }
+      },
+      "grid": {
+        "dark": "{color.neutral.800}",
+        "light": "{color.neutral.200}",
+        "$description": "Linhas de grade: fio de 1 px, sólido, um passo fora da superfície."
+      },
+      "axis": {
+        "dark": "{color.neutral.700}",
+        "light": "{color.neutral.300}",
+        "$description": "Linha de base e eixos."
+      }
+    }
+  }
+}

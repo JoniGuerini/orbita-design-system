@@ -1,0 +1,217 @@
+/* Página: Abas (prefixo tb-) */
+
+.tb-stage {
+  width: min(560px, 100%);
+}
+
+.tb-panel {
+  padding: var(--ds-space-200) 0 var(--ds-space-050);
+}
+
+.tb-panel__title {
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.tb-panel__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Aparências e modos ───────── */
+
+.tb-appearances,
+.tb-modes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.tb-example {
+  display: block;
+  min-height: 200px;
+  padding: var(--ds-space-300);
+}
+
+/* ───────── Anatomia ───────── */
+
+.tb-anatomy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.tb-anatomy__stage {
+  display: flex;
+  align-items: center;
+  padding: var(--ds-space-600) var(--ds-space-500);
+  background: var(--ds-color-bg-canvas);
+  border-inline-end: 1px solid var(--ds-color-border-subtle);
+}
+
+.tb-anatomy__stage .ds-tabs {
+  width: 100%;
+}
+
+/* a lista não rola aqui: os marcadores precisam aparecer */
+.tb-anatomy__stage .ds-tabs__list {
+  overflow: visible;
+}
+
+.tb-pin {
+  position: relative;
+  outline: 1px dashed var(--ds-color-fg-subtle);
+  outline-offset: 3px;
+}
+
+.tb-anatomy__stage .ds-tabs__panel.tb-pin {
+  margin-top: var(--ds-space-200);
+  padding: var(--ds-space-100) var(--ds-space-150);
+  border-radius: var(--ds-radius-xs);
+}
+
+.tb-pin::before {
+  content: attr(data-num);
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-inverse);
+  color: var(--ds-color-fg-inverse);
+  font: var(--ds-font-weight-semibold) 0.625rem/1 var(--ds-font-family-sans);
+}
+
+.ds-tabs__list.tb-pin::before {
+  top: -22px;
+  left: -10px;
+}
+
+.ds-tabs__tab.tb-pin::before {
+  top: -22px;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.ds-tabs__count.tb-pin::before {
+  top: -24px;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.ds-tabs__panel.tb-pin::before {
+  top: -10px;
+  left: -10px;
+}
+
+.tb-anatomy__legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-300);
+  padding: var(--ds-space-400);
+}
+
+.tb-anatomy__legend li {
+  display: flex;
+  gap: var(--ds-space-200);
+}
+
+.tb-anatomy__num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-inverse);
+  color: var(--ds-color-fg-inverse);
+  font: var(--ds-text-label-sm);
+}
+
+.tb-anatomy__title {
+  font: var(--ds-text-label-md);
+}
+
+.tb-anatomy__optional {
+  margin-inline-start: var(--ds-space-050);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.tb-anatomy__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Teclado ───────── */
+
+.tb-keys {
+  --doc-table-cols: 160px minmax(0, 1fr);
+}
+
+.tb-keys__keys {
+  display: flex;
+  gap: var(--ds-space-050);
+}
+
+.tb-keys__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+/* ───────── Uso ───────── */
+
+.tb-usage__preview {
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.tb-usage__preview .ds-tabs__panel {
+  display: none;
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .tb-appearances,
+  .tb-modes,
+  .tb-anatomy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tb-anatomy__stage {
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--ds-color-border-subtle);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tb-example {
+    padding: var(--ds-space-200);
+  }
+
+  .tb-anatomy__stage {
+    padding: var(--ds-space-500) var(--ds-space-300) var(--ds-space-400);
+  }
+
+  .tb-anatomy__legend {
+    padding: var(--ds-space-300) var(--ds-space-250);
+  }
+
+  .tb-keys {
+    --doc-table-cols: 120px minmax(0, 1fr);
+  }
+}

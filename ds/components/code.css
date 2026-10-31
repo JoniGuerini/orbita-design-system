@@ -1,0 +1,36 @@
+/* Bloco de código — <pre class="ds-code"><code>…</code></pre> */
+
+.ds-code {
+  position: relative;
+  margin: 0;
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-sunken);
+  border: 1px solid var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-code-md);
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.ds-code--sm {
+  padding: var(--ds-space-150) var(--ds-space-200);
+  border-radius: var(--ds-radius-md);
+  font: var(--ds-text-code-sm);
+}
+
+.ds-code__comment {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-code__accent {
+  color: var(--ds-color-fg-brand);
+}
+
+/* Código inline */
+.ds-inline-code {
+  padding: 1px 6px;
+  border-radius: var(--ds-radius-xs);
+  background: var(--ds-color-bg-hover);
+  font: var(--ds-text-code-sm);
+}

@@ -1,0 +1,211 @@
+/* Página: Switch (prefixo sw-) */
+
+.sw-stage {
+  max-width: 380px;
+}
+
+.sw-stage--end {
+  width: min(380px, 100%);
+}
+
+/* ───────── Switch ou checkbox ───────── */
+
+.sw-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.sw-compare__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.sw-compare__stage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-250);
+  padding: var(--ds-space-400);
+  background: var(--ds-color-bg-canvas);
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+}
+
+.sw-compare__status {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+/* ───────── Tamanhos e estados ───────── */
+
+.sw-sizes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.sw-sizes .cd-example__preview {
+  gap: var(--ds-space-400);
+}
+
+.sw-states {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.sw-states__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-400) var(--ds-space-200);
+}
+
+.sw-states__item + .sw-states__item {
+  border-inline-start: 1px solid var(--ds-color-border-subtle);
+}
+
+.sw-states__label {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+/* ───────── Lista de ajustes ───────── */
+
+.sw-settings {
+  max-width: 640px;
+  padding: var(--ds-space-300) var(--ds-space-400) var(--ds-space-150);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.sw-settings__title {
+  font: var(--ds-text-heading-sm);
+  letter-spacing: var(--ds-text-heading-sm-tracking);
+}
+
+.sw-settings__list {
+  margin-top: var(--ds-space-150);
+}
+
+.sw-settings__row {
+  padding-block: var(--ds-space-200);
+}
+
+.sw-settings__row + .sw-settings__row {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.sw-settings .ds-switch--end {
+  gap: var(--ds-space-400);
+}
+
+/* ───────── Movimento ───────── */
+
+.sw-motion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--ds-space-150);
+}
+
+.sw-motion__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-400);
+  padding: var(--ds-space-500) var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+/* versão ampliada para enxergar a curva */
+.sw-motion__big .ds-switch {
+  --_w: 96px;
+  --_h: 52px;
+  --_thumb: 40px;
+}
+
+.sw-motion__big .ds-switch__input {
+  margin: 0;
+}
+
+.sw-motion__big .ds-switch__input::before {
+  left: 5px;
+}
+
+.sw-motion__big .ds-switch__input:checked::before {
+  translate: calc(var(--_w) - var(--_thumb) - 12px) -50%;
+}
+
+.sw-motion__demo[data-reduced] .ds-switch__input,
+.sw-motion__demo[data-reduced] .ds-switch__input::before {
+  transition: none;
+}
+
+.sw-motion__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-100);
+}
+
+.sw-motion__code {
+  align-self: start;
+}
+
+/* ───────── Uso ───────── */
+
+.sw-usage {
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.sw-usage--row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-150);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .sw-compare,
+  .sw-motion {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .sw-sizes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sw-states {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sw-states__item + .sw-states__item {
+    border-inline-start: 0;
+  }
+
+  .sw-compare__stage,
+  .sw-settings {
+    padding-inline: var(--ds-space-250);
+  }
+}

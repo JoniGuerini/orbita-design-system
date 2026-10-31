@@ -1,0 +1,422 @@
+/* Página: Cores */
+
+/* ───────── Paletas ───────── */
+
+.palette-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-150);
+}
+
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.palette-card {
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.palette-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+  margin-bottom: var(--ds-space-200);
+}
+
+.palette-card--featured .palette-card__head {
+  align-items: flex-start;
+}
+
+.palette-card__name {
+  font: var(--ds-text-heading-md);
+  letter-spacing: var(--ds-text-heading-md-tracking);
+}
+
+.palette-card__name--sm {
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.palette-card__meta {
+  margin-top: 2px;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Faixa de swatches */
+.swatches {
+  display: flex;
+  border-radius: var(--ds-radius-md);
+  overflow: hidden;
+}
+
+.swatches--lg {
+  height: 132px;
+}
+
+.swatches--sm {
+  height: 44px;
+  border-radius: var(--ds-radius-sm);
+}
+
+.swatch {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: var(--ds-space-150);
+  text-align: start;
+  transition: flex-grow var(--ds-duration-slow) var(--ds-easing-emphasized);
+}
+
+.swatches--lg .swatch:hover,
+.swatches--lg .swatch:focus-visible {
+  flex-grow: 2.2;
+}
+
+.swatch:focus-visible {
+  z-index: 1;
+  outline-offset: -3px;
+}
+
+.swatch--ink-dark {
+  color: rgb(15 14 12 / 0.82);
+}
+
+.swatch--ink-light {
+  color: rgb(255 255 255 / 0.92);
+}
+
+.swatch:focus-visible.swatch--ink-dark {
+  outline-color: rgb(15 14 12 / 0.82);
+}
+
+.swatch__step {
+  font: var(--ds-text-label-sm);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.swatch__value {
+  overflow: hidden;
+  font: var(--ds-font-weight-regular) 0.6875rem/1rem var(--ds-font-family-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.swatches--lg:hover .swatch__value,
+.swatch:focus-visible .swatch__value {
+  opacity: 0.85;
+}
+
+.palette-howto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--ds-space-300);
+  margin-top: var(--ds-space-300);
+  padding: var(--ds-space-250) var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  border: 1px dashed var(--ds-color-border-default);
+}
+
+.palette-howto__text {
+  display: flex;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.palette-howto__text .ds-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--ds-color-fg-brand);
+}
+
+.palette-howto__text strong {
+  color: var(--ds-color-fg-default);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+/* ───────── Tokens semânticos ───────── */
+
+.token-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-100);
+}
+
+.token-filters__count {
+  margin-inline-start: 2px;
+  color: var(--ds-color-fg-subtle);
+  font-weight: var(--ds-font-weight-regular);
+  font-variant-numeric: tabular-nums;
+}
+
+.token-group-desc {
+  margin: var(--ds-space-250) 0 var(--ds-space-200);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.token-table,
+.contrast-table {
+  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) 44px;
+}
+
+.contrast-table {
+  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) 64px;
+}
+
+.token-name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.token-name__label {
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.token-name__var {
+  overflow: hidden;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.token-name__desc {
+  margin-top: 2px;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.token-value {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  min-width: 0;
+}
+
+.token-swatch {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-color-border-default);
+}
+
+.token-value__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.token-value__ref {
+  overflow: hidden;
+  font: var(--ds-text-label-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.token-value__hex {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+}
+
+/* ───────── Temas ───────── */
+
+.theme-previews {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.theme-preview {
+  margin: 0;
+  border-radius: var(--ds-radius-xl);
+  border: 1px solid var(--ds-color-border-subtle);
+  background: var(--ds-color-bg-surface);
+  overflow: hidden;
+}
+
+.theme-preview__stage {
+  padding: var(--ds-space-500);
+  background: var(--ds-color-bg-canvas);
+  color: var(--ds-color-fg-default);
+}
+
+.tp-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-raised);
+  border: 1px solid var(--ds-color-border-subtle);
+  box-shadow: var(--ds-shadow-lg);
+}
+
+.tp-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.tp-card__title {
+  margin-top: var(--ds-space-050);
+  font: var(--ds-text-heading-md);
+  letter-spacing: var(--ds-text-heading-md-tracking);
+}
+
+.tp-card__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.tp-card__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+}
+
+.theme-preview__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ds-space-150) var(--ds-space-250);
+  border-top: 1px solid var(--ds-color-border-subtle);
+  font: var(--ds-text-label-md);
+}
+
+.theme-preview__note {
+  color: var(--ds-color-fg-subtle);
+  font-weight: var(--ds-font-weight-regular);
+}
+
+.theme-code {
+  margin-top: var(--ds-space-150);
+}
+
+/* ───────── Contraste ───────── */
+
+.contrast-summary {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-100);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.contrast-summary__value {
+  color: var(--ds-color-success-fg);
+  font: var(--ds-text-heading-lg);
+  letter-spacing: var(--ds-text-heading-lg-tracking);
+  font-variant-numeric: tabular-nums;
+}
+
+.contrast-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  min-width: 0;
+}
+
+.contrast-sample {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 36px;
+  border-radius: var(--ds-radius-sm);
+  border: 1px solid var(--ds-color-border-subtle);
+  font: var(--ds-font-weight-semibold) 0.9375rem/1 var(--ds-font-family-sans);
+}
+
+.contrast-ratio {
+  min-width: 6ch;
+  font: var(--ds-text-label-md);
+  font-variant-numeric: tabular-nums;
+}
+
+.contrast-min {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .palette-grid,
+  .theme-previews {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .swatches--lg {
+    height: 96px;
+  }
+
+  .swatch {
+    padding: var(--ds-space-075);
+  }
+
+  .swatch__step {
+    font-size: 0.625rem;
+  }
+
+  .palette-howto {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .theme-preview__stage {
+    padding: var(--ds-space-250);
+  }
+
+  /* tabelas viram cartões empilhados */
+  .doc-table__head {
+    display: none;
+  }
+
+  .token-table .doc-table__row,
+  .contrast-table .doc-table__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: var(--ds-space-150);
+  }
+
+  .token-table .token-name,
+  .contrast-table .token-name {
+    grid-column: 1;
+  }
+
+  .token-table .token-value,
+  .contrast-table .contrast-cell {
+    grid-column: 1 / -1;
+  }
+
+  .token-table .doc-table__row > .ds-icon-btn {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .contrast-min {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}

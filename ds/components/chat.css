@@ -1,0 +1,664 @@
+/*
+ * Conversa e composer — mensagens, cartão de resultado e a caixa de mensagem.
+ *
+ * <div class="ds-thread" role="log" aria-live="polite" aria-label="Conversa">
+ *   <p class="ds-thread__divider">Hoje</p>
+ *   <article class="ds-message ds-message--user">
+ *     <div class="ds-message__attachments">…ds-attachment…</div>
+ *     <div class="ds-message__body"><p>Pergunta</p></div>
+ *     <p class="ds-message__meta">Enviada · 14:32</p>
+ *   </article>
+ *   <article class="ds-message">
+ *     <header class="ds-message__head"><span class="ds-message__mark">Ó</span><span class="ds-message__author">Órbita</span><span>14:32</span></header>
+ *     <div class="ds-message__body"><p>Resposta…</p></div>
+ *     <section class="ds-result-card">…</section>
+ *     <div class="ds-message__actions">…ds-icon-btn ds-icon-btn--sm ds-icon-btn--muted…</div>
+ *   </article>
+ * </div>
+ *
+ * Composer: gerado por createComposer() (ds/js/composer.js) — .ds-composer + .ds-composer__hint.
+ * Estados forçados para documentar: .ds-composer[data-state="focus"], [data-busy], [data-disabled], [data-over].
+ */
+
+/* ───────── Conversa ───────── */
+
+.ds-thread {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-400);
+  min-width: 0;
+}
+
+.ds-thread__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  letter-spacing: var(--ds-text-caption-tracking);
+}
+
+.ds-thread__divider::before,
+.ds-thread__divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ds-color-border-subtle);
+}
+
+/* Aviso do sistema: centrado, discreto, sem balão */
+.ds-thread__notice {
+  align-self: center;
+  max-width: 48ch;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+  text-align: center;
+}
+
+/* ───────── Mensagem ───────── */
+
+.ds-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-100);
+  min-width: 0;
+}
+
+.ds-message__head {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+  letter-spacing: var(--ds-text-eyebrow-tracking);
+}
+
+.ds-message__mark {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-color-brand-subtle);
+  color: var(--ds-color-brand-fg);
+  font: var(--ds-font-weight-bold) 0.8125rem/1 var(--ds-font-family-display);
+  letter-spacing: -0.02em;
+}
+
+.ds-message__author {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-message__head > :not(.ds-message__mark, .ds-message__author)::before {
+  content: "·";
+  margin-inline-end: var(--ds-space-100);
+}
+
+/* Resposta: texto de leitura, sem balão */
+.ds-message__body {
+  max-width: 68ch;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+  overflow-wrap: anywhere;
+}
+
+.ds-message__body > * + * {
+  margin-top: var(--ds-space-150);
+}
+
+.ds-message__body ul,
+.ds-message__body ol {
+  display: grid;
+  gap: var(--ds-space-075);
+  padding-inline-start: 1.25em;
+}
+
+.ds-message__body ul { list-style: disc; }
+.ds-message__body ol { list-style: decimal; }
+
+.ds-message__body li::marker {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-message__body strong {
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.ds-message__body code {
+  padding: 1px 6px;
+  border-radius: var(--ds-radius-xs);
+  background: var(--ds-color-bg-hover);
+  font: var(--ds-text-code-sm);
+}
+
+/* Comando usado na pergunta (/roteiro) */
+.ds-message__command {
+  color: var(--ds-color-brand-fg);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+/* Pergunta: balão sólido à direita, com o canto de quem fala */
+.ds-message--user {
+  align-items: flex-end;
+}
+
+.ds-message--user .ds-message__body {
+  max-width: min(85%, 56ch);
+  padding: var(--ds-space-150) var(--ds-space-200);
+  border-radius: var(--ds-radius-xl) var(--ds-radius-xl) var(--ds-radius-xs) var(--ds-radius-xl);
+  background: var(--ds-color-bg-raised);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.ds-message__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-075);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  letter-spacing: var(--ds-text-caption-tracking);
+}
+
+/* Falhou ao enviar: o texto fica, com um caminho para seguir */
+.ds-message__error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-075) var(--ds-space-150);
+  color: var(--ds-color-danger-fg);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-message__error > span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+}
+
+.ds-message[data-status="error"] .ds-message__body {
+  border-color: var(--ds-color-danger-border);
+}
+
+/* Ações: aparecem no hover e no foco; sempre visíveis no toque e na última resposta */
+.ds-message__actions {
+  display: flex;
+  gap: 2px;
+  margin-inline-start: -6px;
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-message:hover .ds-message__actions,
+.ds-message:focus-within .ds-message__actions,
+.ds-message[data-latest] .ds-message__actions,
+.ds-message__actions[data-state="visible"] {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .ds-message__actions {
+    opacity: 1;
+  }
+}
+
+.ds-message__actions .ds-icon-btn[aria-pressed="true"] {
+  color: var(--ds-color-fg-brand);
+}
+
+.ds-message__attachments {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-space-075);
+  max-width: min(85%, 56ch);
+}
+
+.ds-message:not(.ds-message--user) .ds-message__attachments {
+  justify-content: flex-start;
+}
+
+/* ───────── Anexo ───────── */
+
+.ds-attachment {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  max-width: 100%;
+  height: 36px;
+  padding-inline: var(--ds-space-100) var(--ds-space-150);
+  border: 1px solid var(--ds-color-border-control);
+  border-radius: var(--ds-radius-full);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+}
+
+.ds-attachment:has(> .ds-attachment__remove) {
+  padding-inline-end: var(--ds-space-075);
+}
+
+.ds-attachment__icon {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-muted);
+}
+
+.ds-attachment__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-attachment__size {
+  flex: none;
+  color: var(--ds-color-fg-subtle);
+  font-weight: var(--ds-font-weight-regular);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-attachment__remove {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--ds-radius-full);
+  color: var(--ds-color-fg-subtle);
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-standard), color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-attachment__remove:hover {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+/* ───────── Escrevendo ───────── */
+
+.ds-typing {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  min-height: 28px;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.ds-typing__dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.ds-typing__dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: ds-typing 1.2s var(--ds-easing-standard) infinite;
+}
+
+.ds-typing__dots i:nth-child(2) { animation-delay: 0.15s; }
+.ds-typing__dots i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes ds-typing {
+  0%, 60%, 100% { opacity: 0.3; transform: none; }
+  30% { opacity: 1; transform: translateY(-2px); }
+}
+
+/* Cursor de texto chegando (só enquanto a resposta é escrita) */
+.ds-message[aria-busy="true"] .ds-message__body > p:last-child::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-inline-start: 2px;
+  vertical-align: -0.15em;
+  background: var(--ds-color-fg-brand);
+  animation: ds-caret 1s steps(1) infinite;
+}
+
+@keyframes ds-caret {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-typing__dots i,
+  .ds-message[aria-busy="true"] .ds-message__body > p:last-child::after {
+    animation: none;
+  }
+
+  .ds-typing__dots i {
+    opacity: 0.6;
+  }
+}
+
+/* ───────── Cartão de resultado ───────── */
+
+.ds-result-card {
+  display: grid;
+  gap: var(--ds-space-100);
+  width: 100%;
+  max-width: 68ch;
+  margin-top: var(--ds-space-050);
+  padding: var(--ds-space-250) var(--ds-space-300) var(--ds-space-250);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.ds-result-card__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--ds-space-150);
+}
+
+.ds-result-card__eyebrow {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+}
+
+.ds-result-card__title {
+  margin-top: 2px;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-heading-sm);
+  letter-spacing: var(--ds-text-heading-sm-tracking);
+}
+
+.ds-result-card__tools {
+  display: flex;
+  gap: 2px;
+  margin: -4px -8px 0 0;
+}
+
+.ds-result-card__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-result-card__list {
+  display: grid;
+  gap: var(--ds-space-150);
+  margin-top: var(--ds-space-100);
+}
+
+.ds-result-card__list .ds-section__text {
+  margin-top: var(--ds-space-050);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-result-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-050) var(--ds-space-300);
+  margin-top: var(--ds-space-100);
+}
+
+/* Sugestões de primeira mensagem */
+.ds-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-100);
+}
+
+/* ───────── Composer ───────── */
+
+.ds-composer {
+  --ds-composer-max: 216px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+  padding: var(--ds-space-150) var(--ds-space-150) var(--ds-space-100) var(--ds-space-200);
+  border: 1px solid var(--ds-color-border-field);
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-raised);
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    box-shadow var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-composer:hover {
+  border-color: var(--ds-color-border-field-hover);
+}
+
+.ds-composer:focus-within,
+.ds-composer[data-state="focus"] {
+  border-color: var(--ds-color-border-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-color-border-focus) 22%, transparent);
+}
+
+.ds-composer[data-drop] {
+  border-style: dashed;
+  border-color: var(--ds-color-border-focus);
+}
+
+.ds-composer[data-disabled] {
+  opacity: var(--ds-opacity-disabled);
+  pointer-events: none;
+}
+
+.ds-composer__tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-075);
+  margin-inline-start: calc(-1 * var(--ds-space-075));
+}
+
+.ds-composer__tokens[hidden] {
+  display: none;
+}
+
+/* Comando escolhido: pílula da marca antes do texto */
+.ds-composer__command {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+  height: 30px;
+  padding-inline: var(--ds-space-100) var(--ds-space-050);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-brand-subtle);
+  border: 1px solid var(--ds-color-brand-border);
+  color: var(--ds-color-brand-fg);
+  font: var(--ds-text-label-sm);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.ds-composer__command .ds-attachment__remove {
+  width: 20px;
+  height: 20px;
+  color: inherit;
+}
+
+.ds-composer__input {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  max-height: var(--ds-composer-max);
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+  scrollbar-width: thin;
+}
+
+.ds-composer__input::placeholder {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-composer__bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-inline-start: calc(-1 * var(--ds-space-100));
+}
+
+.ds-composer__spacer {
+  flex: 1;
+}
+
+.ds-composer__count {
+  margin-inline-end: var(--ds-space-150);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-composer__count[hidden] {
+  display: none;
+}
+
+.ds-composer[data-over] .ds-composer__count {
+  color: var(--ds-color-danger-fg);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.ds-composer[data-over] {
+  border-color: var(--ds-color-danger-border);
+}
+
+/* Enviar: o único ponto de cor; vira "parar" enquanto a resposta chega */
+.ds-composer__send {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-brand-solid);
+  color: var(--ds-color-brand-on-solid);
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-standard), color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-composer__send:hover {
+  background: var(--ds-color-brand-solid-hover);
+}
+
+.ds-composer__send:active {
+  background: var(--ds-color-brand-solid-pressed);
+}
+
+.ds-composer__send:disabled,
+.ds-composer__send[aria-disabled="true"] {
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-disabled);
+  cursor: not-allowed;
+}
+
+.ds-composer__stop {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: currentColor;
+}
+
+.ds-composer[data-busy] .ds-composer__send {
+  background: var(--ds-color-fg-default);
+  color: var(--ds-color-bg-canvas);
+}
+
+.ds-composer__hint {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--ds-space-050) var(--ds-space-100);
+  margin-top: var(--ds-space-100);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.ds-composer__hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Lista de comandos ("/") */
+.ds-composer__menu {
+  position: absolute;
+  bottom: calc(100% + var(--ds-space-100));
+  left: 0;
+  z-index: var(--ds-z-popover);
+  width: min(360px, 100%);
+  max-height: 288px;
+  padding: 6px;
+  overflow-y: auto;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-raised);
+  border: 1px solid var(--ds-color-border-strong);
+  box-shadow: var(--ds-shadow-xl);
+}
+
+.ds-composer__menu[hidden] {
+  display: none;
+}
+
+.ds-composer__menu-label {
+  padding: var(--ds-space-100) var(--ds-space-150) var(--ds-space-075);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+}
+
+.ds-composer__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--ds-space-150);
+  padding: var(--ds-space-100) var(--ds-space-150);
+  border-radius: 10px;
+  color: var(--ds-color-fg-muted);
+  cursor: pointer;
+}
+
+.ds-composer__option[aria-selected="true"] {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-composer__option .ds-icon {
+  grid-row: span 2;
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-composer__option[aria-selected="true"] .ds-icon {
+  color: var(--ds-color-fg-brand);
+}
+
+.ds-composer__option-label {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.ds-composer__option-desc {
+  overflow: hidden;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-composer__empty {
+  padding: var(--ds-space-150);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}

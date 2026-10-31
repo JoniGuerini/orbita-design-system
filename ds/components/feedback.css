@@ -1,0 +1,319 @@
+/* Estado vazio, tooltip e breadcrumb */
+
+/*
+ * Estado vazio — quando não há nada para mostrar, diga por quê e ofereça o próximo passo.
+ *
+ * <div class="ds-empty" role="status">
+ *   <span class="ds-empty__icon"><ds-icon name="inbox"></ds-icon></span>
+ *   <p class="ds-empty__title">Nenhum projeto ainda</p>
+ *   <p class="ds-empty__description">Crie o primeiro para convidar o time.</p>
+ *   <div class="ds-empty__actions"><button class="ds-btn ds-btn--primary">Criar projeto</button></div>
+ *   <p class="ds-empty__meta">Erro 503 · 14:32</p>                       ← opcional
+ * </div>
+ *
+ * Onde: padrão (página inteira) · --compact (dentro de painel) · --inline (linha de tabela ou lista)
+ * Superfície: --plain (sem contorno nem fundo, quando já está dentro de um cartão)
+ * Tom: --danger (erro) · --warning (offline, atenção) · --loading (o ícone gira; parado com movimento reduzido)
+ */
+.ds-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-800) var(--ds-space-300);
+  border: 1px dashed var(--ds-color-border-default);
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-sunken);
+  text-align: center;
+}
+
+.ds-empty__icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--ds-space-050);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-brand);
+}
+
+.ds-empty__title {
+  font: var(--ds-text-heading-md);
+  letter-spacing: var(--ds-text-heading-md-tracking);
+}
+
+.ds-empty__description {
+  max-width: 46ch;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-empty__title + .ds-empty__description {
+  margin-top: calc(-1 * var(--ds-space-100));
+}
+
+.ds-empty__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-150) var(--ds-space-200);
+  margin-top: var(--ds-space-100);
+}
+
+.ds-empty__meta {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-empty__title:focus {
+  outline: none;
+}
+
+/* Tons */
+.ds-empty--danger .ds-empty__icon {
+  background: var(--ds-color-danger-subtle);
+  color: var(--ds-color-danger-fg);
+}
+
+.ds-empty--warning .ds-empty__icon {
+  background: var(--ds-color-warning-subtle);
+  color: var(--ds-color-warning-fg);
+}
+
+.ds-empty--muted .ds-empty__icon {
+  color: var(--ds-color-fg-muted);
+}
+
+.ds-empty--loading .ds-empty__icon {
+  background: transparent;
+  color: var(--ds-color-fg-muted);
+}
+
+.ds-empty--loading .ds-empty__icon .ds-icon {
+  animation: ds-empty-spin 0.9s linear infinite;
+}
+
+@keyframes ds-empty-spin {
+  to { transform: rotate(1turn); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-empty--loading .ds-empty__icon .ds-icon {
+    animation: none;
+  }
+}
+
+/* Superfície */
+.ds-empty--plain {
+  border: 0;
+  background: transparent;
+}
+
+/* Dentro de painel */
+.ds-empty--compact {
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-500) var(--ds-space-250);
+  border-radius: var(--ds-radius-xl);
+}
+
+.ds-empty--compact .ds-empty__icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0;
+  border-radius: var(--ds-radius-md);
+}
+
+.ds-empty--compact .ds-empty__title {
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.ds-empty--compact .ds-empty__title + .ds-empty__description {
+  margin-top: calc(-1 * var(--ds-space-075));
+}
+
+.ds-empty--compact .ds-empty__actions {
+  margin-top: var(--ds-space-050);
+}
+
+/* Linha de tabela ou lista: ícone à esquerda, ação à direita */
+.ds-empty--inline {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icon title actions"
+    "icon desc actions";
+  align-items: center;
+  column-gap: var(--ds-space-200);
+  row-gap: 2px;
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  text-align: start;
+}
+
+.ds-empty--inline .ds-empty__icon {
+  grid-area: icon;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  border-radius: var(--ds-radius-md);
+}
+
+.ds-empty--inline .ds-empty__title {
+  grid-area: title;
+  align-self: end;
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.ds-empty--inline .ds-empty__description {
+  grid-area: desc;
+  align-self: start;
+  max-width: none;
+  margin: 0;
+}
+
+.ds-empty--inline .ds-empty__actions {
+  grid-area: actions;
+  justify-content: flex-end;
+  max-width: 44%;
+  margin: 0;
+  justify-self: end;
+}
+
+.ds-empty--inline .ds-empty__meta {
+  display: none;
+}
+
+@media (max-width: 639.98px) {
+  .ds-empty {
+    padding-block: var(--ds-space-600);
+  }
+
+  .ds-empty--compact {
+    padding-block: var(--ds-space-400);
+  }
+
+  .ds-empty--inline {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "icon title"
+      "icon desc"
+      ". actions";
+    padding-block: var(--ds-space-200);
+  }
+
+  .ds-empty--inline .ds-empty__actions {
+    justify-content: flex-start;
+    justify-self: start;
+    max-width: none;
+    margin-top: var(--ds-space-150);
+  }
+}
+
+.ds-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--ds-z-tooltip);
+  max-width: 240px;
+  padding: 6px 10px;
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-color-bg-raised);
+  border: 1px solid var(--ds-color-border-default);
+  box-shadow: var(--ds-shadow-lg);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity var(--ds-duration-fast) var(--ds-easing-standard),
+    transform var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+/* Aberto, o balão aceita o ponteiro: dá para apontar e ler sem ele sumir (WCAG 1.4.13) */
+.ds-tooltip[data-open] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* Ponte invisível sobre o vão entre o gatilho e o balão */
+.ds-tooltip::before {
+  content: "";
+  position: absolute;
+}
+
+.ds-tooltip[data-placement="top"]::before { inset: 100% 0 auto; height: 12px; }
+.ds-tooltip[data-placement="bottom"]::before { inset: auto 0 100%; height: 12px; }
+.ds-tooltip[data-placement="right"]::before { inset: 0 100% 0 auto; width: 12px; }
+.ds-tooltip[data-placement="left"]::before { inset: 0 auto 0 100%; width: 12px; }
+
+.ds-tooltip kbd {
+  margin-inline-start: var(--ds-space-100);
+}
+
+/* Breadcrumb */
+.ds-breadcrumb {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* em telas pequenas, só a página atual */
+@media (max-width: 767.98px) {
+  .ds-breadcrumb li:not(:last-child) {
+    display: none;
+  }
+
+  .ds-breadcrumb li:last-child > .ds-icon {
+    display: none;
+  }
+}
+
+.ds-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+  min-width: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.ds-breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.ds-breadcrumb a {
+  color: var(--ds-color-fg-subtle);
+  text-decoration: none;
+  border-radius: var(--ds-radius-xs);
+  transition: color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-breadcrumb a:hover {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-breadcrumb [aria-current="page"] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ds-color-fg-default);
+}
+
+.ds-breadcrumb .ds-icon {
+  opacity: 0.6;
+}

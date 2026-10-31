@@ -1,0 +1,555 @@
+/*
+ * App shell — painéis flutuantes: sidebar recolhível + painel principal com topbar.
+ *
+ * <div class="ds-shell" data-sidebar="expanded|collapsed" data-mobile-open="true|false">
+ *   <aside class="ds-sidebar">…</aside>
+ *   <div class="ds-shell__scrim"></div>
+ *   <div class="ds-main"><div class="ds-main__scroll"><header class="ds-topbar">…</header><main class="ds-main__content">…</main></div></div>
+ * </div>
+ *
+ * Geometria: no modo recolhido, a sidebar tem 76 px e todos os ícones ficam centrados
+ * em x = 37 px (conteúdo de 74 px) — por isso nada "pula" na animação.
+ */
+
+.ds-shell {
+  --_gap: var(--ds-layout-frame-gap);
+  --_sidebar-w: var(--ds-layout-sidebar);
+  --_dur: var(--ds-duration-slow);
+  --_ease: var(--ds-easing-emphasized);
+  --_inset: 13px;
+
+  display: flex;
+  gap: var(--_gap);
+  height: 100dvh;
+  padding: var(--_gap);
+  background: var(--ds-color-bg-app);
+}
+
+/* ───────── Sidebar ───────── */
+
+.ds-sidebar {
+  position: relative;
+  isolation: isolate;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  width: var(--_sidebar-w);
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-sidebar);
+  border: 1px solid var(--ds-color-border-subtle);
+  box-shadow: var(--ds-shadow-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .ds-shell[data-ready] .ds-sidebar {
+    transition: width var(--_dur) var(--_ease);
+  }
+}
+
+.ds-sidebar__header {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: 76px;
+  padding-inline: 15px;
+}
+
+/* Logotipo tipográfico: só o nome */
+.ds-brand {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  translate: 0 -50%;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-font-weight-bold) 1.75rem/1 var(--ds-font-family-display);
+  letter-spacing: -0.045em;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: var(--ds-radius-xs);
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-brand:hover {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-sidebar__toggle {
+  margin-inline-start: auto;
+}
+
+.ds-sidebar__toggle-close {
+  display: none;
+}
+
+/* Busca */
+.ds-sidebar__search {
+  flex: none;
+  padding: 0 var(--_inset) var(--ds-space-100);
+}
+
+/* É um botão com rótulo (abre a busca ⌘K), não um campo: mantém o contorno fino dos controles com texto */
+.ds-sidebar-search {
+  padding-inline: 12px;
+  border-color: var(--ds-color-border-control);
+  overflow: hidden;
+}
+
+.ds-sidebar-search:hover {
+  border-color: var(--ds-color-border-strong);
+}
+
+.ds-sidebar-search__kbd {
+  display: flex;
+  gap: 3px;
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+/* Navegação */
+.ds-sidebar__nav {
+  flex: 1;
+  min-height: 0;
+  padding: var(--ds-space-050) var(--_inset) var(--ds-space-400);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 40px), transparent);
+}
+
+.ds-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-nav-item {
+  --_h: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--_h);
+  padding-inline: 13px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    box-shadow var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-nav-item:hover {
+  background-color: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-nav-item:focus-visible {
+  outline-offset: -2px;
+}
+
+.ds-nav-item[aria-current="page"] {
+  background-color: var(--ds-color-bg-selected);
+  border-color: var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-nav-item__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-nav-item > .ds-dot {
+  margin-inline-end: 4px;
+  transition: translate var(--_dur) var(--_ease);
+}
+
+/* item principal — maior */
+.ds-nav-item--lg {
+  --_h: 48px;
+  gap: 14px;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-lg);
+  letter-spacing: var(--ds-text-label-lg-tracking);
+}
+
+.ds-sidebar__divider {
+  width: 56%;
+  margin: var(--ds-space-200) 13px var(--ds-space-150);
+}
+
+/* Grupos */
+.ds-nav-group + .ds-nav-group {
+  margin-top: var(--ds-space-100);
+}
+
+.ds-nav-group__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding-inline: 13px 6px;
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.ds-nav-group__header:focus-visible {
+  outline-offset: -2px;
+}
+
+.ds-nav-group__label {
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-nav-group__toggle {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-color-bg-selected);
+  color: var(--ds-color-fg-subtle);
+  transition:
+    opacity var(--ds-duration-base) var(--ds-easing-standard),
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-nav-group__header:hover .ds-nav-group__toggle {
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-nav-group__toggle .ds-icon {
+  transition: transform var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.ds-nav-group__header[aria-expanded="false"] .ds-nav-group__toggle .ds-icon {
+  transform: rotate(-90deg);
+}
+
+/* vira um divisor curto no modo recolhido */
+.ds-nav-group__header::after {
+  content: "";
+  position: absolute;
+  inset-inline: 14px;
+  top: 50%;
+  height: 1px;
+  background: var(--ds-color-border-default);
+  opacity: 0;
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-nav-group__items {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--_dur) var(--_ease);
+}
+
+.ds-nav-group__items > .ds-nav-list {
+  min-height: 0;
+  overflow: hidden;
+  padding-block: 2px 4px;
+}
+
+.ds-nav-group[data-open="false"] .ds-nav-group__items {
+  grid-template-rows: 0fr;
+}
+
+.ds-nav-group[data-open="false"] .ds-nav-group__items > .ds-nav-list {
+  visibility: hidden;
+  transition: visibility 0s var(--_dur);
+}
+
+/* Rodapé — cartão de conta/versão */
+.ds-sidebar__footer {
+  flex: none;
+  padding: var(--ds-space-100) var(--_inset) var(--_inset);
+}
+
+.ds-account {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 64px;
+  padding-inline: 11px 14px;
+  border-radius: var(--ds-radius-lg);
+  color: var(--ds-color-fg-default);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: padding var(--_dur) var(--_ease);
+}
+
+.ds-account::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--ds-color-bg-muted);
+  border: 1px solid var(--ds-color-border-subtle);
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-account:hover {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-account:hover .ds-account__chevron {
+  translate: 2px 0;
+  color: var(--ds-color-fg-default);
+}
+
+.ds-account__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  transition: opacity var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-account__title {
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.ds-account__subtitle {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.ds-account__chevron {
+  color: var(--ds-color-fg-subtle);
+  transition:
+    opacity var(--ds-duration-base) var(--ds-easing-standard),
+    translate var(--ds-duration-base) var(--ds-easing-emphasized),
+    color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+/* ───────── Painel principal ───────── */
+
+.ds-main {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+  box-shadow: var(--ds-shadow-lg);
+  overflow: hidden;
+}
+
+.ds-main__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.ds-topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--ds-z-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  height: var(--ds-layout-topbar);
+  padding-inline: 28px 16px;
+  background: var(--ds-color-bg-canvas);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-main[data-scrolled] .ds-topbar {
+  border-bottom-color: var(--ds-color-border-subtle);
+}
+
+/* no topo da página a topbar é transparente — a arte de fundo aparece nítida */
+.ds-main:not([data-scrolled]) .ds-topbar {
+  background: transparent;
+}
+
+.ds-topbar__spacer {
+  flex: 1;
+}
+
+.ds-topbar__menu,
+.ds-topbar__search {
+  display: none;
+}
+
+.ds-main__content {
+  --_pt: var(--ds-space-200);
+  --_px: var(--ds-layout-gutter);
+  position: relative;
+  padding: var(--_pt) var(--_px) var(--ds-space-1200);
+  outline: none;
+}
+
+/* Fundo de borda a borda do painel, por trás da topbar (ex.: arte do início) */
+.ds-main__backdrop {
+  position: absolute;
+  top: calc(-1 * (var(--ds-layout-topbar) + var(--_pt)));
+  inset-inline: calc(-1 * var(--_px));
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ds-main__backdrop ~ * {
+  position: relative;
+  z-index: 1;
+}
+
+.ds-shell__scrim {
+  display: none;
+}
+
+/* ───────── Desktop: modo recolhido ───────── */
+
+@media (min-width: 1024px) {
+  .ds-shell[data-sidebar="collapsed"] {
+    --_sidebar-w: var(--ds-layout-sidebar-collapsed);
+  }
+
+  .ds-shell[data-sidebar="collapsed"] :is(
+    .ds-brand,
+    .ds-sidebar-search .ds-field__placeholder,
+    .ds-sidebar-search__kbd,
+    .ds-nav-item__label,
+    .ds-nav-group__label,
+    .ds-nav-group__toggle,
+    .ds-account__text,
+    .ds-account__chevron,
+    .ds-account::before
+  ) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-nav-group__header {
+    pointer-events: none;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-nav-group__header::after {
+    opacity: 1;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-nav-group__items {
+    grid-template-rows: 1fr;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-nav-group__items > .ds-nav-list {
+    visibility: visible;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-nav-item > .ds-dot {
+    position: absolute;
+    top: 9px;
+    left: 30px;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-account {
+    padding-inline: 3px;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-sidebar__divider {
+    width: calc(100% - 26px);
+  }
+}
+
+/* ───────── Mobile / tablet: gaveta ───────── */
+
+@media (max-width: 1023.98px) {
+  .ds-shell {
+    --_gap: 8px;
+  }
+
+  .ds-sidebar {
+    position: fixed;
+    z-index: calc(var(--ds-z-overlay) + 1);
+    inset: var(--_gap) auto var(--_gap) var(--_gap);
+    width: min(var(--ds-layout-sidebar), calc(100vw - 48px));
+    box-shadow: var(--ds-shadow-2xl);
+    transform: translateX(calc(-100% - 2 * var(--_gap)));
+    visibility: hidden;
+    transition:
+      transform var(--_dur) var(--_ease),
+      visibility 0s var(--_dur);
+  }
+
+  .ds-shell[data-mobile-open="true"] .ds-sidebar {
+    transform: none;
+    visibility: visible;
+    transition: transform var(--_dur) var(--_ease);
+  }
+
+  .ds-shell__scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-z-overlay);
+    background: var(--ds-color-bg-overlay);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--_dur) var(--_ease);
+  }
+
+  .ds-shell[data-mobile-open="true"] .ds-shell__scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .ds-sidebar__toggle-collapse {
+    display: none;
+  }
+
+  .ds-sidebar__toggle-close {
+    display: inline-flex;
+  }
+
+  .ds-topbar {
+    padding-inline: 12px;
+  }
+
+  .ds-topbar__menu,
+  .ds-topbar__search {
+    display: inline-grid;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ds-main__content {
+    --_pt: var(--ds-space-100);
+    --_px: var(--ds-space-200);
+    padding-bottom: var(--ds-space-800);
+  }
+}
+
+/* ───────── Modo demonstração (app dentro de um iframe, ?embed) ───────── */
+
+html[data-embed] .ds-skip-link {
+  display: none;
+}

@@ -1,0 +1,184 @@
+/*
+ * Abas — padrão ARIA (ds/js/tabs.js).
+ *
+ * <div class="ds-tabs" data-ds-tabs>
+ *   <div class="ds-tabs__list" role="tablist" aria-label="…">
+ *     <button class="ds-tabs__tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Rótulo</button>
+ *   </div>
+ *   <div class="ds-tabs__panel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">…</div>
+ * </div>
+ *
+ * Aparências: sublinhada (padrão) · .ds-tabs--segmented · Tamanho: .ds-tabs--sm · Largura: .ds-tabs--fill
+ */
+
+.ds-tabs__list {
+  display: flex;
+  gap: var(--ds-space-050);
+  padding-block: var(--ds-space-100);
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: inset 0 -1px 0 var(--ds-color-border-subtle);
+}
+
+.ds-tabs__list::-webkit-scrollbar {
+  display: none;
+}
+
+.ds-tabs__tab {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-100);
+  height: 36px;
+  padding-inline: var(--ds-space-150);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  white-space: nowrap;
+  transition:
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-tabs__tab:hover {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-tabs__tab:focus-visible {
+  outline-offset: -2px;
+}
+
+.ds-tabs__tab[aria-selected="true"] {
+  color: var(--ds-color-fg-default);
+}
+
+/* indicador da aba ativa (sublinhada) */
+.ds-tabs__tab::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--ds-space-150);
+  bottom: calc(-1 * var(--ds-space-100));
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ds-color-brand-solid);
+  opacity: 0;
+  transition: opacity var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-tabs__tab[aria-selected="true"]::after {
+  opacity: 1;
+}
+
+.ds-tabs__tab:disabled,
+.ds-tabs__tab[aria-disabled="true"] {
+  opacity: var(--ds-opacity-disabled);
+  pointer-events: none;
+}
+
+.ds-tabs__tab .ds-icon {
+  color: inherit;
+}
+
+/* contagem dentro da aba */
+.ds-tabs__count {
+  min-width: 20px;
+  height: 20px;
+  padding-inline: var(--ds-space-075);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-selected);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-caption);
+  font-weight: var(--ds-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: 20px;
+  text-align: center;
+}
+
+.ds-tabs__panel {
+  padding-top: var(--ds-space-300);
+}
+
+.ds-tabs__panel:focus-visible {
+  outline-offset: 4px;
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-tabs__panel[hidden] {
+  display: none;
+}
+
+/* ───────── Pequena ───────── */
+
+.ds-tabs--sm .ds-tabs__list {
+  padding-block: var(--ds-space-075);
+}
+
+.ds-tabs--sm .ds-tabs__tab {
+  height: 30px;
+  padding-inline: var(--ds-space-100);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+}
+
+.ds-tabs--sm .ds-tabs__tab::after {
+  inset-inline: var(--ds-space-100);
+  bottom: calc(-1 * var(--ds-space-075));
+}
+
+/* ───────── Segmentada (pílula) ───────── */
+
+.ds-tabs--segmented .ds-tabs__list {
+  display: inline-flex;
+  max-width: 100%;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-sunken);
+  border: 1px solid var(--ds-color-border-subtle);
+  box-shadow: none;
+}
+
+.ds-tabs--segmented .ds-tabs__tab {
+  height: 32px;
+  padding-inline: var(--ds-space-200);
+  border-radius: var(--ds-radius-full);
+}
+
+.ds-tabs--segmented .ds-tabs__tab:hover {
+  background: transparent;
+}
+
+.ds-tabs--segmented .ds-tabs__tab[aria-selected="true"] {
+  background: var(--ds-color-bg-muted);
+}
+
+.ds-tabs--segmented .ds-tabs__tab::after {
+  display: none;
+}
+
+.ds-tabs--segmented .ds-tabs__tab:focus-visible {
+  outline-offset: -1px;
+}
+
+.ds-tabs--segmented.ds-tabs--sm .ds-tabs__tab {
+  height: 26px;
+  padding-inline: var(--ds-space-150);
+}
+
+.ds-tabs--segmented .ds-tabs__tab[aria-selected="true"] .ds-tabs__count {
+  background: var(--ds-color-bg-hover);
+}
+
+/* ───────── Largura total ───────── */
+
+.ds-tabs--fill .ds-tabs__list {
+  display: flex;
+}
+
+.ds-tabs--fill .ds-tabs__tab {
+  flex: 1 1 0;
+}

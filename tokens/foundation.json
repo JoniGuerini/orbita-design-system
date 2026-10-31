@@ -1,0 +1,50 @@
+{
+  "space": {
+    "$type": "dimension",
+    "$description": "Escala de 4 em 4 px. O sufixo indica múltiplos de 8 px (100 = 8 px).",
+    "0": 0, "025": 2, "050": 4, "075": 6, "100": 8, "150": 12, "200": 16, "250": 20,
+    "300": 24, "400": 32, "500": 40, "600": 48, "800": 64, "1000": 80, "1200": 96
+  },
+  "radius": {
+    "$type": "dimension",
+    "$unit": "px",
+    "none": 0, "xs": 6, "sm": 8, "md": 12, "lg": 16, "xl": 20, "2xl": 28, "3xl": 36, "full": 9999
+  },
+  "border-width": { "$type": "dimension", "$unit": "px", "thin": 1, "thick": 2 },
+  "focus-ring": { "$type": "dimension", "$unit": "px", "width": 2, "offset": 2 },
+  "size": {
+    "$type": "dimension",
+    "control": { "xs": 28, "sm": 32, "md": 40, "lg": 48 },
+    "icon": { "xs": 14, "sm": 16, "md": 20, "lg": 24, "xl": 32 }
+  },
+  "layout": {
+    "$type": "dimension",
+    "$unit": "px",
+    "sidebar": 288, "sidebar-collapsed": 76, "topbar": 64, "frame-gap": 12,
+    "content-max": 1160, "prose-max": 720, "gutter": 40
+  },
+  "breakpoint": {
+    "$type": "dimension",
+    "$unit": "px",
+    "sm": 640, "md": 768, "lg": 1024, "xl": 1280, "2xl": 1536
+  },
+  "blur": { "$type": "dimension", "$unit": "px", "sm": 8, "md": 16, "lg": 32 },
+  "z": {
+    "$type": "number",
+    "base": 0, "raised": 1, "dropdown": 1000, "sticky": 1100, "overlay": 1200,
+    "modal": 1300, "popover": 1400, "toast": 1500, "tooltip": 1600
+  },
+  "duration": {
+    "$type": "duration",
+    "instant": "0ms", "fast": "120ms", "base": "200ms", "slow": "320ms", "slower": "480ms"
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "standard": [0.2, 0, 0, 1],
+    "emphasized": [0.32, 0.72, 0, 1],
+    "decelerate": [0, 0, 0, 1],
+    "accelerate": [0.3, 0, 1, 1],
+    "linear": [0, 0, 1, 1]
+  },
+  "opacity": { "$type": "number", "disabled": 0.44, "muted": 0.64 }
+}

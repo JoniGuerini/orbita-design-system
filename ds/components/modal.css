@@ -1,0 +1,209 @@
+/*
+ * Modal — <dialog class="ds-modal"> aberto com ds/js/modal.js
+ *   tamanhos: --sm (400) md (520, padrão) --lg (720) · tom: --danger
+ *   prévia estática na documentação: <div class="ds-modal ds-modal--inline">
+ */
+
+.ds-modal {
+  --_w: 520px;
+  width: min(var(--_w), calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--ds-color-border-subtle);
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-raised);
+  color: var(--ds-color-fg-default);
+  box-shadow: var(--ds-shadow-2xl);
+  overflow: hidden;
+}
+
+.ds-modal--sm { --_w: 400px; }
+.ds-modal--lg { --_w: 720px; }
+
+/* só quando aberto (ou na prévia) — o <dialog> fechado continua escondido */
+.ds-modal[open],
+.ds-modal--inline {
+  display: flex;
+  flex-direction: column;
+}
+
+.ds-modal::backdrop {
+  background: var(--ds-color-bg-overlay);
+}
+
+/* Entrada e saída */
+.ds-modal[open] {
+  animation: ds-modal-in var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.ds-modal[open]::backdrop {
+  animation: ds-modal-fade-in var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-modal[data-closing] {
+  animation: ds-modal-out var(--ds-duration-fast) var(--ds-easing-accelerate) forwards;
+}
+
+.ds-modal[data-closing]::backdrop {
+  animation: ds-modal-fade-out var(--ds-duration-fast) var(--ds-easing-accelerate) forwards;
+}
+
+@keyframes ds-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes ds-modal-out {
+  to {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+}
+
+@keyframes ds-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ds-modal-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Prévia estática (documentação) */
+.ds-modal--inline {
+  position: relative;
+  inset: auto;
+  max-width: 100%;
+  max-height: none;
+  margin: 0;
+}
+
+/* Partes */
+.ds-modal__header {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-400) var(--ds-space-300) 0 var(--ds-space-400);
+}
+
+.ds-modal__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-muted);
+}
+
+.ds-modal--danger .ds-modal__icon {
+  background: var(--ds-color-danger-subtle);
+  color: var(--ds-color-danger-fg);
+}
+
+.ds-modal__heading {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.ds-modal__eyebrow {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+}
+
+.ds-modal__title {
+  margin-top: var(--ds-space-050);
+  font: var(--ds-text-heading-lg);
+  letter-spacing: var(--ds-text-heading-lg-tracking);
+}
+
+.ds-modal__eyebrow + .ds-modal__title {
+  margin-top: var(--ds-space-050);
+}
+
+.ds-modal__heading > .ds-modal__title:first-child {
+  margin-top: 0;
+}
+
+.ds-modal__close {
+  margin-top: -4px;
+}
+
+.ds-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: var(--ds-space-200) var(--ds-space-400) 0;
+  overflow-y: auto;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+}
+
+/* com ícone, o corpo alinha com o título */
+.ds-modal__header:has(> .ds-modal__icon) + .ds-modal__body {
+  padding-inline-start: calc(var(--ds-space-400) + 40px + var(--ds-space-200));
+}
+
+.ds-modal__body > * + * {
+  margin-top: var(--ds-space-150);
+}
+
+.ds-modal__footer {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-400);
+}
+
+.ds-modal__header:last-child {
+  padding-bottom: var(--ds-space-400);
+}
+
+.ds-modal__body:last-child {
+  padding-bottom: var(--ds-space-400);
+}
+
+@media (max-width: 767.98px) {
+  .ds-modal {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+    border-radius: var(--ds-radius-xl);
+  }
+
+  .ds-modal--inline {
+    width: 100%;
+  }
+
+  .ds-modal__header {
+    padding: var(--ds-space-300) var(--ds-space-200) 0 var(--ds-space-300);
+  }
+
+  .ds-modal__body {
+    padding-inline: var(--ds-space-300);
+  }
+
+  .ds-modal__header:has(> .ds-modal__icon) + .ds-modal__body {
+    padding-inline-start: var(--ds-space-300);
+  }
+
+  /* ações empilhadas, a principal em cima */
+  .ds-modal__footer {
+    flex-direction: column-reverse;
+    padding: var(--ds-space-300);
+  }
+
+  .ds-modal__footer > .ds-btn {
+    width: 100%;
+  }
+}

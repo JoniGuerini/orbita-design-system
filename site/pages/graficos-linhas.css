@@ -1,0 +1,161 @@
+/* Página: Gráficos › Linhas e áreas (prefixo gl-) */
+
+.gl-stage {
+  min-width: 0;
+}
+
+/* ───────── Cartões de exemplo ───────── */
+
+.gl-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.gl-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gl-card__chart {
+  min-width: 0;
+  padding: var(--ds-space-250) var(--ds-space-300) var(--ds-space-200);
+}
+
+.gl-card__chart--stack {
+  display: grid;
+  gap: var(--ds-space-300);
+}
+
+.gl-card__body {
+  margin-top: auto;
+  padding: var(--ds-space-200) var(--ds-space-300) var(--ds-space-250);
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+/* ───────── Mira ───────── */
+
+.gl-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: var(--ds-space-150);
+  align-items: start;
+}
+
+.gl-points {
+  display: grid;
+  gap: var(--ds-space-050);
+}
+
+.gl-points li {
+  display: flex;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+}
+
+.gl-points li + li {
+  border-top: 1px solid var(--ds-color-border-subtle);
+  border-radius: 0;
+}
+
+.gl-points .ds-icon {
+  flex: none;
+  margin-top: 2px;
+  color: var(--ds-color-fg-subtle);
+}
+
+.gl-points__title {
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.gl-points__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Um eixo só ───────── */
+
+.gl-why {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-150);
+  max-width: 76ch;
+  margin-bottom: var(--ds-space-300);
+  padding: var(--ds-space-200) var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-warning-subtle);
+  border: 1px solid var(--ds-color-warning-border);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.gl-why__icon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--ds-color-warning-fg);
+  line-height: 0;
+}
+
+/* ───────── API ───────── */
+
+.gl-api {
+  --doc-table-cols: minmax(0, 1.1fr) minmax(0, 1.2fr) minmax(0, 0.8fr) minmax(0, 2fr);
+}
+
+.gl-api + .gl-api,
+.cd-code + .gl-api {
+  margin-top: var(--ds-space-200);
+}
+
+.gl-api--methods {
+  --doc-table-cols: minmax(0, 1fr) minmax(0, 3fr);
+}
+
+.gl-api__type {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  overflow-wrap: anywhere;
+}
+
+.gl-api__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .gl-grid,
+  .gl-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .gl-card__chart {
+    padding: var(--ds-space-200);
+  }
+
+  .gl-card__body {
+    padding: var(--ds-space-200);
+  }
+
+  .gl-api .doc-table__head {
+    display: none;
+  }
+
+  .gl-api .doc-table__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ds-space-050);
+  }
+}

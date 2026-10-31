@@ -1,0 +1,165 @@
+/* Página: Gráficos › Dispersão (prefixo gd-) */
+
+/* ───────── Cartões de exemplo ───────── */
+
+.gd-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.gd-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gd-card__chart {
+  min-width: 0;
+  padding: var(--ds-space-250) var(--ds-space-300) var(--ds-space-200);
+}
+
+.gd-card__body {
+  margin-top: auto;
+  padding: var(--ds-space-200) var(--ds-space-300) var(--ds-space-250);
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.gd-card--dense {
+  margin-top: var(--ds-space-150);
+}
+
+/* ───────── Alvo de 24 px ───────── */
+
+.gd-target {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: var(--ds-space-300);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gd-target__figure {
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+}
+
+.gd-target__svg {
+  width: min(100%, 240px);
+  height: auto;
+  overflow: visible;
+}
+
+.gd-target__hit {
+  fill: var(--ds-color-bg-hover);
+  stroke: var(--ds-color-fg-subtle);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.gd-target__ring {
+  fill: var(--ds-color-bg-canvas);
+}
+
+.gd-target__dot {
+  fill: var(--ds-color-chart-series-1);
+}
+
+.gd-target__lead {
+  stroke: var(--ds-color-fg-subtle);
+  stroke-width: 1;
+}
+
+.gd-target__num {
+  fill: var(--ds-color-fg-default);
+  font: var(--ds-font-weight-semibold) 12px var(--ds-font-family-sans);
+}
+
+.gd-target__cap {
+  fill: var(--ds-color-fg-subtle);
+  font: var(--ds-font-weight-regular) 12px var(--ds-font-family-sans);
+}
+
+.gd-target__list {
+  display: grid;
+}
+
+.gd-target__list li {
+  padding: var(--ds-space-150) 0;
+}
+
+.gd-target__list li + li {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.gd-target__title {
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.gd-target__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── API ───────── */
+
+.gd-api {
+  --doc-table-cols: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 0.8fr) minmax(0, 2fr);
+}
+
+.cd-code + .gd-api {
+  margin-top: var(--ds-space-200);
+}
+
+.gd-api__type {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  overflow-wrap: anywhere;
+}
+
+.gd-api__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .gd-grid,
+  .gd-target {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .gd-card__chart,
+  .gd-card__body {
+    padding: var(--ds-space-200);
+  }
+
+  .gd-target {
+    padding: var(--ds-space-200);
+  }
+
+  .gd-api .doc-table__head {
+    display: none;
+  }
+
+  .gd-api .doc-table__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ds-space-050);
+  }
+}

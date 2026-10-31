@@ -1,0 +1,416 @@
+/* Campo de texto e controle segmentado */
+
+.ds-field {
+  --_h: 44px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  width: 100%;
+  height: var(--_h);
+  padding-inline: 13px var(--ds-space-150);
+  border: 1px solid var(--ds-color-border-field);
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  color: var(--ds-color-fg-subtle);
+  text-align: start;
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    box-shadow var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-field:hover {
+  border-color: var(--ds-color-border-field-hover);
+}
+
+.ds-field:focus-within {
+  border-color: var(--ds-color-border-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-color-border-focus) 22%, transparent);
+}
+
+.ds-field:has(.ds-field__input:focus-visible) {
+  outline: none;
+}
+
+.ds-field__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  outline: none;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-field__input::placeholder,
+.ds-field__placeholder {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-field__placeholder {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ds-field > .ds-icon {
+  flex: none;
+  color: var(--ds-color-fg-subtle);
+}
+
+/* Botão dentro do campo (limpar, mostrar senha…) */
+.ds-field__action {
+  margin-inline-end: calc(-1 * var(--ds-space-075));
+}
+
+/* Estados — também forçáveis com data-state="hover|focus" para documentação e testes */
+.ds-field[data-state="hover"] {
+  border-color: var(--ds-color-border-field-hover);
+}
+
+.ds-field[data-state="focus"] {
+  border-color: var(--ds-color-border-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-color-border-focus) 22%, transparent);
+}
+
+.ds-field:has(> .ds-field__input:disabled) {
+  opacity: var(--ds-opacity-disabled);
+  border-color: var(--ds-color-border-field);
+  cursor: not-allowed;
+}
+
+.ds-field__input:disabled {
+  cursor: not-allowed;
+}
+
+.ds-field:has(> .ds-field__input[readonly]) {
+  background: var(--ds-color-bg-sunken);
+  border-color: var(--ds-color-border-subtle);
+}
+
+.ds-field:has(> .ds-field__input[aria-invalid="true"]) {
+  border-color: var(--ds-color-danger-solid);
+}
+
+.ds-field:has(> .ds-field__input[aria-invalid="true"]):focus-within {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ds-color-danger-solid) 22%, transparent);
+}
+
+/* Tamanhos — dentro de .ds-form-field o padrão é md (40 px) */
+.ds-form-field .ds-field,
+.ds-field.ds-field--md {
+  --_h: var(--ds-size-control-md);
+}
+
+.ds-field.ds-field--sm {
+  --_h: var(--ds-size-control-sm);
+  gap: var(--ds-space-100);
+  padding-inline: 10px var(--ds-space-100);
+  border-radius: var(--ds-radius-sm);
+}
+
+.ds-field.ds-field--lg {
+  --_h: var(--ds-size-control-lg);
+  padding-inline: var(--ds-space-200);
+}
+
+.ds-field.ds-field--lg > .ds-field__input {
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+}
+
+/* Multilinha: <div class="ds-field ds-field--multiline"><textarea class="ds-field__input"></textarea></div> */
+.ds-field.ds-field--multiline {
+  height: auto;
+  align-items: flex-start;
+  padding-block: 10px;
+}
+
+.ds-field--multiline > .ds-field__input {
+  height: auto;
+  min-height: 88px;
+  padding: 0;
+  resize: vertical;
+  line-height: 1.375rem;
+}
+
+.ds-field--multiline > .ds-icon {
+  margin-top: 1px;
+}
+
+/*
+ * Campo completo
+ * <div class="ds-form-field">
+ *   <label class="ds-form-field__label" for="x">Rótulo</label>
+ *   <div class="ds-field"><input class="ds-field__input" id="x" aria-describedby="x-hint"></div>
+ *   <div class="ds-form-field__footer"><p class="ds-form-field__hint" id="x-hint">Dica</p><span class="ds-form-field__counter">0/40</span></div>
+ * </div>
+ */
+.ds-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-075);
+  min-width: 0;
+}
+
+.ds-form-field__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-100);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.ds-form-field__optional {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.ds-form-field__footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+}
+
+.ds-form-field__hint {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-form-field__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-075);
+  color: var(--ds-color-danger-fg);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-form-field__error > .ds-icon {
+  flex: none;
+  margin-top: 3px;
+}
+
+.ds-form-field__counter {
+  flex: none;
+  margin-inline-start: auto;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-form-field__counter[data-over] {
+  color: var(--ds-color-danger-fg);
+}
+
+/* Controle segmentado */
+.ds-segmented {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-sunken);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.ds-segmented__item {
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding-inline: var(--ds-space-100);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-full);
+  color: var(--ds-color-fg-subtle);
+  transition:
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    box-shadow var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-segmented__item:hover {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-segmented__item[aria-checked="true"] {
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-default);
+}
+
+/*
+ * Formulário — layout, seções e ações (o comportamento fica em ds/js/form.js)
+ *
+ * <form class="ds-form" novalidate>
+ *   <div data-form-summary></div>                         ← resumo de erros entra aqui (opcional)
+ *   <fieldset class="ds-form__section">
+ *     <legend class="ds-form__legend"><span class="ds-section__stamp">01</span>Sobre o projeto</legend>
+ *     <p class="ds-form__section-desc">Aparece para todo o time.</p>
+ *     <div class="ds-form__row">…dois .ds-form-field lado a lado…</div>
+ *   </fieldset>
+ *   <div class="ds-form__actions">
+ *     <button class="ds-btn ds-btn--ghost ds-form__actions-start">Excluir</button>   ← destrutiva, longe da principal
+ *     <button class="ds-btn ds-btn--secondary">Cancelar</button>
+ *     <button class="ds-btn ds-btn--primary" type="submit">Criar projeto</button>  ← principal à direita
+ *   </div>
+ * </form>
+ *
+ * Modificadores: .ds-form__row--3 (três colunas) · .ds-form__actions--sticky (rodapé fixo em formulários longos;
+ * personalize o fundo com --ds-form-surface) · .ds-field__affix (texto fixo dentro do campo, ex.: "orbita.app/")
+ */
+.ds-form {
+  --ds-form-surface: var(--ds-color-bg-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-400);
+  min-width: 0;
+}
+
+/* o lugar do resumo não ocupa espaço enquanto não há erro */
+.ds-form > [data-form-summary]:empty {
+  display: none;
+}
+
+.ds-form__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-250);
+  min-width: 0;
+}
+
+.ds-form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-250);
+  align-items: start;
+}
+
+.ds-form__row--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ds-form__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-250);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ds-form__section + .ds-form__section {
+  padding-top: var(--ds-space-400);
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+/* legend flutuante = um bloco comum, que respeita o gap da seção */
+.ds-form__legend {
+  float: left;
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-150);
+  width: 100%;
+  padding: 0;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-form__legend + * {
+  clear: both;
+}
+
+.ds-form__section-desc {
+  margin-top: calc(-1 * var(--ds-space-150));
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-form__note {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.ds-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ds-space-150);
+  padding-top: var(--ds-space-300);
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.ds-form__actions-start {
+  margin-inline-end: auto;
+}
+
+.ds-form__actions-meta {
+  margin-inline-end: auto;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.ds-form__actions--sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  padding-bottom: var(--ds-space-250);
+  background: var(--ds-form-surface);
+}
+
+/* erro de uma escolha solta (checkbox de termos, switch) — logo abaixo do controle */
+.ds-form__choice-error {
+  margin-top: var(--ds-space-100);
+  padding-inline-start: 30px;
+}
+
+.ds-field__affix {
+  flex: none;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+  white-space: nowrap;
+}
+
+.ds-field__affix + .ds-field__input {
+  margin-inline-start: calc(-1 * var(--ds-space-150) + 2px);
+}
+
+@media (max-width: 639.98px) {
+  .ds-form__row,
+  .ds-form__row--3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* a principal sobe e todas ocupam a largura */
+  .ds-form__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .ds-form__actions > .ds-btn {
+    width: 100%;
+  }
+
+  .ds-form__actions-start,
+  .ds-form__actions-meta {
+    margin-inline-end: 0;
+  }
+
+  .ds-form__actions-meta {
+    text-align: center;
+  }
+}

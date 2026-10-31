@@ -1,0 +1,182 @@
+/* Página: Badge (prefixo bd-) */
+
+.bd-ratio {
+  margin-top: var(--ds-space-100);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-sizes,
+.bd-contexts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.bd-contexts {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* ───────── Contagem ───────── */
+
+.bd-count {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.bd-count__list {
+  padding: var(--ds-space-200) var(--ds-space-300);
+  background: var(--ds-color-bg-canvas);
+  border-inline-end: 1px solid var(--ds-color-border-subtle);
+}
+
+.bd-count__item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  min-height: 44px;
+  color: var(--ds-color-fg-muted);
+}
+
+.bd-count__item + .bd-count__item {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.bd-count__label {
+  flex: 1;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+}
+
+.bd-count__zero {
+  color: var(--ds-color-fg-disabled);
+  font: var(--ds-text-caption);
+}
+
+.bd-count__rules {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-300);
+}
+
+.bd-count__rule {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.bd-count__rule span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 40px;
+  height: 24px;
+  padding-inline: var(--ds-space-075);
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-selected);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───────── Onde usar ───────── */
+
+.bd-ctx {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.bd-ctx__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-150);
+  min-height: 40px;
+  font: var(--ds-text-label-md);
+}
+
+.bd-ctx__row + .bd-ctx__row {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.bd-ctx__row--nav {
+  justify-content: flex-start;
+  color: var(--ds-color-fg-muted);
+}
+
+.bd-ctx__row--nav span:not(.ds-badge) {
+  flex: 1;
+  color: var(--ds-color-fg-default);
+}
+
+.bd-ctx__card {
+  padding: var(--ds-space-200);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.bd-ctx__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.bd-ctx__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+/* ───────── Uso ───────── */
+
+.bd-usage__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.bd-usage__preview .ds-badge {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .bd-sizes,
+  .bd-contexts,
+  .bd-count {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bd-count__list {
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--ds-color-border-subtle);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .bd-count__list {
+    padding-inline: var(--ds-space-200);
+  }
+}

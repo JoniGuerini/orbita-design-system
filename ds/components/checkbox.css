@@ -1,0 +1,209 @@
+/*
+ * Checkbox e radio — inputs nativos com aparência própria
+ *
+ * <label class="ds-checkbox">
+ *   <input type="checkbox" class="ds-checkbox__input">
+ *   <span class="ds-choice__text">
+ *     <span class="ds-choice__label">Rótulo</span>
+ *     <span class="ds-choice__description">Descrição opcional</span>
+ *   </span>
+ * </label>
+ *
+ * Radio: troque por .ds-radio / .ds-radio__input. Grupos: <fieldset class="ds-choice-group">.
+ * Estados: marcado, indeterminado (propriedade .indeterminate), desativado, inválido (aria-invalid="true"),
+ * e forçados para documentação com data-state="hover|focus".
+ * .ds-choice__* também é usado pelo switch.
+ */
+
+.ds-checkbox,
+.ds-radio {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-default);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ds-checkbox__input,
+.ds-radio__input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  display: grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  border: 1.5px solid var(--ds-color-fg-subtle);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    border-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-checkbox__input {
+  border-radius: var(--ds-radius-xs);
+}
+
+.ds-radio__input {
+  border-radius: var(--ds-radius-full);
+}
+
+/* hover e foco */
+.ds-checkbox:hover .ds-checkbox__input,
+.ds-radio:hover .ds-radio__input,
+.ds-checkbox__input[data-state="hover"],
+.ds-radio__input[data-state="hover"] {
+  border-color: var(--ds-color-fg-muted);
+}
+
+.ds-checkbox__input:focus-visible,
+.ds-radio__input:focus-visible,
+.ds-checkbox__input[data-state="focus"],
+.ds-radio__input[data-state="focus"] {
+  outline: var(--ds-focus-ring-width) solid var(--ds-color-border-focus);
+  outline-offset: var(--ds-focus-ring-offset);
+}
+
+/* Checkbox: marca de seleção desenhada em CSS */
+.ds-checkbox__input::before {
+  content: "";
+  width: 5px;
+  height: 9px;
+  border: solid var(--ds-color-brand-on-solid);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg) scale(0);
+  transition: transform var(--ds-duration-fast) var(--ds-easing-emphasized);
+}
+
+.ds-checkbox__input:checked,
+.ds-checkbox__input:indeterminate {
+  border-color: var(--ds-color-brand-solid);
+  background: var(--ds-color-brand-solid);
+}
+
+.ds-checkbox:hover .ds-checkbox__input:is(:checked, :indeterminate) {
+  border-color: var(--ds-color-brand-solid-hover);
+  background: var(--ds-color-brand-solid-hover);
+}
+
+.ds-checkbox__input:checked::before {
+  transform: translateY(-1px) rotate(45deg) scale(1);
+}
+
+.ds-checkbox__input:indeterminate::before {
+  width: 8px;
+  height: 2px;
+  border: 0;
+  border-radius: 1px;
+  background: var(--ds-color-brand-on-solid);
+  transform: none;
+}
+
+/* Radio: ponto central */
+.ds-radio__input::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-brand-solid);
+  transform: scale(0);
+  transition: transform var(--ds-duration-fast) var(--ds-easing-emphasized);
+}
+
+.ds-radio__input:checked {
+  border-color: var(--ds-color-brand-solid);
+}
+
+.ds-radio__input:checked::before {
+  transform: scale(1);
+}
+
+/* Desativado e inválido */
+.ds-checkbox:has(> .ds-checkbox__input:disabled),
+.ds-radio:has(> .ds-radio__input:disabled) {
+  opacity: var(--ds-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.ds-checkbox__input:disabled,
+.ds-radio__input:disabled {
+  cursor: not-allowed;
+}
+
+.ds-checkbox__input[aria-invalid="true"]:not(:checked, :indeterminate),
+.ds-radio__input[aria-invalid="true"]:not(:checked) {
+  border-color: var(--ds-color-danger-solid);
+}
+
+/* Texto (compartilhado com o switch) */
+.ds-choice__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ds-choice__label {
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.ds-choice__description {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* Grupo: <fieldset class="ds-choice-group"><legend class="ds-choice-group__legend">…</legend><div class="ds-choice-group__items">…</div></fieldset> */
+.ds-choice-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ds-choice-group__legend {
+  margin-bottom: var(--ds-space-150);
+  padding: 0;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+.ds-choice-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-150);
+}
+
+.ds-choice-group--inline .ds-choice-group__items {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--ds-space-150) var(--ds-space-300);
+}
+
+.ds-choice-group__hint,
+.ds-choice-group__error {
+  margin-top: var(--ds-space-150);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-choice-group__hint {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-choice-group__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-075);
+  color: var(--ds-color-danger-fg);
+}
+
+.ds-choice-group__error > .ds-icon {
+  flex: none;
+  margin-top: 3px;
+}

@@ -1,0 +1,302 @@
+/* Peças compartilhadas das páginas de componente (prefixo cd-) */
+
+/* ───────── Playground ───────── */
+
+.cd-playground {
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.cd-playground__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  padding: var(--ds-space-600) var(--ds-space-300);
+  background: var(--ds-color-bg-canvas);
+  color: var(--ds-color-fg-default);
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+  transition: background-color var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.cd-playground__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-150);
+}
+
+/* Largo: o preview ocupa o palco inteiro (gráficos, layouts) */
+.cd-playground--wide .cd-playground__stage {
+  place-items: stretch;
+  padding: var(--ds-space-800) var(--ds-space-300) var(--ds-space-300);
+}
+
+.cd-playground--wide .cd-playground__preview {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.cd-playground--wide .ds-chart {
+  --ds-chart-surface: var(--ds-color-bg-canvas);
+}
+
+.cd-playground__theme {
+  position: absolute;
+  top: var(--ds-space-200);
+  right: var(--ds-space-200);
+}
+
+.cd-playground__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+  padding: var(--ds-space-200) var(--ds-space-250);
+}
+
+.cd-control {
+  gap: var(--ds-space-075);
+}
+
+.cd-control__label {
+  color: var(--ds-color-fg-subtle);
+  font-weight: var(--ds-font-weight-regular);
+}
+
+.cd-control-text {
+  --_h: 36px;
+  width: auto;
+  flex: 1 1 200px;
+  max-width: 280px;
+  border-radius: var(--ds-radius-full);
+  padding-inline: var(--ds-space-200);
+}
+
+.cd-control-text .cd-control__label {
+  font: var(--ds-text-label-sm);
+  white-space: nowrap;
+}
+
+.cd-control-text .ds-field__input {
+  font: var(--ds-text-label-sm);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.cd-playground__code {
+  padding: 0 var(--ds-space-250) var(--ds-space-250);
+}
+
+/* ───────── Bloco de código com copiar ───────── */
+
+.cd-code {
+  position: relative;
+}
+
+.cd-code .ds-code {
+  padding-inline-end: var(--ds-space-600);
+}
+
+.cd-code__copy {
+  position: absolute;
+  top: var(--ds-space-100);
+  right: var(--ds-space-100);
+}
+
+/* ───────── Grades de exemplos ───────── */
+
+.cd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: var(--ds-space-150);
+}
+
+.cd-example {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.cd-example__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-100);
+  min-height: 140px;
+  padding: var(--ds-space-300);
+  background: var(--ds-color-bg-canvas);
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+}
+
+.cd-example__body {
+  padding: var(--ds-space-200) var(--ds-space-250) var(--ds-space-250);
+}
+
+.cd-example__name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-100);
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.cd-example__name code {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+}
+
+.cd-example__text {
+  margin-top: var(--ds-space-075);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Tokens usados ───────── */
+
+.cd-tokens {
+  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.cd-tokens__name {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: start;
+}
+
+.cd-tokens__name span {
+  font: var(--ds-text-label-md);
+}
+
+.cd-tokens__name code {
+  overflow: hidden;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cd-tokens__name:hover code {
+  color: var(--ds-color-fg-default);
+}
+
+.cd-tokens__role {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.cd-tokens__value {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-code-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cd-tokens__swatch {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--ds-radius-xs);
+  border: 1px solid var(--ds-color-border-default);
+}
+
+/* ───────── Acessibilidade ───────── */
+
+.cd-a11y {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.cd-a11y__item {
+  display: flex;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.cd-a11y__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-success-subtle);
+  color: var(--ds-color-success-fg);
+}
+
+.cd-a11y__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+  font: var(--ds-text-label-md);
+}
+
+.cd-a11y__kbd {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.cd-a11y__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .cd-a11y {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cd-playground__stage {
+    min-height: 220px;
+    padding: var(--ds-space-600) var(--ds-space-200) var(--ds-space-400);
+  }
+
+  .cd-playground__controls,
+  .cd-playground__code {
+    padding-inline: var(--ds-space-200);
+  }
+
+  .cd-control-text {
+    max-width: none;
+  }
+
+  .cd-tokens .doc-table__head {
+    display: none;
+  }
+
+  .cd-tokens .doc-table__row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    row-gap: var(--ds-space-100);
+  }
+
+  .cd-tokens__name,
+  .cd-tokens__role {
+    grid-column: 1 / -1;
+  }
+}

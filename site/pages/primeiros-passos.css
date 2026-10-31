@@ -1,0 +1,359 @@
+/* Página: Primeiros passos (prefixo gs-) */
+
+/* ───────── Passos de instalação ───────── */
+
+.gs-steps {
+  display: flex;
+  flex-direction: column;
+}
+
+.gs-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: var(--ds-space-300);
+  padding-bottom: var(--ds-space-500);
+}
+
+/* fio que liga os números */
+.gs-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  bottom: 4px;
+  left: 17px;
+  width: 1px;
+  background: var(--ds-color-border-default);
+}
+
+.gs-step__num {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-default);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-step:last-child {
+  padding-bottom: 0;
+}
+
+.gs-step__body {
+  min-width: 0;
+  padding-top: 6px;
+}
+
+.gs-step__title {
+  font: var(--ds-text-heading-sm);
+  letter-spacing: var(--ds-text-heading-sm-tracking);
+}
+
+.gs-step__text {
+  max-width: 64ch;
+  margin: var(--ds-space-075) 0 var(--ds-space-200);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Tokens ───────── */
+
+.gs-tokens {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--ds-space-150);
+}
+
+.gs-token-groups {
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: hidden;
+}
+
+.gs-token-groups li + li {
+  border-top: 1px solid var(--ds-color-border-subtle);
+}
+
+.gs-token-group {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-150) var(--ds-space-200);
+  color: var(--ds-color-fg-default);
+  text-decoration: none;
+  transition: background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.gs-token-group:hover {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.gs-token-group__icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-muted);
+}
+
+.gs-token-group__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.gs-token-group__name {
+  font: var(--ds-text-label-md);
+}
+
+.gs-token-group__text code {
+  overflow: hidden;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gs-token-group__count {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-token-group__chevron {
+  color: var(--ds-color-fg-subtle);
+}
+
+/* ───────── Módulos ───────── */
+
+.gs-modules {
+  --doc-table-cols: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.3fr) 36px;
+}
+
+.gs-modules__file {
+  overflow: hidden;
+  font: var(--ds-text-code-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gs-modules__what {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.gs-modules__how {
+  overflow: hidden;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ───────── Marca ───────── */
+
+.gs-brand {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--ds-space-150);
+}
+
+.gs-brand__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-250);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gs-brand__steps li {
+  display: flex;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.gs-brand__steps strong {
+  color: var(--ds-color-fg-default);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.gs-brand__num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-sm);
+}
+
+.gs-brand__try {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-150);
+}
+
+.gs-brand__demo {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-150) var(--ds-space-200);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.gs-brand__label {
+  width: 100%;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+}
+
+.gs-brand__preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-150);
+}
+
+.gs-brand__link {
+  color: var(--ds-color-fg-link);
+  font: var(--ds-text-label-md);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ───────── Estrutura ───────── */
+
+.gs-tree {
+  line-height: 1.75;
+}
+
+/* ───────── Próximos passos ───────── */
+
+.gs-next {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.gs-next__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-075);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-default);
+  text-decoration: none;
+  transition: border-color var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.gs-next__card:hover {
+  border-color: var(--ds-color-border-strong);
+  color: var(--ds-color-fg-default);
+}
+
+.gs-next__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--ds-space-150);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-muted);
+}
+
+.gs-next__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: var(--ds-text-heading-sm);
+  letter-spacing: var(--ds-text-heading-sm-tracking);
+}
+
+.gs-next__arrow {
+  color: var(--ds-color-fg-subtle);
+  transition: translate var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.gs-next__card:hover .gs-next__arrow {
+  translate: 2px -2px;
+  color: var(--ds-color-fg-default);
+}
+
+.gs-next__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .gs-tokens,
+  .gs-brand,
+  .gs-next {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .gs-step {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: var(--ds-space-200);
+  }
+
+  .gs-step__num {
+    width: 28px;
+    height: 28px;
+  }
+
+  .gs-step:not(:last-child)::before {
+    top: 32px;
+    left: 13px;
+  }
+
+  .gs-modules .doc-table__head {
+    display: none;
+  }
+
+  .gs-modules .doc-table__row {
+    grid-template-columns: minmax(0, 1fr) 36px;
+    row-gap: var(--ds-space-050);
+  }
+
+  .gs-modules__file {
+    grid-column: 1;
+  }
+
+  .gs-modules .ds-icon-btn {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .gs-modules__what,
+  .gs-modules__how {
+    grid-column: 1 / -1;
+  }
+}

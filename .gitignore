@@ -1,0 +1,14 @@
+# Gerado por npm run figma, npm run figma:test e npm run tokens:export
+dist/
+
+# Dependências (se um dia houver)
+node_modules/
+
+# Configuração local do Claude Code
+.claude/settings.local.json
+
+# Sistema
+.DS_Store
+__MACOSX/
+Thumbs.db
+desktop.ini

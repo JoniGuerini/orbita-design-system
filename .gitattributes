@@ -1,0 +1,5 @@
+# Fim de linha LF em qualquer sistema (o projeto vem do Mac e roda no Windows)
+* text=auto eol=lf
+
+*.png binary
+*.webp binary

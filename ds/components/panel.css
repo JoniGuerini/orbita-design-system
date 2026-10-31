@@ -1,0 +1,222 @@
+/*
+ * Painel — a superfície principal de conteúdo.
+ *
+ * <article class="ds-panel">
+ *   <header class="ds-panel__header">
+ *     <div><p class="ds-panel__eyebrow">Roteiro</p><h1 class="ds-panel__title">…</h1></div>
+ *     <div class="ds-panel__actions">…ds-icon-btn…</div>
+ *     <div class="ds-panel__aside">…ds-btn--ghost…</div>
+ *   </header>
+ *   <div class="ds-panel__toolbar">…ds-chip… <span class="ds-panel__meta">~30s</span></div>
+ *   <div class="ds-panel__body"><section class="ds-section">…</section></div>
+ *   <footer class="ds-panel__footer">…ds-btn--primary…</footer>
+ * </article>
+ */
+
+.ds-panel {
+  position: relative;
+  padding: var(--ds-space-500) var(--ds-space-600) var(--ds-space-600);
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-raised);
+  border: 1px solid var(--ds-color-border-subtle);
+  box-shadow: var(--ds-shadow-lg);
+}
+
+.ds-panel__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--ds-space-300);
+  align-items: start;
+}
+
+.ds-panel__eyebrow {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-eyebrow);
+}
+
+.ds-panel__title {
+  margin-top: var(--ds-space-075);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-heading-lg);
+  letter-spacing: var(--ds-text-heading-lg-tracking);
+}
+
+.ds-panel--hero .ds-panel__title {
+  font: var(--ds-text-display-sm);
+  letter-spacing: var(--ds-text-display-sm-tracking);
+}
+
+/* Compacto: para painéis laterais, gavetas e espaços menores */
+.ds-panel--compact {
+  padding: var(--ds-space-300) var(--ds-space-300) var(--ds-space-400);
+  border-radius: var(--ds-radius-xl);
+}
+
+.ds-panel--compact .ds-panel__title {
+  font: var(--ds-text-heading-md);
+  letter-spacing: var(--ds-text-heading-md-tracking);
+}
+
+.ds-panel--compact .ds-panel__toolbar,
+.ds-panel--compact .ds-panel__body {
+  margin-top: var(--ds-space-300);
+}
+
+.ds-panel--compact .ds-panel__body {
+  gap: var(--ds-space-400);
+}
+
+.ds-panel--compact .ds-panel__footer {
+  margin-top: var(--ds-space-400);
+}
+
+/* Plano: dentro de outra superfície elevada, sem sombra própria */
+.ds-panel--flat {
+  background: var(--ds-color-bg-surface);
+  box-shadow: none;
+}
+
+.ds-panel__actions {
+  display: flex;
+  gap: var(--ds-space-050);
+  margin: -2px -8px 0 0;
+}
+
+.ds-panel__aside {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  margin: var(--ds-space-200) -12px 0 0;
+}
+
+.ds-panel__lead {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 60ch;
+  margin-top: var(--ds-space-200);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+}
+
+.ds-panel__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-100);
+  margin-top: var(--ds-space-400);
+}
+
+.ds-panel__spacer {
+  flex: 1;
+}
+
+.ds-panel__meta {
+  margin-inline-start: var(--ds-space-200);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-500);
+  margin-top: var(--ds-space-400);
+}
+
+.ds-panel__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-150);
+  margin-top: var(--ds-space-600);
+}
+
+/* Seção: carimbo + rótulo, texto, ações inline */
+.ds-section__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-section__stamp {
+  min-width: 2.25ch;
+  font: var(--ds-text-caption);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
+.ds-section__text {
+  max-width: 68ch;
+  margin-top: var(--ds-space-150);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-md);
+  letter-spacing: var(--ds-text-body-md-tracking);
+}
+
+.ds-section__text + .ds-section__text {
+  margin-top: var(--ds-space-100);
+}
+
+.ds-section__text code {
+  padding: 1px 6px;
+  border-radius: var(--ds-radius-xs);
+  background: var(--ds-color-bg-hover);
+  font: var(--ds-text-code-sm);
+}
+
+.ds-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-050) var(--ds-space-300);
+  margin-top: var(--ds-space-150);
+}
+
+@media (max-width: 767.98px) {
+  .ds-panel {
+    padding: var(--ds-space-300) var(--ds-space-250) var(--ds-space-400);
+    border-radius: var(--ds-radius-xl);
+  }
+
+  /* cabeçalho empilhado; ações no canto superior */
+  .ds-panel__header {
+    display: block;
+  }
+
+  .ds-panel__actions {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    margin: 0;
+  }
+
+  .ds-panel__eyebrow {
+    padding-inline-end: 88px;
+  }
+
+  .ds-panel__title {
+    margin-top: var(--ds-space-150);
+  }
+
+  .ds-panel__lead {
+    margin-top: var(--ds-space-150);
+  }
+
+  .ds-panel__aside {
+    margin: var(--ds-space-150) 0 0 -12px;
+  }
+
+  .ds-panel--hero .ds-panel__title {
+    font: var(--ds-text-heading-xl);
+    letter-spacing: var(--ds-text-heading-xl-tracking);
+  }
+
+  .ds-panel__meta {
+    width: 100%;
+    margin: var(--ds-space-050) 0 0;
+  }
+}

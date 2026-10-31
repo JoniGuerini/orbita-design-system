@@ -1,0 +1,279 @@
+/* Página: Tooltip (prefixo tt-) */
+
+/* Tooltip "fixo" — mesmo visual do real, sem posicionamento */
+.ds-tooltip.tt-pinned {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  max-width: 240px;
+  translate: none;
+  transform: none;
+  opacity: 1;
+  white-space: nowrap;
+}
+
+/* ───────── Playground ───────── */
+
+.tt-pg {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.tt-pg--top { grid-template-areas: "tip" "trigger"; }
+.tt-pg--bottom { grid-template-areas: "trigger" "tip"; }
+.tt-pg--left { grid-template-areas: "tip trigger"; }
+.tt-pg--right { grid-template-areas: "trigger tip"; }
+
+.tt-pg__trigger { grid-area: trigger; }
+.tt-pg .tt-pinned { grid-area: tip; }
+
+.tt-term {
+  border-radius: 2px;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-md);
+  text-decoration: underline dotted var(--ds-color-fg-subtle);
+  text-underline-offset: 4px;
+  cursor: help;
+}
+
+/* ───────── Posições ───────── */
+
+.tt-compass {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    ". top ."
+    "left center right"
+    ". bottom .";
+  align-items: center;
+  justify-items: center;
+  gap: var(--ds-space-300);
+  padding: var(--ds-space-600) var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.tt-compass__cell {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+}
+
+.tt-compass__cell--top { grid-area: top; flex-direction: column-reverse; }
+.tt-compass__cell--bottom { grid-area: bottom; flex-direction: column; }
+.tt-compass__cell--left { grid-area: left; flex-direction: row-reverse; justify-self: end; }
+.tt-compass__cell--right { grid-area: right; justify-self: start; }
+
+.tt-compass__center {
+  grid-area: center;
+  padding: var(--ds-space-200) var(--ds-space-300);
+  border-radius: var(--ds-radius-md);
+  border: 1px dashed var(--ds-color-border-default);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  white-space: nowrap;
+}
+
+/* ───────── Com atalho ───────── */
+
+.tt-shortcut {
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ───────── Comportamento ───────── */
+
+.tt-timeline {
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.tt-timeline__track {
+  display: flex;
+  gap: 4px;
+}
+
+.tt-timeline__phase {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 40px;
+  padding-inline: var(--ds-space-150);
+  border-radius: var(--ds-radius-sm);
+  overflow: hidden;
+  font: var(--ds-text-caption);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tt-timeline__phase--wait {
+  background: var(--ds-color-bg-sunken);
+  border: 1px dashed var(--ds-color-border-default);
+  color: var(--ds-color-fg-subtle);
+}
+
+.tt-timeline__phase--show {
+  background: var(--ds-color-brand-subtle);
+  border: 1px solid var(--ds-color-brand-border);
+  color: var(--ds-color-brand-fg);
+}
+
+.tt-timeline__phase--warm {
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-muted);
+}
+
+.tt-timeline__marks {
+  display: grid;
+  grid-template-columns: 450fr 600fr 400fr 0fr;
+  margin-top: var(--ds-space-100);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+}
+
+.tt-timeline__marks span:last-child {
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.tt-try {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-200);
+  margin-top: var(--ds-space-150);
+  padding: var(--ds-space-250) var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.tt-try__label {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.tt-try__row {
+  display: flex;
+  gap: var(--ds-space-050);
+}
+
+.tt-rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150) var(--ds-space-400);
+  margin-top: var(--ds-space-300);
+}
+
+.tt-rules li {
+  display: flex;
+  gap: var(--ds-space-150);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.tt-rules .ds-icon {
+  flex: none;
+  margin-top: 3px;
+  color: var(--ds-color-success-fg);
+}
+
+/* ───────── Quando não usar ───────── */
+
+.tt-avoid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.tt-avoid__item {
+  display: flex;
+  gap: var(--ds-space-200);
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.tt-avoid__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-danger-subtle);
+  color: var(--ds-color-danger-fg);
+}
+
+.tt-avoid__title {
+  font: var(--ds-text-label-md);
+}
+
+.tt-avoid__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Uso ───────── */
+
+.tt-usage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: var(--ds-space-100) 0;
+  padding: var(--ds-space-250);
+  border-radius: var(--ds-radius-lg);
+  background: var(--ds-color-bg-canvas);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+/* ───────── Responsivo ───────── */
+
+@media (max-width: 1100px) {
+  .tt-avoid,
+  .tt-rules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .tt-compass {
+    gap: var(--ds-space-200);
+    padding: var(--ds-space-400) var(--ds-space-150);
+  }
+
+  .tt-compass code {
+    display: none;
+  }
+
+  .tt-timeline__track {
+    flex-direction: column;
+  }
+
+  .tt-timeline__phase {
+    flex: none !important;
+  }
+
+  .tt-timeline__marks {
+    display: none;
+  }
+
+  .tt-pg--left,
+  .tt-pg--right {
+    grid-template-areas: "trigger" "tip";
+  }
+
+  .ds-tooltip.tt-pinned {
+    white-space: normal;
+  }
+}

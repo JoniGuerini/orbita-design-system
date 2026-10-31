@@ -1,0 +1,162 @@
+/* Superfícies: card, divisor, indicador e avatar */
+
+.ds-card {
+  position: relative;
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.ds-card--raised {
+  background: var(--ds-color-bg-raised);
+  box-shadow: var(--ds-shadow-lg);
+}
+
+.ds-card--interactive {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color var(--ds-duration-base) var(--ds-easing-standard),
+    background-color var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.ds-card--interactive:hover {
+  color: inherit;
+  border-color: var(--ds-color-border-strong);
+}
+
+/* Divisor */
+.ds-divider {
+  height: 1px;
+  border: 0;
+  background: var(--ds-color-border-subtle);
+}
+
+.ds-divider--fade {
+  background: var(--ds-gradient-divider);
+}
+
+/* Indicador (pontinho de novidade) */
+.ds-dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-color-brand-indicator);
+}
+
+/*
+ * Avatar — imagem, iniciais ou ícone.
+ *   tamanhos: --xs (24) --sm (32) md (40, padrão) --lg (48) --xl (64) · forma: --square
+ *   tons categóricos: --sand --clay --ochre --slate --green --teal --blue --violet --pink
+ *   status: <span class="ds-avatar__status ds-avatar__status--online|away|busy|offline">
+ *   grupo: <div class="ds-avatar-group">…<span class="ds-avatar ds-avatar--more">+3</span></div>
+ *   --ds-avatar-ring: cor do anel do status e do grupo (padrão: fundo do canvas)
+ */
+.ds-avatar {
+  --_size: 40px;
+  --_tone-bg: var(--ds-color-bg-muted);
+  --_tone-fg: var(--ds-color-fg-muted);
+  position: relative;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: var(--_size);
+  height: var(--_size);
+  border-radius: var(--ds-radius-full);
+  background: var(--_tone-bg);
+  border: 1px solid var(--ds-color-border-subtle);
+  color: var(--_tone-fg);
+  font: var(--ds-font-weight-semibold) max(10px, calc(var(--_size) * 0.38)) / 1 var(--ds-font-family-sans);
+  letter-spacing: -0.01em;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.ds-avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.ds-avatar > svg.ds-icon {
+  width: 50%;
+  height: 50%;
+}
+
+.ds-avatar--xs { --_size: 24px; }
+.ds-avatar--sm { --_size: 32px; }
+.ds-avatar--lg { --_size: 48px; }
+.ds-avatar--xl { --_size: 64px; }
+
+.ds-avatar--square {
+  border-radius: var(--ds-radius-md);
+}
+
+.ds-avatar--xs.ds-avatar--square,
+.ds-avatar--sm.ds-avatar--square {
+  border-radius: var(--ds-radius-sm);
+}
+
+/* Tons categóricos: fundo levemente tingido + texto escuro (claro) ou claro (escuro), contraste ≥ 4,5:1 */
+.ds-avatar--sand { --_t: var(--ds-color-sand-400); --_t-dark: var(--ds-color-sand-200); --_t-light: var(--ds-color-sand-800); }
+.ds-avatar--clay { --_t: var(--ds-color-clay-400); --_t-dark: var(--ds-color-clay-200); --_t-light: var(--ds-color-clay-800); }
+.ds-avatar--ochre { --_t: var(--ds-color-ochre-400); --_t-dark: var(--ds-color-ochre-200); --_t-light: var(--ds-color-ochre-800); }
+.ds-avatar--slate { --_t: var(--ds-color-slate-400); --_t-dark: var(--ds-color-slate-200); --_t-light: var(--ds-color-slate-800); }
+.ds-avatar--green { --_t: var(--ds-color-green-400); --_t-dark: var(--ds-color-green-200); --_t-light: var(--ds-color-green-800); }
+.ds-avatar--teal { --_t: var(--ds-color-teal-400); --_t-dark: var(--ds-color-teal-200); --_t-light: var(--ds-color-teal-800); }
+.ds-avatar--blue { --_t: var(--ds-color-blue-400); --_t-dark: var(--ds-color-blue-200); --_t-light: var(--ds-color-blue-800); }
+.ds-avatar--violet { --_t: var(--ds-color-violet-400); --_t-dark: var(--ds-color-violet-200); --_t-light: var(--ds-color-violet-800); }
+.ds-avatar--pink { --_t: var(--ds-color-pink-400); --_t-dark: var(--ds-color-pink-200); --_t-light: var(--ds-color-pink-800); }
+
+.ds-avatar:is(
+  .ds-avatar--sand, .ds-avatar--clay, .ds-avatar--ochre, .ds-avatar--slate, .ds-avatar--green,
+  .ds-avatar--teal, .ds-avatar--blue, .ds-avatar--violet, .ds-avatar--pink
+) {
+  --_tone-bg: color-mix(in srgb, var(--_t) 24%, var(--ds-color-bg-raised));
+  --_tone-fg: light-dark(var(--_t-light), var(--_t-dark));
+  border-color: transparent;
+}
+
+/* "+N" no fim de um grupo */
+.ds-avatar--more {
+  --_tone-bg: var(--ds-color-bg-muted);
+  --_tone-fg: var(--ds-color-fg-default);
+  font-size: max(10px, calc(var(--_size) * 0.32));
+}
+
+/* Presença */
+.ds-avatar__status {
+  --_status: var(--ds-color-success-solid);
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: max(8px, calc(var(--_size) * 0.28));
+  height: max(8px, calc(var(--_size) * 0.28));
+  border-radius: var(--ds-radius-full);
+  background: var(--_status);
+  box-shadow: 0 0 0 2px var(--ds-avatar-ring, var(--ds-color-bg-canvas));
+}
+
+.ds-avatar__status--away { --_status: var(--ds-color-warning-solid); }
+.ds-avatar__status--busy { --_status: var(--ds-color-danger-solid); }
+.ds-avatar__status--offline { --_status: var(--ds-color-fg-disabled); }
+
+/* Grupo empilhado */
+.ds-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ds-avatar-group > .ds-avatar {
+  box-shadow: 0 0 0 2px var(--ds-avatar-ring, var(--ds-color-bg-canvas));
+}
+
+.ds-avatar-group > .ds-avatar + .ds-avatar {
+  margin-inline-start: calc(var(--_size) * -0.25);
+}

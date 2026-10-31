@@ -1,0 +1,225 @@
+/*
+ * Tabela — <table> nativa.
+ *
+ * <div class="ds-table-wrap" role="region" aria-label="…" tabindex="0">   ← contêiner (rolagem e cabeçalho fixo)
+ *   <table class="ds-table ds-table--hover">
+ *     <caption>Título <span class="ds-table__caption-desc">descrição</span></caption>
+ *     <thead><tr><th scope="col">…</th><th scope="col" class="ds-table__num" aria-sort="descending"><button class="ds-table__sort">…</button></th></tr></thead>
+ *     <tbody><tr data-selected>…<td class="ds-table__num">248</td></tr></tbody>
+ *   </table>
+ * </div>
+ *
+ * Modificadores: .ds-table--compact · .ds-table--hover · .ds-table-wrap--scroll (altura máxima + cabeçalho fixo)
+ */
+
+.ds-table-wrap {
+  position: relative;
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.ds-table-wrap:focus-visible {
+  outline-offset: 2px;
+}
+
+.ds-table-wrap--scroll {
+  max-height: var(--ds-table-max-height, 360px);
+}
+
+.ds-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.ds-table caption {
+  padding: var(--ds-space-250) var(--ds-space-250) var(--ds-space-150);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+  text-align: start;
+}
+
+.ds-table__caption-desc {
+  display: block;
+  margin-top: 2px;
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-body-sm);
+}
+
+.ds-table th,
+.ds-table td {
+  padding-inline: var(--ds-space-200);
+  border-bottom: 1px solid var(--ds-color-border-subtle);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.ds-table th:first-child,
+.ds-table td:first-child {
+  padding-inline-start: var(--ds-space-250);
+}
+
+.ds-table th:last-child,
+.ds-table td:last-child {
+  padding-inline-end: var(--ds-space-250);
+}
+
+.ds-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 44px;
+  background: var(--ds-color-bg-surface);
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-sm);
+  letter-spacing: var(--ds-text-label-sm-tracking);
+  white-space: nowrap;
+}
+
+.ds-table td {
+  height: 52px;
+}
+
+.ds-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Números: direita + algarismos tabulares */
+.ds-table .ds-table__num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-table__muted {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-table__strong {
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+}
+
+/* Hover e seleção */
+.ds-table--hover tbody tr:hover td {
+  background: var(--ds-color-bg-hover);
+}
+
+.ds-table tbody tr[data-selected] td {
+  background: var(--ds-color-bg-selected);
+}
+
+/* Densidade compacta */
+.ds-table--compact thead th {
+  height: 36px;
+}
+
+.ds-table--compact td {
+  height: 40px;
+}
+
+/* Cabeçalho ordenável: <th aria-sort="ascending|descending"><button class="ds-table__sort">Nome <svg/></button></th> */
+.ds-table__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-050);
+  margin-inline: -6px;
+  padding: 4px 6px;
+  border-radius: var(--ds-radius-xs);
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  transition:
+    color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-table__sort:hover {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-table__sort .ds-icon {
+  color: var(--ds-color-fg-subtle);
+}
+
+.ds-table th[aria-sort="ascending"] .ds-table__sort,
+.ds-table th[aria-sort="descending"] .ds-table__sort {
+  color: var(--ds-color-fg-default);
+}
+
+.ds-table th[aria-sort="ascending"] .ds-table__sort .ds-icon,
+.ds-table th[aria-sort="descending"] .ds-table__sort .ds-icon {
+  color: var(--ds-color-fg-brand);
+}
+
+.ds-table__num .ds-table__sort {
+  flex-direction: row-reverse;
+}
+
+/* Coluna de seleção (checkbox nativo) */
+.ds-table .ds-table__check {
+  width: 48px;
+  padding-inline-end: 0;
+}
+
+.ds-table__check input {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--ds-color-brand-solid);
+  cursor: pointer;
+}
+
+/* Estado vazio: <tr class="ds-table__empty"><td colspan="…">…</td></tr> */
+.ds-table__empty td {
+  height: 200px;
+  color: var(--ds-color-fg-subtle);
+  text-align: center;
+}
+
+.ds-table__empty-inner {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-space-100);
+  max-width: 36ch;
+}
+
+.ds-table__empty-title {
+  color: var(--ds-color-fg-default);
+  font: var(--ds-text-label-md);
+}
+
+/* Carregando: barras planas que pulsam (sem brilho) */
+.ds-table__skeleton {
+  display: block;
+  width: var(--w, 60%);
+  height: 10px;
+  border-radius: var(--ds-radius-xs);
+  background: var(--ds-color-bg-muted);
+  animation: ds-table-pulse 1.4s var(--ds-easing-standard) infinite;
+}
+
+.ds-table__num .ds-table__skeleton {
+  margin-inline-start: auto;
+}
+
+@keyframes ds-table-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-table__skeleton {
+    animation: none;
+  }
+}
