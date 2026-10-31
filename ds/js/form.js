@@ -129,7 +129,7 @@ export function enhanceForm(form, options = {}) {
 
   /* ───────── Regras ───────── */
 
-  const msg = (field, key, value) => {
+  const fieldMessage = (field, key, value) => {
     const custom = messages[field.name]?.[key] ?? field.el.dataset[`error${key[0].toUpperCase()}${key.slice(1)}`] ?? (key === 'groupMin' ? field.container?.dataset.errorMin : undefined);
     if (custom) return custom;
     return DEFAULTS[key](field, value);
@@ -138,26 +138,26 @@ export function enhanceForm(form, options = {}) {
   function check(field) {
     const { el, kind } = field;
     if (kind === 'radio') {
-      if (field.required && !field.inputs.some((x) => x.checked)) return msg(field, 'required');
+      if (field.required && !field.inputs.some((x) => x.checked)) return fieldMessage(field, 'required');
     } else if (kind === 'group') {
       const n = field.inputs.filter((x) => x.checked).length;
-      if (field.required && !n) return msg(field, 'required');
-      if (field.min && n < field.min) return msg(field, 'groupMin');
+      if (field.required && !n) return fieldMessage(field, 'required');
+      if (field.min && n < field.min) return fieldMessage(field, 'groupMin');
     } else if (kind === 'check') {
-      if (field.required && !el.checked) return msg(field, 'required');
+      if (field.required && !el.checked) return fieldMessage(field, 'required');
     } else {
       const value = kind === 'select' && el.multiple ? [...el.selectedOptions].map((x) => x.value).join(',') : el.value.trim();
       if (!value) {
-        if (field.required) return msg(field, 'required');
+        if (field.required) return fieldMessage(field, 'required');
       } else if (kind === 'text') {
-        if (el.type === 'email' && !EMAIL.test(value)) return msg(field, 'email', value);
-        if (el.type === 'url' && !/^https?:\/\/\S+\.\S+/.test(value)) return msg(field, 'url', value);
-        if (el.type === 'number' && Number.isNaN(Number(value))) return msg(field, 'number', value);
-        if (el.minLength > 0 && value.length < el.minLength) return msg(field, 'minlength', value);
-        if (field.max && value.length > field.max) return msg(field, 'maxlength', value);
-        if (el.min !== '' && el.type === 'number' && Number(value) < Number(el.min)) return msg(field, 'min', value);
-        if (el.max !== '' && el.type === 'number' && Number(value) > Number(el.max)) return msg(field, 'max', value);
-        if (el.pattern && !new RegExp(`^(?:${el.pattern})$`, 'u').test(value)) return msg(field, 'pattern', value);
+        if (el.type === 'email' && !EMAIL.test(value)) return fieldMessage(field, 'email', value);
+        if (el.type === 'url' && !/^https?:\/\/\S+\.\S+/.test(value)) return fieldMessage(field, 'url', value);
+        if (el.type === 'number' && Number.isNaN(Number(value))) return fieldMessage(field, 'number', value);
+        if (el.minLength > 0 && value.length < el.minLength) return fieldMessage(field, 'minlength', value);
+        if (field.max && value.length > field.max) return fieldMessage(field, 'maxlength', value);
+        if (el.min !== '' && el.type === 'number' && Number(value) < Number(el.min)) return fieldMessage(field, 'min', value);
+        if (el.max !== '' && el.type === 'number' && Number(value) > Number(el.max)) return fieldMessage(field, 'max', value);
+        if (el.pattern && !new RegExp(`^(?:${el.pattern})$`, 'u').test(value)) return fieldMessage(field, 'pattern', value);
       }
     }
     const custom = rules[field.name];
