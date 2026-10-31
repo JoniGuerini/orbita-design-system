@@ -1,12 +1,19 @@
 /**
  * Dados de exemplo das páginas de Gráficos — fictícios, estáveis (sem aleatório) e coerentes entre si,
  * para que o mesmo produto apareça igual em todas as páginas.
+ * O que tem texto é função: devolve os nomes no idioma atual (chame na renderização).
  */
 
-export const MONTHS = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-export const MONTHS_LONG = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-export const WEEKDAYS = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
-export const HOURS = Array.from({ length: 24 }, (_, h) => `${h}h`);
+import { locale, dateFormat } from '../ds/js/i18n.js';
+import { L } from './i18n.js';
+
+const cap = (s) => s.charAt(0).toLocaleUpperCase(locale()) + s.slice(1);
+
+/** Jan, Fev… / Jan, Feb… / Ene, Feb… */
+export const months = () => Array.from({ length: 12 }, (_, i) => cap(dateFormat({ month: 'short' }).format(new Date(2026, i, 15)).replace('.', '')));
+/** Seg… Dom (a semana começa na segunda). */
+export const weekdays = () => Array.from({ length: 7 }, (_, i) => cap(dateFormat({ weekday: 'short' }).format(new Date(2026, 10, 2 + i)).replace('.', '')));
+export const hours = () => Array.from({ length: 24 }, (_, h) => L(`${h}h`, `${h}:00`, `${h} h`));
 
 /** Gerador pseudoaleatório com semente: os gráficos não mudam a cada visita. */
 export function seeded(seed = 7) {
@@ -30,50 +37,50 @@ export const activeUsers = {
 };
 
 /** Vendas por canal (mil unidades), primeiro semestre. */
-export const channels = {
-  categories: MONTHS.slice(0, 6),
+export const channels = () => ({
+  categories: months().slice(0, 6),
   series: [
     { name: 'App', values: [30, 35, 41, 44, 52, 60] },
-    { name: 'Loja', values: [40, 42, 38, 50, 55, 52] },
-    { name: 'Site', values: [20, 18, 22, 25, 24, 28] },
-    { name: 'Parceiros', values: [8, 9, 11, 10, 13, 15] },
+    { name: L('Loja', 'Store', 'Tienda'), values: [40, 42, 38, 50, 55, 52] },
+    { name: L('Site', 'Website', 'Sitio web'), values: [20, 18, 22, 25, 24, 28] },
+    { name: L('Parceiros', 'Partners', 'Socios'), values: [8, 9, 11, 10, 13, 15] },
   ],
-};
+});
 
 /** Formas de pagamento (número de transações no mês). */
-export const payments = [
+export const payments = () => [
   { name: 'Pix', value: 4210 },
-  { name: 'Cartão de crédito', value: 2630 },
-  { name: 'Cartão de débito', value: 1290 },
+  { name: L('Cartão de crédito', 'Credit card', 'Tarjeta de crédito'), value: 2630 },
+  { name: L('Cartão de débito', 'Debit card', 'Tarjeta de débito'), value: 1290 },
   { name: 'Boleto', value: 610 },
-  { name: 'Saldo em conta', value: 320 },
-  { name: 'Vale-refeição', value: 140 },
-  { name: 'Cripto', value: 60 },
+  { name: L('Saldo em conta', 'Account balance', 'Saldo en cuenta'), value: 320 },
+  { name: L('Vale-refeição', 'Meal voucher', 'Vale de comida'), value: 140 },
+  { name: L('Cripto', 'Crypto', 'Cripto'), value: 60 },
 ];
 
 /** Entregas por time no trimestre. */
-export const teams = {
-  categories: ['Pagamentos', 'Cartões', 'Investimentos', 'Seguros', 'Empréstimos', 'Plataforma'],
+export const teams = () => ({
+  categories: [L('Pagamentos', 'Payments', 'Pagos'), L('Cartões', 'Cards', 'Tarjetas'), L('Investimentos', 'Investments', 'Inversiones'), L('Seguros', 'Insurance', 'Seguros'), L('Empréstimos', 'Loans', 'Préstamos'), L('Plataforma', 'Platform', 'Plataforma')],
   values: [48, 41, 33, 27, 19, 14],
-};
+});
 
 /** Funil de ativação. */
-export const funnel = {
-  categories: ['Visitaram', 'Criaram conta', 'Ativaram', 'Primeira compra', 'Recorrentes'],
+export const funnel = () => ({
+  categories: [L('Visitaram', 'Visited', 'Visitaron'), L('Criaram conta', 'Signed up', 'Crearon cuenta'), L('Ativaram', 'Activated', 'Activaron'), L('Primeira compra', 'First purchase', 'Primera compra'), L('Recorrentes', 'Returning', 'Recurrentes')],
   values: [12400, 6800, 4100, 2300, 1150],
-};
+});
 
 /** Variação do NPS por região contra a meta (pontos). */
-export const npsDelta = {
-  categories: ['Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'],
+export const npsDelta = () => ({
+  categories: [L('Norte', 'North', 'Norte'), L('Nordeste', 'Northeast', 'Noreste'), L('Centro-Oeste', 'Center-West', 'Centro-Oeste'), L('Sudeste', 'Southeast', 'Sureste'), L('Sul', 'South', 'Sur')],
   values: [-6, 4, -2, 9, 5],
-};
+});
 
 /** Pedidos por dia da semana × hora. */
 export const ordersByHour = (() => {
   const rnd = seeded(11);
-  return WEEKDAYS.map((_, d) =>
-    HOURS.map((_, h) => {
+  return Array.from({ length: 7 }, (_, d) =>
+    Array.from({ length: 24 }, (_, h) => {
       const curve = Math.max(0, Math.sin(((h - 6) / 24) * Math.PI * 2));
       const lunch = h >= 11 && h <= 13 ? 14 : 0;
       const dinner = h >= 19 && h <= 21 ? 18 : 0;
@@ -96,14 +103,15 @@ export const yearActivity = (() => {
 })();
 export const YEAR_START = '2025-11-02';
 
-/** Clientes: custo de aquisição × satisfação, por segmento. */
-export const customers = (() => {
+/** Clientes: custo de aquisição × satisfação, por segmento (pontos fixos; nomes no idioma atual). */
+const CUSTOMER_POINTS = (() => {
   const rnd = seeded(5);
   const make = (n, cx, cy, sx, sy, sizeBase) =>
     Array.from({ length: n }, () => ({ x: Math.round(cx + (rnd() - 0.5) * sx), y: Math.round(cy + (rnd() - 0.5) * sy), size: Math.round(sizeBase * (0.4 + rnd())) }));
-  return [
-    { name: 'Varejo', points: make(18, 60, 52, 70, 46, 120) },
-    { name: 'Empresas', points: make(14, 115, 64, 70, 36, 300) },
-    { name: 'Autônomos', points: make(12, 38, 38, 40, 40, 60) },
-  ];
+  return [make(18, 60, 52, 70, 46, 120), make(14, 115, 64, 70, 36, 300), make(12, 38, 38, 40, 40, 60)];
 })();
+export const customers = () => [
+  { name: L('Varejo', 'Retail', 'Minorista'), points: CUSTOMER_POINTS[0] },
+  { name: L('Empresas', 'Businesses', 'Empresas'), points: CUSTOMER_POINTS[1] },
+  { name: L('Autônomos', 'Freelancers', 'Autónomos'), points: CUSTOMER_POINTS[2] },
+];

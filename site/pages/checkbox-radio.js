@@ -21,7 +21,7 @@ const STATES = () => [
 ];
 
 const monthly = () => L('Uma vez por mês, sem spam.', 'Once a month, no spam.', 'Una vez al mes, sin spam.');
-const price = (n) => numberFormat({ style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(n);
+const price = (n) => numberFormat({ style: 'currency', currency: 'BRL', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 }).format(n);
 
 let uid = 0;
 

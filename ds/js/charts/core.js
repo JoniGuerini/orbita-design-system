@@ -37,8 +37,8 @@ function presets() {
       integer: NF({ maximumFractionDigits: 0 }).format,
       compact: NF({ notation: 'compact', maximumFractionDigits: 1 }).format,
       percent: NF({ style: 'percent', maximumFractionDigits: 1 }).format,
-      currency: NF({ style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format,
-      'currency-compact': NF({ style: 'currency', currency: 'BRL', notation: 'compact', maximumFractionDigits: 1 }).format,
+      currency: NF({ style: 'currency', currency: 'BRL', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 0 }).format,
+      'currency-compact': NF({ style: 'currency', currency: 'BRL', currencyDisplay: 'narrowSymbol', notation: 'compact', maximumFractionDigits: 1 }).format,
     };
     const axis = { percent: NF({ style: 'percent', maximumFractionDigits: 0 }).format, currency: p['currency-compact'], 'currency-compact': p['currency-compact'] };
     byLocale.set(locale(), { p, axis });
@@ -280,11 +280,11 @@ export function createFrame(host, options, { kind, describe: summary } = {}) {
     }
     <div class="ds-chart__legend" data-legend hidden></div>
     <div class="ds-chart__body" data-body>
-      <div class="ds-chart__plot" data-plot tabindex="0" role="group" aria-roledescription="gráfico" aria-describedby="${id}-hint"></div>
+      <div class="ds-chart__plot" data-plot tabindex="0" role="group" aria-roledescription="${msg('chart.chart').toLocaleLowerCase(locale())}" aria-describedby="${id}-hint"></div>
       <div class="ds-chart__tooltip" data-tooltip hidden></div>
     </div>
     <div class="ds-chart__table" data-table hidden></div>
-    <p class="ds-visually-hidden" id="${id}-hint">Use as setas para percorrer os valores. A tabela tem todos os dados.</p>
+    <p class="ds-visually-hidden" id="${id}-hint">${msg('chart.keysHint')}</p>
     <p class="ds-visually-hidden" aria-live="polite" data-live></p>`;
   host.replaceChildren(figure);
 

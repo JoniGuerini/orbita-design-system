@@ -230,7 +230,7 @@ const chartPreviews = {
   // valores formatados no idioma atual (R$ 1,3 mi · R$1.3M · 1,3 M R$)
   '/graficos/indicadores': () => `<div class="pv pv-kpi">
       <span class="pv-kpi__label">${tr(COPY).kpi}</span>
-      <span class="pv-kpi__value">${numberFormat({ style: 'currency', currency: 'BRL', notation: 'compact', maximumFractionDigits: 1 }).format(1300000)}</span>
+      <span class="pv-kpi__value">${numberFormat({ style: 'currency', currency: 'BRL', currencyDisplay: 'narrowSymbol', notation: 'compact', maximumFractionDigits: 1 }).format(1300000)}</span>
       <span class="pv-kpi__delta">${icon('trending-up', { size: 14 })}${numberFormat({ style: 'percent', maximumFractionDigits: 1, signDisplay: 'always' }).format(0.124)}</span>
       <span class="pv-kpi__meter"><span></span></span>
     </div>`,
