@@ -7,6 +7,9 @@ import { tr, locale } from '../ds/js/i18n.js';
 
 export const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
+/** Texto no idioma atual, direto no template: L('Copiar', 'Copy', 'Copiar'). Chame na renderização, não no topo do módulo. */
+export const L = (pt, en, es) => tr(T(pt, en, es));
+
 const STRINGS = {
   skip: T('Pular para o conteúdo', 'Skip to content', 'Saltar al contenido'),
   sidebar: T('Barra lateral', 'Sidebar', 'Barra lateral'),
