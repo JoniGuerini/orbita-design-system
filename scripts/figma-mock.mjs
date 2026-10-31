@@ -343,21 +343,30 @@ class Variable {
 }
 
 class VariableCollection {
-  constructor(name) {
+  constructor(figma, name) {
+    this._figma = figma;
     this.id = `VariableCollectionId:${nextId()}`;
     this.name = name;
     this.modes = [{ modeId: `${nextId()}`, name: 'Mode 1' }];
     this.hiddenFromPublishing = false;
   }
   renameMode(id, name) { const m = this.modes.find((x) => x.modeId === id); if (!m) fail('renameMode: modo inexistente'); m.name = name; }
-  addMode(name) { const m = { modeId: `${nextId()}`, name }; this.modes.push(m); return m.modeId; }
+  addMode(name) {
+    // o plano gratuito do Figma aceita um modo só por coleção (mensagem igual à do Figma)
+    const max = this._figma._maxModes;
+    if (this.modes.length >= max) fail(`in addMode: Limited to ${max} modes only`);
+    const m = { modeId: `${nextId()}`, name };
+    this.modes.push(m);
+    return m.modeId;
+  }
   get defaultModeId() { return this.modes[0].modeId; }
 }
 
 /* ───────── O objeto figma ───────── */
 
-export function createMockFigma({ missingFonts = [] } = {}) {
+export function createMockFigma({ missingFonts = [], maxModes = Infinity } = {}) {
   const figma = {
+    _maxModes: maxModes,
     _collections: [],
     _variables: [],
     _textStyles: [],
@@ -745,7 +754,7 @@ export function createMockFigma({ missingFonts = [] } = {}) {
   figma.variables = {
     getLocalVariableCollectionsAsync: async () => figma._collections.slice(),
     getLocalVariablesAsync: async () => figma._variables.slice(),
-    createVariableCollection: (name) => { const c = new VariableCollection(name); figma._collections.push(c); return c; },
+    createVariableCollection: (name) => { const c = new VariableCollection(figma, name); figma._collections.push(c); return c; },
     createVariable: (name, collection, type) => {
       if (typeof collection === 'string') fail('createVariable: passe a coleção (objeto), não o id');
       if (figma._variables.some((v) => v.variableCollectionId === collection.id && v.name === name)) fail(`variável repetida: ${name}`);

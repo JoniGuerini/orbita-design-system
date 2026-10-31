@@ -52,7 +52,7 @@ defineBlock({
         span: 2,
         node: async function (w) {
           var pair = box('Claro e Escuro', { dir: 'H', gap: 24, w: w });
-          for (var mode of ['Claro', 'Escuro']) {
+          for (var mode of ORB.active) {
             var stage = box('Modo ' + mode, { dir: 'H', wrap: true, gap: 16, rowGap: 20, pad: 24, fill: 'color/bg/canvas', stroke: 'color/border/subtle', radius: 24 });
             setMode(stage, mode);
             for (var n of this.names) add(stage, await swatch(n));
@@ -160,7 +160,7 @@ defineBlock({
           span: 2,
           node: async function (w) {
             var pair = box('Sombras', { dir: 'H', gap: 24, w: w });
-            for (var mode of ['Claro', 'Escuro']) {
+            for (var mode of ORB.active) {
               var stage = box('Modo ' + mode, { dir: 'H', wrap: true, gap: 24, rowGap: 24, pad: 32, fill: 'color/bg/canvas', stroke: 'color/border/subtle', radius: 24 });
               setMode(stage, mode);
               for (var size of ['xs', 'sm', 'md', 'lg', 'xl', '2xl']) {

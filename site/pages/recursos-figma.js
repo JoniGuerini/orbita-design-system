@@ -10,7 +10,7 @@ const STEPS = [
   ['Gere o plugin', 'Na pasta do projeto. Ele lê os tokens e os ícones atuais — rode de novo sempre que eles mudarem.', 'npm run figma'],
   ['Abra o Figma para desktop', 'Plugins de desenvolvimento só rodam no app. Abra o arquivo onde a biblioteca vai morar (de preferência um arquivo só para ela).', null],
   ['Importe pelo manifesto', 'Menu Plugins → Desenvolvimento → Importar plugin do manifesto… e escolha o arquivo abaixo. É uma vez só; depois ele aparece em Plugins → Desenvolvimento.', 'dist/figma-plugin/manifest.json'],
-  ['Rode “Órbita para Figma”', 'Escolha o que gerar — Fundamentos, Ícones, Componentes — e clique em Gerar no arquivo. Variáveis e estilos de texto sempre são atualizados.', null],
+  ['Rode “Órbita para Figma”', 'Escolha o que gerar — Fundamentos, Ícones, Componentes — e os modos, e clique em Gerar no arquivo. Variáveis e estilos de texto sempre são atualizados.', null],
   ['Publique como biblioteca', 'Com tudo gerado, publique o arquivo (Recursos → Bibliotecas) para o time usar os componentes nos próprios arquivos.', null],
 ];
 
@@ -40,6 +40,7 @@ const LIMITS = [
   ['Alguns componentes ficam mais simples', 'Tabela, gráficos e composer viram exemplos montados, sem todos os comportamentos da web.'],
   ['Fontes', 'Inter, Inter Tight e JetBrains Mono precisam estar disponíveis. Sem uma delas, o plugin usa Inter no mesmo peso e avisa no fim.'],
   ['Sombras não têm modo', 'Os estilos de sombra vêm em pares (Escuro/… e Claro/…); nos componentes, a sombra usa a cor de overlay, que tem modo.'],
+  ['Plano gratuito: um modo só', 'O plano gratuito do Figma aceita um modo por coleção de variáveis. Em Modos, escolha “Só Escuro” ou “Só Claro”; quando o arquivo for para um plano pago, rode de novo com Claro e Escuro e o que já existe é atualizado, sem duplicar.'],
   ['Só no app para desktop', 'Plugins de desenvolvimento não rodam no Figma do navegador.'],
 ];
 

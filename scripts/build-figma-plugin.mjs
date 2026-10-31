@@ -42,7 +42,7 @@ export async function buildFigmaPlugin({ only, out } = {}) {
     // curvas de animação: o Figma não guarda curva como variável, então vão para o bloco Movimento
     easings: data.tokens.filter((t) => t.type === 'cubicBezier').map((t) => ({ name: t.name.split('.').pop(), css: t.css, points: t.css.match(/-?[\d.]+/g).map(Number) })),
     pageIntro: {
-      'Órbita · Componentes': 'Cada bloco é um componente: o conjunto de variantes, exemplos montados com instâncias e o mesmo exemplo nos modos Claro e Escuro. Cores, medidas e textos vêm das variáveis e dos estilos do arquivo.',
+      'Órbita · Componentes': 'Cada bloco é um componente: o conjunto de variantes, exemplos montados com instâncias e o mesmo exemplo {modos}. Cores, medidas e textos vêm das variáveis e dos estilos do arquivo.',
     },
   };
 

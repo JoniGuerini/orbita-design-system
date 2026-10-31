@@ -33,7 +33,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 - **Git e GitHub**: repositório privado [JoniGuerini/orbita-design-system](https://github.com/JoniGuerini/orbita-design-system), branch `main`. Commits com o e-mail anônimo do GitHub (`37719576+JoniGuerini@users.noreply.github.com`), nunca o Gmail; em máquina nova, configure com `git config user.email` dentro do repositório. `dist/` fica fora do git: é gerado por `npm run figma`, `figma:test` e `tokens:export`.
 - **Tokens são a fonte da verdade**: edite `tokens/*.json`; `ds/tokens.css` e `ds/tokens.js` são gerados. O build mede 70 pares de contraste (WCAG).
 - O site está completo: 8 fundamentos, 16 componentes, 7 páginas de gráficos, 5 padrões e 4 recursos — nenhuma página “em construção”. Páginas internas podem usar `.ds-panel`; o Início, não.
-- **Cada entrega grande vira uma versão** em `site/changelog.js` (página Novidades e o ponto da sidebar). Atual: **0.6.0**. Histórico: 0.1 base · 0.2 Gráficos · 0.3 Padrões · 0.4 Recursos · 0.4.1 Contraste · 0.5 Plugin do Figma · 0.6 Plugin completo. Próximo no roadmap: **1.0 Estável**.
+- **Cada entrega grande vira uma versão** em `site/changelog.js` (página Novidades e o ponto da sidebar). Atual: **0.6.1**. Histórico: 0.1 base · 0.2 Gráficos · 0.3 Padrões · 0.4 Recursos · 0.4.1 Contraste · 0.5 Plugin do Figma · 0.6 Plugin completo · 0.6.1 Plugin no plano gratuito. Próximo no roadmap: **1.0 Estável**.
 - Modelos de página: fundamentos seguem `site/pages/cores.js`; componentes, `site/pages/botao.js` + `site/component-doc.js` (playground, variantes, estados via `data-state`, anatomia, acessibilidade, tokens usados).
 - Gráficos (`ds/js/charts.js`, núcleo em `ds/js/charts/`): a paleta `color.chart.series.1–8` (brand, blue, pink, amber, teal, red, violet, green) foi ordenada por um validador de daltonismo (ΔE ≥ 11,7 entre vizinhas nos dois temas). **Não reordene sem revalidar.** Uma série = sem legenda; duas ou mais = sempre legenda; um eixo só; tracejado só para meta.
 
@@ -47,5 +47,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
   - `outlineStroke()` devolve o contorno solto na página; quem chama recoloca.
   - Instância de variante nasce com o nome do conjunto, não com “Prop=Valor”.
   - Propriedade de texto em conjunto de variantes mostra o mesmo valor padrão em todas as variantes.
+- **Plano gratuito do Figma aceita 1 modo por coleção** (`addMode` recusa com “Limited to 1 modes only”). A janela tem Modos (Claro e Escuro · Só Escuro · Só Claro), guardado no `clientStorage`; `ORB.active` decide os modos das variáveis e das prévias. A imitação cobra o limite com `createMockFigma({ maxModes: 1 })` e o teste confere a passagem para o plano pago sem duplicar.
+- Não faça manifestos paralelos (um por modo): `setPluginData` é privado de cada id de plugin, então outro plugin não reconheceria o que este gerou e duplicaria tudo. Variações vão como opção na janela.
 - Pendências conhecidas: o divisor esmaecido do site não entrou (o Figma não liga variável às cores de um degradê). Se a Inter Tight não estiver instalada, o plugin usa a Inter e avisa.
 - `scripts/build-figma-mcp.mjs` gera `dist/figma-mcp/` só para rodar o plugin pelo conector do Figma — não é o caminho normal.

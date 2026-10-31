@@ -24,17 +24,17 @@ const built = await buildFigmaPlugin({ only: arg('only'), out: arg('out') });
 const code = await readFile(path.join(built.outDir, 'code.js'), 'utf8');
 const figma = createMockFigma({ missingFonts: arg('missing-font') ? [arg('missing-font')] : [] });
 
-async function run(label) {
-  const context = vm.createContext({ figma, console, __ORBITA_TEST__: true, setTimeout, Promise });
+async function run(label, fig = figma, options = {}) {
+  const context = vm.createContext({ figma: fig, console, __ORBITA_TEST__: true, setTimeout, Promise });
   vm.runInContext(code, context, { filename: 'code.js' });
   const t0 = performance.now();
-  const summary = await context.main({ strict: !process.argv.includes('--loose') });
+  const summary = await context.main({ strict: !process.argv.includes('--loose'), ...options });
   return { label, summary, ms: Math.round(performance.now() - t0) };
 }
 
-function census() {
-  const out = { pages: figma.root.children.map((p) => p.name), byType: {}, keys: {} };
-  for (const page of figma.root.children) {
+function census(fig = figma) {
+  const out = { pages: fig.root.children.map((p) => p.name), byType: {}, keys: {} };
+  for (const page of fig.root.children) {
     page._loaded = true;
     for (const n of page.findAll()) {
       out.byType[n.type] = (out.byType[n.type] ?? 0) + 1;
@@ -76,13 +76,41 @@ try {
   if (!veil.length || veil.some((n) => Math.abs((n.fills[0]?.opacity ?? 1) - 0.24) > 0.01)) problems.push('o véu do avatar não ficou a 24% (opacidade da pintura perdida)');
 
   // linhas que não cabem: no Figma o conteúdo vaza pela borda (foi assim que as tags saíram do cabeçalho)
-  const overflows = [];
-  for (const page of figma.root.children) {
-    for (const top of page.children) {
-      for (const o of figma._overflowsOf(top)) overflows.push(`${top.name.replace('Órbita · ', '')} › ${o.node.name} (${o.need} > ${o.have} px)`);
+  const overflowsIn = (fig) => {
+    const out = [];
+    for (const page of fig.root.children) {
+      for (const top of page.children) {
+        for (const o of fig._overflowsOf(top)) out.push(`${top.name.replace('Órbita · ', '')} › ${o.node.name} (${o.need} > ${o.have} px)`);
+      }
     }
-  }
+    return out;
+  };
+  const overflows = overflowsIn(figma);
   if (overflows.length) problems.push(`conteúdo vazando da linha: ${overflows.slice(0, 40).join('; ')}${overflows.length > 40 ? ` e mais ${overflows.length - 40}` : ''}`);
+
+  // plano gratuito: um modo só por coleção. Gerar só o Escuro tem de funcionar, pedir os dois tem de explicar
+  // a recusa e, quando o arquivo vai para um plano pago, o Claro entra sem duplicar nem trocar ids.
+  const free = createMockFigma({ maxModes: 1 });
+  const semModes = (fig) => fig._collections.find((c) => c.name === 'Semânticos').modes.map((m) => m.name).join(' · ');
+  const stages = (fig, mode) => fig.root.children.flatMap((p) => p.findAll((n) => n.name === `Modo ${mode}`)).length;
+  const solo = await run('Plano gratuito', free, { modes: ['Escuro'] });
+  const f1 = census(free);
+  if (semModes(free) !== 'Escuro') problems.push(`plano gratuito: Semânticos ficou com os modos ${semModes(free)}`);
+  if (stages(free, 'Claro') || !stages(free, 'Escuro')) problems.push(`plano gratuito: prévias Claro ${stages(free, 'Claro')}, Escuro ${stages(free, 'Escuro')}`);
+  const soloOverflows = overflowsIn(free);
+  if (soloOverflows.length) problems.push(`plano gratuito: conteúdo vazando da linha: ${soloOverflows.slice(0, 10).join('; ')}`);
+  let refused = '';
+  try { await run('Dois modos no plano gratuito', free); } catch (err) { refused = err.message; }
+  if (!/Só Escuro/.test(refused)) problems.push(`plano gratuito: pedir os dois modos devia explicar a recusa (veio: ${refused || 'nada'})`);
+  free._maxModes = Infinity; // o arquivo foi para um time com plano pago
+  await run('Plano pago', free);
+  const f2 = census(free);
+  const moved = Object.keys(f1.keys).filter((k) => (k.startsWith('cmp/') || k.startsWith('set/') || k.startsWith('icon/')) && f2.keys[k] !== f1.keys[k]);
+  if (semModes(free) !== 'Escuro · Claro') problems.push(`plano pago: Semânticos ficou com os modos ${semModes(free)}`);
+  if (stages(free, 'Claro') !== stages(free, 'Escuro')) problems.push(`plano pago: prévias Claro ${stages(free, 'Claro')}, Escuro ${stages(free, 'Escuro')}`);
+  if (f2.dupes?.length) problems.push(`plano pago: chaves repetidas: ${f2.dupes.slice(0, 5).join(', ')}`);
+  if (moved.length) problems.push(`plano pago: componentes que mudaram de id: ${moved.slice(0, 5).join(', ')}`);
+  for (const t of ['COMPONENT', 'COMPONENT_SET']) if (f1.byType[t] !== f2.byType[t]) problems.push(`plano pago: ${t}: ${f1.byType[t]} → ${f2.byType[t]}`);
 
   // resumo para a página Recursos › Plugin do Figma
   const blocks = [];
@@ -110,6 +138,7 @@ try {
   console.log(`✓ ${second.label}: mesmos ${c2.byType.COMPONENT ?? 0} componentes e ${c2.byType.COMPONENT_SET ?? 0} conjuntos, ids preservados (${second.ms} ms)`);
   console.log(`  páginas: ${c2.pages.join(' · ')}`);
   console.log(`  nós: ${Object.entries(c2.byType).map(([k, v]) => `${k.toLowerCase()} ${v}`).join(', ')}`);
+  console.log(`✓ plano gratuito: só o modo Escuro (${solo.ms} ms); pedir os dois explica a recusa; no plano pago o Claro entra com os mesmos ids`);
   if (problems.length) {
     console.error(`✗ ${problems.join('\n✗ ')}`);
     process.exitCode = 1;

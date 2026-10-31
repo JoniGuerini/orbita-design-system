@@ -22,6 +22,13 @@
   label.opt strong { display: block; font-weight: 600; }
   label.opt span span { color: var(--muted); }
   input[type="checkbox"] { width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--brand); }
+  .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; }
+  .seg label { position: relative; display: grid; cursor: pointer; }
+  .seg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .seg span { display: grid; place-items: center; height: 30px; border-radius: 8px; color: var(--muted); font-weight: 500; }
+  .seg input:checked + span { background: var(--figma-color-bg-secondary, #2c2a27); color: var(--fg); }
+  .seg input:focus-visible + span { outline: 2px solid var(--brand); outline-offset: 1px; }
+  .hint { color: var(--muted); }
   .actions { display: flex; gap: 8px; margin-top: 18px; }
   button { flex: 1; height: 36px; border-radius: 10px; border: 1px solid var(--line); background: transparent; color: var(--fg); font: 500 12px Inter, sans-serif; cursor: pointer; }
   button.primary { border: 0; background: var(--brand); color: var(--on-brand); font-weight: 600; }
@@ -38,9 +45,19 @@
 
   <fieldset>
     <legend>O que gerar</legend>
-    <label class="opt"><input type="checkbox" value="Fundamentos" checked><span><strong>Fundamentos</strong><span>Cores nos dois modos, tipografia, espaço, raio e sombra</span></span></label>
+    <label class="opt"><input type="checkbox" value="Fundamentos" checked><span><strong>Fundamentos</strong><span>Cores, tipografia, espaço, raio e sombra</span></span></label>
     <label class="opt"><input type="checkbox" value="Ícones" checked><span><strong>Ícones</strong><span>Todos os ícones como componentes de 24 px</span></span></label>
-    <label class="opt"><input type="checkbox" value="Componentes" checked><span><strong>Componentes</strong><span>Blocos com variantes, exemplos e os modos Claro e Escuro</span></span></label>
+    <label class="opt"><input type="checkbox" value="Componentes" checked><span><strong>Componentes</strong><span>Blocos com variantes, exemplos e prévias em cada modo</span></span></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Modos</legend>
+    <div class="seg">
+      <label><input type="radio" name="modes" value="Claro,Escuro" checked><span>Claro e Escuro</span></label>
+      <label><input type="radio" name="modes" value="Escuro"><span>Só Escuro</span></label>
+      <label><input type="radio" name="modes" value="Claro"><span>Só Claro</span></label>
+    </div>
+    <p class="hint" data-hint></p>
   </fieldset>
 
   <div class="actions">
@@ -52,17 +69,34 @@
 <script>
   const log = document.querySelector('[data-log]');
   const run = document.querySelector('[data-run]');
+  const hint = document.querySelector('[data-hint]');
+  const modeInputs = [...document.querySelectorAll('input[name="modes"]')];
+  const chosenModes = () => modeInputs.find((i) => i.checked).value.split(',');
+  const showHint = () => {
+    hint.textContent = chosenModes().length > 1
+      ? 'Precisa de plano pago no Figma: o gratuito aceita um modo só por coleção.'
+      : 'Funciona em qualquer plano. Para ter os dois depois, rode de novo com Claro e Escuro: o que já existe é atualizado.';
+  };
+  modeInputs.forEach((i) => i.addEventListener('change', showHint));
+  showHint();
+
   run.addEventListener('click', () => {
     const pages = [...document.querySelectorAll('input[type="checkbox"]:checked')].map((i) => i.value);
     run.disabled = true;
     log.dataset.tone = '';
     log.textContent = 'Começando…';
-    parent.postMessage({ pluginMessage: { type: 'run', pages } }, '*');
+    parent.postMessage({ pluginMessage: { type: 'run', pages, modes: chosenModes() } }, '*');
   });
   document.querySelector('[data-cancel]').addEventListener('click', () => parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*'));
   onmessage = (event) => {
     const msg = event.data.pluginMessage;
     if (!msg) return;
+    if (msg.type === 'init') {
+      const saved = modeInputs.find((i) => i.value === msg.modes.join(','));
+      if (saved) saved.checked = true;
+      showHint();
+      return;
+    }
     log.textContent = msg.message;
     if (msg.type === 'done' || msg.type === 'error') {
       log.dataset.tone = msg.type;

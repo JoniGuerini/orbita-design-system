@@ -3,10 +3,34 @@
  * Tipos: 'novo' | 'melhoria' | 'correcao'.
  */
 
-export const CURRENT_VERSION = '0.6.0';
+export const CURRENT_VERSION = '0.6.1';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 export const releases = [
+  {
+    version: '0.6.1',
+    date: '2026-10-31',
+    title: 'Plugin no plano gratuito',
+    summary: 'O plugin do Figma passou a funcionar no plano gratuito, que aceita um modo só por coleção de variáveis: você escolhe os modos na janela e completa depois, sem duplicar nada.',
+    groups: [
+      {
+        name: 'Figma',
+        items: [
+          ['novo', 'Modos na janela do plugin: Claro e Escuro, Só Escuro ou Só Claro. A escolha fica guardada no computador', '/recursos/figma'],
+          ['melhoria', 'Num arquivo gerado com um modo só, rodar de novo com Claro e Escuro acrescenta o outro modo e mantém os componentes e as instâncias', '/recursos/figma'],
+          ['correcao', 'A recusa do plano gratuito (“Limited to 1 modes only”) virou uma explicação em português, com o que fazer', '/recursos/figma'],
+          ['melhoria', 'O teste do plugin simula o plano gratuito e a passagem para um plano pago', '/recursos/figma'],
+        ],
+      },
+      {
+        name: 'Site',
+        items: [
+          ['correcao', 'Na troca da cor da marca, a bolinha do Pêssego não imita mais a cor escolhida', '/'],
+          ['correcao', 'Subir o servidor não regrava mais a data dos tokens quando nada mudou', '/recursos/tokens'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.6.0',
     date: '2026-10-31',

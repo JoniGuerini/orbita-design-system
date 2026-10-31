@@ -18,6 +18,7 @@ var ORB = {
   vars: {}, // nome → Variable
   collections: {}, // nome → VariableCollection
   modes: {}, // 'Escuro' | 'Claro' → modeId (coleção Semânticos)
+  active: ['Claro', 'Escuro'], // modos escolhidos na janela, na ordem das prévias (o plano gratuito do Figma aceita um só)
   textStyles: {},
   effectStyles: {},
   registry: {}, // orbita-key → node
@@ -48,6 +49,23 @@ function pick(obj, key, fallback) {
 
 /* ───────── Tokens: variáveis e estilos ───────── */
 
+/** Modos que esta execução gera: numa coleção com temas, só os escolhidos; nas outras, o único que há. */
+function modesOf(c) {
+  return c.modes.length > 1 ? c.modes.filter(function (m) { return ORB.active.indexOf(m) >= 0; }) : c.modes;
+}
+
+/** addMode com a recusa do plano gratuito explicada (o Figma só diz “Limited to 1 modes only”). */
+function addMode(col, name) {
+  try {
+    return col.addMode(name);
+  } catch (err) {
+    if (/Limited to/.test(String(err && err.message))) {
+      throw new Error('O plano deste arquivo no Figma aceita um modo só por coleção de variáveis. Em Modos, escolha “Só Escuro” ou “Só Claro”, ou leve o arquivo para um time com plano pago.');
+    }
+    throw err;
+  }
+}
+
 async function importTokens() {
   var collections = await figma.variables.getLocalVariableCollectionsAsync();
   var allVars = await figma.variables.getLocalVariablesAsync();
@@ -56,13 +74,14 @@ async function importTokens() {
   for (var c of DATA.collections) {
     var col = collections.find(function (x) { return x.name === c.name; }) || figma.variables.createVariableCollection(c.name);
     var modeIds = {};
-    c.modes.forEach(function (m, i) {
+    var wanted = modesOf(c);
+    wanted.forEach(function (m, i) {
       var mode = col.modes.find(function (x) { return x.name === m; });
-      if (!mode && i === 0 && c.modes.indexOf(col.modes[0].name) < 0) {
+      if (!mode && i === 0 && wanted.indexOf(col.modes[0].name) < 0) {
         col.renameMode(col.modes[0].modeId, m);
         mode = { modeId: col.modes[0].modeId };
       }
-      modeIds[m] = mode ? mode.modeId : col.addMode(m);
+      modeIds[m] = mode ? mode.modeId : addMode(col, m);
     });
     if (c.hiddenFromPublishing) col.hiddenFromPublishing = true;
     var vars = {};
@@ -101,7 +120,7 @@ async function importTokens() {
   for (var c3 of DATA.collections) {
     var e3 = byCollection[c3.name];
     for (var v3 of c3.variables) {
-      for (var mode of c3.modes) {
+      for (var mode of modesOf(c3)) {
         var raw = v3.values[mode];
         var value = raw && typeof raw === 'object'
           ? figma.variables.createVariableAlias(byCollection[raw.collection].vars[raw.alias])
@@ -735,6 +754,7 @@ async function docBlock(def, content) {
   add(row, await text(def.description, { style: 'body-sm', color: 'color/neutral/400', w: w - 14 * 2 - 80 - 260, name: 'Descrição' }), { grow: true });
   var tags = box('Tags', { dir: 'H', gap: 8 });
   for (var t of def.tags || ['Componente', 'Claro · Escuro']) {
+    if (t === 'Claro · Escuro') t = ORB.active.join(' · ');
     var pill = box('Tag', { dir: 'H', pad: [5, 12], radius: 'radius/full', fill: 'color/neutral/900', stroke: 'color/neutral/800' });
     add(pill, await text(t, { style: 'caption', color: 'color/neutral/300' }));
     add(tags, pill);
@@ -775,11 +795,14 @@ async function docBlock(def, content) {
   return block;
 }
 
-/** Duas seções finais: o mesmo exemplo nos modos Claro e Escuro das variáveis. */
+/** Seções finais: o mesmo exemplo em cada modo escolhido das variáveis (Claro e Escuro, ou um só). */
 function themed(title, build, o) {
   o = o || {};
-  return [
-    { title: 'Claro', description: o.light || 'Modo Claro das variáveis', mode: 'Claro', node: build, cross: o.cross, pad: o.pad, gap: o.gap, fillChildren: o.fillChildren },
-    { title: 'Escuro', description: o.dark || 'O mesmo componente no modo Escuro', mode: 'Escuro', node: build, cross: o.cross, pad: o.pad, gap: o.gap, fillChildren: o.fillChildren },
-  ];
+  var both = ORB.active.length > 1;
+  return ORB.active.map(function (mode) {
+    var description = mode === 'Claro'
+      ? o.light || 'Modo Claro das variáveis'
+      : o.dark || (both ? 'O mesmo componente no modo Escuro' : 'Modo Escuro das variáveis');
+    return { title: mode, description: description, mode: mode, node: build, cross: o.cross, pad: o.pad, gap: o.gap, fillChildren: o.fillChildren };
+  });
 }

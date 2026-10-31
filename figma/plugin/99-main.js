@@ -54,7 +54,8 @@ async function cover(page) {
   ORB.registry[key] = c;
   add(c, await text('ÓRBITA DESIGN SYSTEM · ' + META.version, { style: 'overline', color: 'color/brand/400' }));
   add(c, await text(page.name.replace('Órbita · ', ''), { style: 'display-md', color: 'color/neutral/50' }));
-  add(c, await text(META.pageIntro[page.name] || '', { style: 'body-lg', color: 'color/neutral/400', w: 880 }));
+  var modes = ORB.active.length > 1 ? 'nos modos Claro e Escuro' : 'no modo ' + ORB.active[0];
+  add(c, await text((META.pageIntro[page.name] || '').replace('{modos}', modes), { style: 'body-lg', color: 'color/neutral/400', w: 880 }));
   var facts = box('Fatos', { dir: 'H', gap: 40, pad: [12, 0, 0, 0] });
   // contado na própria página: vale também quando os blocos foram gerados em partes
   var sets = page.findAll(function (n) { return n.type === 'COMPONENT_SET'; });
@@ -117,6 +118,8 @@ async function arrange(page, pageId, built) {
 async function main(options) {
   options = options || {};
   var wanted = options.pages || ['Fundamentos', 'Ícones', 'Componentes'];
+  var chosen = options.modes && options.modes.length ? options.modes : ['Claro', 'Escuro'];
+  ORB.active = ['Claro', 'Escuro'].filter(function (m) { return chosen.indexOf(m) >= 0; });
   var names = Object.keys(PAGES).map(function (k) { return PAGES[k]; });
 
   say('Lendo o arquivo…');
@@ -160,7 +163,8 @@ async function main(options) {
   var first = ORB.pages[PAGES[wanted[wanted.length - 1]]] || ORB.pages[PAGES.Componentes];
   await figma.setCurrentPageAsync(first);
   var r = ORB.report;
-  return 'Órbita: ' + r.blocos + ' blocos, ' + r.componentes + ' componentes (' + r.variantes + ' variantes), ' + r.icones + ' ícones, ' + r.variaveis + ' variáveis.' +
+  return 'Órbita: ' + r.blocos + ' blocos, ' + r.componentes + ' componentes (' + r.variantes + ' variantes), ' + r.icones + ' ícones, ' + r.variaveis + ' variáveis' +
+    (ORB.active.length > 1 ? '.' : ', só no modo ' + ORB.active[0] + '.') +
     (r.avisos.length ? ' Avisos: ' + r.avisos.join(' · ') : '');
 }
 
@@ -168,12 +172,17 @@ async function main(options) {
 
 if (typeof __ORBITA_TEST__ === 'undefined') {
   if (typeof __html__ !== 'undefined') {
-    figma.showUI(__html__, { width: 380, height: 520, themeColors: true });
+    figma.showUI(__html__, { width: 380, height: 600, themeColors: true });
     ORB.progress = function (msg) { figma.ui.postMessage({ type: 'progress', message: msg }); };
+    // a escolha de modos fica guardada neste computador: num arquivo de plano gratuito, não precisa escolher toda vez
+    figma.clientStorage.getAsync('orbita-modes').then(function (modes) {
+      if (modes) figma.ui.postMessage({ type: 'init', modes: modes });
+    });
     figma.ui.onmessage = function (msg) {
       if (msg.type === 'cancel') return figma.closePlugin();
       if (msg.type !== 'run') return;
-      main({ pages: msg.pages }).then(function (summary) {
+      figma.clientStorage.setAsync('orbita-modes', msg.modes);
+      main({ pages: msg.pages, modes: msg.modes }).then(function (summary) {
         figma.ui.postMessage({ type: 'done', message: summary });
         figma.notify(summary, { timeout: 8000 });
       }).catch(function (err) {
