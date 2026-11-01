@@ -1,11 +1,16 @@
 /* Chip (pílula com contorno; com aria-haspopup vira seletor), Badge e Kbd */
 
+/* Recuo: cheio do lado que termina em texto; menor do lado que termina em ícone, ✓ ou seta,
+   porque o desenho deles já tem respiro. Sem seta, as duas pontas ficam iguais. */
 .ds-chip {
+  --_pad: var(--ds-space-200);
+  --_pad-glyph: var(--ds-space-150);
+
   display: inline-flex;
   align-items: center;
   gap: var(--ds-space-100);
   height: 36px;
-  padding-inline: var(--ds-space-200) var(--ds-space-150);
+  padding-inline: var(--_pad);
   border: 1px solid var(--ds-color-border-control);
   border-radius: var(--ds-radius-full);
   background: transparent;
@@ -30,13 +35,20 @@
   border-color: var(--ds-color-border-strong);
 }
 
-.ds-chip:has(> .ds-chip__icon) {
-  padding-inline-start: var(--ds-space-150);
+.ds-chip:has(> .ds-chip__icon),
+.ds-chip[aria-pressed="true"]:has(> .ds-chip__check) {
+  padding-inline-start: var(--_pad-glyph);
+}
+
+.ds-chip:has(> .ds-chip__chevron) {
+  padding-inline-end: var(--_pad-glyph);
 }
 
 .ds-chip--sm {
+  --_pad: var(--ds-space-150);
+  --_pad-glyph: var(--ds-space-100);
+
   height: 30px;
-  padding-inline: var(--ds-space-150) var(--ds-space-100);
   font: var(--ds-text-caption);
   font-weight: var(--ds-font-weight-semibold);
 }

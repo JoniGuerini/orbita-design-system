@@ -200,11 +200,11 @@ export default function renderChip(page) {
       </header>
       <div class="ch-sizes">
         ${[
-          ['md', L('Médio', 'Medium', 'Mediano'), '36 px', 'label-sm · 13 px', L('padrão', 'default', 'predeterminado')],
-          ['sm', L('Pequeno', 'Small', 'Pequeño'), '30 px', 'caption · 12 px', 'ds-chip--sm'],
+          ['md', L('Médio', 'Medium', 'Mediano'), '36 px', 'label-sm · 13 px', L('padrão', 'default', 'predeterminado'), [16, 12]],
+          ['sm', L('Pequeno', 'Small', 'Pequeño'), '30 px', 'caption · 12 px', 'ds-chip--sm', [12, 8]],
         ]
           .map(
-            ([size, name, h, text, cls]) => `<article class="cd-example">
+            ([size, name, h, text, cls, [pad, glyph]]) => `<article class="cd-example">
               <div class="cd-example__preview" inert>
                 ${chip({ type: 'filter', size, label: L('Filtro', 'Filter', 'Filtro'), state: 'selected' })}
                 ${chip({ type: 'select', size, label: L('Seletor', 'Picker', 'Selector'), withIcon: 'yes', iconName: 'filter' })}
@@ -212,7 +212,7 @@ export default function renderChip(page) {
               </div>
               <div class="cd-example__body">
                 <p class="cd-example__name">${name}<code>${cls}</code></p>
-                <p class="cd-example__text">${L(`Altura ${h} · texto ${text}`, `Height ${h} · text ${text}`, `Altura ${h} · texto ${text}`)}</p>
+                <p class="cd-example__text">${L(`Altura ${h} · texto ${text} · recuo ${pad} px, ${glyph} px do lado do ícone ou da seta`, `Height ${h} · text ${text} · padding ${pad} px, ${glyph} px on the icon or arrow side`, `Altura ${h} · texto ${text} · relleno ${pad} px, ${glyph} px del lado del ícono o la flecha`)}</p>
               </div>
             </article>`,
           )

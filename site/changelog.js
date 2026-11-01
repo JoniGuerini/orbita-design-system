@@ -102,6 +102,21 @@ const RELEASES = [
           ), '/fundamentos/elevacao'],
         ],
       },
+      {
+        name: T('Componentes', 'Components', 'Componentes'),
+        items: [
+          ['correcao', T(
+            'Chip sem seta fica com as duas pontas iguais; o recuo menor vale só do lado do ícone, do ✓ ou da seta — no site e no Figma',
+            'A chip without an arrow has equal ends; the tighter padding applies only on the icon, ✓, or arrow side — on the site and in Figma',
+            'Un chip sin flecha tiene los dos extremos iguales; el relleno menor vale solo del lado del ícono, el ✓ o la flecha — en el sitio y en Figma',
+          ), '/componentes/chip'],
+          ['correcao', T(
+            'O seletor de idioma da topbar virou um chip seletor completo, com a seta',
+            'The topbar language picker is now a complete picker chip, with the arrow',
+            'El selector de idioma de la topbar ahora es un chip selector completo, con la flecha',
+          ), '/componentes/chip'],
+        ],
+      },
     ],
   },
   {

@@ -258,14 +258,17 @@
 
   var CHIP_TYPES = ['Filtro', 'Seletor'];
   var CHIP_SIZES = [
-    ['M', { h: 36, pl: 'space/200', pr: 'space/150', style: 'label-sm', check: 14, icon: 16 }],
-    ['P', { h: 30, pl: 'space/150', pr: 'space/100', style: 'caption', check: 14, icon: 14 }],
+    ['M', { h: 36, pad: 'space/200', glyph: 'space/150', style: 'label-sm', check: 14, icon: 16 }],
+    ['P', { h: 30, pad: 'space/150', glyph: 'space/100', style: 'caption', check: 14, icon: 14 }],
   ];
   var CHIP_STATES = ['Normal', 'Hover', 'Selecionado', 'Foco', 'Desativado'];
 
   async function buildChip(c, type, s, state) {
-    box(c.name, { dir: 'H', gap: 'space/100', pad: [0, s.pr, 0, s.pl], cross: 'center', h: s.h, radius: 'radius/full' }, c);
     var selected = state === 'Selecionado';
+    // como no site: recuo menor do lado que termina em ✓ ou seta (o desenho já tem respiro)
+    var pl = type === 'Filtro' && selected ? s.glyph : s.pad;
+    var pr = type === 'Seletor' ? s.glyph : s.pad;
+    box(c.name, { dir: 'H', gap: 'space/100', pad: [0, pr, 0, pl], cross: 'center', h: s.h, radius: 'radius/full' }, c);
     if (state === 'Hover') fill(c, 'color/bg/hover');
     if (selected) fill(c, 'color/bg/selected');
     stroke(c, state === 'Hover' || selected ? 'color/border/strong' : 'color/border/control', 1);
@@ -315,7 +318,7 @@
         items.push({
           props: { Tamanho: s[0], Estado: state },
           build: async function (c) {
-            box(c.name, { dir: 'H', gap: 'space/100', pad: [0, 'space/075', 0, s[1].pl], cross: 'center', h: s[1].h, radius: 'radius/full' }, c);
+            box(c.name, { dir: 'H', gap: 'space/100', pad: [0, 'space/075', 0, s[1].pad], cross: 'center', h: s[1].h, radius: 'radius/full' }, c);
             stroke(c, 'color/border/control', 1);
             add(c, await text('Pagamentos', { style: s[1].style, weight: 'Semi Bold', color: 'color/fg/default', prop: 'Rótulo', name: 'Rótulo' }));
             var size = s[0] === 'P' ? 18 : 22;
