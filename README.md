@@ -13,6 +13,8 @@ Abre em http://localhost:5173. O servidor gera os tokens ao iniciar e de novo se
 
 Para só gerar os tokens: `npm run tokens`. Para exportar para o Figma e outras ferramentas: `npm run tokens:export` (gera `dist/tokens/`; veja Recursos › Tokens para Figma).
 
+Para publicar: `npm run build` gera os tokens e monta em `dist/site/` só o site (`index.html`, `ds/`, `site/` e o favicon). O `vercel.json` já aponta o Vercel para esse comando e essa pasta.
+
 ### Plugin do Figma
 
 ```bash
@@ -38,6 +40,7 @@ scripts/
   build-figma-plugin.mjs  figma/plugin/*.js + tokens + ícones → dist/figma-plugin/
   test-figma-plugin.mjs   roda o plugin em figma-mock.mjs (imitação da API) e gera a prévia
   export-tokens.mjs  tokens → dist/tokens/ (variáveis do Figma, plugin, DTCG, JSON plano, CSS)
+  build-site.mjs     só o site → dist/site/ (o que o Vercel publica)
   serve.mjs          servidor de desenvolvimento
 ds/                  ← o design system em si
   ds.css             ponto de entrada (importa tudo)

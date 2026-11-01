@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build-tokens.mjs && node scripts/build-site.mjs",
     "tokens": "node scripts/build-tokens.mjs",
     "figma": "node scripts/build-figma-plugin.mjs",
     "figma:test": "node scripts/test-figma-plugin.mjs",

@@ -1,4 +1,4 @@
-# Gerado por npm run figma, npm run figma:test e npm run tokens:export
+# Gerado por npm run figma, npm run figma:test, npm run tokens:export e npm run build
 dist/
 
 # Dependências (se um dia houver)
