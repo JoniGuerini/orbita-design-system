@@ -20,7 +20,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 - Consistência com o próprio app vale mais que invenção: o hover das Abas é igual ao da `.doc-nav`; Seleção usa lista própria (nada de menu nativo do sistema); Toast tem posição configurável.
 - **Barra de rolagem sobreposta** em todo o app (`ds/js/scrollbar.js` + `components/scrollbar.css`): a nativa some e fica só a barra, sem trilho nem setas. Ela aparece enquanto a pessoa rola e some ~1 s depois de parar. Dá para arrastá-la. Funciona por delegação (qualquer área que rola, inclusive dentro de `<dialog>`). O recuo nas pontas é `--ds-scrollbar-start/end`; o painel principal começa abaixo da topbar. Para desligar numa área, use `--ds-scrollbar: none` (abas e `.doc-nav`). No navegador do app com o painel oculto, a rolagem não dispara eventos: para testar, use rolagem real ou um screenshot para forçar o desenho.
 - Componentes consomem só tokens semânticos.
-- Chip: recuo cheio do lado que termina em texto e menor do lado de ícone, ✓ ou seta (o desenho deles já tem respiro). Chip que abre menu é Seletor e leva a seta — inclusive o de idioma da topbar. Ele nota quando a pílula fica torta.
+- Chip: recuo cheio do lado que termina em texto e menor do lado de ícone, ✓ ou seta (o desenho deles já tem respiro). Chip que abre menu é Seletor e leva a seta — inclusive o de idioma da topbar. Ele nota quando a pílula fica torta. Componentes diferentes lado a lado podem ter alturas diferentes (na topbar, o chip pequeno de 30 px ao lado do segmentado de 38): não é defeito, não precisa igualar nem apontar.
 
 ## Vetos
 
@@ -51,6 +51,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 ## Plugin do Figma
 
 - Código em `figma/plugin/` (um arquivo por grupo; `00-runtime.js` é o núcleo). `npm run figma` gera `dist/figma-plugin/`; `npm run figma:test` roda o plugin duas vezes em `scripts/figma-mock.mjs` (imitação da API com as regras do Figma), confere que os ids se mantêm, acusa conteúdo vazando da borda e gera `dist/figma-plugin/preview.html`.
+- Conferido por ele no Figma de verdade na 0.7.0 (01/11/2026): os três idiomas e o recuo novo do Chip funcionam 100%.
 - Estado em 0.6.0: 42 blocos, 50 conjuntos, 527 variantes, 126 ícones e 305 variáveis. Cada componente é um bloco com cabeçalho escuro (grupo, título, descrição, tags), matriz de variantes rotulada, exemplos e prévias Claro e Escuro — layout que ele pediu a partir de outro DS dele.
 - Regras do Figma de verdade (a imitação já cobra todas):
   - Ao trocar a variável de uma pintura, o Figma põe a transparência da variável na opacidade. Para uma opacidade própria (ex.: véu de 24%), aplique de novo com a mesma ligação — é o `setPaints` do núcleo.
