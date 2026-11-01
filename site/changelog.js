@@ -95,6 +95,11 @@ const RELEASES = [
             'Overlay scrollbar across the app: no track or arrows, it shows while you scroll, fades right after, and can be dragged',
             'Barra de desplazamiento superpuesta en toda la app: sin riel ni flechas, aparece mientras te desplazas, desaparece enseguida y se puede arrastrar',
           ), '/padroes/app-shell'],
+          ['melhoria', T(
+            'O cartão “Ver o que há de novo” no pé da sidebar só aparece enquanto há novidade para ver: abriu Novidades, ele sai',
+            'The “See what’s new” card at the foot of the sidebar only shows while there is something new: open What’s new and it goes away',
+            'La tarjeta “Ver las novedades” al pie de la sidebar solo aparece mientras hay algo nuevo: abres Novedades y desaparece',
+          ), '/novidades'],
           ['correcao', T(
             'Em Elevação, a frase que cita o elemento dialog volta a aparecer inteira',
             'In Elevation, the sentence that mentions the dialog element shows in full again',

@@ -139,11 +139,11 @@ export default function renderNovidades(page) {
 }
 
 export function mount(root) {
-  // visitar a página apaga o indicador de novidade da sidebar
+  // visitar a página marca a versão como vista: a sidebar tira a bolinha e o cartão de novidades
   try {
     localStorage.setItem(SEEN_KEY, CURRENT_VERSION);
   } catch {}
-  document.querySelector('.ds-sidebar .ds-nav-item[href="#/novidades"] .ds-dot')?.remove();
+  document.dispatchEvent(new CustomEvent('ds:newsseen'));
 
   const groups = root.querySelector('[data-groups]');
   const onClick = (event) => {

@@ -77,16 +77,25 @@ const newsSeen = () => {
   }
 };
 
-// o cartão da conta mostra a versão atual (Órbita 0.2)
+// o cartão da conta mostra a versão atual (Órbita 0.7) e só aparece enquanto ela não foi vista;
+// nos exemplos embutidos do App shell ele fica sempre, porque a anatomia aponta para ele
 const shortVersion = CURRENT_VERSION.replace(/\.0$/, '');
 function renderAccount() {
   document.querySelectorAll('.ds-account').forEach((card) => {
     card.dataset.dsTooltip = t('accountTooltip', shortVersion);
     const title = card.querySelector('.ds-account__title');
     if (title) title.textContent = `Órbita ${shortVersion}`;
+    const footer = card.closest('.ds-sidebar__footer');
+    if (footer) footer.hidden = !EMBED && newsSeen();
   });
 }
 renderAccount();
+
+// a página Novidades avisa quando a versão foi vista: some a bolinha e o cartão
+document.addEventListener('ds:newsseen', () => {
+  document.querySelector('.ds-sidebar .ds-nav-item[href="#/novidades"] .ds-dot')?.remove();
+  renderAccount();
+});
 
 const navEl = document.getElementById('sidebar-nav');
 const content = document.getElementById('conteudo');
