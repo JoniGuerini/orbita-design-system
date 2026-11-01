@@ -11,6 +11,7 @@ export const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 export const L = (pt, en, es) => tr(T(pt, en, es));
 
 const STRINGS = {
+  description: T('Órbita — tokens, tipografia, ícones e componentes para produtos refinados.', 'Órbita — tokens, typography, icons, and components for refined products.', 'Órbita — tokens, tipografía, íconos y componentes para productos refinados.'),
   skip: T('Pular para o conteúdo', 'Skip to content', 'Saltar al contenido'),
   sidebar: T('Barra lateral', 'Sidebar', 'Barra lateral'),
   goHome: T('Órbita, ir para o início', 'Órbita, go to home', 'Órbita, ir al inicio'),

@@ -143,6 +143,8 @@ export const MESSAGES = {
     'chart.of': 'de',
     'chart.warning': 'atenção',
     'chart.critical': 'crítico',
+    'chart.tooManySeries': 'Mais de 8 séries: as extras viram “Outros”. Agrupe a cauda ou use pequenos múltiplos.',
+    'chart.scatterTooManySeries': 'Dispersão com mais de 3 séries: as cores deixam de ser distinguíveis entre si. Agrupe ou use pequenos múltiplos.',
   },
 
   en: {
@@ -279,6 +281,8 @@ export const MESSAGES = {
     'chart.of': 'of',
     'chart.warning': 'warning',
     'chart.critical': 'critical',
+    'chart.tooManySeries': 'More than 8 series: the extras become “Other”. Group the tail or use small multiples.',
+    'chart.scatterTooManySeries': 'Scatter with more than 3 series: the colors stop being distinguishable from each other. Group them or use small multiples.',
   },
 
   es: {
@@ -415,5 +419,7 @@ export const MESSAGES = {
     'chart.of': 'de',
     'chart.warning': 'atención',
     'chart.critical': 'crítico',
+    'chart.tooManySeries': 'Más de 8 series: las sobrantes pasan a “Otros”. Agrupa la cola o usa múltiplos pequeños.',
+    'chart.scatterTooManySeries': 'Dispersión con más de 3 series: los colores dejan de distinguirse entre sí. Agrupa o usa múltiplos pequeños.',
   },
 };

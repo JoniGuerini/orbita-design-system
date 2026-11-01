@@ -29,7 +29,7 @@ export function scatterChart(host, input) {
     const series = (opts.series ?? []).map((s, i) => ({ ...s, index: i, paint: paint(s.color, i), points: (s.points ?? []).filter((p) => Number.isFinite(+p.x) && Number.isFinite(+p.y)) }));
     if (series.length > 3 && !warned) {
       warned = true;
-      console.warn('[Órbita] Dispersão com mais de 3 séries: as cores deixam de ser distinguíveis entre si. Agrupe ou use pequenos múltiplos.');
+      console.warn(`[Órbita] ${msg('chart.scatterTooManySeries')}`);
     }
     return { height: 320, x: {}, y: {}, ...opts, series };
   }

@@ -114,7 +114,7 @@ export function paint(color, index = 0) {
     if (index < 8) return `var(--ds-color-chart-series-${index + 1})`;
     if (!warnedPalette) {
       warnedPalette = true;
-      console.warn('[Órbita] Mais de 8 séries: as extras viram “Outros”. Agrupe a cauda ou use pequenos múltiplos.');
+      console.warn(`[Órbita] ${msg('chart.tooManySeries')}`);
     }
     return 'var(--ds-color-chart-other)';
   }

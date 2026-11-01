@@ -343,10 +343,10 @@ const SEMVER = () => [
   ['0.3.1', 2, L('Correção', 'Patch', 'Parche'), L('Ajustes e bugs. Ninguém precisa mudar nada.', 'Tweaks and bugs. Nobody needs to change anything.', 'Ajustes y bugs. Nadie necesita cambiar nada.')],
 ];
 
-const TYPE_INFO = () => ({
-  novo: [L('Novo', 'New', 'Nuevo'), L('Algo que não existia: componente, página, token, ícone.', 'Something that didn’t exist: a component, page, token, icon.', 'Algo que no existía: componente, página, token, ícono.')],
-  melhoria: [L('Melhoria', 'Improvement', 'Mejora'), L('Algo que existia e ficou melhor, sem mudar como se usa.', 'Something that existed and got better, without changing how it’s used.', 'Algo que existía y mejoró, sin cambiar cómo se usa.')],
-  correcao: [L('Correção', 'Fix', 'Corrección'), L('Algo que estava errado e agora está certo.', 'Something that was wrong and is now right.', 'Algo que estaba mal y ahora está bien.')],
+const TYPE_TEXT = () => ({
+  novo: L('Algo que não existia: componente, página, token, ícone.', 'Something that didn’t exist: a component, page, token, icon.', 'Algo que no existía: componente, página, token, ícono.'),
+  melhoria: L('Algo que existia e ficou melhor, sem mudar como se usa.', 'Something that existed and got better, without changing how it’s used.', 'Algo que existía y mejoró, sin cambiar cómo se usa.'),
+  correcao: L('Algo que estava errado e agora está certo.', 'Something that was wrong and is now right.', 'Algo que estaba mal y ahora está bien.'),
 });
 
 const changelogCode = () => `// site/changelog.js
@@ -360,12 +360,19 @@ const RELEASES = [
     summary: T('Uma frase sobre o que muda para quem usa.', 'One sentence on what changes for users.', 'Una frase sobre lo que cambia para quien lo usa.'),
     groups: [
       {
-        name: 'Componentes',
+        name: T('Componentes', 'Components', 'Componentes'),
         items: [
           // [${L('tipo, texto, link', 'type, text, link', 'tipo, texto, enlace')}]
-          ['novo', '${L('Alerta inline com tons e ações', 'Inline alert with tones and actions', 'Alerta inline con tonos y acciones')}', '/padroes/formularios'],
-          ['melhoria', '${L('Toast com seis posições', 'Toast with six positions', 'Toast con seis posiciones')}', '/componentes/toast'],
-          ['correcao', '${L('A busca encontra “calendário”', 'Search finds “calendar”', 'La búsqueda encuentra “calendario”')}', '/fundamentos/icones'],
+          ['novo', T(
+            'Alerta inline com tons e ações',
+            'Inline alert with tones and actions',
+            'Alerta inline con tonos y acciones',
+          ), '/padroes/formularios'],
+          ['correcao', T(
+            'A busca de ícones encontra “calendário”',
+            'Icon search finds “calendar”',
+            'La búsqueda de íconos encuentra “calendario”',
+          ), '/fundamentos/icones'],
         ],
       },
     ],
@@ -457,7 +464,7 @@ export default function renderContribuir(page) {
   const stages = STAGES();
   const checklist = CHECKLIST();
   const TOTAL = total(checklist);
-  const types = TYPE_INFO();
+  const types = TYPE_TEXT();
   return `
   <div class="page doc rc-page">
     <header class="doc-header">
@@ -631,9 +638,9 @@ export default function renderContribuir(page) {
       <div class="rc-types">
         ${Object.entries(TYPES)
           .map(
-            ([id, [tone]]) => `<div class="rc-type">
-              <span class="ds-badge ds-badge--sm ds-badge--${tone}">${types[id][0]}</span>
-              <p>${types[id][1]}</p>
+            ([id, { tone, label }]) => `<div class="rc-type">
+              <span class="ds-badge ds-badge--sm ds-badge--${tone}">${label}</span>
+              <p>${types[id]}</p>
               <code class="ds-inline-code">'${id}'</code>
             </div>`,
           )
