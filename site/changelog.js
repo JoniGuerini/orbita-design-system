@@ -8,10 +8,102 @@ import { tr } from '../ds/js/i18n.js';
 
 const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
-export const CURRENT_VERSION = '0.6.1';
+export const CURRENT_VERSION = '0.7.0';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 const RELEASES = [
+  {
+    version: '0.7.0',
+    date: '2026-11-01',
+    title: T('Idiomas', 'Languages', 'Idiomas'),
+    summary: T(
+      'O Órbita passou a falar português, inglês e espanhol: o site inteiro, os textos dos componentes e o plugin do Figma. O idioma segue o do sistema, troca na topbar e fica salvo.',
+      'Órbita now speaks Portuguese, English, and Spanish: the whole site, the component text, and the Figma plugin. The language follows the system, switches from the topbar, and is remembered.',
+      'Órbita ahora habla portugués, inglés y español: todo el sitio, los textos de los componentes y el plugin de Figma. El idioma sigue al del sistema, se cambia en la topbar y queda guardado.',
+    ),
+    groups: [
+      {
+        name: T('Idiomas', 'Languages', 'Idiomas'),
+        items: [
+          ['novo', T(
+            'Seletor de idioma na topbar, ao lado do tema: Sistema, Português, English e Español. Sem um dos três no sistema, o site abre em inglês',
+            'Language switcher in the topbar, next to the theme: System, Português, English, and Español. If the system uses none of the three, the site opens in English',
+            'Selector de idioma en la topbar, junto al tema: Sistema, Português, English y Español. Si el sistema no usa ninguno de los tres, el sitio abre en inglés',
+          ), '/'],
+          ['novo', T(
+            'As 43 páginas nos três idiomas, com playgrounds, exemplos ao vivo, tabelas e comentários dos códigos',
+            'All 43 pages in the three languages, including playgrounds, live examples, tables, and code comments',
+            'Las 43 páginas en los tres idiomas, con playgrounds, ejemplos en vivo, tablas y comentarios del código',
+          ), '/primeiros-passos'],
+          ['novo', T(
+            'Os textos dos componentes — formulário, seleção, toast, modal, busca, shell, composer, filtros e gráficos — também falam os três idiomas e acompanham a troca',
+            'Component text — form, select, toast, modal, search, shell, composer, filters, and charts — also speaks the three languages and follows the switch',
+            'Los textos de los componentes — formulario, selector, toast, modal, búsqueda, shell, composer, filtros y gráficos — también hablan los tres idiomas y siguen el cambio',
+          ), '/padroes/formularios'],
+          ['melhoria', T(
+            'Números, datas e moeda no formato de cada idioma (4,5:1 · 4.5:1); meses e dias da semana dos gráficos vêm do próprio navegador',
+            'Numbers, dates, and currency in each language’s format (4,5:1 · 4.5:1); chart months and weekdays come from the browser itself',
+            'Números, fechas y moneda en el formato de cada idioma (4,5:1 · 4.5:1); los meses y días de la semana de los gráficos vienen del propio navegador',
+          ), '/graficos/visao-geral'],
+          ['melhoria', T(
+            'Os gráficos descrevem os dados para leitor de tela em frases inteiras, no idioma atual',
+            'Charts describe their data to screen readers in full sentences, in the current language',
+            'Los gráficos describen los datos para lectores de pantalla con frases completas, en el idioma actual',
+          ), '/graficos/visao-geral'],
+          ['melhoria', T(
+            'A busca de ícones acha o ícone pelas palavras de qualquer um dos três idiomas',
+            'Icon search finds an icon by words in any of the three languages',
+            'La búsqueda de íconos encuentra el ícono por palabras en cualquiera de los tres idiomas',
+          ), '/fundamentos/icones'],
+          ['melhoria', T(
+            'Como contribuir mostra como escrever um texto novo nos três idiomas',
+            'How to contribute shows how to write new text in the three languages',
+            'Cómo contribuir muestra cómo escribir un texto nuevo en los tres idiomas',
+          ), '/recursos/contribuir'],
+        ],
+      },
+      {
+        name: T('Figma', 'Figma', 'Figma'),
+        items: [
+          ['novo', T(
+            'Idioma na janela do plugin: páginas, coleções, modos, componentes, propriedades e textos saem em português, inglês ou espanhol',
+            'Language in the plugin window: pages, collections, modes, components, properties, and text come out in Portuguese, English, or Spanish',
+            'Idioma en la ventana del plugin: páginas, colecciones, modos, componentes, propiedades y textos salen en portugués, inglés o español',
+          ), '/recursos/figma'],
+          ['melhoria', T(
+            'Rodar de novo em outro idioma renomeia tudo no lugar, sem duplicar: os ids e as instâncias continuam',
+            'Running again in another language renames everything in place, without duplicating: ids and instances stay',
+            'Ejecutarlo de nuevo en otro idioma renombra todo en el lugar, sin duplicar: los ids y las instancias se mantienen',
+          ), '/recursos/figma'],
+          ['melhoria', T(
+            'O plugin de tokens acha as coleções em qualquer um dos três idiomas',
+            'The tokens plugin finds the collections in any of the three languages',
+            'El plugin de tokens encuentra las colecciones en cualquiera de los tres idiomas',
+          ), '/recursos/tokens'],
+          ['melhoria', T(
+            'O teste do plugin roda o mesmo arquivo nos três idiomas e falha se algum texto ficar sem tradução',
+            'The plugin test runs the same file in the three languages and fails if any text is left untranslated',
+            'La prueba del plugin ejecuta el mismo archivo en los tres idiomas y falla si algún texto queda sin traducir',
+          ), '/recursos/figma'],
+        ],
+      },
+      {
+        name: T('App shell', 'App shell', 'App shell'),
+        items: [
+          ['novo', T(
+            'Barra de rolagem sobreposta em todo o app: sem trilho nem setas, aparece enquanto você rola, some logo depois e dá para arrastar',
+            'Overlay scrollbar across the app: no track or arrows, it shows while you scroll, fades right after, and can be dragged',
+            'Barra de desplazamiento superpuesta en toda la app: sin riel ni flechas, aparece mientras te desplazas, desaparece enseguida y se puede arrastrar',
+          ), '/padroes/app-shell'],
+          ['correcao', T(
+            'Em Elevação, a frase que cita o elemento dialog volta a aparecer inteira',
+            'In Elevation, the sentence that mentions the dialog element shows in full again',
+            'En Elevación, la frase que menciona el elemento dialog vuelve a aparecer completa',
+          ), '/fundamentos/elevacao'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.6.1',
     date: '2026-10-31',
