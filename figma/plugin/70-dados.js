@@ -88,7 +88,7 @@
             add(c, t);
             var d = Math.max(8, Math.round(px * 0.28));
             var dot = instance(status, { Estado: 'Online' });
-            dot.name = 'Status'; // no Figma a instância nasce com o nome do conjunto; “Status” aparece no painel
+            dot.name = L('Status'); // no Figma a instância nasce com o nome do conjunto; “Status” aparece no painel
             dot.resize(d, d);
             add(c, dot, { absolute: true, x: px - d + 1, y: px - d + 1 });
             dot.isExposedInstance = true;
@@ -203,9 +203,9 @@
               var row = box('Exemplos', { dir: 'H', gap: 20, cross: 'center' });
               ['Online', 'Ausente', 'Ocupado', 'Offline'].forEach(function (st, i) {
                 var a = instance(set, { Tamanho: 'G', Tom: ['Azul', 'Verde', 'Argila', 'Neutro'][i] }, { 'Iniciais': ['LM', 'RS', 'TP', 'JV'][i], 'Status': true });
-                var nested = a.findOne(function (n) { return n.type === 'INSTANCE' && n.name === 'Status'; });
+                var nested = a.findOne(function (n) { return n.type === 'INSTANCE' && n.name === L('Status'); });
                 // a instância aninhada (exposta) troca de estado pela propriedade de variante
-                if (nested && st !== 'Online') nested.setProperties({ Estado: st });
+                if (nested && st !== 'Online') nested.setProperties(variantProps({ Estado: st }));
                 add(row, a);
               });
               return row;
@@ -545,8 +545,8 @@
 
   /** Troca o texto de uma camada da instância (sobreposição direta, para textos que não são propriedade). */
   function setText(inst, layer, chars) {
-    var t = inst.findOne(function (n) { return n.type === 'TEXT' && n.name === layer; });
-    if (t) t.characters = chars;
+    var t = inst.findOne(function (n) { return n.type === 'TEXT' && n.name === L(layer); });
+    if (t) t.characters = L(chars);
     return inst;
   }
   var SPARK = [8, 9, 9, 11, 10, 12, 13, 12, 14, 15, 15, 17];
@@ -568,7 +568,7 @@
     var wash = figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="' + area + '" fill="#000000" fill-opacity="0.12" stroke="none"/></svg>');
     var line = figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="' + d + '" stroke="#000000" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>');
     [wash, line].forEach(function (svg) {
-      svg.name = svg === wash ? 'Lavagem' : 'Linha';
+      svg.name = L(svg === wash ? 'Lavagem' : 'Linha');
       svg.fills = [];
       svg.children.forEach(function (ch) { ch.constraints = { horizontal: 'SCALE', vertical: 'SCALE' }; });
       colorIcon(svg, 'color/chart/other');

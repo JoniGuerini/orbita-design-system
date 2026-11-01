@@ -7,8 +7,8 @@
 
   /** Troca o texto de uma camada dentro de uma instância (inclusive em instâncias aninhadas). */
   function setText(node, name, chars) {
-    var t = node.findOne(function (n) { return n.type === 'TEXT' && n.name === name; });
-    if (t) t.characters = chars;
+    var t = node.findOne(function (n) { return n.type === 'TEXT' && n.name === L(name); });
+    if (t) t.characters = L(chars);
     return node;
   }
 

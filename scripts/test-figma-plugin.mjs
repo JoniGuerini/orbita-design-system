@@ -29,7 +29,7 @@ async function run(label, fig = figma, options = {}) {
   vm.runInContext(code, context, { filename: 'code.js' });
   const t0 = performance.now();
   const summary = await context.main({ strict: !process.argv.includes('--loose'), ...options });
-  return { label, summary, ms: Math.round(performance.now() - t0) };
+  return { label, summary, ms: Math.round(performance.now() - t0), missing: context.MISSING };
 }
 
 function census(fig = figma) {
@@ -121,15 +121,66 @@ try {
   if (moved.length) problems.push(`plano pago: componentes que mudaram de id: ${moved.slice(0, 5).join(', ')}`);
   for (const t of ['COMPONENT', 'COMPONENT_SET']) if (f1.byType[t] !== f2.byType[t]) problems.push(`plano pago: ${t}: ${f1.byType[t]} → ${f2.byType[t]}`);
 
+  // idiomas: o mesmo arquivo em inglês, em espanhol e de volta ao português. Tudo é renomeado no lugar —
+  // páginas, coleções, modos, sombras, componentes e propriedades — sem duplicar nem trocar ids, e nenhum
+  // texto fica sem tradução (o que não está em figma/plugin/02-dicionario.js aparece em missing.json).
+  const LANG_NAMES = {
+    en: { pages: 'Órbita · Foundations · Órbita · Icons · Órbita · Components', sem: 'Semantic', modes: 'Dark · Light', icon: 'Icon', stage: 'Light mode' },
+    es: { pages: 'Órbita · Fundamentos · Órbita · Íconos · Órbita · Componentes', sem: 'Semánticos', modes: 'Oscuro · Claro', icon: 'Ícono', stage: 'Modo Claro' },
+    'pt-BR': { pages: 'Órbita · Fundamentos · Órbita · Ícones · Órbita · Componentes', sem: 'Semânticos', modes: 'Escuro · Claro', icon: 'Ícone', stage: 'Modo Claro' },
+  };
+  const missing = {};
+  const langRuns = [];
+  const titles = {}; // orbita-key do bloco ou da página → { 'pt-BR', en, es }, para a página Recursos › Plugin do Figma
+  const nameAll = (lang) => {
+    for (const page of figma.root.children) {
+      const id = page.getPluginData('orbita-page');
+      if (id) (titles[`page/${id}`] ??= {})[lang] = page.name.replace('Órbita · ', '');
+      for (const n of page.children) {
+        const key = n.getPluginData('orbita-key');
+        if (key.startsWith('block/')) (titles[key] ??= {})[lang] = n.name.replace('Órbita · ', '');
+      }
+    }
+  };
+  for (const lang of ['en', 'es', 'pt-BR']) {
+    const r = await run(lang, figma, { locale: lang });
+    langRuns.push(r);
+    nameAll(lang);
+    const c = census();
+    const want = LANG_NAMES[lang];
+    const tag = `idioma ${lang}`;
+    const changed = Object.keys(c2.keys).filter((k) => (k.startsWith('var/') || k.startsWith('cmp/') || k.startsWith('set/') || k.startsWith('icon/')) && c.keys[k] !== c2.keys[k]);
+    if (c.dupes?.length) problems.push(`${tag}: chaves repetidas: ${c.dupes.slice(0, 5).join(', ')}`);
+    if (changed.length) problems.push(`${tag}: componentes que mudaram de id: ${changed.slice(0, 5).join(', ')}`);
+    if (c.pages.join(' · ') !== want.pages) problems.push(`${tag}: páginas ${c.pages.join(' · ')}`);
+    if (figma._collections.length !== 3) problems.push(`${tag}: ${figma._collections.length} coleções (${figma._collections.map((x) => x.name).join(', ')})`);
+    const sem = figma._collections.find((x) => x.name === want.sem);
+    if (!sem || sem.modes.map((m) => m.name).join(' · ') !== want.modes) problems.push(`${tag}: coleção ${want.sem} com os modos ${sem?.modes.map((m) => m.name).join(' · ') ?? '—'}`);
+    for (const t of ['COMPONENT', 'COMPONENT_SET']) if (c.byType[t] !== c2.byType[t]) problems.push(`${tag}: ${t}: ${c2.byType[t]} → ${c.byType[t]}`);
+    const iconNames = Object.keys(c.keys).filter((k) => k.startsWith('icon/')).map((k) => figma._all.get(c.keys[k])?.children[0]?.name);
+    if (iconNames.some((n) => n !== want.icon)) problems.push(`${tag}: camada do ícone devia ser “${want.icon}” (veio ${[...new Set(iconNames)].join(', ')})`);
+    if (!figma.root.children.some((p) => p.findAll((n) => n.name === want.stage).length)) problems.push(`${tag}: nenhuma prévia “${want.stage}”`);
+    const langOverflows = overflowsIn(figma);
+    if (langOverflows.length) problems.push(`${tag}: conteúdo vazando da linha: ${langOverflows.slice(0, 20).join('; ')}${langOverflows.length > 20 ? ` e mais ${langOverflows.length - 20}` : ''}`);
+    if (lang !== 'pt-BR' && Object.keys(r.missing).length) missing[lang] = r.missing;
+  }
+  const styleCount = new Set(figma._effectStyles.map((s) => s.name)).size;
+  if (styleCount !== figma._effectStyles.length) problems.push(`idiomas: estilos de sombra duplicados (${figma._effectStyles.length})`);
+  await writeFile(path.join(built.outDir, 'missing.json'), `${JSON.stringify(missing, null, 2)}\n`);
+  for (const [lang, list] of Object.entries(missing)) {
+    const n = Object.keys(list).length;
+    problems.push(`idioma ${lang}: ${n} textos sem tradução em figma/plugin/02-dicionario.js (lista em ${path.relative(ROOT, path.join(built.outDir, 'missing.json'))}): ${Object.keys(list).slice(0, 8).map((s) => `“${s}”`).join(', ')}${n > 8 ? '…' : ''}`);
+  }
+
   // resumo para a página Recursos › Plugin do Figma
   const blocks = [];
   for (const page of figma.root.children) {
     for (const n of page.children) {
       const key = n.getPluginData('orbita-key');
-      if (key.startsWith('block/')) blocks.push({ page: page.name.replace('Órbita · ', ''), title: n.name.replace('Órbita · ', ''), sets: n.findAll((x) => x.type === 'COMPONENT_SET').length, variants: n.findAll((x) => x.type === 'COMPONENT' && x.parent?.type === 'COMPONENT_SET').length, x: n.x, y: n.y });
+      if (key.startsWith('block/')) blocks.push({ page: titles[`page/${page.getPluginData('orbita-page')}`], title: titles[key], sets: n.findAll((x) => x.type === 'COMPONENT_SET').length, variants: n.findAll((x) => x.type === 'COMPONENT' && x.parent?.type === 'COMPONENT_SET').length, x: n.x, y: n.y });
     }
   }
-  blocks.sort((a, b) => a.page.localeCompare(b.page) || a.y - b.y || a.x - b.x);
+  blocks.sort((a, b) => a.page['pt-BR'].localeCompare(b.page['pt-BR']) || a.y - b.y || a.x - b.x);
   const summary = {
     version: built.version,
     generatedAt: new Date().toISOString(),
@@ -148,6 +199,8 @@ try {
   console.log(`  páginas: ${c2.pages.join(' · ')}`);
   console.log(`  nós: ${Object.entries(c2.byType).map(([k, v]) => `${k.toLowerCase()} ${v}`).join(', ')}`);
   console.log(`✓ plano gratuito: só o modo Escuro, em 3 páginas (${solo.ms} ms); faltar modo ou página explica a recusa; no plano pago o Claro entra com os mesmos ids`);
+  console.log(`✓ idiomas: o mesmo arquivo em inglês, espanhol e de volta ao português, renomeado no lugar com os mesmos ids (${langRuns.map((r) => `${r.label} ${r.ms} ms`).join(', ')})`);
+  console.log(`  ${langRuns[0].summary}`);
   if (problems.length) {
     console.error(`✗ ${problems.join('\n✗ ')}`);
     process.exitCode = 1;

@@ -235,6 +235,25 @@ class ComponentSetNode extends ContainerNode {
     this._defs[key] = { type, defaultValue: def, preferredValues: opts?.preferredValues };
     return key;
   }
+  // como no Figma: recebe o nome completo (“Rótulo#12”) e devolve o novo, com o mesmo sufixo
+  editComponentProperty(full, change) {
+    const def = this._defs[full];
+    if (!def) fail(`editComponentProperty: não existe "${full}"`);
+    if (change.defaultValue !== undefined) {
+      if (def.type === 'TEXT' && typeof change.defaultValue !== 'string') fail('TEXT: padrão precisa ser texto');
+      def.defaultValue = change.defaultValue;
+    }
+    if (change.preferredValues) def.preferredValues = change.preferredValues;
+    const [name, suffix] = full.split('#');
+    if (change.name === undefined || change.name === name) return full;
+    if (Object.keys(this._defs).some((k) => k !== full && k.split('#')[0] === change.name)) fail(`editComponentProperty: já existe "${change.name}"`);
+    const key = `${change.name}#${suffix}`;
+    delete this._defs[full];
+    this._defs[key] = def;
+    // as camadas ligadas acompanham o nome novo
+    for (const n of this.findAll((x) => x._refs)) for (const f of Object.keys(n._refs)) if (n._refs[f] === full) n._refs[f] = key;
+    return key;
+  }
 }
 
 class TextNode extends SceneNode {

@@ -23,6 +23,7 @@
   label.opt span span { color: var(--muted); }
   input[type="checkbox"] { width: 16px; height: 16px; margin: 1px 0 0; accent-color: var(--brand); }
   .seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; }
+  .seg--4 { grid-template-columns: repeat(4, 1fr); }
   .seg label { position: relative; display: grid; cursor: pointer; }
   .seg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
   .seg span { display: grid; place-items: center; height: 30px; border-radius: 8px; color: var(--muted); font-weight: 500; }
@@ -40,68 +41,158 @@
 </head>
 <body>
   <p class="eyebrow">Órbita Design System</p>
-  <h1>Gerar a biblioteca</h1>
-  <p class="lead">Cria ou atualiza variáveis, estilos e componentes neste arquivo. Rodar de novo atualiza sem duplicar — instâncias que você já usou continuam ligadas.</p>
+  <h1 data-t="title">Gerar a biblioteca</h1>
+  <p class="lead" data-t="lead">Cria ou atualiza variáveis, estilos e componentes neste arquivo. Rodar de novo atualiza sem duplicar — instâncias que você já usou continuam ligadas.</p>
 
   <fieldset>
-    <legend>O que gerar</legend>
-    <label class="opt"><input type="checkbox" value="Fundamentos" checked><span><strong>Fundamentos</strong><span>Cores, tipografia, espaço, raio e sombra</span></span></label>
-    <label class="opt"><input type="checkbox" value="Ícones" checked><span><strong>Ícones</strong><span>Todos os ícones como componentes de 24 px</span></span></label>
-    <label class="opt"><input type="checkbox" value="Componentes" checked><span><strong>Componentes</strong><span>Blocos com variantes, exemplos e prévias em cada modo</span></span></label>
+    <legend data-t="what">O que gerar</legend>
+    <label class="opt"><input type="checkbox" value="Fundamentos" checked><span><strong data-t="foundations">Fundamentos</strong><span data-t="foundationsText">Cores, tipografia, espaço, raio e sombra</span></span></label>
+    <label class="opt"><input type="checkbox" value="Ícones" checked><span><strong data-t="icons">Ícones</strong><span data-t="iconsText">Todos os ícones como componentes de 24 px</span></span></label>
+    <label class="opt"><input type="checkbox" value="Componentes" checked><span><strong data-t="components">Componentes</strong><span data-t="componentsText">Blocos com variantes, exemplos e prévias em cada modo</span></span></label>
   </fieldset>
 
   <fieldset>
-    <legend>Modos</legend>
+    <legend data-t="modes">Modos</legend>
     <div class="seg">
-      <label><input type="radio" name="modes" value="Claro,Escuro" checked><span>Claro e Escuro</span></label>
-      <label><input type="radio" name="modes" value="Escuro"><span>Só Escuro</span></label>
-      <label><input type="radio" name="modes" value="Claro"><span>Só Claro</span></label>
+      <label><input type="radio" name="modes" value="Claro,Escuro" checked><span data-t="both">Claro e Escuro</span></label>
+      <label><input type="radio" name="modes" value="Escuro"><span data-t="darkOnly">Só Escuro</span></label>
+      <label><input type="radio" name="modes" value="Claro"><span data-t="lightOnly">Só Claro</span></label>
     </div>
     <p class="hint" data-hint></p>
   </fieldset>
 
+  <fieldset>
+    <legend data-t="language">Idioma</legend>
+    <div class="seg seg--4">
+      <label><input type="radio" name="locale" value="system" checked><span data-t="system">Sistema</span></label>
+      <label><input type="radio" name="locale" value="pt-BR"><span>Português</span></label>
+      <label><input type="radio" name="locale" value="en"><span>English</span></label>
+      <label><input type="radio" name="locale" value="es"><span>Español</span></label>
+    </div>
+    <p class="hint" data-t="languageHint">Nomes, textos e descrições de tudo o que o plugin cria. Trocar e rodar de novo renomeia o que já existe.</p>
+  </fieldset>
+
   <div class="actions">
-    <button type="button" data-cancel>Fechar</button>
+    <button type="button" data-cancel data-t="close">Fechar</button>
     <button type="button" class="primary" data-run>Gerar no arquivo</button>
   </div>
-  <p class="log" data-log aria-live="polite">Variáveis e estilos de texto são sempre atualizados.</p>
+  <p class="log" data-log aria-live="polite"></p>
 
 <script>
+  // textos da janela nas três línguas; o idioma “Sistema” segue o do computador (o que não for português nem espanhol vira inglês)
+  const STRINGS = {
+    'pt-BR': {
+      title: 'Gerar a biblioteca',
+      lead: 'Cria ou atualiza variáveis, estilos e componentes neste arquivo. Rodar de novo atualiza sem duplicar — instâncias que você já usou continuam ligadas.',
+      what: 'O que gerar',
+      foundations: 'Fundamentos', foundationsText: 'Cores, tipografia, espaço, raio e sombra',
+      icons: 'Ícones', iconsText: 'Todos os ícones como componentes de 24 px',
+      components: 'Componentes', componentsText: 'Blocos com variantes, exemplos e prévias em cada modo',
+      modes: 'Modos', both: 'Claro e Escuro', darkOnly: 'Só Escuro', lightOnly: 'Só Claro',
+      bothHint: 'Precisa de plano pago no Figma: o gratuito aceita um modo só por coleção.',
+      oneHint: 'Funciona em qualquer plano. Para ter os dois depois, rode de novo com Claro e Escuro: o que já existe é atualizado.',
+      language: 'Idioma', system: 'Sistema',
+      languageHint: 'Nomes, textos e descrições de tudo o que o plugin cria. Trocar e rodar de novo renomeia o que já existe.',
+      close: 'Fechar', run: 'Gerar no arquivo', again: 'Gerar de novo', starting: 'Começando…',
+      ready: 'Variáveis e estilos de texto são sempre atualizados.',
+    },
+    en: {
+      title: 'Generate the library',
+      lead: 'Creates or updates variables, styles, and components in this file. Running again updates without duplicating — instances you already use stay linked.',
+      what: 'What to generate',
+      foundations: 'Foundations', foundationsText: 'Colors, typography, space, radius, and shadow',
+      icons: 'Icons', iconsText: 'Every icon as a 24 px component',
+      components: 'Components', componentsText: 'Blocks with variants, examples, and previews in each mode',
+      modes: 'Modes', both: 'Light and Dark', darkOnly: 'Dark only', lightOnly: 'Light only',
+      bothHint: 'Needs a paid Figma plan: the free one allows only one mode per collection.',
+      oneHint: 'Works on any plan. To get both later, run again with Light and Dark: what already exists gets updated.',
+      language: 'Language', system: 'System',
+      languageHint: 'Names, text, and descriptions of everything the plugin creates. Switching and running again renames what already exists.',
+      close: 'Close', run: 'Generate in file', again: 'Generate again', starting: 'Starting…',
+      ready: 'Variables and text styles are always updated.',
+    },
+    es: {
+      title: 'Generar la biblioteca',
+      lead: 'Crea o actualiza variables, estilos y componentes en este archivo. Ejecutarlo de nuevo actualiza sin duplicar — las instancias que ya usas siguen vinculadas.',
+      what: 'Qué generar',
+      foundations: 'Fundamentos', foundationsText: 'Colores, tipografía, espacio, radio y sombra',
+      icons: 'Íconos', iconsText: 'Todos los íconos como componentes de 24 px',
+      components: 'Componentes', componentsText: 'Bloques con variantes, ejemplos y vistas previas en cada modo',
+      modes: 'Modos', both: 'Claro y Oscuro', darkOnly: 'Solo Oscuro', lightOnly: 'Solo Claro',
+      bothHint: 'Necesita un plan de pago en Figma: el gratuito admite un solo modo por colección.',
+      oneHint: 'Funciona en cualquier plan. Para tener los dos después, ejecútalo de nuevo con Claro y Oscuro: lo que ya existe se actualiza.',
+      language: 'Idioma', system: 'Sistema',
+      languageHint: 'Nombres, textos y descripciones de todo lo que crea el plugin. Cambiar y ejecutar de nuevo renombra lo que ya existe.',
+      close: 'Cerrar', run: 'Generar en el archivo', again: 'Generar de nuevo', starting: 'Empezando…',
+      ready: 'Las variables y los estilos de texto siempre se actualizan.',
+    },
+  };
+
   const log = document.querySelector('[data-log]');
   const run = document.querySelector('[data-run]');
   const hint = document.querySelector('[data-hint]');
   const modeInputs = [...document.querySelectorAll('input[name="modes"]')];
+  const localeInputs = [...document.querySelectorAll('input[name="locale"]')];
   const chosenModes = () => modeInputs.find((i) => i.checked).value.split(',');
+  const preference = () => localeInputs.find((i) => i.checked).value;
+  const systemLocale = () => {
+    for (const tag of navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]) {
+      const t = String(tag).toLowerCase();
+      if (t.startsWith('pt')) return 'pt-BR';
+      if (t.startsWith('es')) return 'es';
+      if (t.startsWith('en')) return 'en';
+    }
+    return 'en';
+  };
+  const locale = () => (preference() === 'system' ? systemLocale() : preference());
+  const s = () => STRINGS[locale()];
+  let ran = false;
+  let idle = true; // o log mostra a frase de espera até a primeira mensagem do plugin
+
   const showHint = () => {
-    hint.textContent = chosenModes().length > 1
-      ? 'Precisa de plano pago no Figma: o gratuito aceita um modo só por coleção.'
-      : 'Funciona em qualquer plano. Para ter os dois depois, rode de novo com Claro e Escuro: o que já existe é atualizado.';
+    hint.textContent = chosenModes().length > 1 ? s().bothHint : s().oneHint;
+  };
+  const apply = () => {
+    document.documentElement.lang = locale();
+    document.querySelectorAll('[data-t]').forEach((el) => (el.textContent = s()[el.dataset.t]));
+    run.textContent = ran ? s().again : s().run;
+    if (idle) log.textContent = s().ready;
+    showHint();
   };
   modeInputs.forEach((i) => i.addEventListener('change', showHint));
-  showHint();
+  localeInputs.forEach((i) => i.addEventListener('change', () => {
+    apply();
+    parent.postMessage({ pluginMessage: { type: 'locale', preference: preference() } }, '*');
+  }));
+  apply();
 
   run.addEventListener('click', () => {
     const pages = [...document.querySelectorAll('input[type="checkbox"]:checked')].map((i) => i.value);
     run.disabled = true;
+    idle = false;
     log.dataset.tone = '';
-    log.textContent = 'Começando…';
-    parent.postMessage({ pluginMessage: { type: 'run', pages, modes: chosenModes() } }, '*');
+    log.textContent = s().starting;
+    parent.postMessage({ pluginMessage: { type: 'run', pages, modes: chosenModes(), locale: locale() } }, '*');
   });
   document.querySelector('[data-cancel]').addEventListener('click', () => parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*'));
   onmessage = (event) => {
     const msg = event.data.pluginMessage;
     if (!msg) return;
     if (msg.type === 'init') {
-      const saved = modeInputs.find((i) => i.value === msg.modes.join(','));
-      if (saved) saved.checked = true;
-      showHint();
+      const savedModes = msg.modes && modeInputs.find((i) => i.value === msg.modes.join(','));
+      if (savedModes) savedModes.checked = true;
+      const savedLocale = localeInputs.find((i) => i.value === msg.locale);
+      if (savedLocale) savedLocale.checked = true;
+      apply();
       return;
     }
+    idle = false;
     log.textContent = msg.message;
     if (msg.type === 'done' || msg.type === 'error') {
       log.dataset.tone = msg.type;
       run.disabled = false;
-      run.textContent = 'Gerar de novo';
+      ran = true;
+      run.textContent = s().again;
     }
   };
 </script>

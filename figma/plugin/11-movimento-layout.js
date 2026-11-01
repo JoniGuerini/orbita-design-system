@@ -55,7 +55,7 @@
     var p = points.map(function (n, i) { return Math.round((i % 2 ? (1 - n) * 24 : n * 24) * 100) / 100; });
     var d = 'M0 24C' + p[0] + ' ' + p[1] + ' ' + p[2] + ' ' + p[3] + ' 24 0';
     var svg = figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="' + d + '" stroke="#000000" stroke-width="2" stroke-linecap="round" fill="none"/></svg>');
-    svg.name = 'Curva';
+    svg.name = L('Curva');
     svg.fills = [];
     svg.clipsContent = false;
     svg.children.forEach(function (ch) { ch.constraints = { horizontal: 'SCALE', vertical: 'SCALE' }; });

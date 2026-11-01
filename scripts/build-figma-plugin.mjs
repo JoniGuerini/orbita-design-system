@@ -29,7 +29,9 @@ export async function buildFigmaPlugin({ only, out } = {}) {
   globalThis.HTMLElement ??= class {};
   globalThis.customElements ??= { define() {}, get() {} };
   const iconsMod = await import(pathToFileURL(path.join(ROOT, 'ds', 'icons', 'icons.js')).href);
-  const icons = iconsMod.iconList.map((i) => ({ name: i.name, category: i.category, keywords: i.keywords.join(' '), body: i.body }));
+  // palavras-chave nas três línguas: a descrição do componente de ícone vai no idioma escolhido na janela
+  const { ICON_KEYWORDS } = await import(pathToFileURL(path.join(ROOT, 'site', 'icon-keywords.js')).href);
+  const icons = iconsMod.iconList.map((i) => ({ name: i.name, category: i.category, keywords: i.keywords.join(' '), keywordsEn: ICON_KEYWORDS[i.name]?.[0] ?? '', keywordsEs: ICON_KEYWORDS[i.name]?.[1] ?? '', body: i.body }));
 
   const changelog = await readFile(path.join(ROOT, 'site', 'changelog.js'), 'utf8');
   const version = /CURRENT_VERSION = '([^']+)'/.exec(changelog)?.[1] ?? '0.0.0';
@@ -41,15 +43,12 @@ export async function buildFigmaPlugin({ only, out } = {}) {
     iconCategories: iconsMod.iconCategories,
     // curvas de animação: o Figma não guarda curva como variável, então vão para o bloco Movimento
     easings: data.tokens.filter((t) => t.type === 'cubicBezier').map((t) => ({ name: t.name.split('.').pop(), css: t.css, points: t.css.match(/-?[\d.]+/g).map(Number) })),
-    pageIntro: {
-      'Órbita · Componentes': 'Cada bloco é um componente: o conjunto de variantes, exemplos montados com instâncias e o mesmo exemplo {modos}. Cores, medidas e textos vêm das variáveis e dos estilos do arquivo.',
-    },
   };
 
   let files = (await readdir(SRC)).filter((f) => f.endsWith('.js')).sort();
   if (only) {
     const keep = new Set(only.split(',').map((s) => s.trim().replace(/\.js$/, '')));
-    files = files.filter((f) => f.startsWith('00-') || f.startsWith('99-') || keep.has(f.replace(/\.js$/, '')));
+    files = files.filter((f) => f.startsWith('0') || f.startsWith('99-') || keep.has(f.replace(/\.js$/, '')));
   }
   const parts = [];
   for (const f of files) parts.push(`// ───── ${f} ─────\n${await readFile(path.join(SRC, f), 'utf8')}`);

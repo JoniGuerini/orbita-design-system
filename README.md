@@ -19,7 +19,7 @@ Para só gerar os tokens: `npm run tokens`. Para exportar para o Figma e outras 
 npm run figma
 ```
 
-Gera `dist/figma-plugin/`. No Figma para desktop: **Plugins → Desenvolvimento → Importar plugin do manifesto…** e escolha `dist/figma-plugin/manifest.json`. O plugin cria as variáveis, os estilos, os ícones e os componentes em blocos de documentação (modos Claro e Escuro); rodar de novo atualiza sem duplicar. O código fica em `figma/plugin/` (um arquivo por grupo). `npm run figma:test` roda o plugin numa imitação da API do Figma e gera `dist/figma-plugin/preview.html`.
+Gera `dist/figma-plugin/`. No Figma para desktop: **Plugins → Desenvolvimento → Importar plugin do manifesto…** e escolha `dist/figma-plugin/manifest.json`. O plugin cria as variáveis, os estilos, os ícones e os componentes em blocos de documentação (modos Claro e Escuro), em português, inglês ou espanhol (opção Idioma na janela); rodar de novo atualiza sem duplicar. O código fica em `figma/plugin/` (um arquivo por grupo). `npm run figma:test` roda o plugin numa imitação da API do Figma e gera `dist/figma-plugin/preview.html`.
 
 ## Estrutura
 
@@ -31,7 +31,7 @@ tokens/              ← fonte da verdade (edite aqui)
   semantic.json      tokens de cor por tema (escuro e claro) + checagens de contraste
   effects.json       sombras e o gradiente do divisor
 figma/
-  plugin/            o plugin do Figma, um arquivo por grupo (00 núcleo · 10 fundamentos · 20 ícones · 30+ blocos · 99 main)
+  plugin/            o plugin do Figma, um arquivo por grupo (00 núcleo · 01–06 idiomas e dicionário · 10 fundamentos · 20 ícones · 30+ blocos · 99 main)
   ui.html            a janela do plugin
 scripts/
   build-tokens.mjs   tokens/*.json → ds/tokens.css + ds/tokens.js (com relatório WCAG)

@@ -1,0 +1,82 @@
+/**
+ * Dicionário do plugin: blocos de Fundamentos (Cores, Tipografia, Espaço, Movimento, Layout). Veja 01-i18n.js.
+ */
+
+Object.assign(DICT, {
+  /* ───────── Cores ───────── */
+  'Tokens semânticos: é isso que os componentes usam. Cada um aponta para uma primitiva diferente no modo Escuro e no Claro — troque o modo do frame e tudo acompanha.': ['Semantic tokens: this is what components use. Each one points to a different primitive in Dark and Light mode — switch the frame’s mode and everything follows.', 'Tokens semánticos: es lo que usan los componentes. Cada uno apunta a una primitiva distinta en el modo Oscuro y en el Claro — cambia el modo del frame y todo lo acompaña.'],
+  'Fundos': ['Backgrounds', 'Fondos'],
+  'Do fundo do app ao painel elevado — e as camadas de hover e seleção.': ['From the app background to the raised panel — plus the hover and selection layers.', 'Del fondo de la app al panel elevado — y las capas de hover y selección.'],
+  'Do mais forte ao mais apagado. Todos passam de 4,5:1 nas superfícies.': ['From strongest to most faded. All pass 4.5:1 on the surfaces.', 'Del más fuerte al más atenuado. Todos superan 4,5:1 sobre las superficies.'],
+  'Bordas': ['Borders', 'Bordes'],
+  'Contornos finos; border/field é o dos campos e passa de 3:1.': ['Thin outlines; border/field is the one for fields and passes 3:1.', 'Contornos finos; border/field es el de los campos y supera 3:1.'],
+  'O pêssego: ação principal, destaque e o indicador de novidade.': ['The peach: main action, highlight, and the what’s-new indicator.', 'El melocotón: acción principal, destaque y el indicador de novedad.'],
+  'Sucesso, atenção, perigo e informação — sempre com ícone e texto.': ['Success, warning, danger, and info — always with an icon and text.', 'Éxito, atención, peligro e información — siempre con ícono y texto.'],
+  'séries': ['series', 'series'],
+  'As 8 séries em ordem fixa, validadas para daltonismo.': ['The 8 series in a fixed order, validated for color blindness.', 'Las 8 series en orden fijo, validadas para daltonismo.'],
+  'Sequencial (um tom, mais = mais forte), ordinal (etapas em ordem) e divergente (dois polos com o meio neutro).': ['Sequential (one hue, more = stronger), ordinal (steps in order), and diverging (two poles with a neutral middle).', 'Secuencial (un tono, más = más fuerte), ordinal (etapas en orden) y divergente (dos polos con el centro neutro).'],
+  'Status de medidores, o tom de contexto, “Outros”, a grade e o eixo.': ['Meter statuses, the context tone, “Other”, the grid, and the axis.', 'Estados de medidores, el tono de contexto, “Otros”, la cuadrícula y el eje.'],
+
+  /* ───────── Layout ───────── */
+  'Breakpoints, as medidas do app shell e as larguras máximas de conteúdo e de leitura. Tudo em variáveis de Dimensões: layout/* e breakpoint/*.': ['Breakpoints, the app shell measurements, and the maximum content and reading widths. All in Dimensions variables: layout/* and breakpoint/*.', 'Breakpoints, las medidas del app shell y los anchos máximos de contenido y de lectura. Todo en variables de Dimensiones: layout/* y breakpoint/*.'],
+  'Do celular deitado (sm) às telas largas (2xl). O app muda de verdade em md e lg.': ['From a phone in landscape (sm) to wide screens (2xl). The app really changes at md and lg.', 'Del móvil en horizontal (sm) a las pantallas anchas (2xl). La app cambia de verdad en md y lg.'],
+  'Largura': ['Width', 'Ancho'],
+  'Ainda sem regra no app — disponível para componentes.': ['No rule in the app yet — available for components.', 'Todavía sin regla en la app — disponible para componentes.'],
+  'Abaixo dele, margens e painéis compactam e as tabelas viram cartões.': ['Below it, margins and panels compact and tables become cards.', 'Por debajo, márgenes y paneles se compactan y las tablas pasan a tarjetas.'],
+  'Abaixo dele, a sidebar vira gaveta; a partir dele, fica fixa e recolhível (⌘B).': ['Below it, the sidebar becomes a drawer; from it up, it’s fixed and collapsible (⌘B).', 'Por debajo, la sidebar pasa a panel deslizante; desde él, queda fija y plegable (⌘B).'],
+  'Abaixo dele, as grades de 4 colunas passam para 2.': ['Below it, 4-column grids drop to 2.', 'Por debajo, las cuadrículas de 4 columnas pasan a 2.'],
+  'Telas largas mantêm a largura máxima de conteúdo.': ['Wide screens keep the maximum content width.', 'Las pantallas anchas mantienen el ancho máximo de contenido.'],
+  'Em escala 1:2: sidebar flutuante, painel principal, topbar e o respiro entre eles.': ['At 1:2 scale: floating sidebar, main panel, topbar, and the breathing room between them.', 'A escala 1:2: sidebar flotante, panel principal, topbar y el respiro entre ellos.'],
+  'Shell 1:2': ['Shell 1:2', 'Shell 1:2'],
+  'px de margem do conteúdo': ['px content margin', 'px de margen del contenido'],
+  'px entre os painéis': ['px between panels', 'px entre los paneles'],
+  'Larguras de leitura': ['Reading widths', 'Anchos de lectura'],
+  'Conteúdo até 1160 px; texto corrido até 720 px, perto de 70 caracteres por linha.': ['Content up to 1160 px; running text up to 720 px, about 70 characters per line.', 'Contenido hasta 1160 px; texto corrido hasta 720 px, cerca de 70 caracteres por línea.'],
+  'Larguras': ['Widths', 'Anchos'],
+
+  /* ───────── Tipografia ───────── */
+  'Inter Tight para títulos, Inter para leitura e JetBrains Mono para código. Cada linha é um estilo de texto do Figma com o mesmo nome do token.': ['Inter Tight for headings, Inter for reading, and JetBrains Mono for code. Each row is a Figma text style with the same name as the token.', 'Inter Tight para títulos, Inter para lectura y JetBrains Mono para código. Cada fila es un estilo de texto de Figma con el mismo nombre del token.'],
+  'Estilos de texto': ['Text styles', 'Estilos de texto'],
+  'Estilos': ['Styles', 'Estilos'],
+  'Tamanho e entrelinha em px; o tracking vai em %.': ['Size and line height in px; tracking is in %.', 'Tamaño e interlineado en px; el tracking va en %.'],
+  'Especificação': ['Specification', 'Especificación'],
+  'Vamos construir com refinamento': ['Let’s build with refinement', 'Construyamos con refinamiento'],
+  'Um design system plano, calmo e preciso.': ['A flat, calm, and precise design system.', 'Un design system plano, sereno y preciso.'],
+
+  /* ───────── Espaço, raio e sombra ───────── */
+  'Espaço, raio e sombra': ['Space, radius, and shadow', 'Espacio, radio y sombra'],
+  'Escala de 4 em 4 px para o ritmo, cantos do sutil à pílula e sombras para separar camadas. Medidas ligadas às variáveis de Dimensões.': ['A 4 px scale for rhythm, corners from subtle to pill, and shadows to separate layers. Sizes bound to the Dimensions variables.', 'Escala de 4 en 4 px para el ritmo, esquinas de sutil a píldora y sombras para separar capas. Medidas ligadas a las variables de Dimensiones.'],
+  'Estilos de efeito': ['Effect styles', 'Estilos de efecto'],
+  'Espaçamento': ['Spacing', 'Espaciado'],
+  'space/050 a space/1200. Use em gap e padding.': ['space/050 to space/1200. Use for gap and padding.', 'space/050 a space/1200. Úsalo en gap y padding.'],
+  'Espaços': ['Spaces', 'Espacios'],
+  'Raios': ['Radii', 'Radios'],
+  'radius/xs a radius/full.': ['radius/xs to radius/full.', 'radius/xs a radius/full.'],
+  'Sombras': ['Shadows', 'Sombras'],
+  'Estilos de efeito não têm modos no Figma: há uma versão para cada tema.': ['Effect styles have no modes in Figma: there’s one version per theme.', 'Los estilos de efecto no tienen modos en Figma: hay una versión para cada tema.'],
+
+  /* ───────── Movimento ───────── */
+  'Movimento': ['Motion', 'Movimiento'],
+  'Transições com propósito: curtas, com a curva certa para entrar, sair ou se deslocar. As durações são variáveis de Dimensões (em ms); as curvas ficam documentadas aqui.': ['Transitions with a purpose: short, with the right curve to enter, exit, or move. Durations are Dimensions variables (in ms); curves are documented here.', 'Transiciones con propósito: cortas, con la curva correcta para entrar, salir o desplazarse. Las duraciones son variables de Dimensiones (en ms); las curvas quedan documentadas aquí.'],
+  'Curvas': ['Curves', 'Curvas'],
+  'Durações': ['Durations', 'Duraciones'],
+  'duration/instant a duration/slower. A maior parte das interações usa fast.': ['duration/instant to duration/slower. Most interactions use fast.', 'duration/instant a duration/slower. La mayoría de las interacciones usa fast.'],
+  'Troca de estado sem transição.': ['State change with no transition.', 'Cambio de estado sin transición.'],
+  'Duração': ['Duration', 'Duración'],
+  'Hover, foco e cor — a maior parte das interações.': ['Hover, focus, and color — most interactions.', 'Hover, foco y color — la mayoría de las interacciones.'],
+  'Menus, tooltips, chevrons e popovers.': ['Menus, tooltips, chevrons, and popovers.', 'Menús, tooltips, chevrons y popovers.'],
+  'Sidebar, gaveta, grupos do menu e entrada de página.': ['Sidebar, drawer, menu groups, and page entrance.', 'Sidebar, panel deslizante, grupos del menú y entrada de página.'],
+  'Para transições grandes e raras.': ['For large, rare transitions.', 'Para transiciones grandes y poco frecuentes.'],
+  'cubic-bezier do CSS. No protótipo do Figma, use “Personalizada” com os mesmos quatro números.': ['CSS cubic-bezier. In a Figma prototype, use “Custom” with the same four numbers.', 'cubic-bezier de CSS. En el prototipo de Figma, usa “Personalizada” con los mismos cuatro números.'],
+  'Padrão para quase tudo: sai rápido e assenta suave.': ['The default for almost everything: leaves fast and settles softly.', 'Predeterminada para casi todo: sale rápido y se asienta suave.'],
+  'Superfícies que se deslocam: menus, sidebar, gaveta.': ['Surfaces that move: menus, sidebar, drawer.', 'Superficies que se desplazan: menús, sidebar, panel deslizante.'],
+  'Entradas: o elemento chega e desacelera.': ['Entrances: the element arrives and slows down.', 'Entradas: el elemento llega y desacelera.'],
+  'Saídas: o elemento ganha velocidade ao sair.': ['Exits: the element speeds up as it leaves.', 'Salidas: el elemento gana velocidad al salir.'],
+  'Progresso e loops contínuos.': ['Progress and continuous loops.', 'Progreso y bucles continuos.'],
+  'Movimento reduzido': ['Reduced motion', 'Movimiento reducido'],
+  'Com prefers-reduced-motion, as trocas viram instantâneas e nada se desloca.': ['With prefers-reduced-motion, changes become instant and nothing moves.', 'Con prefers-reduced-motion, los cambios pasan a ser instantáneos y nada se desplaza.'],
+  'Respeite o movimento reduzido do sistema': ['Respect the system’s reduced motion', 'Respeta el movimiento reducido del sistema'],
+  'Opacidade e cor podem ficar; deslocamento sai': ['Opacity and color can stay; movement goes', 'Opacidad y color pueden quedarse; el desplazamiento sale'],
+  'Animação só de enfeite': ['Purely decorative animation', 'Animación solo decorativa'],
+  'Piscar mais de 3 vezes por segundo': ['Flashing more than 3 times per second', 'Parpadear más de 3 veces por segundo'],
+});

@@ -22,7 +22,8 @@
     var col = box('Linhas', { dir: 'V', gap: 0 });
     for (var line of lines) {
       var row = box('Linha', { dir: 'H', gap: 0 });
-      for (var part of line) add(row, await text(part[0], { style: style, color: KIND[part[1]], name: part[1] === 'c' ? 'Comentário' : part[1] === 'a' ? 'Destaque' : 'Código' }));
+      // só o comentário se traduz; o resto é código
+      for (var part of line) add(row, await text(part[0], { style: style, color: KIND[part[1]], name: part[1] === 'c' ? 'Comentário' : part[1] === 'a' ? 'Destaque' : 'Código', raw: part[1] !== 'c' }));
       add(col, row);
     }
     return col;

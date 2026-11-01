@@ -329,6 +329,15 @@ function hexToRgba(hex) {
   return { r: n(0), g: n(2), b: n(4), a: h.length === 8 ? n(6) : 1 };
 }
 
+// o plugin “Órbita para Figma” pode ter criado tudo em inglês ou espanhol: acha a coleção, o modo e a sombra em qualquer idioma
+var OTHER_NAMES = { 'Primitivas': ['Primitives'], 'Semânticos': ['Semantic'], 'Dimensões': ['Dimensions', 'Dimensiones'], 'Escuro': ['Dark', 'Oscuro'], 'Claro': ['Light'], 'Valor': ['Value'] };
+function same(found, name) { return found === name || (OTHER_NAMES[name] || []).indexOf(found) >= 0; }
+function sameStyle(found, name) {
+  var a = found.split('/');
+  var b = name.split('/');
+  return a.slice(1).join('/') === b.slice(1).join('/') && same(a[0], b[0]);
+}
+
 async function run() {
   var report = { criadas: 0, atualizadas: 0, estilos: 0, fontes: [] };
   var collections = await figma.variables.getLocalVariableCollectionsAsync();
@@ -336,11 +345,11 @@ async function run() {
   var byName = {};
 
   for (var c of DATA.collections) {
-    var col = collections.find(function (x) { return x.name === c.name; }) || figma.variables.createVariableCollection(c.name);
+    var col = collections.find(function (x) { return same(x.name, c.name); }) || figma.variables.createVariableCollection(c.name);
     var modeIds = {};
     c.modes.forEach(function (m, i) {
-      var mode = col.modes.find(function (x) { return x.name === m; });
-      if (!mode && i === 0 && !c.modes.includes(col.modes[0].name)) {
+      var mode = col.modes.find(function (x) { return same(x.name, m); });
+      if (!mode && i === 0 && !c.modes.some(function (n) { return same(col.modes[0].name, n); })) {
         col.renameMode(col.modes[0].modeId, m);
         mode = { modeId: col.modes[0].modeId };
       }
@@ -399,8 +408,8 @@ async function run() {
 
   var effectStyles = await figma.getLocalEffectStylesAsync();
   for (var e of DATA.effectStyles) {
-    var fx = effectStyles.find(function (x) { return x.name === e.name; }) || figma.createEffectStyle();
-    fx.name = e.name;
+    var fx = effectStyles.find(function (x) { return sameStyle(x.name, e.name); });
+    if (!fx) { fx = figma.createEffectStyle(); fx.name = e.name; }
     fx.description = e.description || '';
     fx.effects = e.effects.map(function (l) {
       return { type: 'DROP_SHADOW', color: l.color, offset: { x: l.x, y: l.y }, radius: l.blur, spread: l.spread, visible: true, blendMode: 'NORMAL', showShadowBehindNode: false };

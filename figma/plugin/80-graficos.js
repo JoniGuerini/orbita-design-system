@@ -94,7 +94,7 @@
     o = o || {};
     var attrs = o.area ? 'fill="#000000" fill-opacity="' + (o.opacity || 0.1) + '" stroke="none"' : 'fill="none" stroke="#000000" stroke-width="' + (o.weight || 2) + '" stroke-linecap="round" stroke-linejoin="round"';
     var svg = figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="' + d + '" ' + attrs + '/></svg>');
-    svg.name = name;
+    svg.name = L(name);
     svg.fills = [];
     svg.clipsContent = false;
     svg.children.forEach(function (ch) { ch.constraints = { horizontal: 'SCALE', vertical: 'SCALE' }; });
@@ -494,11 +494,11 @@
       return '<path d="M' + pt(R, a0) + 'A' + r2(R) + ' ' + r2(R) + ' 0 ' + large + ' 1 ' + pt(R, a1) + 'L' + pt(r, a1) + 'A' + r2(r) + ' ' + r2(r) + ' 0 ' + large + ' 0 ' + pt(r, a0) + 'Z" fill="#000000" stroke="none"/>';
     });
     var svg = figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">' + paths.join('') + '</svg>');
-    svg.name = 'Fatias';
+    svg.name = L('Fatias');
     svg.fills = [];
     svg.clipsContent = false;
     svg.children.forEach(function (ch, i) {
-      ch.name = parts[i][0];
+      ch.name = L(parts[i][0]);
       ch.constraints = { horizontal: 'SCALE', vertical: 'SCALE' };
       ch.fills = [paint(parts[i][2])];
     });

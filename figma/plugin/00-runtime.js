@@ -16,20 +16,22 @@
 
 var ORB = {
   vars: {}, // nome → Variable
-  collections: {}, // nome → VariableCollection
+  collections: {}, // nome em português ('Semânticos') → VariableCollection
   modes: {}, // 'Escuro' | 'Claro' → modeId (coleção Semânticos)
   active: ['Claro', 'Escuro'], // modos escolhidos na janela, na ordem das prévias (o plano gratuito do Figma aceita um só)
   textStyles: {},
-  effectStyles: {},
+  effectStyles: {}, // nome em português ('Escuro/shadow/sm') → EffectStyle
   registry: {}, // orbita-key → node
   fonts: {},
   report: { variaveis: 0, estilos: 0, componentes: 0, variantes: 0, blocos: 0, icones: 0, avisos: [] },
-  pages: {},
+  pages: {}, // 'Fundamentos' | 'Ícones' | 'Componentes' → PageNode
+  block: '', // bloco em construção (para o relatório de textos sem tradução)
   progress: function () {},
 };
 
 var KEY = 'orbita-key';
 var PROP = 'orbita-prop';
+var PAGE = 'orbita-page';
 
 /* ───────── Utilidades ───────── */
 
@@ -60,28 +62,42 @@ function addMode(col, name) {
     return col.addMode(name);
   } catch (err) {
     if (/Limited to/.test(String(err && err.message))) {
-      throw new Error('O plano deste arquivo no Figma aceita um modo só por coleção de variáveis. Em Modos, escolha “Só Escuro” ou “Só Claro”, ou leve o arquivo para um time com plano pago.');
+      throw new Error(L3(
+        'O plano deste arquivo no Figma aceita um modo só por coleção de variáveis. Em Modos, escolha “Só Escuro” ou “Só Claro”, ou leve o arquivo para um time com plano pago.',
+        'This file’s Figma plan allows only one mode per variable collection. Under Modes, choose “Dark only” or “Light only”, or move the file to a team on a paid plan.',
+        'El plan de este archivo en Figma admite un solo modo por colección de variables. En Modos, elige “Solo Oscuro” o “Solo Claro”, o lleva el archivo a un equipo con plan de pago.',
+      ));
     }
     throw err;
   }
+}
+
+/** Nome em português (a chave interna) de uma coleção ou de um modo, em qualquer idioma em que esteja no arquivo. */
+function canonical(name, known) {
+  for (var k of known) if (anyLang(k).indexOf(name) >= 0) return k;
+  return name;
 }
 
 async function importTokens() {
   var collections = await figma.variables.getLocalVariableCollectionsAsync();
   var allVars = await figma.variables.getLocalVariablesAsync();
   var byCollection = {};
+  var collectionNames = DATA.collections.map(function (c) { return c.name; });
+  var modeNames = [];
+  DATA.collections.forEach(function (c) { c.modes.forEach(function (m) { if (modeNames.indexOf(m) < 0) modeNames.push(m); }); });
 
   for (var c of DATA.collections) {
-    var col = collections.find(function (x) { return x.name === c.name; }) || figma.variables.createVariableCollection(c.name);
+    // a coleção pode ter sido criada em outro idioma: acha por qualquer nome e renomeia
+    var names = anyLang(c.name);
+    var col = collections.find(function (x) { return names.indexOf(x.name) >= 0; }) || figma.variables.createVariableCollection(L(c.name));
+    col.name = L(c.name);
     var modeIds = {};
     var wanted = modesOf(c);
     wanted.forEach(function (m, i) {
-      var mode = col.modes.find(function (x) { return x.name === m; });
-      if (!mode && i === 0 && wanted.indexOf(col.modes[0].name) < 0) {
-        col.renameMode(col.modes[0].modeId, m);
-        mode = { modeId: col.modes[0].modeId };
-      }
-      modeIds[m] = mode ? mode.modeId : addMode(col, m);
+      var mode = col.modes.find(function (x) { return canonical(x.name, modeNames) === m; });
+      if (!mode && i === 0 && wanted.indexOf(canonical(col.modes[0].name, modeNames)) < 0) mode = { modeId: col.modes[0].modeId };
+      if (mode) col.renameMode(mode.modeId, L(m));
+      modeIds[m] = mode ? mode.modeId : addMode(col, L(m));
     });
     if (c.hiddenFromPublishing) col.hiddenFromPublishing = true;
     var vars = {};
@@ -91,13 +107,14 @@ async function importTokens() {
   }
   // coleções que já estão no arquivo e não vieram agora (importação em partes): os aliases podem apontar para elas
   collections.forEach(function (col) {
-    if (byCollection[col.name]) return;
+    var id = canonical(col.name, collectionNames);
+    if (byCollection[id]) return;
     var vars = {};
     var modeIds = {};
-    col.modes.forEach(function (m) { modeIds[m.name] = m.modeId; });
+    col.modes.forEach(function (m) { modeIds[canonical(m.name, modeNames)] = m.modeId; });
     allVars.filter(function (v) { return v.variableCollectionId === col.id; }).forEach(function (v) { vars[v.name] = v; });
-    byCollection[col.name] = { col: col, modeIds: modeIds, vars: vars };
-    ORB.collections[col.name] = col;
+    byCollection[id] = { col: col, modeIds: modeIds, vars: vars };
+    ORB.collections[id] = col;
   });
 
   // 1º: todas as variáveis existem (os aliases precisam delas)
@@ -107,7 +124,7 @@ async function importTokens() {
       var variable = entry.vars[v.name];
       if (variable && variable.resolvedType !== v.type) { variable.remove(); variable = null; }
       if (!variable) variable = figma.variables.createVariable(v.name, entry.col, v.type);
-      variable.description = v.description || '';
+      variable.description = L(v.description || '');
       variable.scopes = v.scopes;
       if (v.hiddenFromPublishing) variable.hiddenFromPublishing = true;
       if (v.codeSyntax) variable.setVariableCodeSyntax('WEB', v.codeSyntax);
@@ -145,7 +162,7 @@ async function importTokens() {
     var font = await ensureFont(s.fontFamily, s.fontStyle);
     var style = textStyles.find(function (x) { return x.name === s.name; }) || figma.createTextStyle();
     style.name = s.name;
-    style.description = s.description || '';
+    style.description = L(s.description || '');
     style.fontName = font;
     style.fontSize = s.fontSize;
     style.lineHeight = { unit: 'PIXELS', value: s.lineHeight };
@@ -155,12 +172,17 @@ async function importTokens() {
     ORB.report.estilos++;
   }
 
+  // sombras: 'Escuro/shadow/sm' — o modo no começo do nome vai no idioma ativo
   var effectStyles = await figma.getLocalEffectStylesAsync();
-  effectStyles.forEach(function (x) { ORB.effectStyles[x.name] = x; });
+  var styleName = function (name) {
+    var parts = name.split('/');
+    return [L(parts[0])].concat(parts.slice(1)).join('/');
+  };
   for (var e of DATA.effectStyles || []) {
-    var fx = effectStyles.find(function (x) { return x.name === e.name; }) || figma.createEffectStyle();
-    fx.name = e.name;
-    fx.description = e.description || '';
+    var fxNames = anyLang(e.name.split('/')[0]).map(function (m) { return [m].concat(e.name.split('/').slice(1)).join('/'); });
+    var fx = effectStyles.find(function (x) { return fxNames.indexOf(x.name) >= 0; }) || figma.createEffectStyle();
+    fx.name = styleName(e.name);
+    fx.description = L(e.description || '');
     fx.effects = e.effects.map(function (l) {
       return { type: 'DROP_SHADOW', color: l.color, offset: { x: l.x, y: l.y }, radius: l.blur, spread: l.spread, visible: true, blendMode: 'NORMAL', showShadowBehindNode: false };
     });
@@ -177,7 +199,7 @@ async function ensureFont(family, style) {
     await figma.loadFontAsync({ family: family, style: style });
     ORB.fonts[id] = { family: family, style: style };
   } catch (err) {
-    warn('Fonte ausente: ' + family + ' ' + style + ' (usei Inter)');
+    warn(L3('Fonte ausente: ', 'Missing font: ', 'Fuente ausente: ') + family + ' ' + style + L3(' (usei Inter)', ' (used Inter)', ' (usé Inter)'));
     var fallback = { family: 'Inter', style: style };
     try { await figma.loadFontAsync(fallback); } catch (e2) { fallback = { family: 'Inter', style: 'Regular' }; await figma.loadFontAsync(fallback); }
     ORB.fonts[id] = fallback;
@@ -194,7 +216,7 @@ async function loadFonts() {
 
 function V(name) {
   var v = ORB.vars[name];
-  if (!v) throw new Error('Variável não encontrada: ' + name);
+  if (!v) throw new Error(L3('Variável não encontrada: ', 'Variable not found: ', 'Variable no encontrada: ') + name);
   return v;
 }
 
@@ -277,7 +299,7 @@ var ALIGN = { start: 'MIN', center: 'CENTER', end: 'MAX', between: 'SPACE_BETWEE
 function box(name, o, node) {
   o = o || {};
   var f = node || figma.createFrame();
-  f.name = name;
+  f.name = L(name);
   f.fills = [];
   if (o.dir !== 'none') {
     f.layoutMode = o.dir === 'H' ? 'HORIZONTAL' : 'VERTICAL';
@@ -341,16 +363,18 @@ function addAll(parent, children, o) {
 }
 
 /**
- * Texto com estilo do Órbita. o: { style: 'label-md', color, w, align, name, weight (sobrepõe o peso), size, prop }
+ * Texto com estilo do Órbita. o: { style: 'label-md', color, w, align, name, weight (sobrepõe o peso), size, prop, raw }
  * prop: nome da propriedade de componente de texto que este nó expõe (ex.: 'Rótulo').
+ * O texto passa por L(); raw: true para um texto que já vem traduzido ou que não se traduz (código).
  */
 async function text(chars, o) {
   o = o || {};
+  chars = o.raw ? String(chars) : L(String(chars));
   var t = figma.createText();
   var styleName = 'text/' + (o.style || 'body-sm');
   var style = ORB.textStyles[styleName];
   t.fontName = style ? style.fontName : await ensureFont('Inter', 'Regular');
-  t.characters = String(chars);
+  t.characters = chars;
   if (style) await t.setTextStyleIdAsync(style.id);
   if (o.weight) {
     var family = (style ? style.fontName : t.fontName).family;
@@ -358,7 +382,7 @@ async function text(chars, o) {
   }
   if (o.size) t.fontSize = o.size;
   fill(t, o.color || 'color/fg/default');
-  t.name = o.name || String(chars).slice(0, 40);
+  t.name = o.name ? L(o.name) : chars.slice(0, 40);
   if (o.w) {
     t.resize(o.w, t.height);
     t.textAutoResize = 'HEIGHT';
@@ -373,7 +397,7 @@ async function text(chars, o) {
 function shape(name, o) {
   o = o || {};
   var r = o.ellipse ? figma.createEllipse() : figma.createRectangle();
-  r.name = name;
+  r.name = L(name);
   r.resize(o.w || 8, o.h || o.w || 8);
   fill(r, o.fill || null);
   if (o.stroke) stroke(r, o.stroke, o.strokeWeight);
@@ -390,11 +414,24 @@ function exposes(node, field, propName) {
 
 /* ───────── Registro (rodar de novo atualiza) ───────── */
 
-async function loadRegistry(pageNames) {
+/**
+ * Páginas do Órbita: id ('Componentes') → nome em português ('Órbita · Componentes'), traduzido por L().
+ * A página guarda o id (pluginData orbita-page); as de versões antigas são achadas pelo nome, em qualquer idioma.
+ */
+var PAGES = { Fundamentos: 'Órbita · Fundamentos', 'Ícones': 'Órbita · Ícones', Componentes: 'Órbita · Componentes' };
+
+function pageId(page) {
+  var id = page.getPluginData(PAGE);
+  if (id) return id;
+  return Object.keys(PAGES).find(function (k) { return anyLang(PAGES[k]).indexOf(page.name) >= 0; }) || '';
+}
+
+async function loadRegistry() {
   for (var page of figma.root.children) {
-    if (pageNames.indexOf(page.name) < 0) continue;
+    var id = pageId(page);
+    if (!id || ORB.pages[id]) continue;
     await page.loadAsync();
-    ORB.pages[page.name] = page;
+    ORB.pages[id] = page;
     page.findAll(function (n) { return !!n.getPluginData(KEY); }).forEach(function (n) { ORB.registry[n.getPluginData(KEY)] = n; });
   }
 }
@@ -422,20 +459,25 @@ function addPage() {
     return figma.createPage();
   } catch (err) {
     if (/Starter plan|\d+ pages/.test(String(err && err.message))) {
-      throw new Error('O plano gratuito do Figma aceita 3 páginas por arquivo, e o Órbita usa 3 (Fundamentos, Ícones e Componentes). Apague as outras páginas do arquivo, ou use um arquivo novo, e rode de novo.');
+      throw new Error(L3(
+        'O plano gratuito do Figma aceita 3 páginas por arquivo, e o Órbita usa 3 (Fundamentos, Ícones e Componentes). Apague as outras páginas do arquivo, ou use um arquivo novo, e rode de novo.',
+        'Figma’s free plan allows 3 pages per file, and Órbita uses 3 (Foundations, Icons, and Components). Delete the file’s other pages, or use a new file, and run again.',
+        'El plan gratuito de Figma admite 3 páginas por archivo, y Órbita usa 3 (Fundamentos, Íconos y Componentes). Borra las otras páginas del archivo, o usa un archivo nuevo, y vuelve a ejecutarlo.',
+      ));
     }
     throw err;
   }
 }
 
-async function ensurePage(name) {
-  var page = ORB.pages[name] || figma.root.children.find(function (p) { return p.name === name; });
+async function ensurePage(id) {
+  var page = ORB.pages[id];
   // a página vazia do arquivo novo vira uma do Órbita: o plano gratuito aceita 3 páginas, e o Órbita usa 3
   if (!page) page = await blankDefaultPage();
   if (!page) page = addPage();
-  page.name = name;
+  page.name = L(PAGES[id]);
+  page.setPluginData(PAGE, id);
   await page.loadAsync();
-  ORB.pages[name] = page;
+  ORB.pages[id] = page;
   return page;
 }
 
@@ -460,9 +502,9 @@ function upsertComponent(key, name) {
  * Componente sem variantes. build(comp) monta o conteúdo (use box(name, o, comp) para configurar o layout).
  */
 async function component(key, name, build, o) {
-  var c = upsertComponent('cmp/' + key, name);
+  var c = upsertComponent('cmp/' + key, L(name));
   await build(c);
-  if (o && o.description) c.description = o.description;
+  if (o && o.description) c.description = L(o.description);
   ORB.report.componentes++;
   return c;
 }
@@ -477,8 +519,9 @@ async function variants(key, name, items, o) {
   o = o || {};
   var comps = [];
   for (var it of items) {
+    // a chave usa o português (é a identidade da variante); o nome no Figma vai no idioma ativo
     var vname = Object.keys(it.props).map(function (k) { return k + '=' + it.props[k]; }).join(', ');
-    var c = upsertComponent('var/' + key + '/' + vname, vname);
+    var c = upsertComponent('var/' + key + '/' + vname, variantName(it.props));
     await it.build(c, it.props);
     comps.push(c);
     ORB.report.variantes++;
@@ -494,8 +537,8 @@ async function variants(key, name, items, o) {
     set.setPluginData(KEY, setKey);
     ORB.registry[setKey] = set;
   }
-  set.name = name;
-  if (o.description) set.description = o.description;
+  set.name = L(name);
+  if (o.description) set.description = L(o.description);
 
   // grade das variantes dentro do conjunto (a borda tracejada roxa é do próprio Figma)
   var gap = o.gap === undefined ? 20 : o.gap;
@@ -537,16 +580,24 @@ async function variants(key, name, items, o) {
     Object.keys(o.props).forEach(function (pname) {
       var spec = o.props[pname];
       var defs = set.componentPropertyDefinitions;
-      var found = Object.keys(defs).find(function (k) { return k.split('#')[0] === pname && defs[k].type === spec[0]; });
-      if (found) { keys[pname] = found; return; }
-      var def = spec[1];
+      // a propriedade pode ter sido criada em outro idioma: acha por qualquer nome e traduz nome e texto padrão
+      var names = anyLang(pname);
+      var found = Object.keys(defs).find(function (k) { return names.indexOf(k.split('#')[0]) >= 0 && defs[k].type === spec[0]; });
+      if (found) {
+        var change = {};
+        if (found.split('#')[0] !== Lg(pname)) change.name = Lg(pname);
+        if (spec[0] === 'TEXT' && defs[found].defaultValue !== L(spec[1])) change.defaultValue = L(spec[1]);
+        keys[pname] = Object.keys(change).length ? set.editComponentProperty(found, change) : found;
+        return;
+      }
+      var def = spec[0] === 'TEXT' ? L(spec[1]) : spec[1];
       var opts;
       if (spec[0] === 'INSTANCE_SWAP') {
         var ic = iconComponent(def);
         def = ic.id;
         opts = { preferredValues: (spec[2] || []).map(function (n) { return { type: 'COMPONENT', key: iconComponent(n).key }; }) };
       }
-      keys[pname] = set.addComponentProperty(pname, spec[0], def, opts);
+      keys[pname] = set.addComponentProperty(Lg(pname), spec[0], def, opts);
     });
     // só camadas do próprio componente — nunca as de dentro de uma instância aninhada
     var ownLayer = function (n, c) {
@@ -604,14 +655,26 @@ async function labeledMatrix(set, colLabels, rowLabels) {
   return frame;
 }
 
+/** Nome da variante no idioma ativo: { Variante: 'Primário' } → 'Variant=Primary'. */
+function variantName(props) {
+  return Object.keys(props).map(function (k) { return Lg(k) + '=' + LV(k, props[k]); }).join(', ');
+}
+
+/** Propriedades de variante no idioma ativo, para setProperties: { Estado: 'Ausente' } → { State: 'Away' }. */
+function variantProps(props) {
+  var out = {};
+  Object.keys(props).forEach(function (k) { out[Lg(k)] = LV(k, props[k]); });
+  return out;
+}
+
 /** A variante de um conjunto pelo valor das propriedades — para montar exemplos com instâncias. */
 function variant(set, props) {
-  var want = Object.keys(props).map(function (k) { return k + '=' + props[k]; });
+  var want = variantName(props).split(', ');
   var found = set.children.find(function (c) {
     var parts = c.name.split(', ');
     return want.every(function (w) { return parts.indexOf(w) >= 0; });
   });
-  if (!found) throw new Error('Variante não encontrada: ' + set.name + ' · ' + want.join(', '));
+  if (!found) throw new Error(L3('Variante não encontrada: ', 'Variant not found: ', 'Variante no encontrada: ') + set.name + ' · ' + want.join(', '));
   return found;
 }
 
@@ -623,10 +686,11 @@ function instance(compOrSet, props, overrides) {
     var defs = inst.componentProperties;
     var map = {};
     Object.keys(overrides).forEach(function (short) {
-      var full = Object.keys(defs).find(function (k) { return k.split('#')[0] === short; });
+      var full = Object.keys(defs).find(function (k) { return k.split('#')[0] === Lg(short); });
       if (!full) return;
       var val = overrides[short];
       if (defs[full].type === 'INSTANCE_SWAP') val = iconComponent(val).id;
+      else if (defs[full].type === 'TEXT') val = L(val);
       map[full] = val;
     });
     if (Object.keys(map).length) inst.setProperties(map);
@@ -643,21 +707,31 @@ ICONS.forEach(function (i) { ICON_INDEX[i.name] = i; });
 // muda quando o jeito de montar o ícone muda: força refazer os ícones na mesma versão do Órbita
 var ICON_FORMAT = 'contorno';
 
+/** Nome e palavras-chave do ícone no idioma ativo (as camadas também: “Ícone”, “Icon”, “Ícono”). */
+function nameIcon(c, def) {
+  c.name = L('Ícone') + '/' + def.name;
+  c.description = LANG === 'en' ? def.keywordsEn : LANG === 'es' ? def.keywordsEs : def.keywords;
+  c.children.forEach(function (ch) { ch.name = ch.name.replace(/^[^·]+/, L('Ícone') + (ch.name.indexOf('·') > 0 ? ' ' : '')); });
+  c.setPluginData('orbita-lang', LANG);
+}
+
 function iconComponent(name) {
   var key = 'icon/' + name;
   var c = live(key, 'COMPONENT');
-  if (c && c.getPluginData('orbita-built') === META.version + '/' + ICON_FORMAT) return c;
   var def = ICON_INDEX[name];
-  if (!def) throw new Error('Ícone não encontrado: ' + name);
+  if (c && c.getPluginData('orbita-built') === META.version + '/' + ICON_FORMAT) {
+    // feito nesta versão: em outro idioma, só renomeia (o id e a camada continuam os mesmos)
+    if (c.getPluginData('orbita-lang') !== LANG && def) nameIcon(c, def);
+    return c;
+  }
+  if (!def) throw new Error(L3('Ícone não encontrado: ', 'Icon not found: ', 'Ícono no encontrado: ') + name);
   if (!c) {
     c = figma.createComponent();
     c.setPluginData(KEY, key);
     ORB.registry[key] = c;
-    var holder = ORB.pages['Órbita · Ícones'] || figma.currentPage;
+    var holder = ORB.pages['Ícones'] || figma.currentPage;
     holder.appendChild(c);
   } else c.children.slice().forEach(function (ch) { ch.remove(); });
-  c.name = 'Ícone/' + name;
-  c.description = def.keywords;
   c.resize(24, 24);
   c.fills = [];
   c.clipsContent = false;
@@ -686,7 +760,7 @@ function iconComponent(name) {
     if (n.fills && n.fills.length) { n.strokes = []; c.appendChild(n); parts.push(n); }
   };
   c.children.slice().forEach(collect);
-  if (!parts.length) throw new Error('Ícone sem forma: ' + name);
+  if (!parts.length) throw new Error(L3('Ícone sem forma: ', 'Icon without a shape: ', 'Ícono sin forma: ') + name);
   // uma camada por opacidade (só o heatmap tem células a 35% e 70%); a cheia é sempre “Ícone”
   var byOpacity = {};
   parts.forEach(function (p) {
@@ -702,6 +776,7 @@ function iconComponent(name) {
     return v;
   });
   c.children.slice().forEach(function (ch) { if (keep.indexOf(ch) < 0) ch.remove(); });
+  nameIcon(c, def);
   colorIcon(c, 'color/fg/default');
   c.setPluginData('orbita-built', META.version + '/' + ICON_FORMAT);
   ORB.report.icones++;
@@ -770,7 +845,7 @@ async function docBlock(def, content) {
   // cabeçalho: primitivas de propósito — escuro nos dois modos, como uma capa
   var head = box('Cabeçalho', { dir: 'V', gap: 10, pad: [36, 40, 36, 40], fill: 'color/neutral/950', radius: 24 });
   add(block, head, { fillW: true });
-  add(head, await text(def.group.toUpperCase(), { style: 'overline', color: 'color/brand/400', name: 'Grupo' }));
+  add(head, await text(L(def.group).toUpperCase(), { style: 'overline', color: 'color/brand/400', name: 'Grupo', raw: true }));
   add(head, await text(def.title, { style: 'heading-xl', color: 'color/neutral/50', name: 'Título' }));
   var row = box('Descrição e tags', { dir: 'H', gap: 24, cross: 'end', align: 'between' });
   add(head, row, { fillW: true });
