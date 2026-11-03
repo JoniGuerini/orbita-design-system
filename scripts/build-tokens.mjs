@@ -269,8 +269,6 @@ function cssBlock(selector, tokens, mode, emit, extra = []) {
   return `${selector} {\n${lines.join('\n')}\n}`;
 }
 
-const indent = (str) => str.replace(/^/gm, '  ');
-
 /* ───────────────────────── Build ───────────────────────── */
 
 export async function buildTokens({ quiet = false } = {}) {

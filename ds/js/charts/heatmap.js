@@ -209,7 +209,6 @@ export function heatmap(host, input) {
 
 /* ───────── Calendário ───────── */
 
-const DAY = 86400000;
 const dateCache = new Map();
 /** Datas do calendário no idioma atual; dias da semana curtos e sem ponto (Dom, Seg… · Sun, Mon…). */
 function dates() {

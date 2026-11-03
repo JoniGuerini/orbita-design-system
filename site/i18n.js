@@ -22,8 +22,6 @@ const STRINGS = {
   accountTooltip: T((v) => `Lume ${v} · novidades`, (v) => `Lume ${v} · what’s new`, (v) => `Lume ${v} · novedades`),
   youAreHere: T('Você está em', 'You are here', 'Estás en'),
   theme: T('Tema', 'Theme', 'Tema'),
-  dark: T('Escuro', 'Dark', 'Oscuro'),
-  light: T('Claro', 'Light', 'Claro'),
   orange: T('Laranja', 'Orange', 'Naranja'),
   system: T('Sistema', 'System', 'Sistema'),
   lightTheme: T('Lume claro', 'Lume light', 'Lume claro'),

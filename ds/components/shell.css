@@ -439,20 +439,6 @@
   outline: none;
 }
 
-/* Fundo de borda a borda do painel, por trás da topbar (ex.: arte do início) */
-.ds-main__backdrop {
-  position: absolute;
-  top: calc(-1 * (var(--ds-layout-topbar) + var(--_pt)));
-  inset-inline: calc(-1 * var(--_px));
-  z-index: 0;
-  pointer-events: none;
-}
-
-.ds-main__backdrop ~ * {
-  position: relative;
-  z-index: 1;
-}
-
 .ds-shell__scrim {
   display: none;
 }
