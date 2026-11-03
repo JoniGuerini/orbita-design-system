@@ -515,7 +515,7 @@
   --ds-color-bg-inverse: var(--ds-color-neutral-100);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-white) 5%, transparent);
   --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
-  --ds-color-bg-selected: color-mix(in srgb, var(--ds-color-white) 7%, transparent);
+  --ds-color-bg-selected: color-mix(in srgb, var(--ds-color-refugio-300) 10%, transparent);
   --ds-color-bg-overlay: color-mix(in srgb, var(--ds-color-black) 60%, transparent);
 
   /* color.fg */
@@ -524,9 +524,9 @@
   --ds-color-fg-subtle: var(--ds-color-neutral-400);
   --ds-color-fg-disabled: var(--ds-color-neutral-600);
   --ds-color-fg-inverse: var(--ds-color-neutral-975);
-  --ds-color-fg-brand: var(--ds-color-neutral-100);
-  --ds-color-fg-link: var(--ds-color-neutral-50);
-  --ds-color-fg-link-hover: var(--ds-color-white);
+  --ds-color-fg-brand: var(--ds-color-refugio-200);
+  --ds-color-fg-link: var(--ds-color-refugio-200);
+  --ds-color-fg-link-hover: var(--ds-color-refugio-100);
 
   /* color.border */
   --ds-color-border-subtle: color-mix(in srgb, var(--ds-color-white) 6%, transparent);
@@ -535,17 +535,17 @@
   --ds-color-border-control: color-mix(in srgb, var(--ds-color-white) 13%, transparent);
   --ds-color-border-field: color-mix(in srgb, var(--ds-color-white) 38%, transparent);
   --ds-color-border-field-hover: color-mix(in srgb, var(--ds-color-white) 52%, transparent);
-  --ds-color-border-focus: var(--ds-color-neutral-300);
+  --ds-color-border-focus: var(--ds-color-refugio-300);
 
   /* color.brand */
-  --ds-color-brand-solid: var(--ds-color-neutral-100);
-  --ds-color-brand-solid-hover: var(--ds-color-neutral-50);
-  --ds-color-brand-solid-pressed: var(--ds-color-neutral-200);
-  --ds-color-brand-subtle: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
-  --ds-color-brand-subtle-hover: color-mix(in srgb, var(--ds-color-white) 12%, transparent);
-  --ds-color-brand-fg: var(--ds-color-neutral-100);
-  --ds-color-brand-border: color-mix(in srgb, var(--ds-color-white) 20%, transparent);
-  --ds-color-brand-on-solid: var(--ds-color-neutral-950);
+  --ds-color-brand-solid: var(--ds-color-refugio-300);
+  --ds-color-brand-solid-hover: var(--ds-color-refugio-200);
+  --ds-color-brand-solid-pressed: var(--ds-color-refugio-400);
+  --ds-color-brand-subtle: color-mix(in srgb, var(--ds-color-refugio-300) 14%, transparent);
+  --ds-color-brand-subtle-hover: color-mix(in srgb, var(--ds-color-refugio-300) 20%, transparent);
+  --ds-color-brand-fg: var(--ds-color-refugio-200);
+  --ds-color-brand-border: color-mix(in srgb, var(--ds-color-refugio-300) 32%, transparent);
+  --ds-color-brand-on-solid: var(--ds-color-refugio-900);
   --ds-color-brand-indicator: var(--ds-color-terracotta-400);
 
   /* color.success */

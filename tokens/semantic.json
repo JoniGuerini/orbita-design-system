@@ -274,7 +274,7 @@
         "light-sidebar": "alpha({color.white}, 0.1)"
       },
       "selected": {
-        "dark": "alpha({color.white}, 0.07)",
+        "dark": "alpha({color.refugio.300}, 0.1)",
         "orange": "alpha({color.neutral.975}, 0.06)",
         "light": "alpha({color.refugio.700}, 0.07)",
         "light-sidebar": "alpha({color.white}, 0.09)"
@@ -317,17 +317,17 @@
         "light": "{color.refugio.25}"
       },
       "brand": {
-        "dark": "{color.neutral.100}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.700}",
         "light": "{color.refugio.700}"
       },
       "link": {
-        "dark": "{color.neutral.50}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.700}",
         "light": "{color.refugio.700}"
       },
       "link-hover": {
-        "dark": "{color.white}",
+        "dark": "{color.refugio.100}",
         "orange": "{color.brand.800}",
         "light": "{color.refugio.850}"
       }
@@ -373,7 +373,7 @@
         "light-sidebar": "alpha({color.white}, 0.58)"
       },
       "focus": {
-        "dark": "{color.neutral.300}",
+        "dark": "{color.refugio.300}",
         "orange": "{color.brand.600}",
         "light": "{color.refugio.600}",
         "light-sidebar": "{color.refugio.300}"
@@ -381,42 +381,42 @@
     },
     "brand": {
       "solid": {
-        "dark": "{color.neutral.100}",
+        "dark": "{color.refugio.300}",
         "orange": "{color.brand.500}",
         "light": "{color.refugio.700}"
       },
       "solid-hover": {
-        "dark": "{color.neutral.50}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.400}",
         "light": "{color.refugio.800}"
       },
       "solid-pressed": {
-        "dark": "{color.neutral.200}",
+        "dark": "{color.refugio.400}",
         "orange": "{color.brand.600}",
         "light": "{color.refugio.850}"
       },
       "subtle": {
-        "dark": "alpha({color.white}, 0.08)",
+        "dark": "alpha({color.refugio.300}, 0.14)",
         "orange": "{color.brand.50}",
         "light": "{color.refugio.100}"
       },
       "subtle-hover": {
-        "dark": "alpha({color.white}, 0.12)",
+        "dark": "alpha({color.refugio.300}, 0.2)",
         "orange": "{color.brand.100}",
         "light": "{color.refugio.150}"
       },
       "fg": {
-        "dark": "{color.neutral.100}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.700}",
         "light": "{color.refugio.700}"
       },
       "border": {
-        "dark": "alpha({color.white}, 0.2)",
+        "dark": "alpha({color.refugio.300}, 0.32)",
         "orange": "{color.brand.200}",
         "light": "{color.refugio.200}"
       },
       "on-solid": {
-        "dark": "{color.neutral.950}",
+        "dark": "{color.refugio.900}",
         "orange": "{color.brand.950}",
         "light": "{color.refugio.25}"
       },

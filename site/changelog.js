@@ -26,9 +26,9 @@ const RELEASES = [
         name: T('Temas', 'Themes', 'Temas'),
         items: [
           ['novo', T(
-            'Lume escuro: o Escuro de antes, quase preto e quente, sem o pêssego — botão primário claro e terracota no indicador',
-            'Lume dark: the previous Dark, near-black and warm, without the peach — a light primary button and terracotta on the indicator',
-            'Lume oscuro: el Oscuro de antes, casi negro y cálido, sin el melocotón — botón primario claro y terracota en el indicador',
+            'Lume escuro: o Escuro de antes, quase preto e quente, com a ardósia do Lume como acento no lugar do pêssego — botão primário, links, foco e seleção — e terracota no indicador',
+            'Lume dark: the previous Dark, near-black and warm, with Lume’s slate as the accent instead of the peach — primary button, links, focus, and selection — and terracotta on the indicator',
+            'Lume oscuro: el Oscuro de antes, casi negro y cálido, con la pizarra de Lume como acento en lugar del melocotón — botón primario, enlaces, foco y selección — y terracota en el indicador',
           ), '/fundamentos/cores'],
           ['melhoria', T(
             'Sistema é o padrão: Lume claro ou Lume escuro, conforme o aparelho. O seletor da topbar fica Sistema · Lume claro · Lume escuro · Laranja',
