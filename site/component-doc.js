@@ -3,14 +3,15 @@
  *
  *   playgroundMarkup(id)  → HTML do playground (palco + controles + código)
  *   mountPlayground(root, { id, controls, text?, render, code }) → liga tudo, devolve limpeza
- *   tokenTable(names)     → tabela "Tokens usados" com valores reais nos três temas
+ *   tokenTable(names)     → tabela "Tokens usados" com valores reais nos quatro temas
  *   a11yList(items)       → checklist de acessibilidade
  *   codeBlock(code)       → bloco de código com botão copiar
  */
 import { icon } from '../ds/icons/icons.js';
 import { tokens } from '../ds/tokens.js';
 import { attachMenu } from '../ds/js/menu.js';
-import { resolvedTheme } from '../ds/js/theme.js';
+import { resolvedTheme, themeFor } from '../ds/js/theme.js';
+import { THEME_IDS, themeLabel, isDarkTheme } from './themes.js';
 import { copyText } from '../ds/js/toast.js';
 import { tr } from '../ds/js/i18n.js';
 import { T } from './i18n.js';
@@ -36,8 +37,11 @@ export function codeBlock(code, { label = tr(TEXT).copy } = {}) {
 
 /* ───────── Palcos com tema próprio ───────── */
 
-/** Tema em que os palcos de exemplo começam: o do site (Sistema vira Escuro ou Claro). */
+/** Tema em que os palcos de exemplo começam: o do site (Sistema vira claro ou escuro da paleta). */
 export const siteTheme = () => resolvedTheme();
+/** Modo (claro ou escuro) de um tema resolvido — os seletores dos palcos trocam o modo, na paleta do site. */
+export const modeOf = (theme) => (isDarkTheme(theme) ? 'dark' : 'light');
+export { themeFor };
 
 /**
  * Os palcos (stageSelector) acompanham o tema do site quando ele muda; os botões [data-<attr>] do palco
@@ -48,7 +52,7 @@ export function followSiteTheme(root, stageSelector, attr) {
     const theme = event.detail.resolved;
     root.querySelectorAll(stageSelector).forEach((stage) => {
       stage.dataset.theme = theme;
-      stage.querySelectorAll(`[data-${attr}]`).forEach((b) => b.setAttribute('aria-checked', String(b.getAttribute(`data-${attr}`) === theme)));
+      stage.querySelectorAll(`[data-${attr}]`).forEach((b) => b.setAttribute('aria-checked', String(b.getAttribute(`data-${attr}`) === modeOf(theme))));
     });
   };
   document.documentElement.addEventListener('ds:themechange', onTheme);
@@ -64,9 +68,8 @@ export function playgroundMarkup(id, { wide = false } = {}) {
     <div class="cd-playground__stage" data-stage data-theme="${th}">
       <div class="cd-playground__preview" data-preview></div>
       <div class="ds-segmented cd-playground__theme" role="radiogroup" aria-label="${t.stageTheme}">
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="${t.refugio}">${icon('cabin', { size: 16 })}</button>
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="${th === 'dark'}" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="${th === 'light'}" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="${modeOf(th) === 'light'}" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="${modeOf(th) === 'dark'}" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
       </div>
     </div>
     <div class="cd-playground__controls" data-controls></div>
@@ -137,7 +140,7 @@ export function mountPlayground(root, { id, controls, text, render, code, mount 
   const onStageTheme = (event) => {
     const btn = event.target.closest('[data-stage-theme]');
     if (!btn) return;
-    stage.dataset.theme = btn.dataset.stageTheme;
+    stage.dataset.theme = themeFor(btn.dataset.stageTheme);
     stage.querySelectorAll('[data-stage-theme]').forEach((b) => b.setAttribute('aria-checked', String(b === btn)));
   };
   stage.addEventListener('click', onStageTheme);
@@ -179,21 +182,16 @@ function tokenValue(t, mode) {
 export function tokenTable(groups) {
   const t = tr(TEXT);
   return `<div class="doc-table cd-tokens">
-    <div class="doc-table__head" aria-hidden="true"><span>${t.token}</span><span>${t.role}</span><span>${t.dark}</span><span>${t.light}</span><span>${t.refugio}</span></div>
+    <div class="doc-table__head" aria-hidden="true"><span>${t.token}</span><span>${t.role}</span>${THEME_IDS.map((id) => `<span>${themeLabel(id)}</span>`).join('')}</div>
     ${groups
       .map(([name, role]) => {
         const t = byName.get(name);
         if (!t) return '';
-        const dark = tokenValue(t, 'dark');
-        const light = tokenValue(t, 'light');
-        const refugio = tokenValue(t, 'refugio');
         const swatch = (mode) => (t.type === 'color' ? `<span class="cd-tokens__swatch" style="background:${t.modes[mode].value}"></span>` : '');
         return `<div class="doc-table__row">
           <button type="button" class="cd-tokens__name" data-copy-token="var(${t.cssVar})"><span>${name}</span><code>${t.cssVar}</code></button>
           <span class="cd-tokens__role">${role}</span>
-          <span class="cd-tokens__value">${swatch('dark')}${escapeHtml(dark)}</span>
-          <span class="cd-tokens__value">${swatch('light')}${escapeHtml(light)}</span>
-          <span class="cd-tokens__value">${swatch('refugio')}${escapeHtml(refugio)}</span>
+          ${THEME_IDS.map((id) => `<span class="cd-tokens__value">${swatch(id)}${escapeHtml(tokenValue(t, id))}</span>`).join('')}
         </div>`;
       })
       .join('')}

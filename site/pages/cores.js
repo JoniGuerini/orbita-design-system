@@ -5,6 +5,7 @@ import { copyText } from '../../ds/js/toast.js';
 import { tr, formatNumber } from '../../ds/js/i18n.js';
 import { mountDocNav } from '../doc-nav.js';
 import { T, paletteLabel, tokenDescription, ratio } from '../i18n.js';
+import { THEME_IDS, themeLabel } from '../themes.js';
 
 export const styles = 'site/pages/cores.css';
 
@@ -41,13 +42,13 @@ const COPY = T(
     head: { token: 'Token', dark: 'Escuro', light: 'Claro', refugio: 'Refúgio' },
     themes: {
       title: 'Temas',
-      desc: 'O Refúgio é o padrão: o tema claro de ardósia e terracota do app Lume. Escuro, claro e “seguir o sistema” vêm prontos. Como os temas vivem em atributos, dá até para misturar: um bloco claro dentro de uma tela escura.',
+      desc: 'O Lume é o padrão, em claro e escuro: a ardósia e a terracota do app Lume. A paleta Laranja, o pêssego quente, também vem em claro e escuro, e “Sistema” escolhe entre os dois. Como os temas vivem em atributos, dá até para misturar: um bloco claro dentro de uma tela escura.',
       dark: 'Escuro',
       light: 'Claro',
       refugio: 'Refúgio',
       default: 'padrão',
       card: ['Exemplo', 'Lançamento da versão 0.1', 'Os mesmos componentes e os mesmos tokens — só o tema muda.', 'Tom direto', 'Pronto', 'Revisar', 'Publicar', 'Cancelar'],
-      code: ['escuro', 'claro', 'segue o sistema operacional', 'tema aninhado: só este bloco fica claro', 'padrão: claro, ardósia e terracota (app Lume)'],
+      code: ['tema aninhado: só este bloco fica escuro', '“Sistema” é resolvido no JS: claro ou escuro da paleta escolhida'],
     },
     contrast: {
       title: 'Contraste',
@@ -94,13 +95,13 @@ const COPY = T(
     head: { token: 'Token', dark: 'Dark', light: 'Light', refugio: 'Refúgio' },
     themes: {
       title: 'Themes',
-      desc: 'Refúgio is the default: the Lume app’s light slate-and-terracotta theme. Dark, light, and “match system” come ready. Since themes live in attributes, you can even mix them: a light block inside a dark screen.',
+      desc: 'Lume is the default, in light and dark: the Lume app’s slate and terracotta. The Orange palette, the warm peach, also comes in light and dark, and “System” picks between them. Since themes live in attributes, you can even mix them: a light block inside a dark screen.',
       dark: 'Dark',
       light: 'Light',
       refugio: 'Refúgio',
       default: 'default',
       card: ['Example', 'Version 0.1 launch', 'The same components and the same tokens — only the theme changes.', 'Direct tone', 'Done', 'Review', 'Publish', 'Cancel'],
-      code: ['dark', 'light', 'follows the operating system', 'nested theme: only this block turns light', 'default: light, slate and terracotta (Lume app)'],
+      code: ['nested theme: only this block turns dark', '“System” is resolved in JS: light or dark of the chosen palette'],
     },
     contrast: {
       title: 'Contrast',
@@ -147,13 +148,13 @@ const COPY = T(
     head: { token: 'Token', dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio' },
     themes: {
       title: 'Temas',
-      desc: 'Refúgio es el predeterminado: el tema claro de pizarra y terracota de la app Lume. Oscuro, claro y “seguir el sistema” vienen listos. Como los temas viven en atributos, hasta se pueden mezclar: un bloque claro dentro de una pantalla oscura.',
+      desc: 'Lume es el predeterminado, en claro y oscuro: la pizarra y la terracota de la app Lume. La paleta Naranja, el melocotón cálido, también viene en claro y oscuro, y “Sistema” elige entre los dos. Como los temas viven en atributos, hasta se pueden mezclar: un bloque claro dentro de una pantalla oscura.',
       dark: 'Oscuro',
       light: 'Claro',
       refugio: 'Refúgio',
       default: 'predeterminado',
       card: ['Ejemplo', 'Lanzamiento de la versión 0.1', 'Los mismos componentes y los mismos tokens — solo cambia el tema.', 'Tono directo', 'Listo', 'Revisar', 'Publicar', 'Cancelar'],
-      code: ['oscuro', 'claro', 'sigue el sistema operativo', 'tema anidado: solo este bloque queda claro', 'predeterminado: claro, pizarra y terracota (app Lume)'],
+      code: ['tema anidado: solo este bloque queda oscuro', '“Sistema” se resuelve en JS: claro u oscuro de la paleta elegida'],
     },
     contrast: {
       title: 'Contraste',
@@ -271,9 +272,7 @@ function tokenRows(c) {
           <span class="token-name__var">${t.cssVar}</span>
           ${desc ? `<span class="token-name__desc">${escape(desc)}</span>` : ''}
         </div>
-        ${tokenValue(t, 'dark')}
-        ${tokenValue(t, 'light')}
-        ${tokenValue(t, 'refugio')}
+        ${THEME_IDS.map((id) => tokenValue(t, id)).join('')}
         <button type="button" class="ds-icon-btn ds-icon-btn--muted" data-copy="var(${t.cssVar})" aria-label="${c.copyVar(t.cssVar)}" data-ds-tooltip="${c.copyTooltip}">${icon('copy', { size: 18 })}</button>
       </div>`;
     })
@@ -371,7 +370,7 @@ export default function renderCores(page) {
       </div>
       <p class="token-group-desc" data-group-desc>${groupDesc(c)}</p>
       <div class="doc-table token-table">
-        <div class="doc-table__head" aria-hidden="true"><span>${c.head.token}</span><span>${c.head.dark}</span><span>${c.head.light}</span><span>${c.head.refugio}</span><span></span></div>
+        <div class="doc-table__head" aria-hidden="true"><span>${c.head.token}</span>${THEME_IDS.map((id) => `<span>${themeLabel(id)}</span>`).join('')}<span></span></div>
         <div data-token-rows>${tokenRows(c)}</div>
       </div>
     </section>
@@ -385,9 +384,7 @@ export default function renderCores(page) {
       </header>
       <div class="theme-previews">
         ${[
-          ['refugio', th.refugio, th.default],
-          ['dark', th.dark, ''],
-          ['light', th.light, ''],
+          ...THEME_IDS.map((id) => [id, themeLabel(id), id === 'light' ? th.default : '']),
         ]
           .map(
             ([mode, label, note]) => `<figure class="theme-preview">
@@ -414,12 +411,10 @@ export default function renderCores(page) {
           )
           .join('')}
       </div>
-      <pre class="ds-code theme-code"><code>&lt;html data-theme="refugio"&gt;  <span class="ds-code__comment">&lt;!-- ${th.code[4]} --&gt;</span>
-&lt;html data-theme="dark"&gt;     <span class="ds-code__comment">&lt;!-- ${th.code[0]} --&gt;</span>
-&lt;html data-theme="light"&gt;    <span class="ds-code__comment">&lt;!-- ${th.code[1]} --&gt;</span>
-&lt;html data-theme="system"&gt;   <span class="ds-code__comment">&lt;!-- ${th.code[2]} --&gt;</span>
+      <pre class="ds-code theme-code"><code>${THEME_IDS.map((id) => `&lt;html data-theme="${id}"&gt;${' '.repeat(13 - id.length)}<span class="ds-code__comment">&lt;!-- ${themeLabel(id)}${id === 'light' ? ` · ${th.default}` : ''} --&gt;</span>`).join('\n')}
+<span class="ds-code__comment">&lt;!-- ${th.code[1]} --&gt;</span>
 
-&lt;section data-theme="light"&gt; <span class="ds-code__comment">&lt;!-- ${th.code[3]} --&gt;</span></code></pre>
+&lt;section data-theme="dark"&gt;  <span class="ds-code__comment">&lt;!-- ${th.code[0]} --&gt;</span></code></pre>
     </section>
 
     <section class="doc-section" id="contraste" aria-labelledby="contraste-title">
@@ -431,14 +426,12 @@ export default function renderCores(page) {
         <p class="contrast-summary"><span class="contrast-summary__value">${passed}/${contrast.length}</span><span>${c.contrast.approved}</span></p>
       </header>
       <div class="doc-table contrast-table">
-        <div class="doc-table__head" aria-hidden="true">${c.contrast.head.map((h) => `<span>${h}</span>`).join('')}</div>
+        <div class="doc-table__head" aria-hidden="true">${[c.contrast.head[0], ...THEME_IDS.map(themeLabel), c.contrast.head.at(-1)].map((h) => `<span>${h}</span>`).join('')}</div>
         ${pairs
           .map(
             (p) => `<div class="doc-table__row">
               <div class="token-name"><span class="token-name__label">${short(p.fg)}</span><span class="token-name__var">${c.contrast.on(short(p.bg))}</span></div>
-              ${contrastCell(c, p, 'dark')}
-              ${contrastCell(c, p, 'light')}
-              ${contrastCell(c, p, 'refugio')}
+              ${THEME_IDS.map((id) => contrastCell(c, p, id)).join('')}
               <span class="contrast-min">${ratio(p.min, Number.isInteger(p.min) ? 0 : 1)}</span>
             </div>`,
           )

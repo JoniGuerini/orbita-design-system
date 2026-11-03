@@ -202,497 +202,530 @@
     "$type": "color",
     "bg": {
       "app": {
-        "dark": "{color.neutral.975}",
-        "light": "{color.neutral.100}",
-        "refugio": "{color.refugio.200}",
+        "orange-dark": "{color.neutral.975}",
+        "orange": "{color.neutral.100}",
+        "light": "{color.refugio.200}",
+        "dark": "{color.refugio.975}",
         "$description": "Fundo atrás dos painéis do app shell."
       },
       "canvas": {
-        "dark": "{color.neutral.925}",
-        "light": "{color.neutral.50}",
-        "refugio": "{color.refugio.100}",
+        "orange-dark": "{color.neutral.925}",
+        "orange": "{color.neutral.50}",
+        "light": "{color.refugio.100}",
+        "dark": "{color.refugio.950}",
         "$description": "Fundo do painel de conteúdo."
       },
       "sidebar": {
-        "dark": "{color.neutral.900}",
-        "light": "{color.neutral.25}",
-        "refugio": "{color.refugio.25}",
-        "refugio-sidebar": "{color.refugio.800}"
+        "orange-dark": "{color.neutral.900}",
+        "orange": "{color.neutral.25}",
+        "light": "{color.refugio.25}",
+        "dark": "{color.refugio.900}",
+        "light-sidebar": "{color.refugio.800}"
       },
       "surface": {
-        "dark": "{color.neutral.900}",
-        "light": "{color.neutral.25}",
-        "refugio": "{color.white}",
+        "orange-dark": "{color.neutral.900}",
+        "orange": "{color.neutral.25}",
+        "light": "{color.white}",
+        "dark": "{color.refugio.900}",
         "$description": "Cards e blocos sobre o canvas."
       },
       "raised": {
-        "dark": "{color.neutral.850}",
+        "orange-dark": "{color.neutral.850}",
+        "orange": "{color.white}",
         "light": "{color.white}",
-        "refugio": "{color.white}",
-        "refugio-sidebar": "{color.refugio.750}",
+        "dark": "{color.refugio.850}",
+        "light-sidebar": "{color.refugio.750}",
         "$description": "Modais, popovers, painéis flutuantes."
       },
       "sunken": {
-        "dark": "{color.neutral.950}",
-        "light": "{color.neutral.100}",
-        "refugio": "{color.refugio.150}",
-        "refugio-sidebar": "{color.refugio.850}",
+        "orange-dark": "{color.neutral.950}",
+        "orange": "{color.neutral.100}",
+        "light": "{color.refugio.150}",
+        "dark": "{color.refugio.975}",
+        "light-sidebar": "{color.refugio.850}",
         "$description": "Campos e áreas rebaixadas."
       },
       "muted": {
-        "dark": "{color.neutral.750}",
-        "light": "{color.neutral.200}",
-        "refugio": "{color.refugio.200}",
-        "refugio-sidebar": "{color.refugio.700}"
+        "orange-dark": "{color.neutral.750}",
+        "orange": "{color.neutral.200}",
+        "light": "{color.refugio.200}",
+        "dark": "{color.refugio.750}",
+        "light-sidebar": "{color.refugio.700}"
       },
       "field": {
-        "dark": "{color.neutral.850}",
+        "orange-dark": "{color.neutral.850}",
+        "orange": "{color.white}",
         "light": "{color.white}",
-        "refugio": "{color.white}",
-        "refugio-sidebar": "{color.refugio.750}",
+        "dark": "{color.refugio.850}",
+        "light-sidebar": "{color.refugio.750}",
         "$description": "Fundo de campos, seleção e chips que abrem menu: o mesmo do menu que eles abrem (raised), para os dois conversarem."
       },
       "field-hover": {
-        "dark": "{color.neutral.800}",
-        "light": "{color.neutral.50}",
-        "refugio": "{color.refugio.25}",
-        "refugio-sidebar": "{color.refugio.700}"
+        "orange-dark": "{color.neutral.800}",
+        "orange": "{color.neutral.50}",
+        "light": "{color.refugio.25}",
+        "dark": "{color.refugio.800}",
+        "light-sidebar": "{color.refugio.700}"
       },
       "inverse": {
-        "dark": "{color.neutral.100}",
-        "light": "{color.neutral.950}",
-        "refugio": "{color.refugio.800}"
+        "orange-dark": "{color.neutral.100}",
+        "orange": "{color.neutral.950}",
+        "light": "{color.refugio.800}",
+        "dark": "{color.refugio.100}"
       },
       "hover": {
-        "dark": "alpha({color.white}, 0.05)",
-        "light": "alpha({color.neutral.975}, 0.045)",
-        "refugio": "alpha({color.refugio.700}, 0.05)",
-        "refugio-sidebar": "alpha({color.white}, 0.06)"
+        "orange-dark": "alpha({color.white}, 0.05)",
+        "orange": "alpha({color.neutral.975}, 0.045)",
+        "light": "alpha({color.refugio.700}, 0.05)",
+        "light-sidebar": "alpha({color.white}, 0.06)"
       },
       "pressed": {
-        "dark": "alpha({color.white}, 0.08)",
-        "light": "alpha({color.neutral.975}, 0.08)",
-        "refugio": "alpha({color.refugio.700}, 0.09)",
-        "refugio-sidebar": "alpha({color.white}, 0.1)"
+        "orange-dark": "alpha({color.white}, 0.08)",
+        "orange": "alpha({color.neutral.975}, 0.08)",
+        "light": "alpha({color.refugio.700}, 0.09)",
+        "light-sidebar": "alpha({color.white}, 0.1)"
       },
       "selected": {
-        "dark": "alpha({color.white}, 0.07)",
-        "light": "alpha({color.neutral.975}, 0.06)",
-        "refugio": "alpha({color.refugio.700}, 0.07)",
-        "refugio-sidebar": "alpha({color.white}, 0.09)"
+        "orange-dark": "alpha({color.white}, 0.07)",
+        "orange": "alpha({color.neutral.975}, 0.06)",
+        "light": "alpha({color.refugio.700}, 0.07)",
+        "light-sidebar": "alpha({color.white}, 0.09)"
       },
       "overlay": {
-        "dark": "alpha({color.black}, 0.6)",
-        "light": "alpha({color.neutral.975}, 0.32)",
-        "refugio": "alpha({color.refugio.800}, 0.35)"
+        "orange-dark": "alpha({color.black}, 0.6)",
+        "orange": "alpha({color.neutral.975}, 0.32)",
+        "light": "alpha({color.refugio.800}, 0.35)"
       }
     },
     "fg": {
       "default": {
-        "dark": "{color.neutral.100}",
-        "light": "{color.neutral.975}",
-        "refugio": "{color.refugio.800}",
-        "refugio-sidebar": "{color.refugio.25}"
+        "orange-dark": "{color.neutral.100}",
+        "orange": "{color.neutral.975}",
+        "light": "{color.refugio.800}",
+        "dark": "{color.refugio.25}",
+        "light-sidebar": "{color.refugio.25}"
       },
       "muted": {
-        "dark": "{color.neutral.300}",
-        "light": "{color.neutral.650}",
-        "refugio": "{color.refugio.650}",
-        "refugio-sidebar": "{color.refugio.200}"
+        "orange-dark": "{color.neutral.300}",
+        "orange": "{color.neutral.650}",
+        "light": "{color.refugio.650}",
+        "dark": "{color.refugio.300}",
+        "light-sidebar": "{color.refugio.200}"
       },
       "subtle": {
-        "dark": "{color.neutral.400}",
-        "light": "{color.neutral.550}",
-        "refugio": "{color.refugio.550}",
-        "refugio-sidebar": "{color.refugio.300}",
+        "orange-dark": "{color.neutral.400}",
+        "orange": "{color.neutral.550}",
+        "light": "{color.refugio.550}",
+        "dark": "{color.refugio.400}",
+        "light-sidebar": "{color.refugio.300}",
         "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos três temas."
       },
       "disabled": {
-        "dark": "{color.neutral.600}",
-        "light": "{color.neutral.400}",
-        "refugio": "{color.refugio.400}",
-        "refugio-sidebar": "{color.refugio.500}"
+        "orange-dark": "{color.neutral.600}",
+        "orange": "{color.neutral.400}",
+        "light": "{color.refugio.400}",
+        "dark": "{color.refugio.600}",
+        "light-sidebar": "{color.refugio.500}"
       },
       "inverse": {
-        "dark": "{color.neutral.975}",
-        "light": "{color.neutral.50}",
-        "refugio": "{color.refugio.25}"
+        "orange-dark": "{color.neutral.975}",
+        "orange": "{color.neutral.50}",
+        "light": "{color.refugio.25}",
+        "dark": "{color.refugio.975}"
       },
       "brand": {
-        "dark": "{color.brand.400}",
-        "light": "{color.brand.700}",
-        "refugio": "{color.refugio.700}"
+        "orange-dark": "{color.brand.400}",
+        "orange": "{color.brand.700}",
+        "light": "{color.refugio.700}",
+        "dark": "{color.refugio.200}"
       },
       "link": {
-        "dark": "{color.brand.300}",
-        "light": "{color.brand.700}",
-        "refugio": "{color.refugio.700}"
+        "orange-dark": "{color.brand.300}",
+        "orange": "{color.brand.700}",
+        "light": "{color.refugio.700}",
+        "dark": "{color.refugio.200}"
       },
       "link-hover": {
-        "dark": "{color.brand.200}",
-        "light": "{color.brand.800}",
-        "refugio": "{color.refugio.850}"
+        "orange-dark": "{color.brand.200}",
+        "orange": "{color.brand.800}",
+        "light": "{color.refugio.850}",
+        "dark": "{color.refugio.100}"
       }
     },
     "border": {
       "subtle": {
-        "dark": "alpha({color.white}, 0.06)",
-        "light": "alpha({color.neutral.975}, 0.07)",
-        "refugio": "alpha({color.refugio.700}, 0.14)",
-        "refugio-sidebar": "alpha({color.white}, 0.08)"
+        "orange-dark": "alpha({color.white}, 0.06)",
+        "orange": "alpha({color.neutral.975}, 0.07)",
+        "light": "alpha({color.refugio.700}, 0.14)",
+        "light-sidebar": "alpha({color.white}, 0.08)"
       },
       "default": {
-        "dark": "alpha({color.white}, 0.1)",
-        "light": "alpha({color.neutral.975}, 0.11)",
-        "refugio": "alpha({color.refugio.700}, 0.2)",
-        "refugio-sidebar": "alpha({color.white}, 0.12)"
+        "orange-dark": "alpha({color.white}, 0.1)",
+        "orange": "alpha({color.neutral.975}, 0.11)",
+        "light": "alpha({color.refugio.700}, 0.2)",
+        "light-sidebar": "alpha({color.white}, 0.12)"
       },
       "strong": {
-        "dark": "alpha({color.white}, 0.16)",
-        "light": "alpha({color.neutral.975}, 0.18)",
-        "refugio": "alpha({color.refugio.700}, 0.3)",
-        "refugio-sidebar": "alpha({color.white}, 0.18)"
+        "orange-dark": "alpha({color.white}, 0.16)",
+        "orange": "alpha({color.neutral.975}, 0.18)",
+        "light": "alpha({color.refugio.700}, 0.3)",
+        "light-sidebar": "alpha({color.white}, 0.18)"
       },
       "control": {
-        "dark": "alpha({color.white}, 0.13)",
-        "light": "alpha({color.neutral.975}, 0.15)",
-        "refugio": "alpha({color.refugio.700}, 0.2)",
-        "refugio-sidebar": "alpha({color.white}, 0.14)",
+        "orange-dark": "alpha({color.white}, 0.13)",
+        "orange": "alpha({color.neutral.975}, 0.15)",
+        "light": "alpha({color.refugio.700}, 0.2)",
+        "light-sidebar": "alpha({color.white}, 0.14)",
         "$description": "Contorno de chips e botões com texto — o rótulo já identifica o controle (WCAG 1.4.11 não exige 3:1 aqui)."
       },
       "field": {
-        "dark": "alpha({color.white}, 0.38)",
-        "light": "alpha({color.neutral.975}, 0.48)",
-        "refugio": "alpha({color.refugio.700}, 0.68)",
-        "refugio-sidebar": "alpha({color.white}, 0.44)",
+        "orange-dark": "alpha({color.white}, 0.38)",
+        "orange": "alpha({color.neutral.975}, 0.48)",
+        "light": "alpha({color.refugio.700}, 0.68)",
+        "light-sidebar": "alpha({color.white}, 0.44)",
         "$description": "Contorno de campos, seleção, composer e switch desligado: o contorno é o que identifica o controle, então passa de 3:1 em todas as superfícies."
       },
       "field-hover": {
-        "dark": "alpha({color.white}, 0.52)",
-        "light": "alpha({color.neutral.975}, 0.62)",
-        "refugio": "alpha({color.refugio.700}, 0.82)",
-        "refugio-sidebar": "alpha({color.white}, 0.58)",
+        "orange-dark": "alpha({color.white}, 0.52)",
+        "orange": "alpha({color.neutral.975}, 0.62)",
+        "light": "alpha({color.refugio.700}, 0.82)",
+        "light-sidebar": "alpha({color.white}, 0.58)",
         "$description": "Contorno de campo no hover — mais forte que o de repouso."
       },
       "focus": {
-        "dark": "{color.brand.400}",
-        "light": "{color.brand.600}",
-        "refugio": "{color.refugio.600}",
-        "refugio-sidebar": "{color.refugio.300}"
+        "orange-dark": "{color.brand.400}",
+        "orange": "{color.brand.600}",
+        "light": "{color.refugio.600}",
+        "dark": "{color.refugio.300}",
+        "light-sidebar": "{color.refugio.300}"
       }
     },
     "brand": {
       "solid": {
-        "dark": "{color.brand.400}",
-        "light": "{color.brand.500}",
-        "refugio": "{color.refugio.700}"
+        "orange-dark": "{color.brand.400}",
+        "orange": "{color.brand.500}",
+        "light": "{color.refugio.700}",
+        "dark": "{color.refugio.200}"
       },
       "solid-hover": {
-        "dark": "{color.brand.300}",
-        "light": "{color.brand.400}",
-        "refugio": "{color.refugio.800}"
+        "orange-dark": "{color.brand.300}",
+        "orange": "{color.brand.400}",
+        "light": "{color.refugio.800}",
+        "dark": "{color.refugio.100}"
       },
       "solid-pressed": {
-        "dark": "{color.brand.500}",
-        "light": "{color.brand.600}",
-        "refugio": "{color.refugio.850}"
+        "orange-dark": "{color.brand.500}",
+        "orange": "{color.brand.600}",
+        "light": "{color.refugio.850}",
+        "dark": "{color.refugio.300}"
       },
       "subtle": {
-        "dark": "alpha({color.brand.400}, 0.14)",
-        "light": "{color.brand.50}",
-        "refugio": "{color.refugio.100}"
+        "orange-dark": "alpha({color.brand.400}, 0.14)",
+        "orange": "{color.brand.50}",
+        "light": "{color.refugio.100}",
+        "dark": "alpha({color.refugio.300}, 0.14)"
       },
       "subtle-hover": {
-        "dark": "alpha({color.brand.400}, 0.2)",
-        "light": "{color.brand.100}",
-        "refugio": "{color.refugio.150}"
+        "orange-dark": "alpha({color.brand.400}, 0.2)",
+        "orange": "{color.brand.100}",
+        "light": "{color.refugio.150}",
+        "dark": "alpha({color.refugio.300}, 0.2)"
       },
       "fg": {
-        "dark": "{color.brand.300}",
-        "light": "{color.brand.700}",
-        "refugio": "{color.refugio.700}"
+        "orange-dark": "{color.brand.300}",
+        "orange": "{color.brand.700}",
+        "light": "{color.refugio.700}",
+        "dark": "{color.refugio.200}"
       },
       "border": {
-        "dark": "alpha({color.brand.400}, 0.32)",
-        "light": "{color.brand.200}",
-        "refugio": "{color.refugio.200}"
+        "orange-dark": "alpha({color.brand.400}, 0.32)",
+        "orange": "{color.brand.200}",
+        "light": "{color.refugio.200}",
+        "dark": "alpha({color.refugio.300}, 0.32)"
       },
       "on-solid": {
-        "dark": "{color.brand.950}",
-        "light": "{color.brand.950}",
-        "refugio": "{color.refugio.25}"
+        "orange-dark": "{color.brand.950}",
+        "orange": "{color.brand.950}",
+        "light": "{color.refugio.25}",
+        "dark": "{color.refugio.900}"
       },
       "indicator": {
-        "dark": "{color.brand.500}",
-        "light": "{color.brand.500}",
-        "refugio": "{color.terracotta.500}",
+        "orange-dark": "{color.brand.500}",
+        "orange": "{color.brand.500}",
+        "light": "{color.terracotta.500}",
+        "dark": "{color.terracotta.400}",
         "$description": "Pontinho de notificação/novidade."
       }
     },
     "success": {
       "solid": {
-        "dark": "{color.green.400}",
-        "light": "{color.green.700}"
+        "orange-dark": "{color.green.400}",
+        "orange": "{color.green.700}"
       },
       "solid-hover": {
-        "dark": "{color.green.300}",
-        "light": "{color.green.800}"
+        "orange-dark": "{color.green.300}",
+        "orange": "{color.green.800}"
       },
       "subtle": {
-        "dark": "alpha({color.green.400}, 0.13)",
-        "light": "{color.green.50}"
+        "orange-dark": "alpha({color.green.400}, 0.13)",
+        "orange": "{color.green.50}"
       },
       "fg": {
-        "dark": "{color.green.300}",
-        "light": "{color.green.800}"
+        "orange-dark": "{color.green.300}",
+        "orange": "{color.green.800}"
       },
       "border": {
-        "dark": "alpha({color.green.400}, 0.3)",
-        "light": "{color.green.200}"
+        "orange-dark": "alpha({color.green.400}, 0.3)",
+        "orange": "{color.green.200}"
       },
       "on-solid": {
-        "dark": "{color.green.950}",
-        "light": "{color.white}"
+        "orange-dark": "{color.green.950}",
+        "orange": "{color.white}"
       }
     },
     "warning": {
       "solid": {
-        "dark": "{color.amber.400}",
-        "light": "{color.amber.400}"
+        "orange-dark": "{color.amber.400}",
+        "orange": "{color.amber.400}"
       },
       "solid-hover": {
-        "dark": "{color.amber.300}",
-        "light": "{color.amber.500}"
+        "orange-dark": "{color.amber.300}",
+        "orange": "{color.amber.500}"
       },
       "subtle": {
-        "dark": "alpha({color.amber.400}, 0.13)",
-        "light": "{color.amber.50}"
+        "orange-dark": "alpha({color.amber.400}, 0.13)",
+        "orange": "{color.amber.50}"
       },
       "fg": {
-        "dark": "{color.amber.300}",
-        "light": "{color.amber.800}"
+        "orange-dark": "{color.amber.300}",
+        "orange": "{color.amber.800}"
       },
       "border": {
-        "dark": "alpha({color.amber.400}, 0.3)",
-        "light": "{color.amber.200}"
+        "orange-dark": "alpha({color.amber.400}, 0.3)",
+        "orange": "{color.amber.200}"
       },
       "on-solid": {
-        "dark": "{color.amber.950}",
-        "light": "{color.amber.950}"
+        "orange-dark": "{color.amber.950}",
+        "orange": "{color.amber.950}"
       }
     },
     "danger": {
       "solid": {
-        "dark": "{color.red.400}",
-        "light": "{color.red.700}"
+        "orange-dark": "{color.red.400}",
+        "orange": "{color.red.700}"
       },
       "solid-hover": {
-        "dark": "{color.red.300}",
-        "light": "{color.red.800}"
+        "orange-dark": "{color.red.300}",
+        "orange": "{color.red.800}"
       },
       "subtle": {
-        "dark": "alpha({color.red.400}, 0.13)",
-        "light": "{color.red.50}"
+        "orange-dark": "alpha({color.red.400}, 0.13)",
+        "orange": "{color.red.50}"
       },
       "fg": {
-        "dark": "{color.red.300}",
-        "light": "{color.red.700}"
+        "orange-dark": "{color.red.300}",
+        "orange": "{color.red.700}"
       },
       "border": {
-        "dark": "alpha({color.red.400}, 0.3)",
-        "light": "{color.red.200}"
+        "orange-dark": "alpha({color.red.400}, 0.3)",
+        "orange": "{color.red.200}"
       },
       "on-solid": {
-        "dark": "{color.red.950}",
-        "light": "{color.white}"
+        "orange-dark": "{color.red.950}",
+        "orange": "{color.white}"
       }
     },
     "info": {
       "solid": {
-        "dark": "{color.blue.400}",
-        "light": "{color.blue.700}"
+        "orange-dark": "{color.blue.400}",
+        "orange": "{color.blue.700}"
       },
       "solid-hover": {
-        "dark": "{color.blue.300}",
-        "light": "{color.blue.800}"
+        "orange-dark": "{color.blue.300}",
+        "orange": "{color.blue.800}"
       },
       "subtle": {
-        "dark": "alpha({color.blue.400}, 0.13)",
-        "light": "{color.blue.50}"
+        "orange-dark": "alpha({color.blue.400}, 0.13)",
+        "orange": "{color.blue.50}"
       },
       "fg": {
-        "dark": "{color.blue.300}",
-        "light": "{color.blue.700}"
+        "orange-dark": "{color.blue.300}",
+        "orange": "{color.blue.700}"
       },
       "border": {
-        "dark": "alpha({color.blue.400}, 0.3)",
-        "light": "{color.blue.200}"
+        "orange-dark": "alpha({color.blue.400}, 0.3)",
+        "orange": "{color.blue.200}"
       },
       "on-solid": {
-        "dark": "{color.blue.950}",
-        "light": "{color.white}"
+        "orange-dark": "{color.blue.950}",
+        "orange": "{color.white}"
       }
     },
     "chart": {
       "$description": "Cores de gráficos. Marcas usam estas cores; textos (rótulos, valores, legenda) usam sempre fg.*.",
       "series": {
         "1": {
-          "dark": "{color.brand.600}",
-          "light": "{color.brand.600}"
+          "orange-dark": "{color.brand.600}",
+          "orange": "{color.brand.600}"
         },
         "2": {
-          "dark": "{color.blue.600}",
-          "light": "{color.blue.600}"
+          "orange-dark": "{color.blue.600}",
+          "orange": "{color.blue.600}"
         },
         "3": {
-          "dark": "{color.pink.600}",
-          "light": "{color.pink.600}"
+          "orange-dark": "{color.pink.600}",
+          "orange": "{color.pink.600}"
         },
         "4": {
-          "dark": "{color.amber.700}",
-          "light": "{color.amber.700}"
+          "orange-dark": "{color.amber.700}",
+          "orange": "{color.amber.700}"
         },
         "5": {
-          "dark": "{color.teal.600}",
-          "light": "{color.teal.600}"
+          "orange-dark": "{color.teal.600}",
+          "orange": "{color.teal.600}"
         },
         "6": {
-          "dark": "{color.red.600}",
-          "light": "{color.red.600}"
+          "orange-dark": "{color.red.600}",
+          "orange": "{color.red.600}"
         },
         "7": {
-          "dark": "{color.violet.600}",
-          "light": "{color.violet.600}"
+          "orange-dark": "{color.violet.600}",
+          "orange": "{color.violet.600}"
         },
         "8": {
-          "dark": "{color.green.600}",
-          "light": "{color.green.600}"
+          "orange-dark": "{color.green.600}",
+          "orange": "{color.green.600}"
         },
         "$description": "Categóricas: identidade de série. Ordem fixa, nunca recicle. Validada contra daltonismo (ΔE ≥ 8 entre vizinhas) e visão normal (≥ 15), nos três temas (o Refúgio usa as do Claro); as 3 primeiras também em todos os pares (dispersão)."
       },
       "muted": {
-        "dark": "{color.neutral.700}",
-        "light": "{color.neutral.300}",
-        "refugio": "{color.refugio.300}",
+        "orange-dark": "{color.neutral.700}",
+        "orange": "{color.neutral.300}",
+        "light": "{color.refugio.300}",
+        "dark": "{color.refugio.700}",
         "$description": "Ênfase: o contexto em cinza, para uma série se destacar."
       },
       "other": {
-        "dark": "{color.neutral.600}",
-        "light": "{color.neutral.400}",
-        "refugio": "{color.refugio.400}",
+        "orange-dark": "{color.neutral.600}",
+        "orange": "{color.neutral.400}",
+        "light": "{color.refugio.400}",
+        "dark": "{color.refugio.600}",
         "$description": "“Outros”: a cauda agrupada depois da 8ª série ou do 6º segmento."
       },
       "seq": {
         "1": {
-          "dark": "{color.brand.900}",
-          "light": "{color.brand.100}"
+          "orange-dark": "{color.brand.900}",
+          "orange": "{color.brand.100}"
         },
         "2": {
-          "dark": "{color.brand.800}",
-          "light": "{color.brand.300}"
+          "orange-dark": "{color.brand.800}",
+          "orange": "{color.brand.300}"
         },
         "3": {
-          "dark": "{color.brand.700}",
-          "light": "{color.brand.400}"
+          "orange-dark": "{color.brand.700}",
+          "orange": "{color.brand.400}"
         },
         "4": {
-          "dark": "{color.brand.600}",
-          "light": "{color.brand.500}"
+          "orange-dark": "{color.brand.600}",
+          "orange": "{color.brand.500}"
         },
         "5": {
-          "dark": "{color.brand.500}",
-          "light": "{color.brand.600}"
+          "orange-dark": "{color.brand.500}",
+          "orange": "{color.brand.600}"
         },
         "6": {
-          "dark": "{color.brand.400}",
-          "light": "{color.brand.700}"
+          "orange-dark": "{color.brand.400}",
+          "orange": "{color.brand.700}"
         },
         "7": {
-          "dark": "{color.brand.300}",
-          "light": "{color.brand.800}"
+          "orange-dark": "{color.brand.300}",
+          "orange": "{color.brand.800}"
         },
         "$description": "Sequencial: magnitude, de pouco (1) a muito (7). Um só tom; no escuro a âncora inverte (mais = mais claro)."
       },
       "ord": {
         "1": {
-          "dark": "{color.brand.800}",
-          "light": "{color.brand.400}"
+          "orange-dark": "{color.brand.800}",
+          "orange": "{color.brand.400}"
         },
         "2": {
-          "dark": "{color.brand.700}",
-          "light": "{color.brand.500}"
+          "orange-dark": "{color.brand.700}",
+          "orange": "{color.brand.500}"
         },
         "3": {
-          "dark": "{color.brand.600}",
-          "light": "{color.brand.600}"
+          "orange-dark": "{color.brand.600}",
+          "orange": "{color.brand.600}"
         },
         "4": {
-          "dark": "{color.brand.500}",
-          "light": "{color.brand.700}"
+          "orange-dark": "{color.brand.500}",
+          "orange": "{color.brand.700}"
         },
         "5": {
-          "dark": "{color.brand.400}",
-          "light": "{color.brand.800}"
+          "orange-dark": "{color.brand.400}",
+          "orange": "{color.brand.800}"
         },
         "$description": "Ordinal: etapas em sequência (funil, faixas). Mesmo tom, a ponta mais fraca ainda passa de 2:1 sobre a superfície."
       },
       "div": {
         "1": {
-          "dark": "{color.blue.400}",
-          "light": "{color.blue.700}"
+          "orange-dark": "{color.blue.400}",
+          "orange": "{color.blue.700}"
         },
         "2": {
-          "dark": "{color.blue.600}",
-          "light": "{color.blue.500}"
+          "orange-dark": "{color.blue.600}",
+          "orange": "{color.blue.500}"
         },
         "3": {
-          "dark": "{color.blue.800}",
-          "light": "{color.blue.300}"
+          "orange-dark": "{color.blue.800}",
+          "orange": "{color.blue.300}"
         },
         "4": {
-          "dark": "{color.neutral.750}",
-          "light": "{color.neutral.200}",
-          "refugio": "{color.refugio.200}"
+          "orange-dark": "{color.neutral.750}",
+          "orange": "{color.neutral.200}",
+          "light": "{color.refugio.200}",
+          "dark": "{color.refugio.750}"
         },
         "5": {
-          "dark": "{color.brand.800}",
-          "light": "{color.brand.300}"
+          "orange-dark": "{color.brand.800}",
+          "orange": "{color.brand.300}"
         },
         "6": {
-          "dark": "{color.brand.600}",
-          "light": "{color.brand.500}"
+          "orange-dark": "{color.brand.600}",
+          "orange": "{color.brand.500}"
         },
         "7": {
-          "dark": "{color.brand.400}",
-          "light": "{color.brand.700}"
+          "orange-dark": "{color.brand.400}",
+          "orange": "{color.brand.700}"
         },
         "$description": "Divergente: abaixo (1–3, frio) e acima (5–7, quente) de uma referência; 4 é o meio neutro."
       },
       "status": {
         "$description": "Status em gráficos (medidor, séries que significam bom ou ruim). Reservado: nunca para identidade de série, e sempre com ícone e rótulo.",
         "good": {
-          "dark": "{color.green.500}",
-          "light": "{color.green.600}"
+          "orange-dark": "{color.green.500}",
+          "orange": "{color.green.600}"
         },
         "warning": {
-          "dark": "{color.amber.400}",
-          "light": "{color.amber.500}"
+          "orange-dark": "{color.amber.400}",
+          "orange": "{color.amber.500}"
         },
         "critical": {
-          "dark": "{color.red.600}",
-          "light": "{color.red.600}"
+          "orange-dark": "{color.red.600}",
+          "orange": "{color.red.600}"
         }
       },
       "grid": {
-        "dark": "{color.neutral.800}",
-        "light": "{color.neutral.200}",
-        "refugio": "{color.refugio.200}",
+        "orange-dark": "{color.neutral.800}",
+        "orange": "{color.neutral.200}",
+        "light": "{color.refugio.200}",
+        "dark": "{color.refugio.800}",
         "$description": "Linhas de grade: fio de 1 px, sólido, um passo fora da superfície."
       },
       "axis": {
-        "dark": "{color.neutral.700}",
-        "light": "{color.neutral.300}",
-        "refugio": "{color.refugio.300}",
+        "orange-dark": "{color.neutral.700}",
+        "orange": "{color.neutral.300}",
+        "light": "{color.refugio.300}",
+        "dark": "{color.refugio.700}",
         "$description": "Linha de base e eixos."
       }
     }

@@ -1,6 +1,7 @@
 import { icon } from '../../ds/icons/icons.js';
 import { tokens, contrast } from '../../ds/tokens.js';
-import { siteTheme, followSiteTheme } from '../component-doc.js';
+import { siteTheme, followSiteTheme, modeOf, themeFor } from '../component-doc.js';
+import { THEME_IDS, themeLabel, perTheme } from '../themes.js';
 import { mountSelects, enhanceSelect } from '../../ds/js/select.js';
 import { barChart, meter } from '../../ds/js/charts.js';
 import { typingHtml } from '../../ds/js/composer.js';
@@ -300,9 +301,8 @@ function section(id, title, desc, body) {
 }
 
 const themeSwitch = (label, th = siteTheme()) => `<div class="ds-segmented ra-stage__theme" role="radiogroup" aria-label="${L('Tema do exemplo', 'Example theme', 'Tema del ejemplo')}: ${label}">
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="Refúgio">${icon('cabin', { size: 16 })}</button>
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="dark" aria-checked="${th === 'dark'}" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="light" aria-checked="${th === 'light'}" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="light" aria-checked="${modeOf(th) === 'light'}" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="dark" aria-checked="${modeOf(th) === 'dark'}" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
   </div>`;
 
 const PRINCIPLES = () => [
@@ -678,7 +678,7 @@ export function mount(root) {
     const themeBtn = event.target.closest('[data-ra-theme]');
     if (themeBtn) {
       const stage = themeBtn.closest('[data-ra-stage]');
-      stage.dataset.theme = themeBtn.dataset.raTheme;
+      stage.dataset.theme = themeFor(themeBtn.dataset.raTheme);
       stage.querySelectorAll('[data-ra-theme]').forEach((b) => b.setAttribute('aria-checked', String(b === themeBtn)));
     }
     const chip = event.target.closest('[data-ra-chip]');
