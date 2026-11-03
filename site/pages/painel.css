@@ -312,3 +312,29 @@
     height: 16px;
   }
 }
+
+/* Cards reais na seção "Painel ou card?" */
+.pn-card {
+  width: 100%;
+}
+
+.pn-card__title {
+  font: var(--ds-text-heading-xs);
+  letter-spacing: var(--ds-text-heading-xs-tracking);
+}
+
+.pn-card__text {
+  margin-top: var(--ds-space-050);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+/* nomes de classe longos (ds-card--interactive) descem inteiros, sem quebrar no meio */
+.pn-cards .cd-example__name {
+  flex-wrap: wrap;
+  row-gap: var(--ds-space-050);
+}
+
+.pn-cards .cd-example__name code {
+  white-space: nowrap;
+}
