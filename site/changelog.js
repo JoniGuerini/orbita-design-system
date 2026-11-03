@@ -78,6 +78,21 @@ const RELEASES = [
         ],
       },
       {
+        name: T('Componentes', 'Components', 'Componentes'),
+        items: [
+          ['melhoria', T(
+            'Campo, seleção e chip que abre menu com o fundo do menu que abrem (bg.field): o select e a lista aberta conversam — no Refúgio, os dois brancos. Contorno fino e placeholder mais forte',
+            'Field, select, and menu chip with the background of the menu they open (bg.field): the select and its open list match — in Refúgio, both white. Thin outline and a stronger placeholder',
+            'Campo, selector y chip que abre menú con el fondo del menú que abren (bg.field): el selector y la lista abierta combinan — en Refúgio, ambos blancos. Contorno fino y placeholder más fuerte',
+          ), '/componentes/selecao'],
+          ['correcao', T(
+            'Listas e links estilizados por classe não perdem mais o padding nem a cor para o reset (que passou a ter peso zero)',
+            'Class-styled lists and links no longer lose their padding or color to the reset (now zero-specificity)',
+            'Las listas y enlaces con estilo por clase ya no pierden el padding ni el color por el reset (ahora con peso cero)',
+          ), '/componentes/selecao'],
+        ],
+      },
+      {
         name: T('App shell', 'App shell', 'App shell'),
         items: [
           ['novo', T(

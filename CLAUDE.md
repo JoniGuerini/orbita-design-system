@@ -39,7 +39,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 - Logotipo é a chama do Lume + o nome “Lume” escrito em **Geist Serif** (Regular, 28 px, tracking -0,02em), a fonte dos títulos. Em 03/11/2026 testamos dois desenhos próprios do nome (traço único e depois serifado, `assets/logotype.svg`, no histórico do git): ele preferiu, por ora, a própria Geist Serif. Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
 - Nunca o ícone de *sparkles* (estrela grande + pequena) — saiu da biblioteca. Novidades usa `megaphone`.
 - Nada de enfeite “vibe coded”, como o badge “Versão 0.1 · veja as novidades” no hero.
-- Contornos discretos: chips, botões e a busca da sidebar mantêm `border.control` fino (o rótulo já identifica). Campos, seleção, composer e switch usam `border.field` (3:1).
+- Contornos discretos: chips, botões e a busca da sidebar mantêm `border.control` fino (o rótulo já identifica). Composer e switch usam `border.field` (3:1). **Campo, seleção e chip que abre menu** (03/11/2026, escolha dele depois de testar): fundo `bg.field` = o do menu que abrem (`bg.raised`: branco no Refúgio e no Claro), contorno fino `border.default` (`border.strong` no hover), placeholder em `fg.muted` — “o select conversa com o dropdown”. Testamos preenchido translúcido sem contorno: no Refúgio o campo branco some no card branco, por isso o contorno fino. O contorno fica abaixo de 3:1 (WCAG 1.4.11) — decisão consciente, registrada na página Acessibilidade.
 
 ## Idiomas
 
