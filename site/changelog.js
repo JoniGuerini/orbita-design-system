@@ -81,9 +81,9 @@ const RELEASES = [
         name: T('App shell', 'App shell', 'App shell'),
         items: [
           ['novo', T(
-            'Logotipo desenhado do zero: o nome Lume deixou de ser texto em Inter Tight e virou um desenho próprio, de traço único (assets/logotype.svg)',
-            'Logotype drawn from scratch: the Lume name is no longer Inter Tight text but its own single-stroke drawing (assets/logotype.svg)',
-            'Logotipo dibujado desde cero: el nombre Lume dejó de ser texto en Inter Tight y pasó a ser un dibujo propio, de trazo único (assets/logotype.svg)',
+            'Logotipo desenhado do zero: o nome Lume deixou de ser texto em fonte e virou um desenho próprio, serifado e de alto contraste, na linha da Geist Serif (assets/logotype.svg)',
+            'Logotype drawn from scratch: the Lume name is no longer font text but its own drawing, a high-contrast serif in the spirit of Geist Serif (assets/logotype.svg)',
+            'Logotipo dibujado desde cero: el nombre Lume dejó de ser texto en una fuente y pasó a ser un dibujo propio, serifado y de alto contraste, en la línea de Geist Serif (assets/logotype.svg)',
           ), '/'],
           ['novo', T(
             'Navbar como alternativa à sidebar: o mesmo painel flutuante no topo, com um menu por grupo. Escolha Sidebar ou Navbar na topbar ou na busca ⌘K; a escolha fica salva. No celular, as duas viram a gaveta',
