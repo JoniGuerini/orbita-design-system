@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T21:51:20.074Z",
+  "generatedAt": "2026-11-03T21:59:27.942Z",
   "prefix": "ds",
   "modes": [
     "light",
@@ -2543,8 +2543,8 @@ const data = {
           "value": "#dae0e8"
         },
         "dark": {
-          "ref": "{color.refugio.975}",
-          "value": "#10171f"
+          "ref": "{color.neutral.975}",
+          "value": "#0f0e0c"
         },
         "orange": {
           "ref": "{color.neutral.100}",
@@ -2565,8 +2565,8 @@ const data = {
           "value": "#eef2f6"
         },
         "dark": {
-          "ref": "{color.refugio.950}",
-          "value": "#161f29"
+          "ref": "{color.neutral.925}",
+          "value": "#1d1b18"
         },
         "orange": {
           "ref": "{color.neutral.50}",
@@ -2586,8 +2586,8 @@ const data = {
           "value": "#f8fafd"
         },
         "dark": {
-          "ref": "{color.refugio.900}",
-          "value": "#1d2734"
+          "ref": "{color.neutral.900}",
+          "value": "#24221f"
         },
         "orange": {
           "ref": "{color.neutral.25}",
@@ -2608,8 +2608,8 @@ const data = {
           "value": "#ffffff"
         },
         "dark": {
-          "ref": "{color.refugio.900}",
-          "value": "#1d2734"
+          "ref": "{color.neutral.900}",
+          "value": "#24221f"
         },
         "orange": {
           "ref": "{color.neutral.25}",
@@ -2630,8 +2630,8 @@ const data = {
           "value": "#ffffff"
         },
         "dark": {
-          "ref": "{color.refugio.850}",
-          "value": "#232f3d"
+          "ref": "{color.neutral.850}",
+          "value": "#2c2a27"
         },
         "orange": {
           "ref": "{color.white}",
@@ -2652,8 +2652,8 @@ const data = {
           "value": "#e8edf3"
         },
         "dark": {
-          "ref": "{color.refugio.975}",
-          "value": "#10171f"
+          "ref": "{color.neutral.950}",
+          "value": "#151412"
         },
         "orange": {
           "ref": "{color.neutral.100}",
@@ -2673,8 +2673,8 @@ const data = {
           "value": "#dae0e8"
         },
         "dark": {
-          "ref": "{color.refugio.750}",
-          "value": "#354558"
+          "ref": "{color.neutral.750}",
+          "value": "#3d3b38"
         },
         "orange": {
           "ref": "{color.neutral.200}",
@@ -2695,8 +2695,8 @@ const data = {
           "value": "#ffffff"
         },
         "dark": {
-          "ref": "{color.refugio.850}",
-          "value": "#232f3d"
+          "ref": "{color.neutral.850}",
+          "value": "#2c2a27"
         },
         "orange": {
           "ref": "{color.white}",
@@ -2716,8 +2716,8 @@ const data = {
           "value": "#f8fafd"
         },
         "dark": {
-          "ref": "{color.refugio.800}",
-          "value": "#2b3847"
+          "ref": "{color.neutral.800}",
+          "value": "#33312e"
         },
         "orange": {
           "ref": "{color.neutral.50}",
@@ -2737,8 +2737,8 @@ const data = {
           "value": "#2b3847"
         },
         "dark": {
-          "ref": "{color.refugio.100}",
-          "value": "#eef2f6"
+          "ref": "{color.neutral.100}",
+          "value": "#f3ede5"
         },
         "orange": {
           "ref": "{color.neutral.950}",
@@ -2842,8 +2842,8 @@ const data = {
           "value": "#2b3847"
         },
         "dark": {
-          "ref": "{color.refugio.25}",
-          "value": "#f8fafd"
+          "ref": "{color.neutral.100}",
+          "value": "#f3ede5"
         },
         "orange": {
           "ref": "{color.neutral.975}",
@@ -2863,8 +2863,8 @@ const data = {
           "value": "#46586e"
         },
         "dark": {
-          "ref": "{color.refugio.300}",
-          "value": "#c0cad6"
+          "ref": "{color.neutral.300}",
+          "value": "#cec8c1"
         },
         "orange": {
           "ref": "{color.neutral.650}",
@@ -2885,8 +2885,8 @@ const data = {
           "value": "#5c6c7f"
         },
         "dark": {
-          "ref": "{color.refugio.400}",
-          "value": "#93a0b0"
+          "ref": "{color.neutral.400}",
+          "value": "#9c9792"
         },
         "orange": {
           "ref": "{color.neutral.550}",
@@ -2906,8 +2906,8 @@ const data = {
           "value": "#93a0b0"
         },
         "dark": {
-          "ref": "{color.refugio.600}",
-          "value": "#53657a"
+          "ref": "{color.neutral.600}",
+          "value": "#605d59"
         },
         "orange": {
           "ref": "{color.neutral.400}",
@@ -2927,8 +2927,8 @@ const data = {
           "value": "#f8fafd"
         },
         "dark": {
-          "ref": "{color.refugio.975}",
-          "value": "#10171f"
+          "ref": "{color.neutral.975}",
+          "value": "#0f0e0c"
         },
         "orange": {
           "ref": "{color.neutral.50}",
@@ -2948,8 +2948,8 @@ const data = {
           "value": "#3e5166"
         },
         "dark": {
-          "ref": "{color.refugio.200}",
-          "value": "#dae0e8"
+          "ref": "{color.neutral.100}",
+          "value": "#f3ede5"
         },
         "orange": {
           "ref": "{color.brand.700}",
@@ -2969,8 +2969,8 @@ const data = {
           "value": "#3e5166"
         },
         "dark": {
-          "ref": "{color.refugio.200}",
-          "value": "#dae0e8"
+          "ref": "{color.neutral.50}",
+          "value": "#f9f5f1"
         },
         "orange": {
           "ref": "{color.brand.700}",
@@ -2990,8 +2990,8 @@ const data = {
           "value": "#232f3d"
         },
         "dark": {
-          "ref": "{color.refugio.100}",
-          "value": "#eef2f6"
+          "ref": "{color.white}",
+          "value": "#ffffff"
         },
         "orange": {
           "ref": "{color.brand.800}",
@@ -3140,8 +3140,8 @@ const data = {
           "value": "#53657a"
         },
         "dark": {
-          "ref": "{color.refugio.300}",
-          "value": "#c0cad6"
+          "ref": "{color.neutral.300}",
+          "value": "#cec8c1"
         },
         "orange": {
           "ref": "{color.brand.600}",
@@ -3161,8 +3161,8 @@ const data = {
           "value": "#3e5166"
         },
         "dark": {
-          "ref": "{color.refugio.200}",
-          "value": "#dae0e8"
+          "ref": "{color.neutral.100}",
+          "value": "#f3ede5"
         },
         "orange": {
           "ref": "{color.brand.500}",
@@ -3182,8 +3182,8 @@ const data = {
           "value": "#2b3847"
         },
         "dark": {
-          "ref": "{color.refugio.100}",
-          "value": "#eef2f6"
+          "ref": "{color.neutral.50}",
+          "value": "#f9f5f1"
         },
         "orange": {
           "ref": "{color.brand.400}",
@@ -3203,8 +3203,8 @@ const data = {
           "value": "#232f3d"
         },
         "dark": {
-          "ref": "{color.refugio.300}",
-          "value": "#c0cad6"
+          "ref": "{color.neutral.200}",
+          "value": "#e5ded7"
         },
         "orange": {
           "ref": "{color.brand.600}",
@@ -3224,8 +3224,8 @@ const data = {
           "value": "#eef2f6"
         },
         "dark": {
-          "ref": "alpha({color.refugio.300}, 0.14)",
-          "value": "#c0cad624"
+          "ref": "alpha({color.white}, 0.08)",
+          "value": "#ffffff14"
         },
         "orange": {
           "ref": "{color.brand.50}",
@@ -3245,8 +3245,8 @@ const data = {
           "value": "#e8edf3"
         },
         "dark": {
-          "ref": "alpha({color.refugio.300}, 0.2)",
-          "value": "#c0cad633"
+          "ref": "alpha({color.white}, 0.12)",
+          "value": "#ffffff1f"
         },
         "orange": {
           "ref": "{color.brand.100}",
@@ -3266,8 +3266,8 @@ const data = {
           "value": "#3e5166"
         },
         "dark": {
-          "ref": "{color.refugio.200}",
-          "value": "#dae0e8"
+          "ref": "{color.neutral.100}",
+          "value": "#f3ede5"
         },
         "orange": {
           "ref": "{color.brand.700}",
@@ -3287,8 +3287,8 @@ const data = {
           "value": "#dae0e8"
         },
         "dark": {
-          "ref": "alpha({color.refugio.300}, 0.32)",
-          "value": "#c0cad652"
+          "ref": "alpha({color.white}, 0.2)",
+          "value": "#ffffff33"
         },
         "orange": {
           "ref": "{color.brand.200}",
@@ -3308,8 +3308,8 @@ const data = {
           "value": "#f8fafd"
         },
         "dark": {
-          "ref": "{color.refugio.900}",
-          "value": "#1d2734"
+          "ref": "{color.neutral.950}",
+          "value": "#151412"
         },
         "orange": {
           "ref": "{color.brand.950}",
@@ -4024,8 +4024,8 @@ const data = {
           "value": "#c0cad6"
         },
         "dark": {
-          "ref": "{color.refugio.700}",
-          "value": "#3e5166"
+          "ref": "{color.neutral.700}",
+          "value": "#4a4744"
         },
         "orange": {
           "ref": "{color.neutral.300}",
@@ -4046,8 +4046,8 @@ const data = {
           "value": "#93a0b0"
         },
         "dark": {
-          "ref": "{color.refugio.600}",
-          "value": "#53657a"
+          "ref": "{color.neutral.600}",
+          "value": "#605d59"
         },
         "orange": {
           "ref": "{color.neutral.400}",
@@ -4382,8 +4382,8 @@ const data = {
           "value": "#dae0e8"
         },
         "dark": {
-          "ref": "{color.refugio.750}",
-          "value": "#354558"
+          "ref": "{color.neutral.750}",
+          "value": "#3d3b38"
         },
         "orange": {
           "ref": "{color.neutral.200}",
@@ -4530,8 +4530,8 @@ const data = {
           "value": "#dae0e8"
         },
         "dark": {
-          "ref": "{color.refugio.800}",
-          "value": "#2b3847"
+          "ref": "{color.neutral.800}",
+          "value": "#33312e"
         },
         "orange": {
           "ref": "{color.neutral.200}",
@@ -4552,8 +4552,8 @@ const data = {
           "value": "#c0cad6"
         },
         "dark": {
-          "ref": "{color.refugio.700}",
-          "value": "#3e5166"
+          "ref": "{color.neutral.700}",
+          "value": "#4a4744"
         },
         "orange": {
           "ref": "{color.neutral.300}",
@@ -4660,7 +4660,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 15.91,
+      "ratio": 14.77,
       "pass": true
     },
     {
@@ -4684,7 +4684,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 10.03,
+      "ratio": 10.36,
       "pass": true
     },
     {
@@ -4708,7 +4708,7 @@ const data = {
       "bg": "color.bg.sidebar",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 14.43,
+      "ratio": 13.64,
       "pass": true
     },
     {
@@ -4732,7 +4732,7 @@ const data = {
       "bg": "color.bg.sidebar",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 9.09,
+      "ratio": 9.56,
       "pass": true
     },
     {
@@ -4756,7 +4756,7 @@ const data = {
       "bg": "color.bg.sidebar",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 5.67,
+      "ratio": 5.48,
       "pass": true
     },
     {
@@ -4780,7 +4780,7 @@ const data = {
       "bg": "color.bg.raised",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 8.19,
+      "ratio": 8.62,
       "pass": true
     },
     {
@@ -4804,7 +4804,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 12.53,
+      "ratio": 15.84,
       "pass": true
     },
     {
@@ -4828,7 +4828,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 12.53,
+      "ratio": 14.77,
       "pass": true
     },
     {
@@ -4852,7 +4852,7 @@ const data = {
       "bg": "color.brand.solid",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 11.36,
+      "ratio": 15.83,
       "pass": true
     },
     {
@@ -4876,7 +4876,7 @@ const data = {
       "bg": "color.brand.subtle",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 9.09,
+      "ratio": 11.8,
       "pass": true
     },
     {
@@ -4900,7 +4900,7 @@ const data = {
       "bg": "color.bg.inverse",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 16.03,
+      "ratio": 16.59,
       "pass": true
     },
     {
@@ -4924,7 +4924,7 @@ const data = {
       "bg": "color.success.subtle",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 8.05,
+      "ratio": 8.33,
       "pass": true
     },
     {
@@ -4972,7 +4972,7 @@ const data = {
       "bg": "color.warning.subtle",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 8.71,
+      "ratio": 8.99,
       "pass": true
     },
     {
@@ -5020,7 +5020,7 @@ const data = {
       "bg": "color.danger.subtle",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 7.68,
+      "ratio": 7.93,
       "pass": true
     },
     {
@@ -5068,7 +5068,7 @@ const data = {
       "bg": "color.info.subtle",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 7.88,
+      "ratio": 8.19,
       "pass": true
     },
     {
@@ -5116,7 +5116,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.94,
+      "ratio": 4.14,
       "pass": true
     },
     {
@@ -5140,7 +5140,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 4.27,
+      "ratio": 4.49,
       "pass": true
     },
     {
@@ -5164,7 +5164,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.88,
+      "ratio": 4.08,
       "pass": true
     },
     {
@@ -5188,7 +5188,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.28,
+      "ratio": 3.45,
       "pass": true
     },
     {
@@ -5212,7 +5212,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 4.47,
+      "ratio": 4.7,
       "pass": true
     },
     {
@@ -5236,7 +5236,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.87,
+      "ratio": 4.07,
       "pass": true
     },
     {
@@ -5260,7 +5260,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.99,
+      "ratio": 4.19,
       "pass": true
     },
     {
@@ -5284,7 +5284,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 4.49,
+      "ratio": 4.73,
       "pass": true
     },
     {
@@ -5308,7 +5308,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 6.26,
+      "ratio": 5.94,
       "pass": true
     },
     {
@@ -5332,7 +5332,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 5.67,
+      "ratio": 5.48,
       "pass": true
     },
     {
@@ -5356,7 +5356,7 @@ const data = {
       "bg": "color.bg.raised",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 5.11,
+      "ratio": 4.94,
       "pass": true
     },
     {
@@ -5380,7 +5380,7 @@ const data = {
       "bg": "color.bg.sunken",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 6.78,
+      "ratio": 6.36,
       "pass": true
     },
     {
@@ -5404,7 +5404,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.53,
+      "ratio": 3.58,
       "pass": true
     },
     {
@@ -5428,7 +5428,7 @@ const data = {
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.43,
+      "ratio": 3.5,
       "pass": true
     },
     {
@@ -5452,7 +5452,7 @@ const data = {
       "bg": "color.bg.raised",
       "mode": "dark",
       "min": 3,
-      "ratio": 3.31,
+      "ratio": 3.38,
       "pass": true
     },
     {
@@ -5500,7 +5500,7 @@ const data = {
       "bg": "color.bg.sunken",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 10.87,
+      "ratio": 11.1,
       "pass": true
     },
     {
@@ -5524,7 +5524,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 8.19,
+      "ratio": 8.62,
       "pass": true
     },
     {
@@ -5548,7 +5548,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 8.19,
+      "ratio": 8.62,
       "pass": true
     },
     {
@@ -5572,7 +5572,7 @@ const data = {
       "bg": "color.bg.field-hover",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 11.42,
+      "ratio": 11.15,
       "pass": true
     },
     {

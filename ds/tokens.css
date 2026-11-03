@@ -503,30 +503,30 @@
   color-scheme: dark;
 
   /* color.bg */
-  --ds-color-bg-app: var(--ds-color-refugio-975);
-  --ds-color-bg-canvas: var(--ds-color-refugio-950);
-  --ds-color-bg-sidebar: var(--ds-color-refugio-900);
-  --ds-color-bg-surface: var(--ds-color-refugio-900);
-  --ds-color-bg-raised: var(--ds-color-refugio-850);
-  --ds-color-bg-sunken: var(--ds-color-refugio-975);
-  --ds-color-bg-muted: var(--ds-color-refugio-750);
-  --ds-color-bg-field: var(--ds-color-refugio-850);
-  --ds-color-bg-field-hover: var(--ds-color-refugio-800);
-  --ds-color-bg-inverse: var(--ds-color-refugio-100);
+  --ds-color-bg-app: var(--ds-color-neutral-975);
+  --ds-color-bg-canvas: var(--ds-color-neutral-925);
+  --ds-color-bg-sidebar: var(--ds-color-neutral-900);
+  --ds-color-bg-surface: var(--ds-color-neutral-900);
+  --ds-color-bg-raised: var(--ds-color-neutral-850);
+  --ds-color-bg-sunken: var(--ds-color-neutral-950);
+  --ds-color-bg-muted: var(--ds-color-neutral-750);
+  --ds-color-bg-field: var(--ds-color-neutral-850);
+  --ds-color-bg-field-hover: var(--ds-color-neutral-800);
+  --ds-color-bg-inverse: var(--ds-color-neutral-100);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-white) 5%, transparent);
   --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
   --ds-color-bg-selected: color-mix(in srgb, var(--ds-color-white) 7%, transparent);
   --ds-color-bg-overlay: color-mix(in srgb, var(--ds-color-black) 60%, transparent);
 
   /* color.fg */
-  --ds-color-fg-default: var(--ds-color-refugio-25);
-  --ds-color-fg-muted: var(--ds-color-refugio-300);
-  --ds-color-fg-subtle: var(--ds-color-refugio-400);
-  --ds-color-fg-disabled: var(--ds-color-refugio-600);
-  --ds-color-fg-inverse: var(--ds-color-refugio-975);
-  --ds-color-fg-brand: var(--ds-color-refugio-200);
-  --ds-color-fg-link: var(--ds-color-refugio-200);
-  --ds-color-fg-link-hover: var(--ds-color-refugio-100);
+  --ds-color-fg-default: var(--ds-color-neutral-100);
+  --ds-color-fg-muted: var(--ds-color-neutral-300);
+  --ds-color-fg-subtle: var(--ds-color-neutral-400);
+  --ds-color-fg-disabled: var(--ds-color-neutral-600);
+  --ds-color-fg-inverse: var(--ds-color-neutral-975);
+  --ds-color-fg-brand: var(--ds-color-neutral-100);
+  --ds-color-fg-link: var(--ds-color-neutral-50);
+  --ds-color-fg-link-hover: var(--ds-color-white);
 
   /* color.border */
   --ds-color-border-subtle: color-mix(in srgb, var(--ds-color-white) 6%, transparent);
@@ -535,17 +535,17 @@
   --ds-color-border-control: color-mix(in srgb, var(--ds-color-white) 13%, transparent);
   --ds-color-border-field: color-mix(in srgb, var(--ds-color-white) 38%, transparent);
   --ds-color-border-field-hover: color-mix(in srgb, var(--ds-color-white) 52%, transparent);
-  --ds-color-border-focus: var(--ds-color-refugio-300);
+  --ds-color-border-focus: var(--ds-color-neutral-300);
 
   /* color.brand */
-  --ds-color-brand-solid: var(--ds-color-refugio-200);
-  --ds-color-brand-solid-hover: var(--ds-color-refugio-100);
-  --ds-color-brand-solid-pressed: var(--ds-color-refugio-300);
-  --ds-color-brand-subtle: color-mix(in srgb, var(--ds-color-refugio-300) 14%, transparent);
-  --ds-color-brand-subtle-hover: color-mix(in srgb, var(--ds-color-refugio-300) 20%, transparent);
-  --ds-color-brand-fg: var(--ds-color-refugio-200);
-  --ds-color-brand-border: color-mix(in srgb, var(--ds-color-refugio-300) 32%, transparent);
-  --ds-color-brand-on-solid: var(--ds-color-refugio-900);
+  --ds-color-brand-solid: var(--ds-color-neutral-100);
+  --ds-color-brand-solid-hover: var(--ds-color-neutral-50);
+  --ds-color-brand-solid-pressed: var(--ds-color-neutral-200);
+  --ds-color-brand-subtle: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
+  --ds-color-brand-subtle-hover: color-mix(in srgb, var(--ds-color-white) 12%, transparent);
+  --ds-color-brand-fg: var(--ds-color-neutral-100);
+  --ds-color-brand-border: color-mix(in srgb, var(--ds-color-white) 20%, transparent);
+  --ds-color-brand-on-solid: var(--ds-color-neutral-950);
   --ds-color-brand-indicator: var(--ds-color-terracotta-400);
 
   /* color.success */
@@ -589,8 +589,8 @@
   --ds-color-chart-series-6: var(--ds-color-red-600);
   --ds-color-chart-series-7: var(--ds-color-violet-600);
   --ds-color-chart-series-8: var(--ds-color-green-600);
-  --ds-color-chart-muted: var(--ds-color-refugio-700);
-  --ds-color-chart-other: var(--ds-color-refugio-600);
+  --ds-color-chart-muted: var(--ds-color-neutral-700);
+  --ds-color-chart-other: var(--ds-color-neutral-600);
   --ds-color-chart-seq-1: var(--ds-color-brand-900);
   --ds-color-chart-seq-2: var(--ds-color-brand-800);
   --ds-color-chart-seq-3: var(--ds-color-brand-700);
@@ -606,15 +606,15 @@
   --ds-color-chart-div-1: var(--ds-color-blue-400);
   --ds-color-chart-div-2: var(--ds-color-blue-600);
   --ds-color-chart-div-3: var(--ds-color-blue-800);
-  --ds-color-chart-div-4: var(--ds-color-refugio-750);
+  --ds-color-chart-div-4: var(--ds-color-neutral-750);
   --ds-color-chart-div-5: var(--ds-color-brand-800);
   --ds-color-chart-div-6: var(--ds-color-brand-600);
   --ds-color-chart-div-7: var(--ds-color-brand-400);
   --ds-color-chart-status-good: var(--ds-color-green-500);
   --ds-color-chart-status-warning: var(--ds-color-amber-400);
   --ds-color-chart-status-critical: var(--ds-color-red-600);
-  --ds-color-chart-grid: var(--ds-color-refugio-800);
-  --ds-color-chart-axis: var(--ds-color-refugio-700);
+  --ds-color-chart-grid: var(--ds-color-neutral-800);
+  --ds-color-chart-axis: var(--ds-color-neutral-700);
 
   /* shadow */
   --ds-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.32);
