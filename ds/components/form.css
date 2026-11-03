@@ -9,8 +9,8 @@
   width: 100%;
   height: var(--_h);
   padding-inline: 13px var(--ds-space-150);
-  /* preenchido: o fundo translúcido separa o campo de qualquer superfície; o contorno só aparece no foco */
-  border: 1px solid transparent;
+  /* o fundo é o do menu que o campo abre (raised); o contorno fino separa do card quando os dois são claros */
+  border: 1px solid var(--ds-color-border-default);
   border-radius: var(--ds-radius-md);
   background: var(--ds-color-bg-field);
   color: var(--ds-color-fg-subtle);
@@ -22,6 +22,7 @@
 }
 
 .ds-field:hover {
+  border-color: var(--ds-color-border-strong);
   background: var(--ds-color-bg-field-hover);
 }
 
@@ -73,6 +74,7 @@
 
 /* Estados — também forçáveis com data-state="hover|focus" para documentação e testes */
 .ds-field[data-state="hover"] {
+  border-color: var(--ds-color-border-strong);
   background: var(--ds-color-bg-field-hover);
 }
 
@@ -83,7 +85,7 @@
 
 .ds-field:has(> .ds-field__input:disabled) {
   opacity: var(--ds-opacity-disabled);
-  border-color: transparent;
+  border-color: var(--ds-color-border-default);
   cursor: not-allowed;
 }
 

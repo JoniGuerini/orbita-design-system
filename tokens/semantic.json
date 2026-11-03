@@ -246,17 +246,17 @@
         "refugio-sidebar": "{color.refugio.700}"
       },
       "field": {
-        "dark": "alpha({color.white}, 0.07)",
-        "light": "alpha({color.neutral.975}, 0.055)",
-        "refugio": "alpha({color.refugio.700}, 0.09)",
-        "refugio-sidebar": "alpha({color.white}, 0.08)",
-        "$description": "Fundo de campos, seleção e chips que abrem menu: translúcido, separa o controle de qualquer fundo sem precisar de contorno."
+        "dark": "{color.neutral.850}",
+        "light": "{color.white}",
+        "refugio": "{color.white}",
+        "refugio-sidebar": "{color.refugio.750}",
+        "$description": "Fundo de campos, seleção e chips que abrem menu: o mesmo do menu que eles abrem (raised), para os dois conversarem."
       },
       "field-hover": {
-        "dark": "alpha({color.white}, 0.1)",
-        "light": "alpha({color.neutral.975}, 0.085)",
-        "refugio": "alpha({color.refugio.700}, 0.13)",
-        "refugio-sidebar": "alpha({color.white}, 0.12)"
+        "dark": "{color.neutral.800}",
+        "light": "{color.neutral.50}",
+        "refugio": "{color.refugio.25}",
+        "refugio-sidebar": "{color.refugio.700}"
       },
       "inverse": {
         "dark": "{color.neutral.100}",

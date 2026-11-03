@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T16:51:29.304Z",
+  "generatedAt": "2026-11-03T16:54:46.197Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -2688,19 +2688,19 @@ const data = {
       "type": "color",
       "source": "semantic.json",
       "themed": true,
-      "description": "Fundo de campos, seleção e chips que abrem menu: translúcido, separa o controle de qualquer fundo sem precisar de contorno.",
+      "description": "Fundo de campos, seleção e chips que abrem menu: o mesmo do menu que eles abrem (raised), para os dois conversarem.",
       "modes": {
         "dark": {
-          "ref": "alpha({color.white}, 0.07)",
-          "value": "#ffffff12"
+          "ref": "{color.neutral.850}",
+          "value": "#2c2a27"
         },
         "light": {
-          "ref": "alpha({color.neutral.975}, 0.055)",
-          "value": "#0f0e0c0e"
+          "ref": "{color.white}",
+          "value": "#ffffff"
         },
         "refugio": {
-          "ref": "alpha({color.refugio.700}, 0.09)",
-          "value": "#3e516617"
+          "ref": "{color.white}",
+          "value": "#ffffff"
         }
       }
     },
@@ -2712,16 +2712,16 @@ const data = {
       "themed": true,
       "modes": {
         "dark": {
-          "ref": "alpha({color.white}, 0.1)",
-          "value": "#ffffff1a"
+          "ref": "{color.neutral.800}",
+          "value": "#33312e"
         },
         "light": {
-          "ref": "alpha({color.neutral.975}, 0.085)",
-          "value": "#0f0e0c16"
+          "ref": "{color.neutral.50}",
+          "value": "#f9f5f1"
         },
         "refugio": {
-          "ref": "alpha({color.refugio.700}, 0.13)",
-          "value": "#3e516621"
+          "ref": "{color.refugio.25}",
+          "value": "#f8fafd"
         }
       }
     },
@@ -5516,7 +5516,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 8.51,
+      "ratio": 8.62,
       "pass": true
     },
     {
@@ -5524,7 +5524,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "light",
       "min": 4.5,
-      "ratio": 6.37,
+      "ratio": 7.76,
       "pass": true
     },
     {
@@ -5532,7 +5532,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 5.65,
+      "ratio": 7.29,
       "pass": true
     },
     {
@@ -5540,7 +5540,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 7.73,
+      "ratio": 8.62,
       "pass": true
     },
     {
@@ -5548,7 +5548,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "light",
       "min": 4.5,
-      "ratio": 6.67,
+      "ratio": 7.76,
       "pass": true
     },
     {
@@ -5556,7 +5556,7 @@ const data = {
       "bg": "color.bg.field",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 6.33,
+      "ratio": 7.29,
       "pass": true
     },
     {
@@ -5564,7 +5564,7 @@ const data = {
       "bg": "color.bg.field-hover",
       "mode": "dark",
       "min": 4.5,
-      "ratio": 10.98,
+      "ratio": 11.15,
       "pass": true
     },
     {
@@ -5572,7 +5572,7 @@ const data = {
       "bg": "color.bg.field-hover",
       "mode": "light",
       "min": 4.5,
-      "ratio": 14.83,
+      "ratio": 17.79,
       "pass": true
     },
     {
@@ -5580,7 +5580,7 @@ const data = {
       "bg": "color.bg.field-hover",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 8.72,
+      "ratio": 11.42,
       "pass": true
     }
   ]

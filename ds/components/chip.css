@@ -42,13 +42,11 @@
 
 .ds-chip:has(> .ds-chip__chevron) {
   padding-inline-end: var(--_pad-glyph);
-  border-color: transparent;
   background: var(--ds-color-bg-field);
 }
 
 .ds-chip:has(> .ds-chip__chevron):hover,
 .ds-chip:has(> .ds-chip__chevron)[aria-expanded="true"] {
-  border-color: transparent;
   background: var(--ds-color-bg-field-hover);
 }
 
