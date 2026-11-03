@@ -81,6 +81,11 @@ const RELEASES = [
             'El botón de contraer pasó a ser una pestaña en el borde de la sidebar, a la altura de la marca, que aparece con el puntero o el foco',
           ), '/padroes/app-shell'],
           ['melhoria', T(
+            'Painéis mais firmes: sidebar e painel principal com raio de 20 px (era 28) e 10 px de espaço entre eles e nas bordas (era 12)',
+            'Firmer panels: sidebar and main panel with a 20 px radius (was 28) and 10 px of space between them and at the edges (was 12)',
+            'Paneles más firmes: sidebar y panel principal con radio de 20 px (era 28) y 10 px de espacio entre ellos y en los bordes (era 12)',
+          ), '/padroes/app-shell'],
+          ['melhoria', T(
             'A chama fica na coluna dos ícones e o nome alinha com os rótulos do menu',
             'The flame sits in the icon column and the name lines up with the menu labels',
             'La llama queda en la columna de los íconos y el nombre se alinea con las etiquetas del menú',
