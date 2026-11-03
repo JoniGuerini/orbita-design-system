@@ -25,7 +25,7 @@ const DEVICES = () => [
 // [seletor do marcador, [x, y] em fração da caixa + deslocamento em px, nome, descrição, seletor do destaque]
 const PARTS = () => [
   ['.ds-sidebar', [1, 0.72, 0, 0], 'Sidebar', L(`Painel flutuante de ${px('layout.sidebar')} px, raio xl, separado do conteúdo por ${px('layout.frame-gap')} px de fundo do app.`, `A floating ${px('layout.sidebar')} px panel, xl radius, separated from the content by ${px('layout.frame-gap')} px of app background.`, `Panel flotante de ${px('layout.sidebar')} px, radio xl, separado del contenido por ${px('layout.frame-gap')} px de fondo de la app.`)],
-  ['.ds-brand', [1, 0.5, 16, 0], L('Marca', 'Brand', 'Marca'), L('A chama do Lume e o nome desenhado (não é fonte). Leva ao Início.', 'The Lume flame and the drawn name (not a font). It goes to Home.', 'La llama de Lume y el nombre dibujado (no es una fuente). Lleva al Inicio.')],
+  ['.ds-brand', [1, 0.5, 16, 0], L('Marca', 'Brand', 'Marca'), L('A chama do Lume e o nome, em Geist Serif. Leva ao Início.', 'The Lume flame and the name, in Geist Serif. It goes to Home.', 'La llama de Lume y el nombre, en Geist Serif. Lleva al Inicio.')],
   ['.ds-sidebar-search', [1, 0.5, 0, 0], L('Busca', 'Search', 'Búsqueda'), L(`Abre a paleta de comandos — o mesmo que ${MOD} K ou /.`, `Opens the command palette — the same as ${MOD} K or /.`, `Abre la paleta de comandos — lo mismo que ${MOD} K o /.`)],
   ['.ds-sidebar__nav .ds-nav-group__header', [0.62, 0.5, 0, 0], L('Navegação com grupos', 'Grouped navigation', 'Navegación con grupos'), L('Navegação principal no topo; depois, grupos que recolhem e lembram o estado.', 'Main navigation at the top; then, groups that collapse and remember their state.', 'Navegación principal arriba; después, grupos que se contraen y recuerdan su estado.'), '.ds-sidebar__nav'],
   ['.ds-account', [1, 0.5, 0, 0], L('Cartão da conta', 'Account card', 'Tarjeta de la cuenta'), L('Fica preso no pé da sidebar: conta, versão ou workspace.', 'Pinned to the foot of the sidebar: account, version, or workspace.', 'Queda fija al pie de la sidebar: cuenta, versión o workspace.')],
@@ -86,7 +86,7 @@ const skeleton = () => `<a class="ds-skip-link" href="#${L('conteudo', 'content'
   <button class="ds-shell__edge" data-shell-toggle aria-controls="sidebar"><ds-icon name="chevron-left" size="16"></ds-icon></button>
   <aside class="ds-sidebar" id="sidebar" aria-label="${L('Barra lateral', 'Sidebar', 'Barra lateral')}">
     <div class="ds-sidebar__header">
-      <a class="ds-brand" href="#/" aria-label="Lume"><img class="ds-brand__mark" src="assets/favicon.svg" alt=""><svg class="ds-brand__type" …>…</svg></a>
+      <a class="ds-brand" href="#/" aria-label="Lume"><img class="ds-brand__mark" src="assets/favicon.svg" alt="">Lume</a>
       <button class="ds-icon-btn ds-icon-btn--outline ds-icon-btn--lg ds-sidebar__toggle"
               data-shell-toggle aria-controls="sidebar">
         <img class="ds-sidebar__toggle-mark" src="assets/favicon.svg" alt="">

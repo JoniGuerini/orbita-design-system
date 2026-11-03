@@ -69,8 +69,8 @@
   align-items: center;
   gap: var(--ds-space-150);
   color: var(--ds-color-fg-default);
-  font: var(--ds-font-weight-bold) 1.75rem/1 var(--ds-font-family-display);
-  letter-spacing: -0.045em;
+  font: var(--ds-font-weight-regular) 1.75rem/1 var(--ds-font-family-display);
+  letter-spacing: -0.02em;
   text-decoration: none;
   white-space: nowrap;
   border-radius: var(--ds-radius-xs);
@@ -79,15 +79,6 @@
 
 .ds-brand:hover {
   color: var(--ds-color-fg-default);
-}
-
-/* O nome é desenhado (não é texto em fonte): serifado, de alto contraste — hastes grossas, horizontais e
-   serifas finas, na linha da Geist Serif dos títulos —, na cor do texto. 20 px de altura das maiúsculas.
-   O link leva o nome no aria-label. Fonte do desenho: assets/logotype.svg. */
-.ds-brand__type {
-  flex: none;
-  width: auto;
-  height: 20.5px;
 }
 
 /* A chama tem as cores do tema Refúgio do app: é logotipo, não segue o tema daqui */

@@ -36,7 +36,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 
 ## Vetos
 
-- Logotipo é a chama do Lume + o nome “Lume” **desenhado do zero** (03/11/2026, pedido dele: “sem usar Inter”) — serifado, de alto contraste, inspirado na Geist Serif (hastes de 13, horizontais e serifas de ~3,5, curvas finas em cima e embaixo; linha de base 100, maiúsculas 72, altura de x 52), um pouco mais encorpado que a Geist Serif Regular para aguentar o tamanho pequeno; a primeira versão (traço único, sem serifa) foi trocada a pedido dele; está inline em `index.html` (`.ds-brand__type`, 20,5 px de altura, cor do texto) e em `assets/logotype.svg`. Mudou o desenho? Atualize os dois. Fonte própria completa foi descartada (só o logotipo). O Figma ainda usa texto. Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
+- Logotipo é a chama do Lume + o nome “Lume” escrito em **Geist Serif** (Regular, 28 px, tracking -0,02em), a fonte dos títulos. Em 03/11/2026 testamos dois desenhos próprios do nome (traço único e depois serifado, `assets/logotype.svg`, no histórico do git): ele preferiu, por ora, a própria Geist Serif. Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
 - Nunca o ícone de *sparkles* (estrela grande + pequena) — saiu da biblioteca. Novidades usa `megaphone`.
 - Nada de enfeite “vibe coded”, como o badge “Versão 0.1 · veja as novidades” no hero.
 - Contornos discretos: chips, botões e a busca da sidebar mantêm `border.control` fino (o rótulo já identifica). Campos, seleção, composer e switch usam `border.field` (3:1).
