@@ -105,6 +105,11 @@
   font-weight: var(--ds-font-weight-semibold);
 }
 
+.swatches--dense .swatch__step {
+  font-size: 0.6875rem;
+  letter-spacing: -0.01em;
+}
+
 .swatch__value {
   overflow: hidden;
   font: var(--ds-font-weight-regular) 0.6875rem/1rem var(--ds-font-family-mono);

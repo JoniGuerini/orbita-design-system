@@ -266,6 +266,12 @@
   flex: 0 0 112px;
 }
 
+/* o campo longo ocupa o resto da linha, sem empurrar o card (o input tem largura própria) */
+.tf-usage--row > .ds-field:not(.tf-usage__short) {
+  flex: 1;
+  min-width: 0;
+}
+
 /* ───────── Responsivo ───────── */
 
 @media (max-width: 1100px) {

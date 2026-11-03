@@ -208,7 +208,8 @@ const inkFor = (s) => (s.contrastOnBlack > s.contrastOnWhite ? 'dark' : 'light')
 /* ───────── Paletas ───────── */
 
 function strip(p, size) {
-  return `<div class="swatches swatches--${size}">
+  // paletas longas (neutros com 18 tons) têm amostras estreitas: números menores para caber
+  return `<div class="swatches swatches--${size}${p.steps.length > 12 ? ' swatches--dense' : ''}">
     ${p.steps
       .map(
         (s) => `<button type="button" class="swatch swatch--ink-${inkFor(s)}" style="background:${s.hex}"

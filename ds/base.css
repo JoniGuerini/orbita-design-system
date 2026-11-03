@@ -53,13 +53,14 @@ button {
   padding: 0;
 }
 
-a {
+/* link solto no texto; peso zero, para links com classe (cards, itens de menu) decidirem a própria cor */
+:where(a) {
   color: var(--ds-color-fg-link);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
 
-a:hover {
+:where(a:hover) {
   color: var(--ds-color-fg-link-hover);
 }
 
@@ -74,8 +75,8 @@ p {
   overflow-wrap: break-word;
 }
 
-ul[role="list"],
-ol[role="list"] {
+/* peso zero (:where): qualquer classe que dê padding ou list-style à lista ganha do reset */
+:where(ul[role="list"], ol[role="list"]) {
   list-style: none;
   padding: 0;
 }
