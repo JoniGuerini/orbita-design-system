@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T15:00:53.770Z",
+  "generatedAt": "2026-11-03T16:51:29.304Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -2679,6 +2679,49 @@ const data = {
         "refugio": {
           "ref": "{color.refugio.200}",
           "value": "#dae0e8"
+        }
+      }
+    },
+    {
+      "name": "color.bg.field",
+      "cssVar": "--ds-color-bg-field",
+      "type": "color",
+      "source": "semantic.json",
+      "themed": true,
+      "description": "Fundo de campos, seleção e chips que abrem menu: translúcido, separa o controle de qualquer fundo sem precisar de contorno.",
+      "modes": {
+        "dark": {
+          "ref": "alpha({color.white}, 0.07)",
+          "value": "#ffffff12"
+        },
+        "light": {
+          "ref": "alpha({color.neutral.975}, 0.055)",
+          "value": "#0f0e0c0e"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.09)",
+          "value": "#3e516617"
+        }
+      }
+    },
+    {
+      "name": "color.bg.field-hover",
+      "cssVar": "--ds-color-bg-field-hover",
+      "type": "color",
+      "source": "semantic.json",
+      "themed": true,
+      "modes": {
+        "dark": {
+          "ref": "alpha({color.white}, 0.1)",
+          "value": "#ffffff1a"
+        },
+        "light": {
+          "ref": "alpha({color.neutral.975}, 0.085)",
+          "value": "#0f0e0c16"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.13)",
+          "value": "#3e516621"
         }
       }
     },
@@ -5466,6 +5509,78 @@ const data = {
       "mode": "refugio",
       "min": 4.5,
       "ratio": 6.19,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.field",
+      "mode": "dark",
+      "min": 4.5,
+      "ratio": 8.51,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.field",
+      "mode": "light",
+      "min": 4.5,
+      "ratio": 6.37,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.field",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 5.65,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.field",
+      "mode": "dark",
+      "min": 4.5,
+      "ratio": 7.73,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.field",
+      "mode": "light",
+      "min": 4.5,
+      "ratio": 6.67,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.field",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 6.33,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.default",
+      "bg": "color.bg.field-hover",
+      "mode": "dark",
+      "min": 4.5,
+      "ratio": 10.98,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.default",
+      "bg": "color.bg.field-hover",
+      "mode": "light",
+      "min": 4.5,
+      "ratio": 14.83,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.default",
+      "bg": "color.bg.field-hover",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 8.72,
       "pass": true
     }
   ]

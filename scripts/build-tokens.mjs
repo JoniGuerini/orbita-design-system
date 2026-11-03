@@ -26,7 +26,7 @@ const FALLBACK = { light: 'dark', refugio: 'light' };
 const SCHEME = { dark: 'dark', light: 'light', refugio: 'light' };
 // recortes de um tema: valem só dentro de um seletor e não viram tema próprio (nem vão para Figma ou exportações).
 // No JSON, a chave do recorte só aparece nos tokens que mudam ali; o resto segue o tema de base.
-const SCOPES = { 'refugio-sidebar': { base: 'refugio', selector: '[data-theme="refugio"] :is(.ds-sidebar, .ds-navbar)', scheme: 'dark' } };
+const SCOPES = { 'refugio-sidebar': { base: 'refugio', selector: '[data-theme="refugio"] :is(.ds-sidebar, .ds-navbar)', scheme: 'dark', over: 'color.bg.sidebar' } };
 const ALL_MODES = [...MODES, ...Object.keys(SCOPES)];
 for (const [id, scope] of Object.entries(SCOPES)) FALLBACK[id] = scope.base;
 const modeValue = (value, mode) => value[mode] ?? (FALLBACK[mode] ? modeValue(value, FALLBACK[mode]) : undefined);
@@ -316,7 +316,8 @@ export async function buildTokens({ quiet = false } = {}) {
     checks
       .filter(([, bg]) => themedTokens.find((t) => t.name === bg)?.own?.includes(mode))
       .map(([fg, bg, min]) => {
-        const bgRgb = emit.solidColor(bg, mode);
+        // transparência composta sobre o fundo do próprio recorte (a sidebar), não sobre o canvas da página
+        const bgRgb = emit.solidColor(bg, mode, SCOPES[mode].over);
         const fgColor = parseHex(emit.resolveColor(`{${fg}}`, mode));
         const ratio = round(contrastRatio(fgColor.a < 1 ? composite(fgColor, bgRgb) : fgColor.rgb, bgRgb), 2);
         return { fg, bg, mode, min, ratio, pass: ratio >= min };

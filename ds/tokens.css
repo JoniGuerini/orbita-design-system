@@ -381,6 +381,8 @@
   --ds-color-bg-raised: var(--ds-color-neutral-850);
   --ds-color-bg-sunken: var(--ds-color-neutral-950);
   --ds-color-bg-muted: var(--ds-color-neutral-750);
+  --ds-color-bg-field: color-mix(in srgb, var(--ds-color-white) 7%, transparent);
+  --ds-color-bg-field-hover: color-mix(in srgb, var(--ds-color-white) 10%, transparent);
   --ds-color-bg-inverse: var(--ds-color-neutral-100);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-white) 5%, transparent);
   --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
@@ -508,6 +510,8 @@
   --ds-color-bg-raised: var(--ds-color-white);
   --ds-color-bg-sunken: var(--ds-color-neutral-100);
   --ds-color-bg-muted: var(--ds-color-neutral-200);
+  --ds-color-bg-field: color-mix(in srgb, var(--ds-color-neutral-975) 5.5%, transparent);
+  --ds-color-bg-field-hover: color-mix(in srgb, var(--ds-color-neutral-975) 8.5%, transparent);
   --ds-color-bg-inverse: var(--ds-color-neutral-950);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-neutral-975) 4.5%, transparent);
   --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-neutral-975) 8%, transparent);
@@ -635,6 +639,8 @@
   --ds-color-bg-raised: var(--ds-color-white);
   --ds-color-bg-sunken: var(--ds-color-refugio-150);
   --ds-color-bg-muted: var(--ds-color-refugio-200);
+  --ds-color-bg-field: color-mix(in srgb, var(--ds-color-refugio-700) 9%, transparent);
+  --ds-color-bg-field-hover: color-mix(in srgb, var(--ds-color-refugio-700) 13%, transparent);
   --ds-color-bg-inverse: var(--ds-color-refugio-800);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-refugio-700) 5%, transparent);
   --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-refugio-700) 9%, transparent);
@@ -759,6 +765,8 @@
   --ds-color-bg-raised: var(--ds-color-refugio-750);
   --ds-color-bg-sunken: var(--ds-color-refugio-850);
   --ds-color-bg-muted: var(--ds-color-refugio-700);
+  --ds-color-bg-field: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
+  --ds-color-bg-field-hover: color-mix(in srgb, var(--ds-color-white) 12%, transparent);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-white) 6%, transparent);
   --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-white) 10%, transparent);
   --ds-color-bg-selected: color-mix(in srgb, var(--ds-color-white) 9%, transparent);
@@ -791,6 +799,8 @@
     --ds-color-bg-raised: var(--ds-color-white);
     --ds-color-bg-sunken: var(--ds-color-neutral-100);
     --ds-color-bg-muted: var(--ds-color-neutral-200);
+    --ds-color-bg-field: color-mix(in srgb, var(--ds-color-neutral-975) 5.5%, transparent);
+    --ds-color-bg-field-hover: color-mix(in srgb, var(--ds-color-neutral-975) 8.5%, transparent);
     --ds-color-bg-inverse: var(--ds-color-neutral-950);
     --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-neutral-975) 4.5%, transparent);
     --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-neutral-975) 8%, transparent);

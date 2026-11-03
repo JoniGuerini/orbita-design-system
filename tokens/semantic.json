@@ -180,6 +180,22 @@
       "color.fg.muted",
       "color.bg.sunken",
       4.5
+    ],
+    [
+      "color.fg.muted",
+      "color.bg.field",
+      4.5
+    ],
+    [
+      "color.fg.muted",
+      "color.bg.field",
+      4.5,
+      "color.bg.surface"
+    ],
+    [
+      "color.fg.default",
+      "color.bg.field-hover",
+      4.5
     ]
   ],
   "color": {
@@ -228,6 +244,19 @@
         "light": "{color.neutral.200}",
         "refugio": "{color.refugio.200}",
         "refugio-sidebar": "{color.refugio.700}"
+      },
+      "field": {
+        "dark": "alpha({color.white}, 0.07)",
+        "light": "alpha({color.neutral.975}, 0.055)",
+        "refugio": "alpha({color.refugio.700}, 0.09)",
+        "refugio-sidebar": "alpha({color.white}, 0.08)",
+        "$description": "Fundo de campos, seleção e chips que abrem menu: translúcido, separa o controle de qualquer fundo sem precisar de contorno."
+      },
+      "field-hover": {
+        "dark": "alpha({color.white}, 0.1)",
+        "light": "alpha({color.neutral.975}, 0.085)",
+        "refugio": "alpha({color.refugio.700}, 0.13)",
+        "refugio-sidebar": "alpha({color.white}, 0.12)"
       },
       "inverse": {
         "dark": "{color.neutral.100}",

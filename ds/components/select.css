@@ -25,9 +25,9 @@ select[data-ds-select]:not([data-enhanced]) {
   width: 100%;
   height: var(--ds-size-control-md);
   padding-inline: 12px;
-  border: 1px solid var(--ds-color-border-field);
+  border: 1px solid transparent;
   border-radius: var(--ds-radius-md);
-  background: transparent;
+  background: var(--ds-color-bg-field);
   color: var(--ds-color-fg-default);
   font: var(--ds-text-body-sm);
 }
@@ -65,9 +65,10 @@ select[data-ds-select][multiple]:not([data-enhanced]) {
   width: 100%;
   height: var(--_h);
   padding-inline: var(--_px) calc(var(--_px) - 2px);
-  border: 1px solid var(--ds-color-border-field);
+  /* preenchido como o campo: sem contorno em repouso, a cor de foco no foco ou aberto */
+  border: 1px solid transparent;
   border-radius: var(--ds-radius-md);
-  background: transparent;
+  background: var(--ds-color-bg-field);
   color: var(--ds-color-fg-default);
   font: var(--ds-text-body-sm);
   letter-spacing: var(--ds-text-body-sm-tracking);
@@ -75,12 +76,13 @@ select[data-ds-select][multiple]:not([data-enhanced]) {
   cursor: pointer;
   transition:
     border-color var(--ds-duration-fast) var(--ds-easing-standard),
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
     box-shadow var(--ds-duration-base) var(--ds-easing-standard);
 }
 
 .ds-select__trigger:hover,
 .ds-select[data-state="hover"] .ds-select__trigger {
-  border-color: var(--ds-color-border-field-hover);
+  background: var(--ds-color-bg-field-hover);
 }
 
 .ds-select__trigger:focus-visible,
@@ -103,7 +105,7 @@ select[data-ds-select][multiple]:not([data-enhanced]) {
 
 .ds-select__value[data-placeholder],
 .ds-select__summary[data-placeholder] {
-  color: var(--ds-color-fg-subtle);
+  color: var(--ds-color-fg-muted);
 }
 
 .ds-select__icon,
@@ -237,7 +239,7 @@ select[data-ds-select][multiple]:not([data-enhanced]) {
 .ds-select__trigger:disabled,
 .ds-select__trigger--multi[data-disabled] {
   opacity: var(--ds-opacity-disabled);
-  border-color: var(--ds-color-border-field);
+  border-color: transparent;
   cursor: not-allowed;
 }
 

@@ -118,11 +118,13 @@
 .ds-sidebar-search {
   padding-inline: 12px;
   border-color: var(--ds-color-border-control);
+  background: transparent;
   overflow: hidden;
 }
 
 .ds-sidebar-search:hover {
   border-color: var(--ds-color-border-strong);
+  background: transparent;
 }
 
 .ds-sidebar-search__kbd {

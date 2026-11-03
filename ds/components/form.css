@@ -9,9 +9,10 @@
   width: 100%;
   height: var(--_h);
   padding-inline: 13px var(--ds-space-150);
-  border: 1px solid var(--ds-color-border-field);
+  /* preenchido: o fundo translúcido separa o campo de qualquer superfície; o contorno só aparece no foco */
+  border: 1px solid transparent;
   border-radius: var(--ds-radius-md);
-  background: transparent;
+  background: var(--ds-color-bg-field);
   color: var(--ds-color-fg-subtle);
   text-align: start;
   transition:
@@ -21,7 +22,7 @@
 }
 
 .ds-field:hover {
-  border-color: var(--ds-color-border-field-hover);
+  background: var(--ds-color-bg-field-hover);
 }
 
 .ds-field:focus-within {
@@ -47,7 +48,7 @@
 
 .ds-field__input::placeholder,
 .ds-field__placeholder {
-  color: var(--ds-color-fg-subtle);
+  color: var(--ds-color-fg-muted);
   font: var(--ds-text-body-sm);
   letter-spacing: var(--ds-text-body-sm-tracking);
 }
@@ -72,7 +73,7 @@
 
 /* Estados — também forçáveis com data-state="hover|focus" para documentação e testes */
 .ds-field[data-state="hover"] {
-  border-color: var(--ds-color-border-field-hover);
+  background: var(--ds-color-bg-field-hover);
 }
 
 .ds-field[data-state="focus"] {
@@ -82,7 +83,7 @@
 
 .ds-field:has(> .ds-field__input:disabled) {
   opacity: var(--ds-opacity-disabled);
-  border-color: var(--ds-color-border-field);
+  border-color: transparent;
   cursor: not-allowed;
 }
 
