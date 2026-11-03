@@ -300,7 +300,7 @@ function section(id, title, desc, body) {
 }
 
 const themeSwitch = (label, th = siteTheme()) => `<div class="ds-segmented ra-stage__theme" role="radiogroup" aria-label="${L('Tema do exemplo', 'Example theme', 'Tema del ejemplo')}: ${label}">
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="Refúgio">${icon('mountain', { size: 16 })}</button>
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="Refúgio">${icon('cabin', { size: 16 })}</button>
     <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="dark" aria-checked="${th === 'dark'}" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
     <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="light" aria-checked="${th === 'light'}" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
   </div>`;

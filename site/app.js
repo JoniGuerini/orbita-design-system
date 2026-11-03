@@ -147,7 +147,7 @@ const palette = createCommandPalette({
       hint: page.load ? undefined : t('soon'),
       perform: () => go(page.path),
     })),
-    { id: 'theme-refugio', label: t('useRefugio'), group: t('actions'), icon: 'mountain', keywords: ['refúgio', 'refugio', 'lume', 'ardósia', 'slate'], perform: () => applyTheme('refugio') },
+    { id: 'theme-refugio', label: t('useRefugio'), group: t('actions'), icon: 'cabin', keywords: ['refúgio', 'refugio', 'lume', 'ardósia', 'slate'], perform: () => applyTheme('refugio') },
     { id: 'theme-dark', label: t('useDark'), group: t('actions'), icon: 'moon', keywords: ['dark', 'escuro', 'oscuro'], perform: () => applyTheme('dark') },
     { id: 'theme-light', label: t('useLight'), group: t('actions'), icon: 'sun', keywords: ['light', 'claro'], perform: () => applyTheme('light') },
     { id: 'theme-system', label: t('useSystem'), group: t('actions'), icon: 'monitor', keywords: ['system', 'sistema', 'automático'], perform: () => applyTheme('system') },

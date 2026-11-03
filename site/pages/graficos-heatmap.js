@@ -88,7 +88,7 @@ function scalePanel(theme) {
     `<span class="gh-step${used ? '' : ' gh-step--off'}"><span class="gh-step__chip" style="background:var(--ds-color-chart-${token})"></span><span class="gh-step__label">${label}</span></span>`;
   const empty = L('vazio', 'empty', 'vacío');
   return `<div class="gh-scales__panel" data-theme="${theme}">
-    <p class="gh-scales__theme">${icon({ dark: 'moon', light: 'sun', refugio: 'mountain' }[theme], { size: 16 })}${{ dark: L('Escuro', 'Dark', 'Oscuro'), light: L('Claro', 'Light', 'Claro'), refugio: 'Refúgio' }[theme]}</p>
+    <p class="gh-scales__theme">${icon({ dark: 'moon', light: 'sun', refugio: 'cabin' }[theme], { size: 16 })}${{ dark: L('Escuro', 'Dark', 'Oscuro'), light: L('Claro', 'Light', 'Claro'), refugio: 'Refúgio' }[theme]}</p>
     <div class="gh-scales__row">
       <p class="gh-scales__name">${L('Sequencial · 7 faixas', 'Sequential · 7 bands', 'Secuencial · 7 rangos')}</p>
       <div class="gh-steps">${swatch('grid', empty)}${SEQ.map((n) => swatch(`seq-${n}`, n)).join('')}</div>

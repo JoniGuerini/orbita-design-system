@@ -105,7 +105,9 @@ const DEFINITIONS = [
   ['sun', 'interface', 'tema claro dia', circle(12, 12, 4) + path('M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4')],
   ['moon', 'interface', 'tema escuro noite', path('M10.5 3.5a7.5 7.5 0 0 0 10 10A8.5 8.5 0 1 1 10.5 3.5z')],
   // desenho próprio: base que passa dos picos, neve em zigue-zague no pico maior e um pico atrás
-  ['mountain', 'interface', 'montanha tema refúgio natureza', path('M2.5 19.5h19M3.5 19.5 10.5 6l7 13.5M14.39 13.5l2.41-4 4.2 10M8.17 10.5l1.6 1.5 1.7-1.4 2 1.2')],
+  // desenho próprio: cabana em A (telhado até o chão), porta em arco e chaminé — diferente da casa de “home”
+  ['cabin', 'interface', 'cabana abrigo refúgio tema casa', path('M2.5 19.5h19M3.5 19.5 12 4.5l8.5 15M10 19.5v-3.5a2 2 0 0 1 4 0v3.5M16 11.6V7.5h2v7.6')],
+  ['mountain', 'interface', 'montanha natureza', path('M2.5 19.5h19M3.5 19.5 10.5 6l7 13.5M14.39 13.5l2.41-4 4.2 10M8.17 10.5l1.6 1.5 1.7-1.4 2 1.2')],
   ['monitor', 'interface', 'sistema tela desktop', rect(3, 4, 18, 12.5, 2.5) + path('M8.5 20.5h7M12 16.5v4')],
   ['eye', 'interface', 'visualizar mostrar ver', path('M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z') + circle(12, 12, 3)],
   ['eye-off', 'interface', 'ocultar esconder senha', path('M10 5.7a9.6 9.6 0 0 1 2-.2c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.6 3.4M6.6 6.6C4 8.3 2.5 12 2.5 12S6 18.5 12 18.5a9.4 9.4 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M3.5 3.5l17 17')],
