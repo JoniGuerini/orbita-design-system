@@ -223,8 +223,9 @@
   gap: 2px;
   padding: 3px;
   border-radius: var(--ds-radius-full);
+  /* trilho rebaixado com contorno fino; o item escolhido sobe com o fundo dos campos (bg.field) */
   background: var(--ds-color-bg-sunken);
-  border: 1px solid var(--ds-color-border-subtle);
+  border: 1px solid var(--ds-color-border-default);
 }
 
 .ds-segmented__item {
@@ -235,7 +236,7 @@
   padding-inline: var(--ds-space-100);
   border: 1px solid transparent;
   border-radius: var(--ds-radius-full);
-  color: var(--ds-color-fg-subtle);
+  color: var(--ds-color-fg-muted);
   transition:
     color var(--ds-duration-fast) var(--ds-easing-standard),
     background-color var(--ds-duration-fast) var(--ds-easing-standard),
@@ -247,7 +248,8 @@
 }
 
 .ds-segmented__item[aria-checked="true"] {
-  background: var(--ds-color-bg-muted);
+  border-color: var(--ds-color-border-default);
+  background: var(--ds-color-bg-field);
   color: var(--ds-color-fg-default);
 }
 

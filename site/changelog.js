@@ -85,6 +85,11 @@ const RELEASES = [
             'Field, select, and menu chip with the background of the menu they open (bg.field): the select and its open list match — in Refúgio, both white. Thin outline and a stronger placeholder',
             'Campo, selector y chip que abre menú con el fondo del menú que abren (bg.field): el selector y la lista abierta combinan — en Refúgio, ambos blancos. Contorno fino y placeholder más fuerte',
           ), '/componentes/selecao'],
+          ['melhoria', T(
+            'Controle segmentado (tema, layout) com mais contraste: trilho rebaixado com contorno fino e o item escolhido elevado, no fundo dos campos',
+            'Segmented control (theme, layout) with more contrast: a sunken track with a thin outline and the chosen item raised, on the field background',
+            'Control segmentado (tema, diseño) con más contraste: riel hundido con contorno fino y el elemento elegido elevado, con el fondo de los campos',
+          ), '/padroes/app-shell'],
           ['correcao', T(
             'Listas e links estilizados por classe não perdem mais o padding nem a cor para o reset (que passou a ter peso zero)',
             'Class-styled lists and links no longer lose their padding or color to the reset (now zero-specificity)',
