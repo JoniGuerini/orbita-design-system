@@ -156,10 +156,42 @@ const stats = (c) =>
     `${passed}/${contrast.length}`,
   ].map((value, i) => [value, c.stats[i]]);
 
+// o card não cresce a cada lançamento: mostra as versões recentes que cabem na altura do card ao lado
+// (fitRoadmap) e as próximas; o histórico inteiro fica em Novidades
+const ROADMAP_MAX = 6;
+const ROADMAP_MIN = 2;
 const roadmap = (c) => [
-  ...[...releases].reverse().map((r) => [`v${r.version.replace(/\.0$/, '')}`, r.title, ['success', c.ready], r.summary]),
-  ...upcoming.map((u) => [`v${u.version}`, u.title, u.status, `${u.text} ${u.items.join(', ')}.`]),
+  ...releases.slice(0, ROADMAP_MAX).reverse().map((r) => [`v${r.version.replace(/\.0$/, '')}`, r.title, ['success', c.ready], r.summary, true]),
+  ...upcoming.map((u) => [`v${u.version}`, u.title, u.status, `${u.text} ${u.items.join(', ')}.`, false]),
 ];
+
+/** Esconde as versões mais antigas até o roadmap caber na altura natural do card de padrões (lado a lado). */
+function fitRoadmap(split) {
+  const [list, card] = split.children;
+  const recent = [...card.querySelectorAll('[data-recent]')];
+  recent.forEach((item) => (item.hidden = false));
+  const sideBySide = getComputedStyle(split).gridTemplateColumns.split(' ').length > 1;
+  // altura do conteúdo sem o esticamento da grade: do topo do card ao fim do último filho, mais o respiro de baixo
+  const natural = (el, last) => last.getBoundingClientRect().bottom - el.getBoundingClientRect().top + parseFloat(getComputedStyle(el).paddingBottom);
+  const listHeight = natural(list, list.lastElementChild);
+  const link = card.querySelector(':scope > .ds-inline-action');
+  const roadmapHeight = () => natural(card, card.querySelector('.home-roadmap')) + link.offsetHeight + parseFloat(getComputedStyle(card.querySelector('.home-roadmap')).marginBottom);
+  let shown = recent.length;
+  if (!sideBySide) {
+    // um embaixo do outro, a altura não importa: as 3 mais recentes bastam
+    while (shown > 3) recent[recent.length - shown--].hidden = true;
+    return;
+  }
+  // tira a mais antiga só enquanto passar da altura deixar mais sobra do que o vão que ficaria sem ela
+  while (shown > ROADMAP_MIN) {
+    const over = roadmapHeight() - listHeight;
+    const oldest = recent[recent.length - shown];
+    const step = oldest.offsetHeight + parseFloat(getComputedStyle(oldest.parentElement).rowGap);
+    if (over <= 0 || over < step - over) break;
+    oldest.hidden = true;
+    shown--;
+  }
+}
 
 /* ───────── Prévias visuais dos fundamentos (só tokens, sem imagens) ───────── */
 
@@ -417,7 +449,7 @@ export default function renderHome() {
         <ol class="home-roadmap" role="list">
           ${roadmap(c)
             .map(
-              ([stamp, title, [tone, status], text]) => `<li class="home-roadmap__item">
+              ([stamp, title, [tone, status], text, recent]) => `<li class="home-roadmap__item"${recent ? ' data-recent' : ''}>
                 <p class="ds-section__head"><span class="ds-section__stamp">${stamp}</span><span class="home-roadmap__title">${title}</span><span class="ds-badge ds-badge--sm${tone === 'neutral' ? '' : ` ds-badge--${tone}`}">${status}</span></p>
                 <p class="home-roadmap__text">${text}</p>
               </li>`,
@@ -469,9 +501,21 @@ export function mount(root) {
   };
   document.documentElement.addEventListener('ds:themechange', onTheme);
 
+  // refaz a conta quando a largura muda (o texto quebra diferente) e quando as fontes chegam
+  const split = root.querySelector('.home-split');
+  let width = 0;
+  const fit = new ResizeObserver(([entry]) => {
+    if (entry.contentRect.width === width) return;
+    width = entry.contentRect.width;
+    fitRoadmap(split);
+  });
+  fit.observe(split);
+  document.fonts.ready.then(() => split.isConnected && fitRoadmap(split));
+
   return () => {
     brandMenu.destroy();
     themeMenu.destroy();
+    fit.disconnect();
     document.documentElement.removeEventListener('ds:themechange', onTheme);
   };
 }

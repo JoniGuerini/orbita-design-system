@@ -563,8 +563,16 @@
   margin-top: var(--ds-space-1200);
 }
 
+/* os dois cards têm a altura do mais alto; o link do roadmap desce para o pé, alinhado ao fim do outro */
 .home-list {
+  display: flex;
+  flex-direction: column;
   padding: var(--ds-space-400);
+}
+
+.home-list > .ds-inline-action {
+  align-self: flex-start;
+  margin-top: auto;
 }
 
 .home-list__eyebrow {
