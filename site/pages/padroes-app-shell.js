@@ -25,7 +25,7 @@ const DEVICES = () => [
 // [seletor do marcador, [x, y] em fração da caixa + deslocamento em px, nome, descrição, seletor do destaque]
 const PARTS = () => [
   ['.ds-sidebar', [1, 0.72, 0, 0], 'Sidebar', L(`Painel flutuante de ${px('layout.sidebar')} px, raio 2xl, separado do conteúdo por ${px('layout.frame-gap')} px de fundo do app.`, `A floating ${px('layout.sidebar')} px panel, 2xl radius, separated from the content by ${px('layout.frame-gap')} px of app background.`, `Panel flotante de ${px('layout.sidebar')} px, radio 2xl, separado del contenido por ${px('layout.frame-gap')} px de fondo de la app.`)],
-  ['.ds-brand', [1, 0.5, 16, 0], L('Marca', 'Brand', 'Marca'), L('Só o nome, em Inter Tight. Leva ao Início.', 'Just the name, in Inter Tight. It goes to Home.', 'Solo el nombre, en Inter Tight. Lleva al Inicio.')],
+  ['.ds-brand', [1, 0.5, 16, 0], L('Marca', 'Brand', 'Marca'), L('A chama do Lume e o nome, em Inter Tight. Leva ao Início.', 'The Lume flame and the name, in Inter Tight. It goes to Home.', 'La llama de Lume y el nombre, en Inter Tight. Lleva al Inicio.')],
   ['.ds-sidebar-search', [1, 0.5, 0, 0], L('Busca', 'Search', 'Búsqueda'), L(`Abre a paleta de comandos — o mesmo que ${MOD} K ou /.`, `Opens the command palette — the same as ${MOD} K or /.`, `Abre la paleta de comandos — lo mismo que ${MOD} K o /.`)],
   ['.ds-sidebar__nav .ds-nav-group__header', [0.62, 0.5, 0, 0], L('Navegação com grupos', 'Grouped navigation', 'Navegación con grupos'), L('Navegação principal no topo; depois, grupos que recolhem e lembram o estado.', 'Main navigation at the top; then, groups that collapse and remember their state.', 'Navegación principal arriba; después, grupos que se contraen y recuerdan su estado.'), '.ds-sidebar__nav'],
   ['.ds-account', [1, 0.5, 0, 0], L('Cartão da conta', 'Account card', 'Tarjeta de la cuenta'), L('Fica preso no pé da sidebar: conta, versão ou workspace.', 'Pinned to the foot of the sidebar: account, version, or workspace.', 'Queda fija al pie de la sidebar: cuenta, versión o workspace.')],
@@ -85,7 +85,7 @@ const skeleton = () => `<a class="ds-skip-link" href="#${L('conteudo', 'content'
 <div class="ds-shell" id="shell">
   <aside class="ds-sidebar" id="sidebar" aria-label="${L('Barra lateral', 'Sidebar', 'Barra lateral')}">
     <div class="ds-sidebar__header">
-      <a class="ds-brand" href="#/">Lume</a>
+      <a class="ds-brand" href="#/"><img class="ds-brand__mark" src="assets/favicon.svg" alt="">Lume</a>
       <button class="ds-icon-btn ds-icon-btn--outline ds-icon-btn--lg ds-sidebar__toggle"
               data-shell-toggle aria-controls="sidebar">
         <ds-icon name="panel-left" class="ds-sidebar__toggle-collapse"></ds-icon>
@@ -223,7 +223,7 @@ export default function renderAppShell(page) {
         <article class="pa-state">
           <div class="pa-state__art" aria-hidden="true">
             <div class="pa-mini" data-mode="expanded">
-              <span class="pa-mini__brand">Lume</span><span class="pa-mini__search"><i></i><b></b></span>
+              <span class="pa-mini__brand"><img src="assets/favicon.svg" alt="">Lume</span><span class="pa-mini__search"><i></i><b></b></span>
               ${[64, 52, 70].map((w) => `<span class="pa-mini__item"><i></i><b style="width:${w}%"></b></span>`).join('')}
               <span class="pa-mini__group"><b></b></span>
               ${[58, 44].map((w) => `<span class="pa-mini__item"><i></i><b style="width:${w}%"></b></span>`).join('')}

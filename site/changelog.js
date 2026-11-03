@@ -31,10 +31,10 @@ const RELEASES = [
             'El nombre nuevo en todas partes: sitio, componentes, tokens exportados y plugin de Figma',
           ), '/'],
           ['novo', T(
-            'Ícone na aba do navegador: a chama do Lume, nas cores do tema Refúgio',
-            'Browser tab icon: the Lume flame, in the Refúgio theme colors',
-            'Ícono en la pestaña del navegador: la llama de Lume, con los colores del tema Refúgio',
-          ), '/'],
+            'A chama do Lume, nas cores do tema Refúgio, ao lado do nome na sidebar e na aba do navegador',
+            'The Lume flame, in the Refúgio theme colors, next to the name in the sidebar and in the browser tab',
+            'La llama de Lume, con los colores del tema Refúgio, junto al nombre en la sidebar y en la pestaña del navegador',
+          ), '/padroes/app-shell'],
           ['melhoria', T(
             'O que falava de órbita agora fala de luz: a página que não existe “ficou no escuro”',
             'What talked about orbits now talks about light: a missing page is “lost in the dark”',

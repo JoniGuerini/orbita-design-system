@@ -24,6 +24,7 @@ Object.assign(DICT, {
   'A linha da lista é o trilho do indicador.': ['The list’s line is the indicator’s track.', 'La línea de la lista es el riel del indicador.'],
   'Fundo rebaixado e a selecionada em destaque.': ['Recessed background with the selected one highlighted.', 'Fondo hundido y la seleccionada destacada.'],
   'Projeto Lume': ['Lume project', 'Proyecto Lume'],
+  'Chama': ['Flame', 'Llama'],
   'tarefas abertas': ['open tasks', 'tareas abiertas'],
   'em revisão': ['in review', 'en revisión'],
   'Última atualização há 2 horas': ['Last updated 2 hours ago', 'Última actualización hace 2 horas'],

@@ -56,12 +56,15 @@
   padding-inline: 15px;
 }
 
-/* Logotipo tipográfico: só o nome */
+/* Logotipo: a chama do Lume e o nome */
 .ds-brand {
   position: absolute;
   top: 50%;
   left: 20px;
   translate: 0 -50%;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
   color: var(--ds-color-fg-default);
   font: var(--ds-font-weight-bold) 1.75rem/1 var(--ds-font-family-display);
   letter-spacing: -0.045em;
@@ -73,6 +76,13 @@
 
 .ds-brand:hover {
   color: var(--ds-color-fg-default);
+}
+
+/* A chama tem as cores do tema Refúgio do app: é logotipo, não segue o tema daqui */
+.ds-brand__mark {
+  flex: none;
+  width: 24px;
+  height: 24px;
 }
 
 .ds-sidebar__toggle {

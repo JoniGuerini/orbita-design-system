@@ -5,6 +5,15 @@
 (function () {
   /* ───────── Peças locais ───────── */
 
+  /** A chama do Lume, como em assets/favicon.svg: cores fixas do tema Refúgio do app (é logotipo, não segue o tema). */
+  function flame(size) {
+    var f = figma.createNodeFromSvg('<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 24 24">' +
+      '<path fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248z" fill="#c97b63"/>' +
+      '<path d="M15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1.001a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.717z" fill="#ffffff" fill-opacity="0.28"/></svg>');
+    f.name = L('Chama');
+    return f;
+  }
+
   function iconButton(name, size, color) {
     var s = size || 32;
     var b = box('Botão de ícone · ' + name, { dir: 'H', align: 'center', cross: 'center', w: s, h: s, radius: 'radius/sm' });
@@ -351,7 +360,11 @@
       // sidebar flutuante
       var side = box('Sidebar', { dir: 'V', gap: 'space/100', pad: [0, 12, 12, 12], w: 232, fill: 'color/bg/sidebar', stroke: 'color/border/subtle', radius: 'radius/2xl', clip: true });
       var head = box('Cabeçalho', { dir: 'H', align: 'between', cross: 'center', h: 64, pad: [0, 4] });
-      add(head, await text('Lume', { style: 'heading-md', weight: 'Bold', color: 'color/fg/default' }));
+      // logotipo: a chama e o nome, como a .ds-brand do site (chama de 24 px para texto de 28 → 18 para 21)
+      var brand = box('Marca', { dir: 'H', gap: 'space/100', cross: 'center' });
+      add(brand, flame(18));
+      add(brand, await text('Lume', { style: 'heading-md', weight: 'Bold', color: 'color/fg/default' }));
+      add(head, brand);
       var toggle = box('Recolher', { dir: 'H', align: 'center', cross: 'center', w: 36, h: 36, radius: 'radius/md', stroke: 'color/border/control' });
       add(toggle, icon('panel-left', 18, 'color/fg/default'));
       add(head, toggle);

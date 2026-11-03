@@ -7,7 +7,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 ## Nome: Lume (antes Órbita)
 
 - Em 03/11/2026 o Órbita virou **Lume**: é o design system do app Lume dele (repositório `JoniGuerini/lume`, pasta `Documents/Lume v2`; não confundir com o Psico Lume). O visual daqui vai virar o visual novo do Lume — por enquanto só o nome mudou. A versão 0.8.0 · Lume no changelog é o único lugar do site que ainda cita o Órbita, para explicar a troca.
-- O ícone é a chama do Lume nas cores do tema Refúgio (`assets/favicon.svg`, copiado de `Lume v2/public/favicon.svg`); por ora só na aba do navegador.
+- O ícone é a chama do Lume nas cores do tema Refúgio (`assets/favicon.svg`, copiado de `Lume v2/public/favicon.svg`): na aba do navegador e ao lado do nome na sidebar (`.ds-brand__mark`, 24 px para o nome de 28; some com o nome quando a sidebar recolhe). As cores são fixas, de logotipo — não seguem o tema nem a troca de marca. No Figma, o App shell em miniatura leva a mesma chama (18 px para o nome de 21).
 - Continuam com o nome antigo: a pasta local `Órbita`, o repositório `orbita-design-system` e o endereço no Vercel (ele renomeia depois, não mexa) e, de propósito, o id do plugin no manifesto (`orbita-design-system`) e as chaves internas `orbita-*` (pluginData e clientStorage). Com elas, rodar o plugin num arquivo gerado pelo Órbita renomeia páginas, capas e blocos no lugar, sem duplicar (testado em 03/11/2026 rodando o plugin 0.7 e depois o 0.8 na imitação). Trocar o id ou as chaves faria o Figma duplicar tudo.
 
 ## Quem pede e como julga
@@ -30,7 +30,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 
 ## Vetos
 
-- Logotipo é só o nome “Lume” (Inter Tight bold). Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
+- Logotipo é a chama do Lume + o nome “Lume” (Inter Tight bold) — a chama entrou por pedido dele em 03/11/2026. Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
 - Nunca o ícone de *sparkles* (estrela grande + pequena) — saiu da biblioteca. Novidades usa `megaphone`.
 - Nada de enfeite “vibe coded”, como o badge “Versão 0.1 · veja as novidades” no hero.
 - Contornos discretos: chips, botões e a busca da sidebar mantêm `border.control` fino (o rótulo já identifica). Campos, seleção, composer e switch usam `border.field` (3:1).

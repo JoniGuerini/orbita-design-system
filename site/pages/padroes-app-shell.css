@@ -291,11 +291,19 @@
 }
 
 .pa-mini__brand {
+  display: flex;
+  align-items: center;
+  gap: 3px;
   height: 12px;
   margin: 0 0 6px 4px;
   color: var(--ds-color-fg-default);
   font: var(--ds-font-weight-bold) 0.8125rem/12px var(--ds-font-family-display);
   letter-spacing: -0.04em;
+}
+
+.pa-mini__brand img {
+  width: 11px;
+  height: 11px;
 }
 
 .pa-mini__search,
