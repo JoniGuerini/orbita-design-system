@@ -51,9 +51,9 @@ const RELEASES = [
             'Los escenarios de los playgrounds también muestran Refúgio',
           ), '/componentes/botao'],
           ['melhoria', T(
-            'O Refúgio aparece em toda página que compara temas — Elevação, Cores, Gráficos, Heatmap, Acessibilidade, Estados vazios, App shell — e na coluna das tabelas “Tokens usados”. Dois temas lado a lado; o terceiro na linha de baixo',
-            'Refúgio shows up on every page that compares themes — Elevation, Colors, Charts, Heatmap, Accessibility, Empty states, App shell — and as a column in the “Tokens used” tables. Two themes side by side; the third on the row below',
-            'Refúgio aparece en toda página que compara temas — Elevación, Colores, Gráficos, Heatmap, Accesibilidad, Estados vacíos, App shell — y como columna en las tablas “Tokens usados”. Dos temas lado a lado; el tercero en la fila de abajo',
+            'O Refúgio aparece em toda página que compara temas — Elevação, Cores, Gráficos, Heatmap, Acessibilidade, Estados vazios, App shell — e na coluna das tabelas “Tokens usados”. Dois temas lado a lado; o terceiro na linha de baixo, na mesma largura',
+            'Refúgio shows up on every page that compares themes — Elevation, Colors, Charts, Heatmap, Accessibility, Empty states, App shell — and as a column in the “Tokens used” tables. Two themes side by side; the third on the row below, at the same width',
+            'Refúgio aparece en toda página que compara temas — Elevación, Colores, Gráficos, Heatmap, Accesibilidad, Estados vacíos, App shell — y como columna en las tablas “Tokens usados”. Dos temas lado a lado; el tercero en la fila de abajo, con el mismo ancho',
           ), '/fundamentos/elevacao'],
           ['melhoria', T(
             'Cards e áreas de exemplo bem separados no Refúgio: fundo da página no tom do Lume, área rebaixada e moldura mais escuras e contornos mais firmes',

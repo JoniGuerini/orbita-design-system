@@ -174,7 +174,7 @@ const byName = new Map(tokens.map((t) => [t.name, t]));
 const shadows = tokens.filter((t) => t.name.startsWith('shadow.'));
 const zLayers = tokens.filter((t) => t.name.startsWith('z.')).sort((a, b) => Number(b.css) - Number(a.css));
 
-// o terceiro tema vai para a linha de baixo, ocupando a largura das duas colunas
+// dois temas por linha: o terceiro vai para a linha de baixo, na mesma largura dos outros
 const THEMES = ['dark', 'light', 'refugio'];
 
 // do fundo para cima

@@ -129,11 +129,6 @@
   margin-top: var(--ds-space-150);
 }
 
-/* dois temas lado a lado; o terceiro na linha de baixo, com a largura das duas colunas */
-.ra-results > :nth-child(3) {
-  grid-column: 1 / -1;
-}
-
 .ra-result {
   overflow: hidden;
   border-radius: var(--ds-radius-lg);
