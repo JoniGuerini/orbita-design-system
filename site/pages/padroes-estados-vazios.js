@@ -153,11 +153,12 @@ function inPlace(place, html) {
   return `<div class="pe-ctx pe-ctx--page">${html}</div>`;
 }
 
-/** Palco com tema próprio, para ver o estado no escuro e no claro. */
+/** Palco com tema próprio, para ver o estado em cada tema. */
 const stage = (id, inner, label) => `<div class="pe-stage" data-pe-stage data-theme="dark">
     <div class="ds-segmented pe-stage__theme" role="radiogroup" aria-label="${L('Tema do exemplo', 'Example theme', 'Tema del ejemplo')}: ${label}">
       <button type="button" class="ds-segmented__item" role="radio" data-pe-theme="dark" aria-checked="true" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
       <button type="button" class="ds-segmented__item" role="radio" data-pe-theme="light" aria-checked="false" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
+      <button type="button" class="ds-segmented__item" role="radio" data-pe-theme="refugio" aria-checked="false" aria-label="Refúgio">${icon('mountain', { size: 16 })}</button>
     </div>
     <div class="pe-stage__body" data-demo="${id}">${inner}</div>
   </div>`;

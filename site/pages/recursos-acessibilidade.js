@@ -14,10 +14,11 @@ export const styles = ['site/component-doc.css', 'site/pages/recursos-acessibili
 /* ───────── Contraste: a mesma conta do build (WCAG 2.x, alfa composto sobre o fundo) ───────── */
 
 const ic = (s) => `<code class="ds-inline-code">${s}</code>`;
-const MODE_IDS = ['dark', 'light'];
+const MODE_IDS = ['dark', 'light', 'refugio'];
 const MODES = () => [
   ['dark', L('Escuro', 'Dark', 'Oscuro')],
   ['light', L('Claro', 'Light', 'Claro')],
+  ['refugio', 'Refúgio'],
 ];
 const byName = new Map(tokens.map((t) => [t.name, t]));
 const short = (name) => name.replace(/^color\./, '');
@@ -57,7 +58,7 @@ function measure(fg, bg, mode) {
 
 const passed = contrast.filter((c) => c.pass).length;
 
-/** Pares do build agrupados (um por linha, os dois temas lado a lado). */
+/** Pares do build agrupados (um por linha, os três temas lado a lado). */
 const buildPairs = (() => {
   const map = new Map();
   for (const c of contrast) {
@@ -236,7 +237,7 @@ function issues() {
 
 const CHECKLIST = () => [
   [L('Ver', 'See', 'Ver'), [
-    L(`Texto passa de ${num(4.5, 1)}:1 (3:1 se for grande) nos dois temas`, `Text passes ${num(4.5, 1)}:1 (3:1 if large) in both themes`, `El texto supera ${num(4.5, 1)}:1 (3:1 si es grande) en los dos temas`),
+    L(`Texto passa de ${num(4.5, 1)}:1 (3:1 se for grande) nos três temas`, `Text passes ${num(4.5, 1)}:1 (3:1 if large) in all three themes`, `El texto supera ${num(4.5, 1)}:1 (3:1 si es grande) en los tres temas`),
     L('Nada depende só de cor: status tem ícone e texto; séries têm legenda', 'Nothing relies on color alone: status has an icon and text; series have a legend', 'Nada depende solo del color: el estado tiene ícono y texto; las series tienen leyenda'),
     L('Funciona com zoom de 200% e numa tela de 320 px sem rolagem lateral', 'Works at 200% zoom and on a 320 px screen without horizontal scrolling', 'Funciona con zoom de 200% y en una pantalla de 320 px sin desplazamiento lateral'),
     L('Imagens e ícones que informam têm texto alternativo; os decorativos, não', 'Informative images and icons have alt text; decorative ones don’t', 'Las imágenes e íconos que informan tienen texto alternativo; los decorativos, no'),
@@ -300,10 +301,11 @@ function section(id, title, desc, body) {
 const themeSwitch = (label) => `<div class="ds-segmented ra-stage__theme" role="radiogroup" aria-label="${L('Tema do exemplo', 'Example theme', 'Tema del ejemplo')}: ${label}">
     <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="dark" aria-checked="true" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
     <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="light" aria-checked="false" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="refugio" aria-checked="false" aria-label="Refúgio">${icon('mountain', { size: 16 })}</button>
   </div>`;
 
 const PRINCIPLES = () => [
-  ['eye', L('Perceptível', 'Perceivable', 'Perceptible'), L('Contraste medido, nada só por cor, texto que aguenta zoom. Os dois temas valem igual.', 'Measured contrast, nothing by color alone, text that holds up to zoom. Both themes count the same.', 'Contraste medido, nada solo por color, texto que aguanta zoom. Los dos temas valen igual.')],
+  ['eye', L('Perceptível', 'Perceivable', 'Perceptible'), L('Contraste medido, nada só por cor, texto que aguenta zoom. Os três temas valem igual.', 'Measured contrast, nothing by color alone, text that holds up to zoom. All three themes count the same.', 'Contraste medido, nada solo por color, texto que aguanta zoom. Los tres temas valen igual.')],
   ['keyboard', L('Operável', 'Operable', 'Operable'), L('Tudo pelo teclado, foco sempre visível, nada com tempo curto demais para agir.', 'Everything by keyboard, focus always visible, nothing with too little time to act.', 'Todo con el teclado, foco siempre visible, nada con tiempo demasiado corto para actuar.')],
   ['message-square', L('Compreensível', 'Understandable', 'Comprensible'), L('Rótulos claros, erros que dizem como resolver, comportamento previsível.', 'Clear labels, errors that say how to fix them, predictable behavior.', 'Etiquetas claras, errores que dicen cómo resolverlos, comportamiento predecible.')],
   ['code', L('Robusto', 'Robust', 'Robusto'), L('HTML nativo primeiro, padrões ARIA conhecidos quando o nativo não basta.', 'Native HTML first, well-known ARIA patterns when native isn’t enough.', 'HTML nativo primero, patrones ARIA conocidos cuando lo nativo no basta.')],
@@ -313,6 +315,7 @@ export default function renderAcessibilidade(page) {
   const issueList = issues();
   const focusDark = measure('color.border.focus', 'color.bg.canvas', 'dark').ratio;
   const focusLight = measure('color.border.focus', 'color.bg.canvas', 'light').ratio;
+  const focusRefugio = measure('color.border.focus', 'color.bg.canvas', 'refugio').ratio;
   const modes = MODES();
   const keymap = KEYMAP();
   return `
@@ -321,7 +324,7 @@ export default function renderAcessibilidade(page) {
       <div>
         <p class="doc-header__eyebrow">${page.group}</p>
         <h1 class="doc-header__title">${page.label}</h1>
-        <p class="doc-header__lead">${L('Telas que todo mundo consegue usar: no teclado, com leitor de tela, com zoom, com pouca visão de cor ou pedindo menos movimento. A meta é WCAG 2.2 nível AA, nos dois temas.', 'Screens everyone can use: by keyboard, with a screen reader, with zoom, with low color vision, or asking for less motion. The goal is WCAG 2.2 level AA, in both themes.', 'Pantallas que todo el mundo puede usar: con teclado, con lector de pantalla, con zoom, con poca visión de color o pidiendo menos movimiento. La meta es WCAG 2.2 nivel AA, en los dos temas.')}</p>
+        <p class="doc-header__lead">${L('Telas que todo mundo consegue usar: no teclado, com leitor de tela, com zoom, com pouca visão de cor ou pedindo menos movimento. A meta é WCAG 2.2 nível AA, nos três temas.', 'Screens everyone can use: by keyboard, with a screen reader, with zoom, with low color vision, or asking for less motion. The goal is WCAG 2.2 level AA, in all three themes.', 'Pantallas que todo el mundo puede usar: con teclado, con lector de pantalla, con zoom, con poca visión de color o pidiendo menos movimiento. La meta es WCAG 2.2 nivel AA, en los tres temas.')}</p>
       </div>
       <dl class="doc-stats">
         <div class="doc-stat"><dt class="doc-stat__label">${L('contrastes no build', 'contrasts in the build', 'contrastes en el build')}</dt><dd class="doc-stat__value">${passed}/${contrast.length}</dd></div>
@@ -351,14 +354,14 @@ export default function renderAcessibilidade(page) {
           <p class="ra-measure__title">${L('Como medimos', 'How we measure', 'Cómo medimos')}</p>
           <p class="ra-measure__total">${L(`<strong>${passed} de ${contrast.length}</strong> pares passam agora`, `<strong>${passed} of ${contrast.length}</strong> pairs pass now`, `<strong>${passed} de ${contrast.length}</strong> pares pasan ahora`)}</p>
         </div>
-        <p class="ra-measure__text">${L(`A referência é a WCAG 2.2, nível AA. A cada build, ${ic('scripts/build-tokens.mjs')} mede todos os pares de texto e fundo declarados em ${ic('tokens/semantic.json')}, nos dois temas — transparências são compostas sobre o fundo antes da conta. Um par que cai abaixo do mínimo aparece no terminal na hora. O que o build não mede (foco, teclado, leitores de tela) está nas seções abaixo, e o que ainda não está bom fica em <a class="ra-link" href="#" data-goto="ra-pendencias">Pendências</a>.`, `The reference is WCAG 2.2, level AA. On every build, ${ic('scripts/build-tokens.mjs')} measures every text and background pair declared in ${ic('tokens/semantic.json')}, in both themes — transparencies are composited over the background before the math. A pair that drops below the minimum shows up in the terminal right away. What the build doesn’t measure (focus, keyboard, screen readers) is in the sections below, and what still isn’t right goes in <a class="ra-link" href="#" data-goto="ra-pendencias">Known issues</a>.`, `La referencia es WCAG 2.2, nivel AA. En cada build, ${ic('scripts/build-tokens.mjs')} mide todos los pares de texto y fondo declarados en ${ic('tokens/semantic.json')}, en los dos temas — las transparencias se componen sobre el fondo antes de la cuenta. Un par que baja del mínimo aparece en la terminal al instante. Lo que el build no mide (foco, teclado, lectores de pantalla) está en las secciones de abajo, y lo que aún no está bien queda en <a class="ra-link" href="#" data-goto="ra-pendencias">Pendientes</a>.`)}</p>
+        <p class="ra-measure__text">${L(`A referência é a WCAG 2.2, nível AA. A cada build, ${ic('scripts/build-tokens.mjs')} mede todos os pares de texto e fundo declarados em ${ic('tokens/semantic.json')}, nos três temas — transparências são compostas sobre o fundo antes da conta. Um par que cai abaixo do mínimo aparece no terminal na hora. O que o build não mede (foco, teclado, leitores de tela) está nas seções abaixo, e o que ainda não está bom fica em <a class="ra-link" href="#" data-goto="ra-pendencias">Pendências</a>.`, `The reference is WCAG 2.2, level AA. On every build, ${ic('scripts/build-tokens.mjs')} measures every text and background pair declared in ${ic('tokens/semantic.json')}, in all three themes — transparencies are composited over the background before the math. A pair that drops below the minimum shows up in the terminal right away. What the build doesn’t measure (focus, keyboard, screen readers) is in the sections below, and what still isn’t right goes in <a class="ra-link" href="#" data-goto="ra-pendencias">Known issues</a>.`, `La referencia es WCAG 2.2, nivel AA. En cada build, ${ic('scripts/build-tokens.mjs')} mide todos los pares de texto y fondo declarados en ${ic('tokens/semantic.json')}, en los tres temas — las transparencias se componen sobre el fondo antes de la cuenta. Un par que baja del mínimo aparece en la terminal al instante. Lo que el build no mide (foco, teclado, lectores de pantalla) está en las secciones de abajo, y lo que aún no está bien queda en <a class="ra-link" href="#" data-goto="ra-pendencias">Pendientes</a>.`)}</p>
       </div>`,
     )}
 
     ${section(
       'ra-contraste',
       L('Contraste', 'Contrast', 'Contraste'),
-      L('Escolha um texto ou marca e um fundo: a conta é a mesma do build, nos dois temas. Use para conferir uma combinação antes de usá-la.', 'Pick a text or mark and a background: the math is the same as the build’s, in both themes. Use it to check a combination before using it.', 'Elige un texto o marca y un fondo: la cuenta es la misma del build, en los dos temas. Úsalo para revisar una combinación antes de usarla.'),
+      L('Escolha um texto ou marca e um fundo: a conta é a mesma do build, nos três temas. Use para conferir uma combinação antes de usá-la.', 'Pick a text or mark and a background: the math is the same as the build’s, in all three themes. Use it to check a combination before using it.', 'Elige un texto o marca y un fondo: la cuenta es la misma del build, en los tres temas. Úsalo para revisar una combinación antes de usarla.'),
       `<div class="ra-checker">
         <div class="ra-checker__controls">
           <div class="ds-form-field">
@@ -379,13 +382,13 @@ export default function renderAcessibilidade(page) {
         <div class="ra-palette__swatches" aria-hidden="true">${Array.from({ length: 8 }, (_, i) => `<span style="background:var(--ds-color-chart-series-${i + 1})"></span>`).join('')}</div>
         <div class="ra-palette__body">
           <p class="ra-palette__title">${L('Cores de gráfico, em ordem validada', 'Chart colors, in a validated order', 'Colores de gráfico, en orden validado')}</p>
-          <p class="ra-palette__text">${L(`As 8 cores de série seguem uma ordem escolhida para protanopia e deuteranopia: a pior dupla vizinha ainda tem ΔE ${num(11.7, 1)} (meta: 8), ${num(18.5, 1)} na visão normal, e todas passam de 3:1 sobre a superfície nos dois temas. <a class="ra-link" href="#/graficos/visao-geral">Ver em Gráficos</a>`, `The 8 series colors follow an order chosen for protanopia and deuteranopia: the worst neighboring pair still has ΔE ${num(11.7, 1)} (target: 8), ${num(18.5, 1)} with typical vision, and all pass 3:1 on the surface in both themes. <a class="ra-link" href="#/graficos/visao-geral">See in Charts</a>`, `Los 8 colores de serie siguen un orden elegido para protanopia y deuteranopia: el peor par vecino aún tiene ΔE ${num(11.7, 1)} (meta: 8), ${num(18.5, 1)} con visión típica, y todos superan 3:1 sobre la superficie en los dos temas. <a class="ra-link" href="#/graficos/visao-geral">Ver en Gráficos</a>`)}</p>
+          <p class="ra-palette__text">${L(`As 8 cores de série seguem uma ordem escolhida para protanopia e deuteranopia: a pior dupla vizinha ainda tem ΔE ${num(11.7, 1)} (meta: 8), ${num(18.5, 1)} na visão normal, e todas passam de 3:1 sobre a superfície nos três temas. <a class="ra-link" href="#/graficos/visao-geral">Ver em Gráficos</a>`, `The 8 series colors follow an order chosen for protanopia and deuteranopia: the worst neighboring pair still has ΔE ${num(11.7, 1)} (target: 8), ${num(18.5, 1)} with typical vision, and all pass 3:1 on the surface in all three themes. <a class="ra-link" href="#/graficos/visao-geral">See in Charts</a>`, `Los 8 colores de serie siguen un orden elegido para protanopia y deuteranopia: el peor par vecino aún tiene ΔE ${num(11.7, 1)} (meta: 8), ${num(18.5, 1)} con visión típica, y todos superan 3:1 sobre la superficie en los tres temas. <a class="ra-link" href="#/graficos/visao-geral">Ver en Gráficos</a>`)}</p>
         </div>
       </div>
 
-      <h3 class="doc-subhead">${L('Pares verificados no build', 'Pairs checked in the build', 'Pares verificados en el build')} <span class="doc-subhead__meta">${L(`${buildPairs.length} pares × 2 temas`, `${buildPairs.length} pairs × 2 themes`, `${buildPairs.length} pares × 2 temas`)}</span></h3>
+      <h3 class="doc-subhead">${L('Pares verificados no build', 'Pairs checked in the build', 'Pares verificados en el build')} <span class="doc-subhead__meta">${L(`${buildPairs.length} pares × ${modes.length} temas`, `${buildPairs.length} pairs × ${modes.length} themes`, `${buildPairs.length} pares × ${modes.length} temas`)}</span></h3>
       <div class="doc-table ra-pairs">
-        <div class="doc-table__head" aria-hidden="true"><span>${L('Texto ou marca', 'Text or mark', 'Texto o marca')}</span><span>${L('Fundo', 'Background', 'Fondo')}</span><span>${L('Mínimo', 'Minimum', 'Mínimo')}</span><span>${modes[0][1]}</span><span>${modes[1][1]}</span></div>
+        <div class="doc-table__head" aria-hidden="true"><span>${L('Texto ou marca', 'Text or mark', 'Texto o marca')}</span><span>${L('Fundo', 'Background', 'Fondo')}</span><span>${L('Mínimo', 'Minimum', 'Mínimo')}</span><span>${modes[0][1]}</span><span>${modes[1][1]}</span><span>${modes[2][1]}</span></div>
         ${buildPairs
           .map(
             (p) => `<div class="doc-table__row">
@@ -424,7 +427,7 @@ export default function renderAcessibilidade(page) {
         <dl class="ra-spec">
           <div><dt>${L('Espessura', 'Width', 'Grosor')}</dt><dd>${ic('focus-ring.width')} · 2 px</dd></div>
           <div><dt>${L('Distância', 'Offset', 'Distancia')}</dt><dd>${ic('focus-ring.offset')} · 2 px</dd></div>
-          <div><dt>${L('Cor', 'Color', 'Color')}</dt><dd>${ic('border.focus')} · ${L(`${num(focusDark)}:1 no escuro, ${num(focusLight)}:1 no claro, sobre o canvas`, `${num(focusDark)}:1 in dark, ${num(focusLight)}:1 in light, on the canvas`, `${num(focusDark)}:1 en el oscuro, ${num(focusLight)}:1 en el claro, sobre el canvas`)}</dd></div>
+          <div><dt>${L('Cor', 'Color', 'Color')}</dt><dd>${ic('border.focus')} · ${L(`${num(focusDark)}:1 no escuro, ${num(focusLight)}:1 no claro, ${num(focusRefugio)}:1 no Refúgio, sobre o canvas`, `${num(focusDark)}:1 in dark, ${num(focusLight)}:1 in light, ${num(focusRefugio)}:1 in Refúgio, on the canvas`, `${num(focusDark)}:1 en el oscuro, ${num(focusLight)}:1 en el claro, ${num(focusRefugio)}:1 en Refúgio, sobre el canvas`)}</dd></div>
           <div><dt>${L('Quando', 'When', 'Cuándo')}</dt><dd>${L(`Só com ${ic(':focus-visible')} — o clique do mouse não acende o anel`, `Only with ${ic(':focus-visible')} — a mouse click doesn’t light the ring`, `Solo con ${ic(':focus-visible')} — el clic del mouse no enciende el anillo`)}</dd></div>
         </dl>
       </div>
@@ -538,7 +541,7 @@ export default function renderAcessibilidade(page) {
               <p class="ra-issue__rule">${it.rule}</p>
               <p class="ra-issue__text">${it.text}</p>
               <div class="ds-table-wrap ra-issue__table"><table class="ds-table ds-table--compact">
-                <thead><tr><th scope="col">${L('Par', 'Pair', 'Par')}</th><th scope="col" class="ds-table__num">${modes[0][1]}</th><th scope="col" class="ds-table__num">${modes[1][1]}</th></tr></thead>
+                <thead><tr><th scope="col">${L('Par', 'Pair', 'Par')}</th><th scope="col" class="ds-table__num">${modes[0][1]}</th><th scope="col" class="ds-table__num">${modes[1][1]}</th><th scope="col" class="ds-table__num">${modes[2][1]}</th></tr></thead>
                 <tbody>${it.rows.join('')}</tbody></table></div>
               <p class="ra-issue__path">${it.path}</p>
             </article>`,

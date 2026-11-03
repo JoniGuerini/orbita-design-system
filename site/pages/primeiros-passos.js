@@ -23,7 +23,7 @@ const COPY = T(
     steps: [
       ['Copie o design system', `O Lume não tem dependências nem build obrigatório. Leve a pasta ${code('ds/')} para o seu projeto.`],
       ['Carregue as fontes e o CSS', 'Um arquivo só traz tokens, base e todos os componentes. As fontes vêm do Google Fonts.'],
-      ['Escolha o tema', `Escuro é o padrão da marca. Use ${code('light')} para o claro ou ${code('system')} para seguir o sistema.`],
+      ['Escolha o tema', `Escuro é o padrão da marca. Use ${code('light')} para o claro, ${code('refugio')} para o Refúgio ou ${code('system')} para seguir o sistema.`],
       ['Ligue só o JavaScript que usar', 'Componentes visuais funcionam só com CSS. Os interativos têm um módulo cada — importe e ligue os que a tela usa.'],
     ],
     first: { title: 'Sua primeira tela', desc: 'Escolha um ponto de partida, veja em cada tema e copie. O código abaixo é exatamente o que está no palco.' },
@@ -69,7 +69,7 @@ const COPY = T(
     steps: [
       ['Copy the design system', `Lume has no dependencies and no required build. Take the ${code('ds/')} folder into your project.`],
       ['Load the fonts and the CSS', 'A single file brings the tokens, the base, and every component. The fonts come from Google Fonts.'],
-      ['Pick the theme', `Dark is the brand default. Use ${code('light')} for light or ${code('system')} to follow the system.`],
+      ['Pick the theme', `Dark is the brand default. Use ${code('light')} for light, ${code('refugio')} for Refúgio, or ${code('system')} to follow the system.`],
       ['Turn on only the JavaScript you use', 'Visual components work with CSS alone. Interactive ones have a module each — import and turn on the ones your screen uses.'],
     ],
     first: { title: 'Your first screen', desc: 'Pick a starting point, check it in each theme, and copy it. The code below is exactly what’s on the stage.' },
@@ -115,7 +115,7 @@ const COPY = T(
     steps: [
       ['Copia el design system', `Lume no tiene dependencias ni build obligatorio. Lleva la carpeta ${code('ds/')} a tu proyecto.`],
       ['Carga las fuentes y el CSS', 'Un solo archivo trae los tokens, la base y todos los componentes. Las fuentes vienen de Google Fonts.'],
-      ['Elige el tema', `Oscuro es el predeterminado de la marca. Usa ${code('light')} para el claro o ${code('system')} para seguir el sistema.`],
+      ['Elige el tema', `Oscuro es el predeterminado de la marca. Usa ${code('light')} para el claro, ${code('refugio')} para Refúgio o ${code('system')} para seguir el sistema.`],
       ['Activa solo el JavaScript que uses', 'Los componentes visuales funcionan solo con CSS. Los interactivos tienen un módulo cada uno — importa y activa los que use la pantalla.'],
     ],
     first: { title: 'Tu primera pantalla', desc: 'Elige un punto de partida, míralo en cada tema y cópialo. El código de abajo es exactamente lo que está en el escenario.' },

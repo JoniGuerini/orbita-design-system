@@ -8,6 +8,11 @@
   gap: var(--ds-space-150);
 }
 
+/* dois temas lado a lado; o terceiro na linha de baixo, com a largura das duas colunas */
+.el-themes > :nth-child(3) {
+  grid-column: 1 / -1;
+}
+
 .el-theme {
   margin: 0;
   border-radius: var(--ds-radius-xl);
@@ -164,7 +169,7 @@ button.el-tag:hover {
 }
 
 .el-values {
-  --doc-table-cols: minmax(0, 0.8fr) minmax(0, 1.2fr) minmax(0, 1.2fr) 44px;
+  --doc-table-cols: minmax(0, 0.8fr) repeat(3, minmax(0, 1.2fr)) 44px;
 }
 
 .el-values__token {

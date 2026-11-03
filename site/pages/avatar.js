@@ -87,10 +87,12 @@ const toneContrast = TONE_IDS.map((p) => {
   return {
     dark: ratio(rgb(hexOf(p, '200')), mix(t, rgb(raised.dark.value), 0.24)),
     light: ratio(rgb(hexOf(p, '800')), mix(t, rgb(raised.light.value), 0.24)),
+    // o Refúgio é claro (color-scheme light): o avatar usa os tons do claro sobre o raised dele
+    refugio: ratio(rgb(hexOf(p, '800')), mix(t, rgb(raised.refugio.value), 0.24)),
   };
 });
-const minContrast = Math.min(...toneContrast.flatMap((c) => [c.dark, c.light]));
-const maxContrast = Math.max(...toneContrast.flatMap((c) => [c.dark, c.light]));
+const minContrast = Math.min(...toneContrast.flatMap((c) => [c.dark, c.light, c.refugio]));
+const maxContrast = Math.max(...toneContrast.flatMap((c) => [c.dark, c.light, c.refugio]));
 
 /* ───────── Montagem ───────── */
 
@@ -246,7 +248,7 @@ export default function renderAvatar(page) {
             <div class="ds-field av-tones__field"><input class="ds-field__input" id="av-name" type="text" value="Lia Nakamura" data-tone-input spellcheck="false"></div>
           </div>
           <p class="av-tones__result" data-tone-result>${L('Tom', 'Tone', 'Tono')}: ${toneName(toneFor('Lia Nakamura'))}</p>
-          <p class="av-tones__contrast">${icon('check-circle', { size: 16 })}${L(`Contraste das iniciais entre ${fmt(minContrast)} e ${fmt(maxContrast)} nos dois temas.`, `Initials contrast between ${fmt(minContrast)} and ${fmt(maxContrast)} in both themes.`, `Contraste de las iniciales entre ${fmt(minContrast)} y ${fmt(maxContrast)} en los dos temas.`)}</p>
+          <p class="av-tones__contrast">${icon('check-circle', { size: 16 })}${L(`Contraste das iniciais entre ${fmt(minContrast)} e ${fmt(maxContrast)} nos três temas.`, `Initials contrast between ${fmt(minContrast)} and ${fmt(maxContrast)} in all three themes.`, `Contraste de las iniciales entre ${fmt(minContrast)} y ${fmt(maxContrast)} en los tres temas.`)}</p>
         </div>
       </div>
       <div class="av-code">${codeBlock(`// ${L('mesmo nome, mesmo tom', 'same name, same tone', 'mismo nombre, mismo tono')}\nfunction toneFor(name) {\n  let h = 0;\n  for (const ch of name.normalize('NFD')) h = (h * 31 + ch.codePointAt(0)) >>> 0;\n  return TONES[h % TONES.length];\n}`)}</div>
@@ -318,7 +320,7 @@ export default function renderAvatar(page) {
         [L('Nome acessível', 'Accessible name', 'Nombre accesible'), L(`Sozinho, o avatar leva ${ic('role="img"')} e ${ic('aria-label')} com o nome. As iniciais e a imagem ficam escondidas (${ic('aria-hidden')} e ${ic('alt=""')}) para não serem lidas duas vezes.`, `On its own, the avatar gets ${ic('role="img"')} and an ${ic('aria-label')} with the name. The initials and the image are hidden (${ic('aria-hidden')} and ${ic('alt=""')}) so they aren’t read twice.`, `Solo, el avatar lleva ${ic('role="img"')} y ${ic('aria-label')} con el nombre. Las iniciales y la imagen quedan ocultas (${ic('aria-hidden')} y ${ic('alt=""')}) para no leerse dos veces.`)],
         [L('Ao lado do nome, decorativo', 'Next to the name, decorative', 'Junto al nombre, decorativo'), L(`Se o nome já está escrito ao lado, o avatar inteiro sai com ${ic('aria-hidden="true"')}.`, `If the name is already written beside it, the whole avatar gets ${ic('aria-hidden="true"')}.`, `Si el nombre ya está escrito al lado, el avatar entero lleva ${ic('aria-hidden="true"')}.`)],
         [L('Status não é só cor', 'Status isn’t just color', 'El estado no es solo color'), L('Inclua o status no nome acessível (“Marina Duarte, online”) ou em texto visível.', 'Include the status in the accessible name (“Marina Duarte, online”) or in visible text.', 'Incluye el estado en el nombre accesible (“Marina Duarte, online”) o en texto visible.')],
-        [L('Contraste das iniciais', 'Initials contrast', 'Contraste de las iniciales'), L(`Entre ${fmt(minContrast)} e ${fmt(maxContrast)} em todos os tons e nos dois temas — acima dos ${fmt(4.5, 1)} do WCAG.`, `Between ${fmt(minContrast)} and ${fmt(maxContrast)} across all tones and both themes — above WCAG’s ${fmt(4.5, 1)}.`, `Entre ${fmt(minContrast)} y ${fmt(maxContrast)} en todos los tonos y en los dos temas — por encima del ${fmt(4.5, 1)} de WCAG.`)],
+        [L('Contraste das iniciais', 'Initials contrast', 'Contraste de las iniciales'), L(`Entre ${fmt(minContrast)} e ${fmt(maxContrast)} em todos os tons e nos três temas — acima dos ${fmt(4.5, 1)} do WCAG.`, `Between ${fmt(minContrast)} and ${fmt(maxContrast)} across all tones and all three themes — above WCAG’s ${fmt(4.5, 1)}.`, `Entre ${fmt(minContrast)} y ${fmt(maxContrast)} en todos los tonos y en los tres temas — por encima del ${fmt(4.5, 1)} de WCAG.`)],
         [L('Grupo com contagem', 'A group with a count', 'Grupo con conteo'), L(`O grupo é um ${ic('role="group"')} com o total no rótulo; o “+N” diz quantas pessoas estão ocultas.`, `The group is a ${ic('role="group"')} with the total in its label; the “+N” says how many people are hidden.`, `El grupo es un ${ic('role="group"')} con el total en la etiqueta; el “+N” dice cuántas personas están ocultas.`)],
         [L('Dica com o nome', 'A tooltip with the name', 'Tooltip con el nombre'), L('Em grupos, cada avatar mostra o nome no hover e no foco via tooltip.', 'In groups, each avatar shows the name on hover and focus via a tooltip.', 'En grupos, cada avatar muestra el nombre al pasar el mouse y al recibir foco mediante un tooltip.')],
       ])}

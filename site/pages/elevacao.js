@@ -15,7 +15,7 @@ const COPY = T(
     stats: ['camadas de superfície', 'sombras', 'níveis de z-index'],
     onThisPage: 'Nesta página',
     nav: ['Camadas', 'Sombras', 'Quando elevar', 'Empilhamento', 'Uso'],
-    themes: { dark: 'Escuro', light: 'Claro' },
+    themes: { dark: 'Escuro', light: 'Claro', refugio: 'Refúgio' },
     copyVar: (v) => `Copiar var(${v})`,
     copyTooltip: 'Copiar variável',
     none: 'nenhuma',
@@ -50,8 +50,8 @@ const COPY = T(
       raised: 'Algo que precisa passar à frente dos vizinhos.',
       base: 'Fluxo normal da página.',
     },
-    layersSection: { title: 'Camadas de superfície', desc: 'Cada degrau é uma superfície um pouco mais alta. No escuro, subir é clarear; no claro, a camada mais alta é o branco.' },
-    shadows: { title: 'Sombras', desc: 'Seis sombras em duas camadas — uma curta e definida, outra longa e difusa. No escuro são pretas e densas; no claro, um marrom quente bem suave. Clique numa sombra para copiar.', values: 'Valores', valuesMeta: 'mesmo token, valor diferente em cada tema', head: ['Token', 'Escuro', 'Claro'] },
+    layersSection: { title: 'Camadas de superfície', desc: 'Cada degrau é uma superfície um pouco mais alta. No escuro, subir é clarear; no claro e no Refúgio, a camada mais alta é o branco.' },
+    shadows: { title: 'Sombras', desc: 'Seis sombras em duas camadas — uma curta e definida, outra longa e difusa. No escuro são pretas e densas; no claro, um marrom quente bem suave; no Refúgio, a ardósia. Clique numa sombra para copiar.', values: 'Valores', valuesMeta: 'mesmo token, valor diferente em cada tema', head: ['Token', 'Escuro', 'Claro', 'Refúgio'] },
     when: { title: 'Quando elevar', desc: 'O que fica no fluxo usa só cor de superfície. Sombra é para o que se separa da página; sombra forte, só para o que flutua por cima de tudo.', head: ['Componente', 'Superfície', 'Sombra', 'Camada'] },
     stacking: { title: 'Empilhamento', desc: 'A ordem de quem fica por cima. Use sempre o token: os intervalos de 100 deixam espaço para casos especiais sem briga de números.' },
     usage: {
@@ -67,7 +67,7 @@ const COPY = T(
     stats: ['surface layers', 'shadows', 'z-index levels'],
     onThisPage: 'On this page',
     nav: ['Layers', 'Shadows', 'When to elevate', 'Stacking', 'Usage'],
-    themes: { dark: 'Dark', light: 'Light' },
+    themes: { dark: 'Dark', light: 'Light', refugio: 'Refúgio' },
     copyVar: (v) => `Copy var(${v})`,
     copyTooltip: 'Copy variable',
     none: 'none',
@@ -103,7 +103,7 @@ const COPY = T(
       base: 'Normal page flow.',
     },
     layersSection: { title: 'Surface layers', desc: 'Each step is a slightly higher surface. In dark, going up means lighter; in light, the highest layer is white.' },
-    shadows: { title: 'Shadows', desc: 'Six two-layer shadows — one short and defined, one long and diffuse. In dark they’re black and dense; in light, a very soft warm brown. Click a shadow to copy it.', values: 'Values', valuesMeta: 'same token, different value in each theme', head: ['Token', 'Dark', 'Light'] },
+    shadows: { title: 'Shadows', desc: 'Six two-layer shadows — one short and defined, one long and diffuse. In dark they’re black and dense; in light, a very soft warm brown; in Refúgio, slate. Click a shadow to copy it.', values: 'Values', valuesMeta: 'same token, different value in each theme', head: ['Token', 'Dark', 'Light', 'Refúgio'] },
     when: { title: 'When to elevate', desc: 'What stays in the flow uses surface color only. Shadows are for what separates from the page; strong shadows, only for what floats above everything.', head: ['Component', 'Surface', 'Shadow', 'Layer'] },
     stacking: { title: 'Stacking', desc: 'The order of who sits on top. Always use the token: the gaps of 100 leave room for special cases without a numbers fight.' },
     usage: {
@@ -119,7 +119,7 @@ const COPY = T(
     stats: ['capas de superficie', 'sombras', 'niveles de z-index'],
     onThisPage: 'En esta página',
     nav: ['Capas', 'Sombras', 'Cuándo elevar', 'Apilamiento', 'Uso'],
-    themes: { dark: 'Oscuro', light: 'Claro' },
+    themes: { dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio' },
     copyVar: (v) => `Copiar var(${v})`,
     copyTooltip: 'Copiar variable',
     none: 'ninguna',
@@ -154,8 +154,8 @@ const COPY = T(
       raised: 'Algo que necesita pasar por delante de sus vecinos.',
       base: 'Flujo normal de la página.',
     },
-    layersSection: { title: 'Capas de superficie', desc: 'Cada escalón es una superficie un poco más alta. En oscuro, subir es aclarar; en claro, la capa más alta es el blanco.' },
-    shadows: { title: 'Sombras', desc: 'Seis sombras en dos capas — una corta y definida, otra larga y difusa. En oscuro son negras y densas; en claro, un marrón cálido muy suave. Haz clic en una sombra para copiarla.', values: 'Valores', valuesMeta: 'mismo token, valor distinto en cada tema', head: ['Token', 'Oscuro', 'Claro'] },
+    layersSection: { title: 'Capas de superficie', desc: 'Cada escalón es una superficie un poco más alta. En oscuro, subir es aclarar; en claro y en Refúgio, la capa más alta es el blanco.' },
+    shadows: { title: 'Sombras', desc: 'Seis sombras en dos capas — una corta y definida, otra larga y difusa. En oscuro son negras y densas; en claro, un marrón cálido muy suave; en Refúgio, la pizarra. Haz clic en una sombra para copiarla.', values: 'Valores', valuesMeta: 'mismo token, valor distinto en cada tema', head: ['Token', 'Oscuro', 'Claro', 'Refúgio'] },
     when: { title: 'Cuándo elevar', desc: 'Lo que queda en el flujo usa solo color de superficie. La sombra es para lo que se separa de la página; la sombra fuerte, solo para lo que flota por encima de todo.', head: ['Componente', 'Superficie', 'Sombra', 'Capa'] },
     stacking: { title: 'Apilamiento', desc: 'El orden de quién queda encima. Usa siempre el token: los intervalos de 100 dejan espacio para casos especiales sin pelea de números.' },
     usage: {
@@ -174,7 +174,8 @@ const byName = new Map(tokens.map((t) => [t.name, t]));
 const shadows = tokens.filter((t) => t.name.startsWith('shadow.'));
 const zLayers = tokens.filter((t) => t.name.startsWith('z.')).sort((a, b) => Number(b.css) - Number(a.css));
 
-const THEMES = ['dark', 'light'];
+// o terceiro tema vai para a linha de baixo, ocupando a largura das duas colunas
+const THEMES = ['dark', 'light', 'refugio'];
 
 // do fundo para cima
 const LAYERS = ['app', 'sunken', 'canvas', 'surface', 'raised'];
@@ -294,6 +295,7 @@ export default function renderElevacao(page) {
               <div class="el-values__token"><span class="el-values__name">${t.name}</span><span class="el-values__var">${t.cssVar}</span></div>
               <code class="el-values__code">${t.modes.dark}</code>
               <code class="el-values__code">${t.modes.light}</code>
+              <code class="el-values__code">${t.modes.refugio}</code>
               <button type="button" class="ds-icon-btn ds-icon-btn--muted" data-copy="var(${t.cssVar})" aria-label="${c.copyVar(t.cssVar)}" data-ds-tooltip="${c.copyTooltip}">${icon('copy', { size: 18 })}</button>
             </div>`,
           )

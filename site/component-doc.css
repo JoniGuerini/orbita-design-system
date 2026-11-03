@@ -164,7 +164,7 @@
 /* ───────── Tokens usados ───────── */
 
 .cd-tokens {
-  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1.2fr) repeat(3, minmax(0, 1fr));
 }
 
 .cd-tokens__name {

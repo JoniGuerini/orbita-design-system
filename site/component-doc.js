@@ -3,7 +3,7 @@
  *
  *   playgroundMarkup(id)  → HTML do playground (palco + controles + código)
  *   mountPlayground(root, { id, controls, text?, render, code }) → liga tudo, devolve limpeza
- *   tokenTable(names)     → tabela "Tokens usados" com valores reais nos dois temas
+ *   tokenTable(names)     → tabela "Tokens usados" com valores reais nos três temas
  *   a11yList(items)       → checklist de acessibilidade
  *   codeBlock(code)       → bloco de código com botão copiar
  */
@@ -154,19 +154,21 @@ function tokenValue(t, mode) {
 export function tokenTable(groups) {
   const t = tr(TEXT);
   return `<div class="doc-table cd-tokens">
-    <div class="doc-table__head" aria-hidden="true"><span>${t.token}</span><span>${t.role}</span><span>${t.dark}</span><span>${t.light}</span></div>
+    <div class="doc-table__head" aria-hidden="true"><span>${t.token}</span><span>${t.role}</span><span>${t.dark}</span><span>${t.light}</span><span>${t.refugio}</span></div>
     ${groups
       .map(([name, role]) => {
         const t = byName.get(name);
         if (!t) return '';
         const dark = tokenValue(t, 'dark');
         const light = tokenValue(t, 'light');
+        const refugio = tokenValue(t, 'refugio');
         const swatch = (mode) => (t.type === 'color' ? `<span class="cd-tokens__swatch" style="background:${t.modes[mode].value}"></span>` : '');
         return `<div class="doc-table__row">
           <button type="button" class="cd-tokens__name" data-copy-token="var(${t.cssVar})"><span>${name}</span><code>${t.cssVar}</code></button>
           <span class="cd-tokens__role">${role}</span>
           <span class="cd-tokens__value">${swatch('dark')}${escapeHtml(dark)}</span>
           <span class="cd-tokens__value">${swatch('light')}${escapeHtml(light)}</span>
+          <span class="cd-tokens__value">${swatch('refugio')}${escapeHtml(refugio)}</span>
         </div>`;
       })
       .join('')}

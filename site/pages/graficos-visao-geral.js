@@ -351,6 +351,7 @@ export default function renderVisaoGeral(page) {
   const scales = SCALES();
   const darkMin = ratio(minContrast('dark'), 1);
   const lightMin = ratio(minContrast('light'), 1);
+  const refugioMin = ratio(minContrast('refugio'), 1);
   return `
   <div class="page doc gv">
     <header class="doc-header">
@@ -432,13 +433,13 @@ export default function renderVisaoGeral(page) {
           </li>`,
         ).join('')}
       </ol>
-      <p class="gv-note">${L('Os mesmos tons passaram nos dois temas — validados contra a superfície escura e a clara. Da 9ª série em diante não existe cor nova: a cauda vira “Outros”.', 'The same hues passed in both themes — validated against the dark and the light surface. From the 9th series on there’s no new color: the tail becomes “Others”.', 'Los mismos tonos pasaron en los dos temas — validados contra la superficie oscura y la clara. De la 9.ª serie en adelante no hay color nuevo: la cola se vuelve “Otros”.')}</p>
+      <p class="gv-note">${L('Os mesmos tons passaram nos dois temas — validados contra a superfície escura e a clara; o Refúgio usa os mesmos do Claro. Da 9ª série em diante não existe cor nova: a cauda vira “Outros”.', 'The same hues passed in both themes — validated against the dark and the light surface; Refúgio uses the same as Light. From the 9th series on there’s no new color: the tail becomes “Others”.', 'Los mismos tonos pasaron en los dos temas — validados contra la superficie oscura y la clara; Refúgio usa los mismos que el Claro. De la 9.ª serie en adelante no hay color nuevo: la cola se vuelve “Otros”.')}</p>
 
       <div class="gv-checks">
         <div class="gv-check"><p class="gv-check__value">${fmt1(11.7)}</p><p class="gv-check__label">${L('pior ΔE entre vizinhas com protanopia e deuteranopia', 'worst ΔE between neighbors with protanopia and deuteranopia', 'peor ΔE entre vecinos con protanopia y deuteranopia')}</p><p class="gv-check__goal">${L('alvo ≥ 8', 'target ≥ 8', 'objetivo ≥ 8')}</p></div>
         <div class="gv-check"><p class="gv-check__value">${fmt1(18.5)}</p><p class="gv-check__label">${L('pior ΔE entre vizinhas com visão típica', 'worst ΔE between neighbors with typical vision', 'peor ΔE entre vecinos con visión típica')}</p><p class="gv-check__goal">${L('mínimo 15', 'minimum 15', 'mínimo 15')}</p></div>
         <div class="gv-check"><p class="gv-check__value">${fmt1(11.8)} · ${fmt1(15.1)}</p><p class="gv-check__label">${L('as 3 primeiras em todos os pares, para dispersão', 'the first 3 across all pairs, for scatter', 'los 3 primeros en todos los pares, para dispersión')}</p><p class="gv-check__goal">${L('daltonismo · visão típica', 'color blindness · typical vision', 'daltonismo · visión típica')}</p></div>
-        <div class="gv-check"><p class="gv-check__value">${fmt1(minContrast('dark'))} · ${fmt1(minContrast('light'))}</p><p class="gv-check__label">${L('menor contraste de uma marca com a superfície', 'lowest contrast of a mark against the surface', 'menor contraste de una marca con la superficie')}</p><p class="gv-check__goal">${L('escuro · claro · mínimo 3:1', 'dark · light · minimum 3:1', 'oscuro · claro · mínimo 3:1')}</p></div>
+        <div class="gv-check"><p class="gv-check__value">${fmt1(minContrast('dark'))} · ${fmt1(minContrast('light'))} · ${fmt1(minContrast('refugio'))}</p><p class="gv-check__label">${L('menor contraste de uma marca com a superfície', 'lowest contrast of a mark against the surface', 'menor contraste de una marca con la superficie')}</p><p class="gv-check__goal">${L('escuro · claro · mínimo 3:1', 'dark · light · minimum 3:1', 'oscuro · claro · mínimo 3:1')}</p></div>
       </div>
 
       <div class="gv-cvd">
@@ -459,10 +460,14 @@ export default function renderVisaoGeral(page) {
 
       <h3 class="doc-subhead">${L('Escalas', 'Scales', 'Escalas')} <span class="doc-subhead__meta">${L('um tom por trabalho · cada tema com os seus passos', 'one hue per job · each theme with its own steps', 'un tono por trabajo · cada tema con sus pasos')}</span></h3>
       <div class="gv-themes">
-        ${['dark', 'light']
+        ${[
+          ['dark', 'moon', L('Escuro', 'Dark', 'Oscuro')],
+          ['light', 'sun', L('Claro', 'Light', 'Claro')],
+          ['refugio', 'mountain', 'Refúgio'],
+        ]
           .map(
-            (mode) => `<div class="gv-theme" data-theme="${mode}">
-              <p class="gv-theme__name">${icon(mode === 'dark' ? 'moon' : 'sun', { size: 16 })}${mode === 'dark' ? L('Escuro', 'Dark', 'Oscuro') : L('Claro', 'Light', 'Claro')}</p>
+            ([mode, glyph, label]) => `<div class="gv-theme" data-theme="${mode}">
+              <p class="gv-theme__name">${icon(glyph, { size: 16 })}${label}</p>
               ${scales.map(
                 ([prefix, name, n, , ends]) => `<div class="gv-scale">
                   <p class="gv-scale__name">${name}<code>chart.${prefix}.1–${n}</code></p>
@@ -563,10 +568,10 @@ export default function renderVisaoGeral(page) {
       L('Decisões que já vêm prontas em todos os gráficos — e as que continuam sendo suas.', 'Decisions that come built into every chart — and the ones that are still yours.', 'Decisiones que ya vienen listas en todos los gráficos — y las que siguen siendo tuyas.'),
       a11yList([
         [L('Cor nunca sozinha', 'Never color alone', 'Nunca solo color'), L('Duas séries ou mais têm legenda; até quatro, também rótulo direto. Status vem com ícone e texto.', 'Two or more series get a legend; up to four, a direct label too. Status comes with an icon and text.', 'Dos series o más tienen leyenda; hasta cuatro, también etiqueta directa. El estado viene con ícono y texto.')],
-        [L('Paleta validada para daltonismo', 'A colorblind-validated palette', 'Paleta validada para daltonismo'), L('Vizinhas separadas por ΔE ≥ 8 com protanopia e deuteranopia, e ≥ 15 com visão típica, nos dois temas.', 'Neighbors separated by ΔE ≥ 8 with protanopia and deuteranopia, and ≥ 15 with typical vision, in both themes.', 'Vecinos separados por ΔE ≥ 8 con protanopia y deuteranopia, y ≥ 15 con visión típica, en los dos temas.')],
+        [L('Paleta validada para daltonismo', 'A colorblind-validated palette', 'Paleta validada para daltonismo'), L('Vizinhas separadas por ΔE ≥ 8 com protanopia e deuteranopia, e ≥ 15 com visão típica, nos três temas.', 'Neighbors separated by ΔE ≥ 8 with protanopia and deuteranopia, and ≥ 15 with typical vision, in all three themes.', 'Vecinos separados por ΔE ≥ 8 con protanopia y deuteranopia, y ≥ 15 con visión típica, en los tres temas.')],
         [L('Tabela em todo gráfico', 'A table in every chart', 'Tabla en todo gráfico'), L('O botão “Ver como tabela” mostra todos os números. É o equivalente acessível, não um extra.', 'The “View as table” button shows every number. It’s the accessible equivalent, not an extra.', 'El botón “Ver como tabla” muestra todos los números. Es el equivalente accesible, no un extra.')],
         [L('Teclado e leitor de tela', 'Keyboard and screen reader', 'Teclado y lector de pantalla'), L('O gráfico recebe foco, as setas percorrem os valores e uma região ao vivo anuncia cada um.', 'The chart takes focus, the arrows walk through the values, and a live region announces each one.', 'El gráfico recibe foco, las flechas recorren los valores y una región en vivo anuncia cada uno.'), ['Tab', '←', '→', 'Esc']],
-        [L('Contraste das marcas', 'Mark contrast', 'Contraste de las marcas'), L(`Toda cor categórica passa de 3:1 contra a superfície — ${darkMin} no escuro e ${lightMin} no claro, no pior caso.`, `Every categorical color passes 3:1 against the surface — ${darkMin} in dark and ${lightMin} in light, in the worst case.`, `Todo color categórico supera 3:1 contra la superficie — ${darkMin} en el oscuro y ${lightMin} en el claro, en el peor caso.`)],
+        [L('Contraste das marcas', 'Mark contrast', 'Contraste de las marcas'), L(`Toda cor categórica passa de 3:1 contra a superfície — ${darkMin} no escuro, ${lightMin} no claro e ${refugioMin} no Refúgio, no pior caso.`, `Every categorical color passes 3:1 against the surface — ${darkMin} in dark, ${lightMin} in light, and ${refugioMin} in Refúgio, in the worst case.`, `Todo color categórico supera 3:1 contra la superficie — ${darkMin} en el oscuro, ${lightMin} en el claro y ${refugioMin} en Refúgio, en el peor caso.`)],
         [L('Textura de reserva', 'Backup texture', 'Textura de reserva'), L(`Com ${ic('texture: true')}, barras e fatias ganham hachura em 45° e 135° — também na impressão e em alto contraste.`, `With ${ic('texture: true')}, bars and slices get hatching at 45° and 135° — in print and high contrast too.`, `Con ${ic('texture: true')}, barras y porciones reciben rayado a 45° y 135° — también en la impresión y en alto contraste.`)],
         [L('Movimento reduzido', 'Reduced motion', 'Movimiento reducido'), L(`A entrada anima uma vez, quando o gráfico aparece. Com ${ic('prefers-reduced-motion')}, não anima.`, `The entrance animates once, when the chart appears. With ${ic('prefers-reduced-motion')}, it doesn’t.`, `La entrada se anima una vez, cuando aparece el gráfico. Con ${ic('prefers-reduced-motion')}, no se anima.`)],
         [L('Texto dos dados é seu', 'Data text is yours', 'El texto de los datos es tuyo'), L('Nomes de série e categoria entram como texto, nunca como HTML — vêm de planilhas e APIs.', 'Series and category names go in as text, never as HTML — they come from spreadsheets and APIs.', 'Los nombres de serie y categoría entran como texto, nunca como HTML — vienen de planillas y APIs.')],

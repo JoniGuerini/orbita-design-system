@@ -183,13 +183,13 @@
       "app": {
         "dark": "{color.neutral.975}",
         "light": "{color.neutral.100}",
-        "refugio": "{color.refugio.150}",
+        "refugio": "{color.refugio.200}",
         "$description": "Fundo atrás dos painéis do app shell."
       },
       "canvas": {
         "dark": "{color.neutral.925}",
         "light": "{color.neutral.50}",
-        "refugio": "{color.refugio.50}",
+        "refugio": "{color.refugio.100}",
         "$description": "Fundo do painel de conteúdo."
       },
       "sidebar": {
@@ -212,7 +212,7 @@
       "sunken": {
         "dark": "{color.neutral.950}",
         "light": "{color.neutral.100}",
-        "refugio": "{color.refugio.100}",
+        "refugio": "{color.refugio.150}",
         "$description": "Campos e áreas rebaixadas."
       },
       "muted": {
@@ -261,7 +261,7 @@
         "dark": "{color.neutral.400}",
         "light": "{color.neutral.550}",
         "refugio": "{color.refugio.550}",
-        "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos dois temas."
+        "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos três temas."
       },
       "disabled": {
         "dark": "{color.neutral.600}",
@@ -293,22 +293,22 @@
       "subtle": {
         "dark": "alpha({color.white}, 0.06)",
         "light": "alpha({color.neutral.975}, 0.07)",
-        "refugio": "alpha({color.refugio.700}, 0.08)"
+        "refugio": "alpha({color.refugio.700}, 0.14)"
       },
       "default": {
         "dark": "alpha({color.white}, 0.1)",
         "light": "alpha({color.neutral.975}, 0.11)",
-        "refugio": "alpha({color.refugio.700}, 0.14)"
+        "refugio": "alpha({color.refugio.700}, 0.2)"
       },
       "strong": {
         "dark": "alpha({color.white}, 0.16)",
         "light": "alpha({color.neutral.975}, 0.18)",
-        "refugio": "alpha({color.refugio.700}, 0.25)"
+        "refugio": "alpha({color.refugio.700}, 0.3)"
       },
       "control": {
         "dark": "alpha({color.white}, 0.13)",
         "light": "alpha({color.neutral.975}, 0.15)",
-        "refugio": "alpha({color.refugio.700}, 0.18)",
+        "refugio": "alpha({color.refugio.700}, 0.2)",
         "$description": "Contorno de chips e botões com texto — o rótulo já identifica o controle (WCAG 1.4.11 não exige 3:1 aqui)."
       },
       "field": {
@@ -516,7 +516,7 @@
           "dark": "{color.green.600}",
           "light": "{color.green.600}"
         },
-        "$description": "Categóricas: identidade de série. Ordem fixa, nunca recicle. Validada contra daltonismo (ΔE ≥ 8 entre vizinhas) e visão normal (≥ 15), nos dois temas; as 3 primeiras também em todos os pares (dispersão)."
+        "$description": "Categóricas: identidade de série. Ordem fixa, nunca recicle. Validada contra daltonismo (ΔE ≥ 8 entre vizinhas) e visão normal (≥ 15), nos três temas (o Refúgio usa as do Claro); as 3 primeiras também em todos os pares (dispersão)."
       },
       "muted": {
         "dark": "{color.neutral.700}",

@@ -88,7 +88,7 @@ const TOKEN_DESCRIPTIONS = {
   'color.bg.surface': T(null, 'Cards and blocks on the canvas.', 'Tarjetas y bloques sobre el canvas.'),
   'color.bg.raised': T(null, 'Modals, popovers, floating panels.', 'Modales, popovers, paneles flotantes.'),
   'color.bg.sunken': T(null, 'Fields and recessed areas.', 'Campos y áreas hundidas.'),
-  'color.fg.subtle': T(null, 'Faded text (axis ticks, metadata). Passes 4.5:1 on every surface, in both themes.', 'Texto atenuado (marcas de eje, metadatos). Supera 4,5:1 en todas las superficies, en los dos temas.'),
+  'color.fg.subtle': T(null, 'Faded text (axis ticks, metadata). Passes 4.5:1 on every surface, in all three themes.', 'Texto atenuado (marcas de eje, metadatos). Supera 4,5:1 en todas las superficies, en los tres temas.'),
   'color.border.control': T(null, 'Outline for chips and buttons with text — the label already identifies the control (WCAG 1.4.11 doesn’t require 3:1 here).', 'Contorno de chips y botones con texto — la etiqueta ya identifica el control (WCAG 1.4.11 no exige 3:1 aquí).'),
   'color.border.field': T(null, 'Outline for fields, select, composer, and the off switch: the outline is what identifies the control, so it passes 3:1 on every surface.', 'Contorno de campos, selector, composer y switch apagado: el contorno es lo que identifica el control, así que supera 3:1 en todas las superficies.'),
   'color.border.field-hover': T(null, 'Field outline on hover — stronger than at rest.', 'Contorno del campo al pasar el cursor — más fuerte que en reposo.'),

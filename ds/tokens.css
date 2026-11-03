@@ -628,12 +628,12 @@
   color-scheme: light;
 
   /* color.bg */
-  --ds-color-bg-app: var(--ds-color-refugio-150);
-  --ds-color-bg-canvas: var(--ds-color-refugio-50);
+  --ds-color-bg-app: var(--ds-color-refugio-200);
+  --ds-color-bg-canvas: var(--ds-color-refugio-100);
   --ds-color-bg-sidebar: var(--ds-color-refugio-25);
   --ds-color-bg-surface: var(--ds-color-white);
   --ds-color-bg-raised: var(--ds-color-white);
-  --ds-color-bg-sunken: var(--ds-color-refugio-100);
+  --ds-color-bg-sunken: var(--ds-color-refugio-150);
   --ds-color-bg-muted: var(--ds-color-refugio-200);
   --ds-color-bg-inverse: var(--ds-color-refugio-800);
   --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-refugio-700) 5%, transparent);
@@ -652,10 +652,10 @@
   --ds-color-fg-link-hover: var(--ds-color-refugio-850);
 
   /* color.border */
-  --ds-color-border-subtle: color-mix(in srgb, var(--ds-color-refugio-700) 8%, transparent);
-  --ds-color-border-default: color-mix(in srgb, var(--ds-color-refugio-700) 14%, transparent);
-  --ds-color-border-strong: color-mix(in srgb, var(--ds-color-refugio-700) 25%, transparent);
-  --ds-color-border-control: color-mix(in srgb, var(--ds-color-refugio-700) 18%, transparent);
+  --ds-color-border-subtle: color-mix(in srgb, var(--ds-color-refugio-700) 14%, transparent);
+  --ds-color-border-default: color-mix(in srgb, var(--ds-color-refugio-700) 20%, transparent);
+  --ds-color-border-strong: color-mix(in srgb, var(--ds-color-refugio-700) 30%, transparent);
+  --ds-color-border-control: color-mix(in srgb, var(--ds-color-refugio-700) 20%, transparent);
   --ds-color-border-field: color-mix(in srgb, var(--ds-color-refugio-700) 68%, transparent);
   --ds-color-border-field-hover: color-mix(in srgb, var(--ds-color-refugio-700) 82%, transparent);
   --ds-color-border-focus: var(--ds-color-refugio-600);

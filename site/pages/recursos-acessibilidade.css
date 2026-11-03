@@ -129,6 +129,11 @@
   margin-top: var(--ds-space-150);
 }
 
+/* dois temas lado a lado; o terceiro na linha de baixo, com a largura das duas colunas */
+.ra-results > :nth-child(3) {
+  grid-column: 1 / -1;
+}
+
 .ra-result {
   overflow: hidden;
   border-radius: var(--ds-radius-lg);
@@ -264,7 +269,7 @@
 
 /* Pares do build */
 .ra-pairs {
-  --doc-table-cols: minmax(0, 1.4fr) minmax(0, 1fr) 64px 96px 96px;
+  --doc-table-cols: minmax(0, 1.4fr) minmax(0, 1fr) 64px 96px 96px 96px;
 }
 
 .ra-pairs .doc-table__row {

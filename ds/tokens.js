@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T13:13:39.394Z",
+  "generatedAt": "2026-11-03T13:44:53.567Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -2547,8 +2547,8 @@ const data = {
           "value": "#f3ede5"
         },
         "refugio": {
-          "ref": "{color.refugio.150}",
-          "value": "#e8edf3"
+          "ref": "{color.refugio.200}",
+          "value": "#dae0e8"
         }
       }
     },
@@ -2569,8 +2569,8 @@ const data = {
           "value": "#f9f5f1"
         },
         "refugio": {
-          "ref": "{color.refugio.50}",
-          "value": "#f2f5f8"
+          "ref": "{color.refugio.100}",
+          "value": "#eef2f6"
         }
       }
     },
@@ -2656,8 +2656,8 @@ const data = {
           "value": "#f3ede5"
         },
         "refugio": {
-          "ref": "{color.refugio.100}",
-          "value": "#eef2f6"
+          "ref": "{color.refugio.150}",
+          "value": "#e8edf3"
         }
       }
     },
@@ -2835,7 +2835,7 @@ const data = {
       "type": "color",
       "source": "semantic.json",
       "themed": true,
-      "description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos dois temas.",
+      "description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos três temas.",
       "modes": {
         "dark": {
           "ref": "{color.neutral.400}",
@@ -2972,8 +2972,8 @@ const data = {
           "value": "#0f0e0c12"
         },
         "refugio": {
-          "ref": "alpha({color.refugio.700}, 0.08)",
-          "value": "#3e516614"
+          "ref": "alpha({color.refugio.700}, 0.14)",
+          "value": "#3e516624"
         }
       }
     },
@@ -2993,8 +2993,8 @@ const data = {
           "value": "#0f0e0c1c"
         },
         "refugio": {
-          "ref": "alpha({color.refugio.700}, 0.14)",
-          "value": "#3e516624"
+          "ref": "alpha({color.refugio.700}, 0.2)",
+          "value": "#3e516633"
         }
       }
     },
@@ -3014,8 +3014,8 @@ const data = {
           "value": "#0f0e0c2e"
         },
         "refugio": {
-          "ref": "alpha({color.refugio.700}, 0.25)",
-          "value": "#3e516640"
+          "ref": "alpha({color.refugio.700}, 0.3)",
+          "value": "#3e51664d"
         }
       }
     },
@@ -3036,8 +3036,8 @@ const data = {
           "value": "#0f0e0c26"
         },
         "refugio": {
-          "ref": "alpha({color.refugio.700}, 0.18)",
-          "value": "#3e51662e"
+          "ref": "alpha({color.refugio.700}, 0.2)",
+          "value": "#3e516633"
         }
       }
     },
@@ -4625,7 +4625,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 10.91,
+      "ratio": 10.61,
       "pass": true
     },
     {
@@ -4649,7 +4649,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 6.66,
+      "ratio": 6.48,
       "pass": true
     },
     {
@@ -4745,7 +4745,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 7.46,
+      "ratio": 7.25,
       "pass": true
     },
     {
@@ -4769,7 +4769,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 7.46,
+      "ratio": 7.25,
       "pass": true
     },
     {
@@ -5249,7 +5249,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 4.91,
+      "ratio": 4.78,
       "pass": true
     },
     {
@@ -5321,7 +5321,7 @@ const data = {
       "bg": "color.bg.sunken",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 4.78,
+      "ratio": 4.57,
       "pass": true
     },
     {
@@ -5345,7 +5345,7 @@ const data = {
       "bg": "color.bg.canvas",
       "mode": "refugio",
       "min": 3,
-      "ratio": 3.4,
+      "ratio": 3.35,
       "pass": true
     },
     {
@@ -5417,7 +5417,7 @@ const data = {
       "bg": "color.bg.sunken",
       "mode": "refugio",
       "min": 3,
-      "ratio": 3.35,
+      "ratio": 3.29,
       "pass": true
     },
     {
@@ -5441,7 +5441,7 @@ const data = {
       "bg": "color.bg.sunken",
       "mode": "refugio",
       "min": 4.5,
-      "ratio": 6.48,
+      "ratio": 6.19,
       "pass": true
     }
   ]

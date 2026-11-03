@@ -120,7 +120,7 @@ export default function renderBadge(page) {
       <header class="doc-section__header">
         <div>
           <h2 class="doc-section__title" id="tons-title">${L('Tons', 'Tones', 'Tonos')}</h2>
-          <p class="doc-section__desc">${L('O tom diz o tipo de status. Fundo suave, texto forte e contorno fino — legível nos dois temas, sem gritar.', 'The tone says the type of status. A soft background, strong text, and a thin outline — legible in both themes, without shouting.', 'El tono dice el tipo de estado. Fondo suave, texto fuerte y contorno fino — legible en los dos temas, sin gritar.')}</p>
+          <p class="doc-section__desc">${L('O tom diz o tipo de status. Fundo suave, texto forte e contorno fino — legível nos três temas, sem gritar.', 'The tone says the type of status. A soft background, strong text, and a thin outline — legible in all three themes, without shouting.', 'El tono dice el tipo de estado. Fondo suave, texto fuerte y contorno fino — legible en los tres temas, sin gritar.')}</p>
         </div>
       </header>
       <div class="cd-grid bd-tones">
@@ -134,7 +134,7 @@ export default function renderBadge(page) {
             <div class="cd-example__body">
               <p class="cd-example__name">${name}<code>${tone === 'neutral' ? 'ds-badge' : `ds-badge--${tone}`}</code></p>
               <p class="cd-example__text">${text}</p>
-              <p class="bd-ratio">${L(`Contraste ${fmtRatio(toneRatio(tone, 'dark'))} escuro · ${fmtRatio(toneRatio(tone, 'light'))} claro`, `Contrast ${fmtRatio(toneRatio(tone, 'dark'))} dark · ${fmtRatio(toneRatio(tone, 'light'))} light`, `Contraste ${fmtRatio(toneRatio(tone, 'dark'))} oscuro · ${fmtRatio(toneRatio(tone, 'light'))} claro`)}</p>
+              <p class="bd-ratio">${L(`Contraste ${fmtRatio(toneRatio(tone, 'dark'))} escuro · ${fmtRatio(toneRatio(tone, 'light'))} claro · ${fmtRatio(toneRatio(tone, 'refugio'))} Refúgio`, `Contrast ${fmtRatio(toneRatio(tone, 'dark'))} dark · ${fmtRatio(toneRatio(tone, 'light'))} light · ${fmtRatio(toneRatio(tone, 'refugio'))} Refúgio`, `Contraste ${fmtRatio(toneRatio(tone, 'dark'))} oscuro · ${fmtRatio(toneRatio(tone, 'light'))} claro · ${fmtRatio(toneRatio(tone, 'refugio'))} Refúgio`)}</p>
             </div>
           </article>`,
         ).join('')}

@@ -26,7 +26,7 @@ const STAGES = () => [
   },
   {
     name: L('Rascunho', 'Draft', 'Borrador'),
-    text: L('Tokens, CSS, JS e a página com playground. Estados forçados com data-state, nos dois temas.', 'Tokens, CSS, JS, and the page with a playground. States forced with data-state, in both themes.', 'Tokens, CSS, JS y la página con playground. Estados forzados con data-state, en los dos temas.'),
+    text: L('Tokens, CSS, JS e a página com playground. Estados forçados com data-state, nos três temas.', 'Tokens, CSS, JS, and the page with a playground. States forced with data-state, in all three themes.', 'Tokens, CSS, JS y la página con playground. Estados forzados con data-state, en los tres temas.'),
     who: L('Quem vai construir', 'Whoever will build it', 'Quien lo va a construir'),
     out: L('Pull request em rascunho', 'A draft pull request', 'Pull request en borrador'),
   },
@@ -121,7 +121,7 @@ Anatomia, variantes e estados (normal, hover, pressionado, foco, desativado, err
 O que mais foi considerado e por que ficou de fora.
 
 ### Impacto em tokens
-Tokens novos ou alterados. Contraste nos dois temas.
+Tokens novos ou alterados. Contraste nos três temas.
 
 ### Acessibilidade
 Papel ARIA, teclado, foco, leitor de tela e movimento reduzido.
@@ -146,7 +146,7 @@ Anatomy, variants, and states (default, hover, pressed, focus, disabled, error).
 What else was considered and why it was left out.
 
 ### Token impact
-New or changed tokens. Contrast in both themes.
+New or changed tokens. Contrast in all three themes.
 
 ### Accessibility
 ARIA role, keyboard, focus, screen reader, and reduced motion.
@@ -171,7 +171,7 @@ Anatomía, variantes y estados (normal, hover, presionado, foco, desactivado, er
 Qué más se consideró y por qué quedó fuera.
 
 ### Impacto en tokens
-Tokens nuevos o modificados. Contraste en los dos temas.
+Tokens nuevos o modificados. Contraste en los tres temas.
 
 ### Accesibilidad
 Rol ARIA, teclado, foco, lector de pantalla y movimiento reducido.
@@ -298,7 +298,7 @@ const CHECKLIST = () => [
     id: 'a11y',
     name: L('Acessibilidade', 'Accessibility', 'Accesibilidad'),
     items: [
-      [L('Contraste', 'Contrast', 'Contraste'), L('Texto ≥ 4,5:1 e contornos e ícones ≥ 3:1, nos dois temas.', 'Text ≥ 4.5:1 and outlines and icons ≥ 3:1, in both themes.', 'Texto ≥ 4,5:1 y contornos e íconos ≥ 3:1, en los dos temas.')],
+      [L('Contraste', 'Contrast', 'Contraste'), L('Texto ≥ 4,5:1 e contornos e ícones ≥ 3:1, nos três temas.', 'Text ≥ 4.5:1 and outlines and icons ≥ 3:1, in all three themes.', 'Texto ≥ 4,5:1 y contornos e íconos ≥ 3:1, en los tres temas.')],
       [L('Teclado', 'Keyboard', 'Teclado'), L('Tudo alcançável com Tab; setas, Enter, Espaço e Esc onde o padrão ARIA pede.', 'Everything reachable with Tab; arrows, Enter, Space, and Esc where the ARIA pattern calls for them.', 'Todo alcanzable con Tab; flechas, Enter, Espacio y Esc donde el patrón ARIA lo pide.')],
       [L('Nomes', 'Names', 'Nombres'), L('Botões de ícone com aria-label; campos com rótulo de verdade.', 'Icon buttons with aria-label; fields with a real label.', 'Botones de ícono con aria-label; campos con etiqueta de verdad.')],
       [L('Movimento', 'Motion', 'Movimiento'), L('prefers-reduced-motion respeitado; nada pisca nem anima sem motivo.', 'prefers-reduced-motion respected; nothing flashes or animates without a reason.', 'prefers-reduced-motion respetado; nada parpadea ni se anima sin motivo.')],
@@ -320,7 +320,7 @@ const CHECKLIST = () => [
     items: [
       [L('Página', 'Page', 'Página'), L('Ligada em site/nav.js com load e uma descrição de uma frase.', 'Wired in site/nav.js with load and a one-sentence description.', 'Conectada en site/nav.js con load y una descripción de una frase.')],
       [L('Três idiomas', 'Three languages', 'Tres idiomas'), L('Textos em português, inglês e espanhol; números e datas pelo idioma atual.', 'Text in Portuguese, English, and Spanish; numbers and dates in the current language.', 'Textos en portugués, inglés y español; números y fechas según el idioma actual.')],
-      ['Playground', L('Controles, os dois temas e o código exato do que está no palco.', 'Controls, both themes, and the exact code for what’s on stage.', 'Controles, los dos temas y el código exacto de lo que está en escena.')],
+      ['Playground', L('Controles, os temas e o código exato do que está no palco.', 'Controls, the themes, and the exact code for what’s on stage.', 'Controles, los temas y el código exacto de lo que está en escena.')],
       [L('Uso', 'Usage', 'Uso'), L('Faça e evite com exemplos — e quando não usar.', 'Do and don’t with examples — and when not to use it.', 'Haz y evita con ejemplos — y cuándo no usarlo.')],
       [L('Novidades', 'What’s new', 'Novedades'), L('Entrada em site/changelog.js com o link para a página.', 'An entry in site/changelog.js with the link to the page.', 'Entrada en site/changelog.js con el enlace a la página.')],
     ],
