@@ -22,7 +22,7 @@ const COPY = T(
     install: { title: 'Instalação', desc: 'Quatro passos. Nenhum precisa de terminal além do primeiro.', step: (n) => `Passo ${n}: ` },
     steps: [
       ['Copie o design system', `O Lume não tem dependências nem build obrigatório. Leve a pasta ${code('ds/')} para o seu projeto.`],
-      ['Carregue as fontes e o CSS', 'Um arquivo só traz tokens, base e todos os componentes. As fontes vêm do Google Fonts.'],
+      ['Carregue o CSS', 'Um arquivo só traz as fontes, os tokens, a base e todos os componentes. As fontes vêm junto, em ds/fonts, com as licenças.'],
       ['Escolha o tema', `Escuro é o padrão da marca. Use ${code('light')} para o claro, ${code('refugio')} para o Refúgio ou ${code('system')} para seguir o sistema.`],
       ['Ligue só o JavaScript que usar', 'Componentes visuais funcionam só com CSS. Os interativos têm um módulo cada — importe e ligue os que a tela usa.'],
     ],
@@ -68,7 +68,7 @@ const COPY = T(
     install: { title: 'Installation', desc: 'Four steps. Only the first one needs a terminal.', step: (n) => `Step ${n}: ` },
     steps: [
       ['Copy the design system', `Lume has no dependencies and no required build. Take the ${code('ds/')} folder into your project.`],
-      ['Load the fonts and the CSS', 'A single file brings the tokens, the base, and every component. The fonts come from Google Fonts.'],
+      ['Load the CSS', 'A single file brings the fonts, the tokens, the base, and every component. The fonts ship in ds/fonts, with their licenses.'],
       ['Pick the theme', `Dark is the brand default. Use ${code('light')} for light, ${code('refugio')} for Refúgio, or ${code('system')} to follow the system.`],
       ['Turn on only the JavaScript you use', 'Visual components work with CSS alone. Interactive ones have a module each — import and turn on the ones your screen uses.'],
     ],
@@ -114,7 +114,7 @@ const COPY = T(
     install: { title: 'Instalación', desc: 'Cuatro pasos. Solo el primero necesita terminal.', step: (n) => `Paso ${n}: ` },
     steps: [
       ['Copia el design system', `Lume no tiene dependencias ni build obligatorio. Lleva la carpeta ${code('ds/')} a tu proyecto.`],
-      ['Carga las fuentes y el CSS', 'Un solo archivo trae los tokens, la base y todos los componentes. Las fuentes vienen de Google Fonts.'],
+      ['Carga el CSS', 'Un solo archivo trae las fuentes, los tokens, la base y todos los componentes. Las fuentes vienen incluidas, en ds/fonts, con sus licencias.'],
       ['Elige el tema', `Oscuro es el predeterminado de la marca. Usa ${code('light')} para el claro, ${code('refugio')} para Refúgio o ${code('system')} para seguir el sistema.`],
       ['Activa solo el JavaScript que uses', 'Los componentes visuales funcionan solo con CSS. Los interactivos tienen un módulo cada uno — importa y activa los que use la pantalla.'],
     ],
@@ -161,10 +161,7 @@ const countPrefix = (prefix) => tokens.filter((t) => t.name.startsWith(prefix)).
 
 const STEP_CODE = [
   'cp -R lume/ds ./ds',
-  `<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400..600&display=swap">
-<style>@font-face { font-family: 'Geist Serif'; src: url('https://cdn.jsdelivr.net/npm/geist@1.9.0/dist/fonts/geist-serif/GeistSerif-Regular.woff2') format('woff2'); font-display: swap; }</style>
-<link rel="stylesheet" href="ds/ds.css">`,
+  `<link rel="stylesheet" href="ds/ds.css">`,
   () => `<html lang="${locale()}" data-theme="dark">`,
   `<script type="module">
   import './ds/icons/icons.js';

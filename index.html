@@ -8,10 +8,8 @@
     <meta name="theme-color" content="#0f0e0c" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400..600&display=swap" />
+    <link rel="preload" href="ds/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="ds/fonts/GeistSerif-Regular.woff2" as="font" type="font/woff2" crossorigin />
 
     <script>
       // aplica tema, idioma, barra de rolagem e estado da sidebar antes do primeiro paint (sem "piscar")
@@ -37,17 +35,6 @@
       } catch (e) {}
     </script>
 
-    <style>
-      /* Geist Serif (Vercel, OFL) nos títulos — ainda fora do Google Fonts; só existe o peso Regular.
-         A Geist Sans, do texto, vem do Google Fonts acima. */
-      @font-face {
-        font-family: 'Geist Serif';
-        src: url('https://cdn.jsdelivr.net/npm/geist@1.9.0/dist/fonts/geist-serif/GeistSerif-Regular.woff2') format('woff2');
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-    </style>
     <link rel="stylesheet" href="ds/ds.css" />
     <link rel="stylesheet" href="site/site.css" />
     <link rel="stylesheet" href="site/docs.css" />

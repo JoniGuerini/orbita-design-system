@@ -1,0 +1,29 @@
+/*
+ * Fontes do Lume, servidas daqui (sem Google Fonts nem CDN): a mesma letra em qualquer aparelho e rede.
+ * Todas sob a SIL Open Font License 1.1 — as licenças estão em ds/fonts/ e vão junto com os arquivos.
+ *   Geist Sans e Geist Serif — Vercel, com basement.studio (pacote geist@1.9.0)
+ *   JetBrains Mono — The JetBrains Mono Project Authors (@fontsource-variable/jetbrains-mono@5.3.0, latino)
+ */
+@font-face {
+  font-family: "Geist";
+  src: url("./fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Serif";
+  src: url("./fonts/GeistSerif-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
