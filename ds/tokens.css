@@ -317,7 +317,7 @@
   --ds-opacity-muted: 0.64;
 
   /* font.family */
-  --ds-font-family-display: "Inter Tight", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ds-font-family-display: "Geist Serif", "Iowan Old Style", Georgia, serif;
   --ds-font-family-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --ds-font-family-mono: "JetBrains Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
@@ -329,18 +329,18 @@
   --ds-font-weight-heavy: 800;
 
   /* text */
-  --ds-text-display-lg: var(--ds-font-weight-semibold) 4rem/4rem var(--ds-font-family-display);
-  --ds-text-display-lg-tracking: -0.045em;
-  --ds-text-display-md: var(--ds-font-weight-semibold) 3rem/3.25rem var(--ds-font-family-display);
-  --ds-text-display-md-tracking: -0.042em;
-  --ds-text-display-sm: var(--ds-font-weight-semibold) 2.5rem/2.75rem var(--ds-font-family-display);
-  --ds-text-display-sm-tracking: -0.04em;
-  --ds-text-heading-xl: var(--ds-font-weight-semibold) 2rem/2.375rem var(--ds-font-family-display);
-  --ds-text-heading-xl-tracking: -0.035em;
-  --ds-text-heading-lg: var(--ds-font-weight-semibold) 1.625rem/2rem var(--ds-font-family-display);
-  --ds-text-heading-lg-tracking: -0.03em;
-  --ds-text-heading-md: var(--ds-font-weight-semibold) 1.3125rem/1.75rem var(--ds-font-family-display);
-  --ds-text-heading-md-tracking: -0.022em;
+  --ds-text-display-lg: var(--ds-font-weight-regular) 4rem/4rem var(--ds-font-family-display);
+  --ds-text-display-lg-tracking: -0.025em;
+  --ds-text-display-md: var(--ds-font-weight-regular) 3rem/3.25rem var(--ds-font-family-display);
+  --ds-text-display-md-tracking: -0.022em;
+  --ds-text-display-sm: var(--ds-font-weight-regular) 2.5rem/2.75rem var(--ds-font-family-display);
+  --ds-text-display-sm-tracking: -0.02em;
+  --ds-text-heading-xl: var(--ds-font-weight-regular) 2rem/2.375rem var(--ds-font-family-display);
+  --ds-text-heading-xl-tracking: -0.018em;
+  --ds-text-heading-lg: var(--ds-font-weight-regular) 1.625rem/2rem var(--ds-font-family-display);
+  --ds-text-heading-lg-tracking: -0.014em;
+  --ds-text-heading-md: var(--ds-font-weight-regular) 1.3125rem/1.75rem var(--ds-font-family-display);
+  --ds-text-heading-md-tracking: -0.01em;
   --ds-text-heading-sm: var(--ds-font-weight-semibold) 1.0625rem/1.5rem var(--ds-font-family-sans);
   --ds-text-heading-sm-tracking: -0.016em;
   --ds-text-heading-xs: var(--ds-font-weight-semibold) 0.9375rem/1.375rem var(--ds-font-family-sans);

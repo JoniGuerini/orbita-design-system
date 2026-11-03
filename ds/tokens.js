@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T14:02:48.344Z",
+  "generatedAt": "2026-11-03T14:53:12.473Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -2205,7 +2205,7 @@ const data = {
       "type": "fontFamily",
       "source": "typography.json",
       "themed": false,
-      "css": "\"Inter Tight\", \"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif"
+      "css": "\"Geist Serif\", \"Iowan Old Style\", Georgia, serif"
     },
     {
       "name": "font.family.sans",
@@ -2272,10 +2272,10 @@ const data = {
       "family": "display",
       "size": 64,
       "line": 64,
-      "weight": "semibold",
-      "tracking": "-0.045em",
+      "weight": "regular",
+      "tracking": "-0.025em",
       "usage": "Heróis e momentos de marca.",
-      "css": "var(--ds-font-weight-semibold) 4rem/4rem var(--ds-font-family-display)"
+      "css": "var(--ds-font-weight-regular) 4rem/4rem var(--ds-font-family-display)"
     },
     {
       "name": "text.display-md",
@@ -2286,10 +2286,10 @@ const data = {
       "family": "display",
       "size": 48,
       "line": 52,
-      "weight": "semibold",
-      "tracking": "-0.042em",
+      "weight": "regular",
+      "tracking": "-0.022em",
       "usage": "Título principal de páginas de destaque.",
-      "css": "var(--ds-font-weight-semibold) 3rem/3.25rem var(--ds-font-family-display)"
+      "css": "var(--ds-font-weight-regular) 3rem/3.25rem var(--ds-font-family-display)"
     },
     {
       "name": "text.display-sm",
@@ -2300,10 +2300,10 @@ const data = {
       "family": "display",
       "size": 40,
       "line": 44,
-      "weight": "semibold",
-      "tracking": "-0.04em",
+      "weight": "regular",
+      "tracking": "-0.02em",
       "usage": "Título de página.",
-      "css": "var(--ds-font-weight-semibold) 2.5rem/2.75rem var(--ds-font-family-display)"
+      "css": "var(--ds-font-weight-regular) 2.5rem/2.75rem var(--ds-font-family-display)"
     },
     {
       "name": "text.heading-xl",
@@ -2314,10 +2314,10 @@ const data = {
       "family": "display",
       "size": 32,
       "line": 38,
-      "weight": "semibold",
-      "tracking": "-0.035em",
+      "weight": "regular",
+      "tracking": "-0.018em",
       "usage": "Título de painéis e modais grandes.",
-      "css": "var(--ds-font-weight-semibold) 2rem/2.375rem var(--ds-font-family-display)"
+      "css": "var(--ds-font-weight-regular) 2rem/2.375rem var(--ds-font-family-display)"
     },
     {
       "name": "text.heading-lg",
@@ -2328,10 +2328,10 @@ const data = {
       "family": "display",
       "size": 26,
       "line": 32,
-      "weight": "semibold",
-      "tracking": "-0.03em",
+      "weight": "regular",
+      "tracking": "-0.014em",
       "usage": "Título de seção.",
-      "css": "var(--ds-font-weight-semibold) 1.625rem/2rem var(--ds-font-family-display)"
+      "css": "var(--ds-font-weight-regular) 1.625rem/2rem var(--ds-font-family-display)"
     },
     {
       "name": "text.heading-md",
@@ -2342,10 +2342,10 @@ const data = {
       "family": "display",
       "size": 21,
       "line": 28,
-      "weight": "semibold",
-      "tracking": "-0.022em",
+      "weight": "regular",
+      "tracking": "-0.01em",
       "usage": "Subtítulo de seção, título de card grande.",
-      "css": "var(--ds-font-weight-semibold) 1.3125rem/1.75rem var(--ds-font-family-display)"
+      "css": "var(--ds-font-weight-regular) 1.3125rem/1.75rem var(--ds-font-family-display)"
     },
     {
       "name": "text.heading-sm",

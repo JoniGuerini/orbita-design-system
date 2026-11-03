@@ -84,7 +84,7 @@
   border-radius: var(--ds-radius-sm);
   background: var(--ds-color-brand-subtle);
   color: var(--ds-color-brand-fg);
-  font: var(--ds-font-weight-bold) 0.8125rem/1 var(--ds-font-family-display);
+  font: var(--ds-font-weight-bold) 0.8125rem/1 var(--ds-font-family-sans);
   letter-spacing: -0.02em;
 }
 

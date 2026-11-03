@@ -297,7 +297,7 @@
   height: 12px;
   margin: 0 0 6px 4px;
   color: var(--ds-color-fg-default);
-  font: var(--ds-font-weight-bold) 0.8125rem/12px var(--ds-font-family-display);
+  font: var(--ds-font-weight-bold) 0.8125rem/12px var(--ds-font-family-sans);
   letter-spacing: -0.04em;
 }
 

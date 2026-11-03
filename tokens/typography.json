@@ -2,7 +2,7 @@
   "font": {
     "family": {
       "$type": "fontFamily",
-      "display": "\"Inter Tight\", \"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "display": "\"Geist Serif\", \"Iowan Old Style\", Georgia, serif",
       "sans": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
       "mono": "\"JetBrains Mono\", ui-monospace, \"SF Mono\", SFMono-Regular, Menlo, Consolas, monospace"
     },
@@ -13,12 +13,12 @@
   },
   "text": {
     "$type": "typography",
-    "display-lg": { "family": "display", "size": 64, "line": 64, "weight": "semibold", "tracking": "-0.045em", "usage": "Heróis e momentos de marca." },
-    "display-md": { "family": "display", "size": 48, "line": 52, "weight": "semibold", "tracking": "-0.042em", "usage": "Título principal de páginas de destaque." },
-    "display-sm": { "family": "display", "size": 40, "line": 44, "weight": "semibold", "tracking": "-0.04em", "usage": "Título de página." },
-    "heading-xl": { "family": "display", "size": 32, "line": 38, "weight": "semibold", "tracking": "-0.035em", "usage": "Título de painéis e modais grandes." },
-    "heading-lg": { "family": "display", "size": 26, "line": 32, "weight": "semibold", "tracking": "-0.03em", "usage": "Título de seção." },
-    "heading-md": { "family": "display", "size": 21, "line": 28, "weight": "semibold", "tracking": "-0.022em", "usage": "Subtítulo de seção, título de card grande." },
+    "display-lg": { "family": "display", "size": 64, "line": 64, "weight": "regular", "tracking": "-0.025em", "usage": "Heróis e momentos de marca." },
+    "display-md": { "family": "display", "size": 48, "line": 52, "weight": "regular", "tracking": "-0.022em", "usage": "Título principal de páginas de destaque." },
+    "display-sm": { "family": "display", "size": 40, "line": 44, "weight": "regular", "tracking": "-0.02em", "usage": "Título de página." },
+    "heading-xl": { "family": "display", "size": 32, "line": 38, "weight": "regular", "tracking": "-0.018em", "usage": "Título de painéis e modais grandes." },
+    "heading-lg": { "family": "display", "size": 26, "line": 32, "weight": "regular", "tracking": "-0.014em", "usage": "Título de seção." },
+    "heading-md": { "family": "display", "size": 21, "line": 28, "weight": "regular", "tracking": "-0.01em", "usage": "Subtítulo de seção, título de card grande." },
     "heading-sm": { "family": "sans", "size": 17, "line": 24, "weight": "semibold", "tracking": "-0.016em", "usage": "Título de card e grupos." },
     "heading-xs": { "family": "sans", "size": 15, "line": 22, "weight": "semibold", "tracking": "-0.011em", "usage": "Título de item de lista." },
     "body-lg": { "family": "sans", "size": 18, "line": 32, "weight": "regular", "tracking": "-0.014em", "usage": "Texto de leitura em destaque." },

@@ -383,7 +383,7 @@
 
 .pv-type__aa {
   color: var(--ds-color-fg-default);
-  font: var(--ds-font-weight-semibold) 4rem/1 var(--ds-font-family-display);
+  font: var(--ds-font-weight-regular) 4rem/1 var(--ds-font-family-display);
   letter-spacing: -0.05em;
 }
 

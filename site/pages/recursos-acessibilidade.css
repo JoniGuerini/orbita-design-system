@@ -154,7 +154,7 @@
 
 .ra-result__big {
   grid-row: span 2;
-  font: var(--ds-font-weight-semibold) 2.5rem/1 var(--ds-font-family-display);
+  font: var(--ds-font-weight-regular) 2.5rem/1 var(--ds-font-family-display);
   letter-spacing: -0.03em;
 }
 
