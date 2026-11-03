@@ -35,6 +35,7 @@ const DEFINITIONS = [
   ['home', 'navegacao', 'casa início inicial', path('M3.5 10.5 12 3.5l8.5 7') + path('M5.5 9v10.5a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9')],
   ['menu', 'navegacao', 'hambúrguer navegação lista', path('M4 7h16M4 12h16M4 17h16')],
   ['panel-left', 'navegacao', 'sidebar barra lateral recolher', rect(3.5, 4.5, 17, 15, 3) + path('M9.5 4.5v15')],
+  ['panel-top', 'navegacao', 'navbar barra superior topo layout', rect(3.5, 4.5, 17, 15, 3) + path('M3.5 10h17')],
   ['chevron-down', 'navegacao', 'seta baixo expandir', path('m6 9 6 6 6-6')],
   ['chevron-up', 'navegacao', 'seta cima recolher', path('m6 15 6-6 6 6')],
   ['chevron-left', 'navegacao', 'seta esquerda voltar', path('m15 6-6 6 6 6')],

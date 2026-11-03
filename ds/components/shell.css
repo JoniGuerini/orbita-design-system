@@ -3,6 +3,7 @@
  *
  * <div class="ds-shell" data-sidebar="expanded|collapsed" data-mobile-open="true|false">
  *   <button class="ds-shell__edge" data-shell-toggle>…</button>   (aba de recolher, na borda da sidebar)
+ *   <div class="ds-navbar">…</div>   (layout navbar: data-layout="navbar" no .ds-shell; some no celular)
  *   <aside class="ds-sidebar">…</aside>
  *   <div class="ds-shell__scrim"></div>
  *   <div class="ds-main"><div class="ds-main__scroll"><header class="ds-topbar">…</header><main class="ds-main__content">…</main></div></div>
@@ -454,6 +455,111 @@
   display: none;
 }
 
+/* ───────── Navbar (layout alternativo à sidebar) ─────────
+   Mesmo painel flutuante, deitado no topo: marca, os links principais, um menu por grupo e a busca.
+   No celular, os dois layouts viram a mesma gaveta (a sidebar), aberta pelo botão da topbar. */
+
+.ds-navbar {
+  display: none;
+}
+
+.ds-navbar .ds-brand {
+  position: static;
+  translate: none;
+  margin-inline: 13px var(--ds-space-250);
+}
+
+.ds-navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ds-navbar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-050);
+  height: 36px;
+  padding-inline: var(--ds-space-150);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-label-md);
+  letter-spacing: var(--ds-text-label-md-tracking);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--ds-duration-fast) var(--ds-easing-standard),
+    color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.ds-navbar__item:hover,
+.ds-navbar__item[aria-expanded="true"] {
+  background: var(--ds-color-bg-hover);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-navbar__item[aria-current="page"],
+.ds-navbar__item[data-current] {
+  background: var(--ds-color-bg-selected);
+  color: var(--ds-color-fg-default);
+}
+
+.ds-navbar__item > .ds-dot {
+  margin-inline-start: 2px;
+}
+
+.ds-navbar__chevron {
+  display: inline-flex;
+  color: var(--ds-color-fg-subtle);
+  transition: transform var(--ds-duration-base) var(--ds-easing-emphasized);
+}
+
+.ds-navbar__item[aria-expanded="true"] .ds-navbar__chevron {
+  transform: rotate(180deg);
+}
+
+.ds-navbar__search {
+  flex: none;
+  width: 240px;
+  margin-inline-start: auto;
+}
+
+@media (min-width: 1024px) {
+  .ds-shell[data-layout="navbar"] {
+    flex-direction: column;
+  }
+
+  .ds-shell[data-layout="navbar"] :is(.ds-sidebar, .ds-shell__edge) {
+    display: none;
+  }
+
+  .ds-shell[data-layout="navbar"] .ds-main {
+    min-height: 0;
+  }
+
+  .ds-shell[data-layout="navbar"] .ds-navbar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-100);
+    height: var(--ds-layout-topbar);
+    padding-inline: var(--ds-space-150);
+    border: 1px solid var(--ds-color-border-subtle);
+    border-radius: var(--ds-radius-xl);
+    background: var(--ds-color-bg-sidebar);
+    color: var(--ds-color-fg-default);
+    box-shadow: var(--ds-shadow-lg);
+  }
+}
+
+/* o seletor de layout só faz sentido no desktop */
+@media (max-width: 1023.98px) {
+  .ds-topbar__layout {
+    display: none;
+  }
+}
+
 /* ───────── Desktop: modo recolhido ───────── */
 
 @media (min-width: 1024px) {
@@ -528,7 +634,7 @@
     --_sidebar-w: var(--ds-layout-sidebar-collapsed);
   }
 
-  .ds-shell[data-sidebar="collapsed"] :is(
+  .ds-shell[data-sidebar="collapsed"] .ds-sidebar :is(
     .ds-brand,
     .ds-sidebar-search .ds-field__placeholder,
     .ds-sidebar-search__kbd,

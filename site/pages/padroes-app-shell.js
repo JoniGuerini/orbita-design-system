@@ -190,6 +190,7 @@ export default function renderAppShell(page) {
       `<div class="pa-demo">
         <div class="pa-demo__toolbar">
           ${segmented('device', L('Tamanho da tela', 'Screen size', 'Tamaño de pantalla'), DEVICES(), 'desktop')}
+          ${segmented('layout', L('Layout do exemplo', 'Example layout', 'Diseño del ejemplo'), [{ value: 'sidebar', label: L('Sidebar', 'Sidebar', 'Sidebar'), icon: 'panel-left' }, { value: 'navbar', label: L('Navbar', 'Navbar', 'Navbar'), icon: 'panel-top' }], 'sidebar')}
           <button type="button" class="ds-btn ds-btn--secondary ds-btn--sm" data-demo-toggle disabled>${icon('panel-left', { size: 16 })}<span data-demo-toggle-label>${L('Recolher menu', 'Collapse menu', 'Contraer menú')}</span></button>
           <span class="pa-demo__spacer"></span>
           ${segmented('theme', L('Tema do exemplo', 'Example theme', 'Tema del ejemplo'), [{ value: 'dark', label: L('Escuro', 'Dark', 'Oscuro'), icon: 'moon' }, { value: 'light', label: L('Claro', 'Light', 'Claro'), icon: 'sun' }, { value: 'refugio', label: 'Refúgio', icon: 'mountain' }], theme)}
@@ -494,6 +495,7 @@ export function mount(root) {
   const parts = PARTS();
   let theme = resolvedTheme();
   let device = devices[0];
+  let layout = 'sidebar';
 
   /* ───────── Ao vivo ───────── */
   const live = root.querySelector('[data-device-frame="live"]');
@@ -507,11 +509,15 @@ export function mount(root) {
 
   function describe(detail) {
     if (!detail) return;
+    // na navbar não há o que recolher: o botão volta a valer no celular (gaveta) ou na sidebar
+    toggleBtn.disabled = !liveApi || (!detail.mobile && detail.layout === 'navbar');
     const mode = detail.mobile
       ? detail.mobileOpen
         ? L('Gaveta aberta', 'Drawer open', 'Cajón abierto')
         : L('Gaveta fechada', 'Drawer closed', 'Cajón cerrado')
-      : detail.sidebar === 'collapsed'
+      : detail.layout === 'navbar'
+        ? L('Navbar', 'Navbar', 'Navbar')
+        : detail.sidebar === 'collapsed'
         ? L('Sidebar recolhida', 'Sidebar collapsed', 'Sidebar contraída')
         : L('Sidebar expandida', 'Sidebar expanded', 'Sidebar expandida');
     toggleLabel.textContent = detail.mobile
@@ -529,6 +535,7 @@ export function mount(root) {
   const readState = () =>
     liveApi && {
       sidebar: liveApi.root.dataset.sidebar,
+      layout: liveApi.root.dataset.layout,
       mobile: liveApi.shell.isMobile(),
       mobileOpen: liveApi.shell.isMobileOpen(),
     };
@@ -540,6 +547,7 @@ export function mount(root) {
       api.root.addEventListener('ds:shellchange', onShellChange);
       api.setTheme(theme);
       api.setLocale?.(locale());
+      api.setLayout?.(layout);
       toggleBtn.disabled = false;
       describe(readState());
     }),
@@ -556,6 +564,10 @@ export function mount(root) {
     fitLive();
     // a largura do iframe muda → o app passa sozinho de sidebar para gaveta (mesmo media query)
     setTimeout(() => describe(readState()), 60);
+  });
+  const layoutGroup = bindSegmented(root.querySelector('[data-segmented="layout"]'), (value) => {
+    layout = value;
+    liveApi?.setLayout?.(value);
   });
   const themeGroup = bindSegmented(root.querySelector('[data-segmented="theme"]'), (value) => {
     theme = value;
@@ -693,6 +705,7 @@ export function mount(root) {
     cleanups.forEach((fn) => fn());
     deviceGroup.off();
     themeGroup.off();
+    layoutGroup.off();
     toggleBtn.removeEventListener('click', onToggle);
     reloadBtn.removeEventListener('click', onReload);
     root.removeEventListener('click', onTry);

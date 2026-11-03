@@ -49,10 +49,22 @@
         try {
           var s = JSON.parse(localStorage.getItem('ds-sidebar'));
           if (s) document.getElementById('shell').dataset.sidebar = s;
+          var ly = JSON.parse(localStorage.getItem('ds-layout'));
+          if (ly === 'navbar' || ly === 'sidebar') document.getElementById('shell').dataset.layout = ly;
         } catch (e) {}
       </script>
 
       <button type="button" class="ds-shell__edge" data-shell-toggle aria-controls="sidebar" data-ds-tooltip-placement="right"><ds-icon name="chevron-left" size="16"></ds-icon></button>
+
+      <div class="ds-navbar">
+        <a class="ds-brand" href="#/" aria-label="Lume, ir para o início" data-i18n-attr="aria-label:goHome"><img class="ds-brand__mark" src="assets/favicon.svg" alt="" width="24" height="24" />Lume</a>
+        <nav class="ds-navbar__nav" id="navbar-nav" aria-label="Principal" data-i18n-attr="aria-label:mainNav"></nav>
+        <button type="button" class="ds-field ds-sidebar-search ds-navbar__search" data-command-open aria-keyshortcuts="Meta+K Control+K">
+          <ds-icon name="search" size="20"></ds-icon>
+          <span class="ds-field__placeholder" data-i18n="searchLume">Buscar no Lume</span>
+          <span class="ds-sidebar-search__kbd" aria-hidden="true"><kbd class="ds-kbd" data-kbd-mod>⌘</kbd><kbd class="ds-kbd">K</kbd></span>
+        </button>
+      </div>
 
       <aside class="ds-sidebar" id="sidebar" aria-label="Barra lateral" data-i18n-attr="aria-label:sidebar">
         <div class="ds-sidebar__header">
@@ -99,6 +111,10 @@
             <button type="button" class="ds-icon-btn ds-topbar__search" data-command-open aria-label="Buscar" data-i18n-attr="aria-label:search">
               <ds-icon name="search"></ds-icon>
             </button>
+            <div class="ds-segmented ds-topbar__layout" role="radiogroup" aria-label="Layout" data-i18n-attr="aria-label:layout">
+              <button type="button" class="ds-segmented__item" role="radio" data-layout-option="sidebar" aria-label="Sidebar" data-ds-tooltip="Navegação na lateral" data-i18n-attr="aria-label:layoutSidebar; data-ds-tooltip:layoutSidebarTip" data-ds-tooltip-placement="bottom"><ds-icon name="panel-left" size="16"></ds-icon></button>
+              <button type="button" class="ds-segmented__item" role="radio" data-layout-option="navbar" aria-label="Navbar" data-ds-tooltip="Navegação no topo" data-i18n-attr="aria-label:layoutNavbar; data-ds-tooltip:layoutNavbarTip" data-ds-tooltip-placement="bottom"><ds-icon name="panel-top" size="16"></ds-icon></button>
+            </div>
             <button type="button" class="ds-chip ds-chip--sm ds-topbar__locale" data-locale-menu data-i18n-attr="data-ds-tooltip:language" data-ds-tooltip="Idioma" data-ds-tooltip-placement="bottom">
               <span class="ds-chip__icon"><ds-icon name="globe" size="14"></ds-icon></span><span data-label>PT</span><span class="ds-chip__chevron"><ds-icon name="chevron-down" size="14"></ds-icon></span>
             </button>

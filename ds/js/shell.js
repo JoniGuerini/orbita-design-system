@@ -1,6 +1,7 @@
 /**
  * Comportamento do app shell: recolher sidebar (desktop), gaveta (mobile),
- * grupos de navegação, item ativo e borda da topbar ao rolar.
+ * grupos de navegação, item ativo, borda da topbar ao rolar e o layout — sidebar ou navbar
+ * (data-layout no .ds-shell; no celular os dois viram a mesma gaveta).
  *
  *   const shell = createShell(document.getElementById('shell'));
  *   createShell(el, { persist: false, initial: 'collapsed' });   // demos: nada vai para o localStorage
@@ -11,6 +12,8 @@ import { icon } from '../icons/icons.js';
 import { msg } from './i18n.js';
 
 const SIDEBAR_KEY = 'ds-sidebar';
+const LAYOUT_KEY = 'ds-layout';
+export const LAYOUTS = ['sidebar', 'navbar'];
 const GROUPS_KEY = 'ds-nav-groups';
 const mobileQuery = matchMedia('(max-width: 1023.98px)');
 
@@ -31,8 +34,10 @@ const store = {
 
 const isTyping = (el) => el?.closest?.('input, textarea, select, [contenteditable="true"]');
 
-export function createShell(root, { persist = true, initial } = {}) {
+export function createShell(root, { persist = true, initial, layout } = {}) {
   const save = (key, value) => persist && store.set(key, value);
+  const startLayout = layout ?? (persist ? store.get(LAYOUT_KEY, root.dataset.layout) : root.dataset.layout);
+  root.dataset.layout = LAYOUTS.includes(startLayout) ? startLayout : 'sidebar';
   const sidebar = root.querySelector('.ds-sidebar');
   const scrim = root.querySelector('[data-shell-scrim]');
   const main = root.querySelector('.ds-main');
@@ -58,7 +63,7 @@ export function createShell(root, { persist = true, initial } = {}) {
     }
     sidebar.dataset.dsTooltips = !mobile && isCollapsed() ? 'on' : 'off';
     root.querySelectorAll('.ds-nav-group__header').forEach((h) => (h.tabIndex = !mobile && isCollapsed() ? -1 : 0));
-    root.dispatchEvent(new CustomEvent('ds:shellchange', { detail: { sidebar: root.dataset.sidebar, mobile, mobileOpen: isMobileOpen() } }));
+    root.dispatchEvent(new CustomEvent('ds:shellchange', { detail: { sidebar: root.dataset.sidebar, layout: root.dataset.layout, mobile, mobileOpen: isMobileOpen() } }));
   }
 
   function setCollapsed(collapsed) {
@@ -118,12 +123,46 @@ export function createShell(root, { persist = true, initial } = {}) {
     save(GROUPS_KEY, state);
   });
 
+  // Layout: sidebar ou navbar. Botões [data-layout-option] dentro do shell (role="radio" num radiogroup)
+  const layoutOptions = () => [...root.querySelectorAll('[data-layout-option]')];
+  function syncLayout() {
+    for (const btn of layoutOptions()) {
+      const on = btn.dataset.layoutOption === root.dataset.layout;
+      btn.setAttribute('aria-checked', String(on));
+      btn.tabIndex = on ? 0 : -1;
+    }
+  }
+  function setLayout(next) {
+    if (!LAYOUTS.includes(next) || next === root.dataset.layout) return;
+    root.dataset.layout = next;
+    save(LAYOUT_KEY, next);
+    syncLayout();
+    sync();
+  }
+  root.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-layout-option]');
+    if (btn) setLayout(btn.dataset.layoutOption);
+  });
+  root.addEventListener('keydown', (event) => {
+    const options = layoutOptions();
+    const index = options.indexOf(document.activeElement);
+    const delta = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+    if (index < 0 || !delta) return;
+    event.preventDefault();
+    const next = options[(index + delta + options.length) % options.length];
+    next.focus();
+    setLayout(next.dataset.layoutOption);
+  });
+  syncLayout();
+
   sync();
   requestAnimationFrame(() => requestAnimationFrame(() => root.setAttribute('data-ready', '')));
 
   return {
     toggle,
     setCollapsed,
+    setLayout,
+    layout: () => root.dataset.layout,
     setMobileOpen,
     closeMobile: () => setMobileOpen(false),
     isCollapsed,
@@ -189,4 +228,53 @@ export function setActiveNavItem(container, href) {
   const l = list.getBoundingClientRect();
   if (a.top < l.top) list.scrollTop += a.top - l.top - 8;
   else if (a.bottom > l.bottom) list.scrollTop += a.bottom - l.bottom + 8;
+}
+
+/* ───────── Navbar ───────── */
+
+/**
+ * Renderiza a navegação da navbar com os mesmos grupos da sidebar: o grupo sem label vira links;
+ * cada grupo com label vira um botão que abre um menu com as páginas.
+ *   const navbar = renderNavbarNav(container, groups, { attachMenu, go: (href) => (location.hash = href) });
+ *   navbar.setActive('#/componentes/botao');  navbar.destroy();
+ * attachMenu vem de ds/js/menu.js (passado por quem chama, para o shell não depender do menu).
+ */
+export function renderNavbarNav(container, groups, { attachMenu, go }) {
+  container.innerHTML = groups
+    .map((group) =>
+      group.label
+        ? `<button type="button" class="ds-navbar__item" data-navbar-group="${escape(group.id)}"><span>${escape(group.label)}</span><span class="ds-navbar__chevron" aria-hidden="true">${icon('chevron-down', { size: 16 })}</span></button>`
+        : group.items
+            .filter((i) => i.href !== '#/')
+            .map((i) => `<a class="ds-navbar__item" href="${escape(i.href)}"><span>${escape(i.label)}</span>${i.dot ? '<span class="ds-dot" aria-label="Novidade"></span>' : ''}</a>`)
+            .join(''),
+    )
+    .join('');
+  const menus = groups
+    .filter((g) => g.label)
+    .map((group) => ({
+      group,
+      button: container.querySelector(`[data-navbar-group="${group.id}"]`),
+    }))
+    .map(({ group, button }) => ({
+      group,
+      button,
+      menu: attachMenu(button, {
+        label: group.label,
+        options: group.items.map((i) => ({ value: i.href, label: i.label, icon: i.icon })),
+        value: null,
+        onChange: go,
+      }),
+    }));
+  return {
+    setActive(href) {
+      container.querySelectorAll('a.ds-navbar__item').forEach((a) => (a.getAttribute('href') === href ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
+      for (const { group, button, menu } of menus) {
+        const here = group.items.some((i) => i.href === href);
+        button.toggleAttribute('data-current', here);
+        menu.setValue?.(here ? href : null);
+      }
+    },
+    destroy: () => menus.forEach(({ menu }) => menu.destroy()),
+  };
 }

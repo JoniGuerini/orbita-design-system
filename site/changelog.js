@@ -70,6 +70,12 @@ const RELEASES = [
       {
         name: T('App shell', 'App shell', 'App shell'),
         items: [
+          ['novo', T(
+            'Navbar como alternativa à sidebar: o mesmo painel flutuante no topo, com um menu por grupo. Escolha Sidebar ou Navbar na topbar ou na busca ⌘K; a escolha fica salva. No celular, as duas viram a gaveta',
+            'Navbar as an alternative to the sidebar: the same floating panel at the top, with one menu per group. Pick Sidebar or Navbar in the topbar or in ⌘K search; the choice is saved. On phones, both become the drawer',
+            'Navbar como alternativa a la sidebar: el mismo panel flotante arriba, con un menú por grupo. Elige Sidebar o Navbar en la topbar o en la búsqueda ⌘K; la elección queda guardada. En el móvil, las dos se vuelven el cajón',
+          ), '/padroes/app-shell'],
+          ['novo', T('Ícone panel-top', 'panel-top icon', 'Ícono panel-top'), '/fundamentos/icones'],
           ['melhoria', T(
             'Sidebar recolhida: a chama do Lume fica no topo, maior, e vira o botão de expandir ao receber o mouse ou o foco',
             'Collapsed sidebar: the Lume flame stays at the top, larger, and becomes the expand button on hover or focus',

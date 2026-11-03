@@ -8,7 +8,7 @@ import { initLocale, setLocale, getLocalePreference, locale, LOCALES, LOCALE_NAM
 import { attachMenu } from '../ds/js/menu.js';
 import { initTooltips } from '../ds/js/tooltip.js';
 import { initScrollbars } from '../ds/js/scrollbar.js';
-import { createShell, renderSidebarNav, setActiveNavItem } from '../ds/js/shell.js';
+import { createShell, renderSidebarNav, renderNavbarNav, setActiveNavItem } from '../ds/js/shell.js';
 import { createCommandPalette } from '../ds/js/command-palette.js';
 import { navigation, pages, findPage } from './nav.js';
 import { CURRENT_VERSION, SEEN_KEY } from './changelog.js';
@@ -93,7 +93,7 @@ renderAccount();
 
 // a página Novidades avisa quando a versão foi vista: some a bolinha e o cartão
 document.addEventListener('ds:newsseen', () => {
-  document.querySelector('.ds-sidebar .ds-nav-item[href="#/novidades"] .ds-dot')?.remove();
+  document.querySelectorAll('.ds-sidebar .ds-nav-item[href="#/novidades"] .ds-dot, .ds-navbar__item[href="#/novidades"] .ds-dot').forEach((d) => d.remove());
   renderAccount();
 });
 
@@ -101,23 +101,36 @@ const navEl = document.getElementById('sidebar-nav');
 const content = document.getElementById('conteudo');
 const breadcrumb = document.getElementById('breadcrumb');
 
+// os mesmos grupos alimentam a sidebar e a navbar
+const navGroups = () =>
+  navigation.map((group) => ({
+    id: group.id,
+    label: group.label,
+    items: group.items.map((item) => ({ label: item.label, icon: item.icon, href: `#${item.path}`, dot: item.dot && !newsSeen() })),
+  }));
+
 function renderSidebar() {
-  renderSidebarNav(
-    navEl,
-    navigation.map((group) => ({
-      id: group.id,
-      label: group.label,
-      items: group.items.map((item) => ({ label: item.label, icon: item.icon, href: `#${item.path}`, dot: item.dot && !newsSeen() })),
-    })),
-  );
+  renderSidebarNav(navEl, navGroups());
 }
 renderSidebar();
 
 const shell = createShell(
   document.getElementById('shell'),
-  EMBED ? { persist: false, initial: params.get('sidebar') === 'collapsed' ? 'collapsed' : 'expanded' } : undefined,
+  EMBED ? { persist: false, initial: params.get('sidebar') === 'collapsed' ? 'collapsed' : 'expanded', layout: params.get('layout') ?? 'sidebar' } : undefined,
 );
 const go = (path) => (location.hash = path);
+
+/* ───────── Navbar ───────── */
+
+const navbarEl = document.getElementById('navbar-nav');
+let navbar = null;
+let activeHref = null;
+function renderNavbar() {
+  navbar?.destroy();
+  navbar = renderNavbarNav(navbarEl, navGroups(), { attachMenu, go });
+  if (activeHref) navbar.setActive(activeHref);
+}
+renderNavbar();
 
 const applyLocale = (preference) => setLocale(preference, { persist: !EMBED });
 
@@ -139,6 +152,8 @@ const palette = createCommandPalette({
     { id: 'theme-refugio', label: t('useRefugio'), group: t('actions'), icon: 'mountain', keywords: ['refúgio', 'refugio', 'lume', 'ardósia', 'slate'], perform: () => applyTheme('refugio') },
     { id: 'theme-system', label: t('useSystem'), group: t('actions'), icon: 'monitor', keywords: ['system', 'sistema', 'automático'], perform: () => applyTheme('system') },
     ...LOCALES.map((l) => ({ id: `locale-${l}`, label: `${t('language')}: ${LOCALE_NAMES[l]}`, group: t('actions'), icon: 'globe', keywords: ['idioma', 'language', 'lenguaje'], perform: () => applyLocale(l) })),
+    { id: 'layout-sidebar', label: t('layoutSidebarTip'), group: t('actions'), icon: 'panel-left', keywords: ['layout', 'sidebar', 'lateral'], perform: () => shell.setLayout('sidebar') },
+    { id: 'layout-navbar', label: t('layoutNavbarTip'), group: t('actions'), icon: 'panel-top', keywords: ['layout', 'navbar', 'topo', 'top', 'superior'], perform: () => shell.setLayout('navbar') },
     { id: 'sidebar', label: t('toggleMenu'), group: t('actions'), icon: 'panel-left', hint: `${palette.modifierLabel} B`, keywords: ['sidebar', 'barra lateral'], perform: () => shell.toggle() },
   ],
 });
@@ -171,6 +186,7 @@ document.documentElement.addEventListener('ds:localechange', () => {
   applyStrings();
   renderAccount();
   renderSidebar();
+  renderNavbar();
   renderLocaleMenu();
   route();
 });
@@ -241,7 +257,9 @@ async function route() {
   const path = currentPath();
   const page = findPage(path);
 
-  setActiveNavItem(navEl, page ? `#${page.path}` : null);
+  activeHref = page ? `#${page.path}` : null;
+  setActiveNavItem(navEl, activeHref);
+  navbar?.setActive(activeHref);
   renderBreadcrumb(page);
   document.title = !page ? `${t('notFound')} · Lume` : page.path === '/' ? 'Lume Design System' : `${page.label} · Lume`;
 
@@ -262,4 +280,4 @@ addEventListener('hashchange', route);
 route();
 
 // a página que embute o app (mesma origem) controla a demonstração por aqui
-if (EMBED) window.lumeEmbed = { shell, palette, go, setTheme: embedTheme, setLocale: applyLocale, root: document.getElementById('shell') };
+if (EMBED) window.lumeEmbed = { shell, palette, go, setTheme: embedTheme, setLocale: applyLocale, setLayout: shell.setLayout, root: document.getElementById('shell') };

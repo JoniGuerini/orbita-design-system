@@ -751,7 +751,7 @@
   --ds-gradient-divider: linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%);
 }
 
-[data-theme="refugio"] .ds-sidebar {
+[data-theme="refugio"] :is(.ds-sidebar, .ds-navbar) {
   color-scheme: dark;
 
   /* color.bg */

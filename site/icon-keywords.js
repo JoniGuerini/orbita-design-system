@@ -7,6 +7,7 @@ export const ICON_KEYWORDS = {
   home: ['house start main', 'casa inicio principal'],
   menu: ['hamburger navigation list', 'hamburguesa navegación lista'],
   'panel-left': ['sidebar collapse side panel', 'barra lateral contraer panel'],
+  'panel-top': ['navbar top bar layout', 'navbar barra superior diseño'],
   'chevron-down': ['arrow down expand', 'flecha abajo expandir'],
   'chevron-up': ['arrow up collapse', 'flecha arriba contraer'],
   'chevron-left': ['arrow left back', 'flecha izquierda volver'],

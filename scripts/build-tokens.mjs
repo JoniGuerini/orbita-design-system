@@ -26,7 +26,7 @@ const FALLBACK = { light: 'dark', refugio: 'light' };
 const SCHEME = { dark: 'dark', light: 'light', refugio: 'light' };
 // recortes de um tema: valem só dentro de um seletor e não viram tema próprio (nem vão para Figma ou exportações).
 // No JSON, a chave do recorte só aparece nos tokens que mudam ali; o resto segue o tema de base.
-const SCOPES = { 'refugio-sidebar': { base: 'refugio', selector: '[data-theme="refugio"] .ds-sidebar', scheme: 'dark' } };
+const SCOPES = { 'refugio-sidebar': { base: 'refugio', selector: '[data-theme="refugio"] :is(.ds-sidebar, .ds-navbar)', scheme: 'dark' } };
 const ALL_MODES = [...MODES, ...Object.keys(SCOPES)];
 for (const [id, scope] of Object.entries(SCOPES)) FALLBACK[id] = scope.base;
 const modeValue = (value, mode) => value[mode] ?? (FALLBACK[mode] ? modeValue(value, FALLBACK[mode]) : undefined);
