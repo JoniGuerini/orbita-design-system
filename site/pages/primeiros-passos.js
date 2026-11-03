@@ -162,7 +162,8 @@ const countPrefix = (prefix) => tokens.filter((t) => t.name.startsWith(prefix)).
 const STEP_CODE = [
   'cp -R lume/ds ./ds',
   `<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=JetBrains+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400..600&display=swap">
+<style>@font-face { font-family: 'Geist Serif'; src: url('https://cdn.jsdelivr.net/npm/geist@1.9.0/dist/fonts/geist-serif/GeistSerif-Regular.woff2') format('woff2'); font-display: swap; }</style>
 <link rel="stylesheet" href="ds/ds.css">`,
   () => `<html lang="${locale()}" data-theme="dark">`,
   `<script type="module">

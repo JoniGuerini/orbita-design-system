@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T14:53:12.473Z",
+  "generatedAt": "2026-11-03T15:00:53.770Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -2213,7 +2213,7 @@ const data = {
       "type": "fontFamily",
       "source": "typography.json",
       "themed": false,
-      "css": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+      "css": "\"Geist\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
     },
     {
       "name": "font.family.mono",

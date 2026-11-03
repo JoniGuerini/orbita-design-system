@@ -277,8 +277,9 @@
       var header = box('Cabeçalho', { dir: 'H', gap: 'space/300', align: 'between' });
       var titles = box('Títulos', { dir: 'V', gap: 'space/075' });
       add(titles, await text('Roteiro', { style: 'eyebrow', color: 'color/fg/subtle', prop: 'Grupo', name: 'Grupo' }));
-      add(titles, await text('Lançamento da versão 0.4', { style: 'heading-lg', color: 'color/fg/default', prop: 'Título', name: 'Título' }));
-      add(header, titles);
+      // o título quebra linha em vez de empurrar as ações (títulos longos, em outro idioma ou outra fonte)
+      add(titles, await text('Lançamento da versão 0.4', { style: 'heading-lg', color: 'color/fg/default', prop: 'Título', name: 'Título' }), { fillW: true });
+      add(header, titles, { grow: true });
       var actions = box('Ações', { dir: 'H', gap: 'space/050' });
       add(actions, iconButton('stack', 36, 'color/fg/default'));
       add(actions, iconButton('x', 36, 'color/fg/default'));

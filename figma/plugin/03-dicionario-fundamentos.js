@@ -35,7 +35,7 @@ Object.assign(DICT, {
   'Larguras': ['Widths', 'Anchos'],
 
   /* ───────── Tipografia ───────── */
-  'Inter Tight para títulos, Inter para leitura e JetBrains Mono para código. Cada linha é um estilo de texto do Figma com o mesmo nome do token.': ['Inter Tight for headings, Inter for reading, and JetBrains Mono for code. Each row is a Figma text style with the same name as the token.', 'Inter Tight para títulos, Inter para lectura y JetBrains Mono para código. Cada fila es un estilo de texto de Figma con el mismo nombre del token.'],
+  'Geist Serif para títulos, Geist Sans para leitura e JetBrains Mono para código. Cada linha é um estilo de texto do Figma com o mesmo nome do token.': ['Geist Serif for headings, Geist Sans for reading, and JetBrains Mono for code. Each row is a Figma text style with the same name as the token.', 'Geist Serif para títulos, Geist Sans para lectura y JetBrains Mono para código. Cada fila es un estilo de texto de Figma con el mismo nombre del token.'],
   'Estilos de texto': ['Text styles', 'Estilos de texto'],
   'Estilos': ['Styles', 'Estilos'],
   'Tamanho e entrelinha em px; o tracking vai em %.': ['Size and line height in px; tracking is in %.', 'Tamaño e interlineado en px; el tracking va en %.'],

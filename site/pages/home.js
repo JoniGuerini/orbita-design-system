@@ -204,7 +204,7 @@ const previews = {
       ${swatchRow('neutral', STEPS)}
       <div class="pv-colors__row">${['red', 'amber', 'green', 'teal', 'blue', 'violet', 'pink', 'clay'].map((p) => `<span style="background:var(--ds-color-${p}-400)"></span>`).join('')}</div>
     </div>`,
-  '/fundamentos/tipografia': () => `<div class="pv pv-type"><span class="pv-type__aa">Aa</span><span class="pv-type__meta">Inter Tight<br>Inter</span></div>`,
+  '/fundamentos/tipografia': () => `<div class="pv pv-type"><span class="pv-type__aa">Aa</span><span class="pv-type__meta">Geist Serif<br>Geist Sans</span></div>`,
   '/fundamentos/icones': () => `<div class="pv pv-icons">${['home', 'search', 'palette', 'layers', 'bell', 'star', 'calendar', 'settings'].map((n) => icon(n, { size: 22 })).join('')}</div>`,
   '/fundamentos/espacamento': () => `<div class="pv pv-space">${['050', '100', '200', '300', '400', '600', '800'].map((s) => `<span style="width:var(--ds-space-${s})"></span>`).join('')}</div>`,
   '/fundamentos/raios': () => `<div class="pv pv-radius">${['xs', 'md', 'xl', 'full'].map((r) => `<span style="border-radius:var(--ds-radius-${r})"></span>`).join('')}</div>`,

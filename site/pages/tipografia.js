@@ -12,7 +12,7 @@ export const styles = 'site/pages/tipografia.css';
 
 const COPY = T(
   {
-    lead: (n) => `Inter Tight dá voz aos títulos, Inter cuida da leitura e JetBrains Mono, do código. ${n} estilos prontos cobrem do herói ao menor rótulo.`,
+    lead: (n) => `Geist Serif dá voz aos títulos, Geist Sans cuida da leitura e JetBrains Mono, do código. ${n} estilos prontos cobrem do herói ao menor rótulo.`,
     stats: ['famílias', 'pesos', 'estilos de texto', 'tamanho base'],
     onThisPage: 'Nesta página',
     nav: ['Famílias', 'Escala', 'Hierarquia', 'Pesos e tracking', 'Uso'],
@@ -20,8 +20,8 @@ const COPY = T(
       title: 'Famílias',
       desc: 'Três famílias, cada uma com um trabalho. Nunca misture duas no mesmo papel.',
       roles: [
-        ['Títulos e números', 'Desenho mais estreito, tracking negativo nos tamanhos grandes.'],
-        ['Leitura e interface', 'Feita para tela: legível de 12 a 18 px, com eixo óptico.'],
+        ['Títulos e números', 'Serifa de alto contraste, num peso só (Regular): dá o tom editorial aos títulos.'],
+        ['Leitura e interface', 'Sem serifa, feita para tela: legível de 12 a 18 px, em pesos de 100 a 900.'],
         ['Código e tokens', 'Caracteres distintos (0/O, 1/l) e largura fixa.'],
       ],
     },
@@ -46,7 +46,7 @@ const COPY = T(
     },
   },
   {
-    lead: (n) => `Inter Tight gives headings their voice, Inter handles reading, and JetBrains Mono, code. ${n} ready-made styles cover everything from the hero to the smallest label.`,
+    lead: (n) => `Geist Serif gives headings their voice, Geist Sans handles reading, and JetBrains Mono, code. ${n} ready-made styles cover everything from the hero to the smallest label.`,
     stats: ['families', 'weights', 'text styles', 'base size'],
     onThisPage: 'On this page',
     nav: ['Families', 'Scale', 'Hierarchy', 'Weights and tracking', 'Usage'],
@@ -54,8 +54,8 @@ const COPY = T(
       title: 'Families',
       desc: 'Three families, each with one job. Never mix two in the same role.',
       roles: [
-        ['Headings and numbers', 'A narrower design, with negative tracking at large sizes.'],
-        ['Reading and interface', 'Made for screens: legible from 12 to 18 px, with an optical size axis.'],
+        ['Headings and numbers', 'A high-contrast serif in a single weight (Regular): it gives headings an editorial tone.'],
+        ['Reading and interface', 'A sans made for screens: legible from 12 to 18 px, in weights from 100 to 900.'],
         ['Code and tokens', 'Distinct characters (0/O, 1/l) and fixed width.'],
       ],
     },
@@ -80,7 +80,7 @@ const COPY = T(
     },
   },
   {
-    lead: (n) => `Inter Tight da voz a los títulos, Inter se ocupa de la lectura y JetBrains Mono, del código. ${n} estilos listos cubren desde el héroe hasta la etiqueta más pequeña.`,
+    lead: (n) => `Geist Serif da voz a los títulos, Geist Sans se ocupa de la lectura y JetBrains Mono, del código. ${n} estilos listos cubren desde el héroe hasta la etiqueta más pequeña.`,
     stats: ['familias', 'pesos', 'estilos de texto', 'tamaño base'],
     onThisPage: 'En esta página',
     nav: ['Familias', 'Escala', 'Jerarquía', 'Pesos y tracking', 'Uso'],
@@ -88,8 +88,8 @@ const COPY = T(
       title: 'Familias',
       desc: 'Tres familias, cada una con un trabajo. Nunca mezcles dos en el mismo papel.',
       roles: [
-        ['Títulos y números', 'Un diseño más estrecho, con tracking negativo en los tamaños grandes.'],
-        ['Lectura e interfaz', 'Hecha para pantalla: legible de 12 a 18 px, con eje óptico.'],
+        ['Títulos y números', 'Serifa de alto contraste, en un solo peso (Regular): da el tono editorial a los títulos.'],
+        ['Lectura e interfaz', 'Sin serifa, hecha para pantalla: legible de 12 a 18 px, en pesos de 100 a 900.'],
         ['Código y tokens', 'Caracteres distintos (0/O, 1/l) y ancho fijo.'],
       ],
     },
@@ -124,8 +124,8 @@ const weightOf = (w) => Number(byName.get(`font.weight.${w}`)?.css ?? 400);
 const short = (t) => t.name.replace(/^text\./, '');
 
 const FAMILIES = [
-  { id: 'display', name: 'Inter Tight', weight: 600, weights: [500, 600, 700, 800] },
-  { id: 'sans', name: 'Inter', weight: 400, weights: [400, 500, 600, 700] },
+  { id: 'display', name: 'Geist Serif', weight: 400, weights: [400] },
+  { id: 'sans', name: 'Geist Sans', weight: 400, weights: [400, 500, 600, 700] },
   { id: 'mono', name: 'JetBrains Mono', weight: 400, weights: [400, 500, 600] },
 ];
 

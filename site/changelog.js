@@ -68,6 +68,16 @@ const RELEASES = [
         ],
       },
       {
+        name: T('Tipografia', 'Typography', 'Tipografía'),
+        items: [
+          ['novo', T(
+            'Geist Serif nos títulos e Geist Sans no texto, no lugar de Inter Tight e Inter. A serifa só tem o peso Regular, então os títulos ficaram em peso normal',
+            'Geist Serif for headings and Geist Sans for text, replacing Inter Tight and Inter. The serif only comes in Regular, so headings are now normal weight',
+            'Geist Serif en los títulos y Geist Sans en el texto, en lugar de Inter Tight e Inter. La serifa solo tiene el peso Regular, así que los títulos quedaron en peso normal',
+          ), '/fundamentos/tipografia'],
+        ],
+      },
+      {
         name: T('App shell', 'App shell', 'App shell'),
         items: [
           ['novo', T(

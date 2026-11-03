@@ -56,7 +56,7 @@ RULES.push(
 
 // iguais nas três línguas: nomes próprios, siglas, termos que o produto usa como estão
 [
-  'Lume', 'Figma', 'Pro', 'Inter', 'Inter Tight', 'JetBrains Mono', 'Semi Bold', 'Regular', 'Medium', 'Bold', 'KB', 'MB', 'XS', 'M', '2xl', '3xl',
+  'Lume', 'Figma', 'Pro', 'Inter', 'Inter Tight', 'Geist', 'Geist Serif', 'JetBrains Mono', 'Semi Bold', 'Regular', 'Medium', 'Bold', 'KB', 'MB', 'XS', 'M', '2xl', '3xl',
   'Hover', 'Ghost', 'Breadcrumb', 'App shell', 'Sidebar', 'Topbar', 'Avatar', 'Online', 'Offline', 'Design', 'Interface', 'Feedback', 'Composer', 'Placeholder', 'Layout',
   'Breakpoints', 'Toast', 'Tooltip', 'Badge', 'Chip', 'Chips', 'Switch', 'Modal', 'Menu', 'Checkbox', 'Radio', 'Status', 'Heatmap', 'Sparkline', 'Pix', 'Tags',
   'AS', 'BL', 'CM', 'DR', 'PG', 'LM', 'RS', 'TP', 'JV', 'AM', 'JS', 'CSS', 'HTML', 'OKLCH', 'SVG', 'PDF', 'CSV', 'URL', 'API', 'WCAG', 'Esc', 'Enter', 'Tab', 'Shift',

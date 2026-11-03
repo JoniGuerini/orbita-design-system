@@ -74,7 +74,7 @@ defineBlock({
   order: 2,
   group: 'Fundamentos',
   title: 'Tipografia',
-  description: 'Inter Tight para títulos, Inter para leitura e JetBrains Mono para código. Cada linha é um estilo de texto do Figma com o mesmo nome do token.',
+  description: 'Geist Serif para títulos, Geist Sans para leitura e JetBrains Mono para código. Cada linha é um estilo de texto do Figma com o mesmo nome do token.',
   tags: ['Estilos de texto'],
   build: async function () {
     return {
