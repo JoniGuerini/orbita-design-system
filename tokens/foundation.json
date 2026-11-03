@@ -20,7 +20,7 @@
   "layout": {
     "$type": "dimension",
     "$unit": "px",
-    "sidebar": 288, "sidebar-collapsed": 76, "topbar": 64, "frame-gap": 8,
+    "sidebar": 288, "sidebar-collapsed": 76, "topbar": 64, "frame-gap": 10,
     "content-max": 1160, "prose-max": 720, "gutter": 40
   },
   "breakpoint": {

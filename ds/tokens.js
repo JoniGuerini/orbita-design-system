@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T14:01:39.123Z",
+  "generatedAt": "2026-11-03T14:02:48.344Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -1929,8 +1929,8 @@ const data = {
       "type": "dimension",
       "source": "foundation.json",
       "themed": false,
-      "px": 8,
-      "css": "8px"
+      "px": 10,
+      "css": "10px"
     },
     {
       "name": "layout.content-max",
