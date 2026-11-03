@@ -4,6 +4,7 @@ import { mountDocNav } from '../doc-nav.js';
 import { playgroundMarkup, mountPlayground, mountCodeCopy, codeBlock, tokenTable, a11yList } from '../component-doc.js';
 import { weekdays, hours, ordersByHour, yearActivity, YEAR_START } from '../chart-data.js';
 import { L } from '../i18n.js';
+import { THEME_IDS, themeLabel, themeIcon } from '../themes.js';
 
 export const styles = ['site/component-doc.css', 'site/pages/graficos-heatmap.css'];
 
@@ -88,7 +89,7 @@ function scalePanel(theme) {
     `<span class="gh-step${used ? '' : ' gh-step--off'}"><span class="gh-step__chip" style="background:var(--ds-color-chart-${token})"></span><span class="gh-step__label">${label}</span></span>`;
   const empty = L('vazio', 'empty', 'vacío');
   return `<div class="gh-scales__panel" data-theme="${theme}">
-    <p class="gh-scales__theme">${icon({ dark: 'moon', light: 'sun', refugio: 'cabin' }[theme], { size: 16 })}${{ dark: L('Escuro', 'Dark', 'Oscuro'), light: L('Claro', 'Light', 'Claro'), refugio: 'Refúgio' }[theme]}</p>
+    <p class="gh-scales__theme">${icon(themeIcon(theme), { size: 16 })}${themeLabel(theme)}</p>
     <div class="gh-scales__row">
       <p class="gh-scales__name">${L('Sequencial · 7 faixas', 'Sequential · 7 bands', 'Secuencial · 7 rangos')}</p>
       <div class="gh-steps">${swatch('grid', empty)}${SEQ.map((n) => swatch(`seq-${n}`, n)).join('')}</div>
@@ -228,7 +229,7 @@ export default function renderHeatmap(page) {
       'escalas',
       L('Escala e faixas', 'Scale and bands', 'Escala y rangos'),
       L('O valor vira uma faixa de cor, não um tom contínuo — faixas o olho consegue comparar. No escuro, a âncora inverte: mais é mais claro.', 'The value becomes a color band, not a continuous tone — bands are something the eye can compare. In dark mode, the anchor flips: more is lighter.', 'El valor se vuelve un rango de color, no un tono continuo — los rangos el ojo los puede comparar. En el oscuro, el ancla se invierte: más es más claro.'),
-      `<div class="gh-scales">${scalePanel('refugio')}${scalePanel('dark')}${scalePanel('light')}</div>
+      `<div class="gh-scales">${THEME_IDS.map(scalePanel).join('')}</div>
       <ul class="gh-notes" role="list">
         <li>${icon('layers', { size: 18 })}<div><p class="gh-notes__title">${L('Faixas iguais', 'Equal bands', 'Rangos iguales')}</p><p class="gh-notes__text">${L('O intervalo entre o mínimo e o máximo é dividido em partes iguais. Com 5 faixas, usamos os passos 1, 2, 4, 6 e 7, para cobrir toda a rampa.', 'The range between minimum and maximum is split into equal parts. With 5 bands, we use steps 1, 2, 4, 6, and 7, to cover the whole ramp.', 'El intervalo entre el mínimo y el máximo se divide en partes iguales. Con 5 rangos, usamos los pasos 1, 2, 4, 6 y 7, para cubrir toda la rampa.')}</p></div></li>
         <li>${icon('minus', { size: 18 })}<div><p class="gh-notes__title">${L('Vazio não é zero', 'Empty isn’t zero', 'Vacío no es cero')}</p><p class="gh-notes__text">${L('Célula sem dado (e o zero, na sequencial) usa a cor da grade — fica claro que ali não há nada, e não “pouco”.', 'A cell with no data (and zero, on the sequential scale) uses the grid color — it’s clear there’s nothing there, not “a little”.', 'Una celda sin dato (y el cero, en la secuencial) usa el color de la cuadrícula — queda claro que ahí no hay nada, y no “poco”.')}</p></div></li>
@@ -244,7 +245,7 @@ export default function renderHeatmap(page) {
         [L('Tabela sempre à mão', 'A table always at hand', 'Tabla siempre a mano'), L('O botão de tabela troca o mapa pelos números: linhas × colunas na matriz e um resumo por mês no calendário — 365 linhas não ajudam ninguém.', 'The table button swaps the map for the numbers: rows × columns in the matrix and a monthly summary in the calendar — 365 rows help no one.', 'El botón de tabla cambia el mapa por los números: filas × columnas en la matriz y un resumen por mes en el calendario — 365 filas no ayudan a nadie.')],
         [L('Teclado em duas direções', 'Keyboard in two directions', 'Teclado en dos direcciones'), L('Tab foca o mapa; as setas andam entre as células, Home e End vão ao começo e ao fim da linha, Esc fecha o tooltip. No calendário, ← e → pulam semanas e ↑ e ↓ andam dias.', 'Tab focuses the map; the arrows move between cells, Home and End go to the start and end of the row, Esc closes the tooltip. In the calendar, ← and → jump weeks and ↑ and ↓ move days.', 'Tab enfoca el mapa; las flechas se mueven entre las celdas, Home y End van al principio y al final de la fila, Esc cierra el tooltip. En el calendario, ← y → saltan semanas y ↑ y ↓ avanzan días.'), ['←', '↑', '↓', '→', 'Home', 'End']],
         [L('Leitor de tela', 'Screen reader', 'Lector de pantalla'), L('O mapa é anunciado com o tamanho da grade; cada célula visitada pelo teclado é lida com linha, coluna e valor.', 'The map is announced with the grid size; each cell visited by keyboard is read with row, column, and value.', 'El mapa se anuncia con el tamaño de la cuadrícula; cada celda visitada con el teclado se lee con fila, columna y valor.')],
-        [L('Contorno no hover', 'Outline on hover', 'Contorno con hover'), L('A célula ativa ganha um anel de 1,5 px na cor do texto, visível sobre qualquer faixa, nos quatro temas.', 'The active cell gets a 1.5 px ring in the text color, visible over any band, in all four themes.', 'La celda activa recibe un anillo de 1,5 px del color del texto, visible sobre cualquier rango, en los cuatro temas.')],
+        [L('Contorno no hover', 'Outline on hover', 'Contorno con hover'), L('A célula ativa ganha um anel de 1,5 px na cor do texto, visível sobre qualquer faixa, nos três temas.', 'The active cell gets a 1.5 px ring in the text color, visible over any band, in all three themes.', 'La celda activa recibe un anillo de 1,5 px del color del texto, visible sobre cualquier rango, en los tres temas.')],
         [L('Faixas contáveis', 'Countable bands', 'Rangos contables'), L('No máximo 7 cores com significado. Acima disso, vizinhas se confundem — use uma tabela.', 'At most 7 meaningful colors. Beyond that, neighbors get confused — use a table.', 'Como máximo 7 colores con significado. Por encima de eso, los vecinos se confunden — usa una tabla.')],
         [L('Ponta clara permitida', 'A faint end is allowed', 'Extremo claro permitido'), L('Na sequencial, o passo mais fraco pode quase sumir na superfície: ele quer dizer “perto de zero”. O valor exato continua no tooltip e na tabela.', 'On the sequential scale, the faintest step can nearly vanish into the surface: it means “close to zero”. The exact value stays in the tooltip and the table.', 'En la secuencial, el paso más débil puede casi desaparecer en la superficie: quiere decir “cerca de cero”. El valor exacto sigue en el tooltip y en la tabla.')],
       ]),

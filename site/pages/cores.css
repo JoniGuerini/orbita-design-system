@@ -176,11 +176,11 @@
 
 .token-table,
 .contrast-table {
-  --doc-table-cols: minmax(0, 1.2fr) repeat(4, minmax(0, 1fr)) 44px;
+  --doc-table-cols: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)) 44px;
 }
 
 .contrast-table {
-  --doc-table-cols: minmax(0, 1.2fr) repeat(4, minmax(0, 1fr)) 64px;
+  --doc-table-cols: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)) 64px;
 }
 
 .token-name {

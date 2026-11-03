@@ -1,12 +1,11 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T21:44:38.041Z",
+  "generatedAt": "2026-11-03T21:51:20.074Z",
   "prefix": "ds",
   "modes": [
     "light",
     "dark",
-    "orange",
-    "orange-dark"
+    "orange"
   ],
   "defaultMode": "light",
   "palettes": [
@@ -2550,10 +2549,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.100}",
           "value": "#f3ede5"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.975}",
-          "value": "#0f0e0c"
         }
       }
     },
@@ -2576,10 +2571,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.50}",
           "value": "#f9f5f1"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.925}",
-          "value": "#1d1b18"
         }
       }
     },
@@ -2601,10 +2592,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.25}",
           "value": "#fefaf7"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.900}",
-          "value": "#24221f"
         }
       }
     },
@@ -2627,10 +2614,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.25}",
           "value": "#fefaf7"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.900}",
-          "value": "#24221f"
         }
       }
     },
@@ -2653,10 +2636,6 @@ const data = {
         "orange": {
           "ref": "{color.white}",
           "value": "#ffffff"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.850}",
-          "value": "#2c2a27"
         }
       }
     },
@@ -2679,10 +2658,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.100}",
           "value": "#f3ede5"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.950}",
-          "value": "#151412"
         }
       }
     },
@@ -2704,10 +2679,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.200}",
           "value": "#e5ded7"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.750}",
-          "value": "#3d3b38"
         }
       }
     },
@@ -2730,10 +2701,6 @@ const data = {
         "orange": {
           "ref": "{color.white}",
           "value": "#ffffff"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.850}",
-          "value": "#2c2a27"
         }
       }
     },
@@ -2755,10 +2722,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.50}",
           "value": "#f9f5f1"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.800}",
-          "value": "#33312e"
         }
       }
     },
@@ -2780,10 +2743,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.950}",
           "value": "#151412"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.100}",
-          "value": "#f3ede5"
         }
       }
     },
@@ -2805,10 +2764,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.045)",
           "value": "#0f0e0c0b"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.05)",
-          "value": "#ffffff0d"
         }
       }
     },
@@ -2830,10 +2785,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.08)",
           "value": "#0f0e0c14"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.08)",
-          "value": "#ffffff14"
         }
       }
     },
@@ -2855,10 +2806,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.06)",
           "value": "#0f0e0c0f"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.07)",
-          "value": "#ffffff12"
         }
       }
     },
@@ -2880,10 +2827,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.32)",
           "value": "#0f0e0c52"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.black}, 0.6)",
-          "value": "#00000099"
         }
       }
     },
@@ -2905,10 +2848,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.975}",
           "value": "#0f0e0c"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.100}",
-          "value": "#f3ede5"
         }
       }
     },
@@ -2930,10 +2869,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.650}",
           "value": "#55524f"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.300}",
-          "value": "#cec8c1"
         }
       }
     },
@@ -2943,7 +2878,7 @@ const data = {
       "type": "color",
       "source": "semantic.json",
       "themed": true,
-      "description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos quatro temas.",
+      "description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos três temas.",
       "modes": {
         "light": {
           "ref": "{color.refugio.550}",
@@ -2956,10 +2891,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.550}",
           "value": "#6d6a66"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.400}",
-          "value": "#9c9792"
         }
       }
     },
@@ -2981,10 +2912,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.400}",
           "value": "#9c9792"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.600}",
-          "value": "#605d59"
         }
       }
     },
@@ -3006,10 +2933,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.50}",
           "value": "#f9f5f1"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.975}",
-          "value": "#0f0e0c"
         }
       }
     },
@@ -3031,10 +2954,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.400}",
-          "value": "#ff945e"
         }
       }
     },
@@ -3056,10 +2975,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.300}",
-          "value": "#ffb590"
         }
       }
     },
@@ -3081,10 +2996,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.800}",
           "value": "#923700"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.200}",
-          "value": "#ffd1ba"
         }
       }
     },
@@ -3106,10 +3017,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.07)",
           "value": "#0f0e0c12"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.06)",
-          "value": "#ffffff0f"
         }
       }
     },
@@ -3131,10 +3038,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.11)",
           "value": "#0f0e0c1c"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.1)",
-          "value": "#ffffff1a"
         }
       }
     },
@@ -3156,10 +3059,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.18)",
           "value": "#0f0e0c2e"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.16)",
-          "value": "#ffffff29"
         }
       }
     },
@@ -3182,10 +3081,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.15)",
           "value": "#0f0e0c26"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.13)",
-          "value": "#ffffff21"
         }
       }
     },
@@ -3208,10 +3103,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.48)",
           "value": "#0f0e0c7a"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.38)",
-          "value": "#ffffff61"
         }
       }
     },
@@ -3234,10 +3125,6 @@ const data = {
         "orange": {
           "ref": "alpha({color.neutral.975}, 0.62)",
           "value": "#0f0e0c9e"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.white}, 0.52)",
-          "value": "#ffffff85"
         }
       }
     },
@@ -3259,10 +3146,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.400}",
-          "value": "#ff945e"
         }
       }
     },
@@ -3284,10 +3167,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.400}",
-          "value": "#ff945e"
         }
       }
     },
@@ -3309,10 +3188,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.400}",
           "value": "#ff945e"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.300}",
-          "value": "#ffb590"
         }
       }
     },
@@ -3334,10 +3209,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.500}",
-          "value": "#f57630"
         }
       }
     },
@@ -3359,10 +3230,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.50}",
           "value": "#fff4ef"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.brand.400}, 0.14)",
-          "value": "#ff945e24"
         }
       }
     },
@@ -3384,10 +3251,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.100}",
           "value": "#ffe7db"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.brand.400}, 0.2)",
-          "value": "#ff945e33"
         }
       }
     },
@@ -3409,10 +3272,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.300}",
-          "value": "#ffb590"
         }
       }
     },
@@ -3434,10 +3293,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.200}",
           "value": "#ffd1ba"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.brand.400}, 0.32)",
-          "value": "#ff945e52"
         }
       }
     },
@@ -3457,10 +3312,6 @@ const data = {
           "value": "#1d2734"
         },
         "orange": {
-          "ref": "{color.brand.950}",
-          "value": "#451400"
-        },
-        "orange-dark": {
           "ref": "{color.brand.950}",
           "value": "#451400"
         }
@@ -3485,10 +3336,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.500}",
-          "value": "#f57630"
         }
       }
     },
@@ -3510,10 +3357,6 @@ const data = {
         "orange": {
           "ref": "{color.green.700}",
           "value": "#1e854a"
-        },
-        "orange-dark": {
-          "ref": "{color.green.400}",
-          "value": "#72cb8b"
         }
       }
     },
@@ -3535,10 +3378,6 @@ const data = {
         "orange": {
           "ref": "{color.green.800}",
           "value": "#0f6939"
-        },
-        "orange-dark": {
-          "ref": "{color.green.300}",
-          "value": "#97dca8"
         }
       }
     },
@@ -3560,10 +3399,6 @@ const data = {
         "orange": {
           "ref": "{color.green.50}",
           "value": "#effaf1"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.green.400}, 0.13)",
-          "value": "#72cb8b21"
         }
       }
     },
@@ -3585,10 +3420,6 @@ const data = {
         "orange": {
           "ref": "{color.green.800}",
           "value": "#0f6939"
-        },
-        "orange-dark": {
-          "ref": "{color.green.300}",
-          "value": "#97dca8"
         }
       }
     },
@@ -3610,10 +3441,6 @@ const data = {
         "orange": {
           "ref": "{color.green.200}",
           "value": "#bdeac6"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.green.400}, 0.3)",
-          "value": "#72cb8b4d"
         }
       }
     },
@@ -3635,10 +3462,6 @@ const data = {
         "orange": {
           "ref": "{color.white}",
           "value": "#ffffff"
-        },
-        "orange-dark": {
-          "ref": "{color.green.950}",
-          "value": "#003016"
         }
       }
     },
@@ -3658,10 +3481,6 @@ const data = {
           "value": "#ffb851"
         },
         "orange": {
-          "ref": "{color.amber.400}",
-          "value": "#ffb851"
-        },
-        "orange-dark": {
           "ref": "{color.amber.400}",
           "value": "#ffb851"
         }
@@ -3685,10 +3504,6 @@ const data = {
         "orange": {
           "ref": "{color.amber.500}",
           "value": "#f6a10c"
-        },
-        "orange-dark": {
-          "ref": "{color.amber.300}",
-          "value": "#ffce8a"
         }
       }
     },
@@ -3710,10 +3525,6 @@ const data = {
         "orange": {
           "ref": "{color.amber.50}",
           "value": "#fff9f0"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.amber.400}, 0.13)",
-          "value": "#ffb85121"
         }
       }
     },
@@ -3735,10 +3546,6 @@ const data = {
         "orange": {
           "ref": "{color.amber.800}",
           "value": "#874e00"
-        },
-        "orange-dark": {
-          "ref": "{color.amber.300}",
-          "value": "#ffce8a"
         }
       }
     },
@@ -3760,10 +3567,6 @@ const data = {
         "orange": {
           "ref": "{color.amber.200}",
           "value": "#ffe2b6"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.amber.400}, 0.3)",
-          "value": "#ffb8514d"
         }
       }
     },
@@ -3783,10 +3586,6 @@ const data = {
           "value": "#432200"
         },
         "orange": {
-          "ref": "{color.amber.950}",
-          "value": "#432200"
-        },
-        "orange-dark": {
           "ref": "{color.amber.950}",
           "value": "#432200"
         }
@@ -3810,10 +3609,6 @@ const data = {
         "orange": {
           "ref": "{color.red.700}",
           "value": "#c13834"
-        },
-        "orange-dark": {
-          "ref": "{color.red.400}",
-          "value": "#ff9087"
         }
       }
     },
@@ -3835,10 +3630,6 @@ const data = {
         "orange": {
           "ref": "{color.red.800}",
           "value": "#9b2825"
-        },
-        "orange-dark": {
-          "ref": "{color.red.300}",
-          "value": "#ffb2aa"
         }
       }
     },
@@ -3860,10 +3651,6 @@ const data = {
         "orange": {
           "ref": "{color.red.50}",
           "value": "#fff4f3"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.red.400}, 0.13)",
-          "value": "#ff908721"
         }
       }
     },
@@ -3885,10 +3672,6 @@ const data = {
         "orange": {
           "ref": "{color.red.700}",
           "value": "#c13834"
-        },
-        "orange-dark": {
-          "ref": "{color.red.300}",
-          "value": "#ffb2aa"
         }
       }
     },
@@ -3910,10 +3693,6 @@ const data = {
         "orange": {
           "ref": "{color.red.200}",
           "value": "#ffcfca"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.red.400}, 0.3)",
-          "value": "#ff90874d"
         }
       }
     },
@@ -3935,10 +3714,6 @@ const data = {
         "orange": {
           "ref": "{color.white}",
           "value": "#ffffff"
-        },
-        "orange-dark": {
-          "ref": "{color.red.950}",
-          "value": "#4c0808"
         }
       }
     },
@@ -3960,10 +3735,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.700}",
           "value": "#1776b5"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.400}",
-          "value": "#6abcff"
         }
       }
     },
@@ -3985,10 +3756,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.800}",
           "value": "#095c92"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.300}",
-          "value": "#98d0ff"
         }
       }
     },
@@ -4010,10 +3777,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.50}",
           "value": "#f0f8ff"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.blue.400}, 0.13)",
-          "value": "#6abcff21"
         }
       }
     },
@@ -4035,10 +3798,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.700}",
           "value": "#1776b5"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.300}",
-          "value": "#98d0ff"
         }
       }
     },
@@ -4060,10 +3819,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.200}",
           "value": "#bfe1ff"
-        },
-        "orange-dark": {
-          "ref": "alpha({color.blue.400}, 0.3)",
-          "value": "#6abcff4d"
         }
       }
     },
@@ -4085,10 +3840,6 @@ const data = {
         "orange": {
           "ref": "{color.white}",
           "value": "#ffffff"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.950}",
-          "value": "#002945"
         }
       }
     },
@@ -4108,10 +3859,6 @@ const data = {
           "value": "#d95c0a"
         },
         "orange": {
-          "ref": "{color.brand.600}",
-          "value": "#d95c0a"
-        },
-        "orange-dark": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
         }
@@ -4135,10 +3882,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.600}",
           "value": "#2a8ed6"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.600}",
-          "value": "#2a8ed6"
         }
       }
     },
@@ -4158,10 +3901,6 @@ const data = {
           "value": "#cd5892"
         },
         "orange": {
-          "ref": "{color.pink.600}",
-          "value": "#cd5892"
-        },
-        "orange-dark": {
           "ref": "{color.pink.600}",
           "value": "#cd5892"
         }
@@ -4185,10 +3924,6 @@ const data = {
         "orange": {
           "ref": "{color.amber.700}",
           "value": "#a86600"
-        },
-        "orange-dark": {
-          "ref": "{color.amber.700}",
-          "value": "#a86600"
         }
       }
     },
@@ -4208,10 +3943,6 @@ const data = {
           "value": "#019d90"
         },
         "orange": {
-          "ref": "{color.teal.600}",
-          "value": "#019d90"
-        },
-        "orange-dark": {
           "ref": "{color.teal.600}",
           "value": "#019d90"
         }
@@ -4235,10 +3966,6 @@ const data = {
         "orange": {
           "ref": "{color.red.600}",
           "value": "#e44b46"
-        },
-        "orange-dark": {
-          "ref": "{color.red.600}",
-          "value": "#e44b46"
         }
       }
     },
@@ -4260,10 +3987,6 @@ const data = {
         "orange": {
           "ref": "{color.violet.600}",
           "value": "#9070dd"
-        },
-        "orange-dark": {
-          "ref": "{color.violet.600}",
-          "value": "#9070dd"
         }
       }
     },
@@ -4283,10 +4006,6 @@ const data = {
           "value": "#339f5c"
         },
         "orange": {
-          "ref": "{color.green.600}",
-          "value": "#339f5c"
-        },
-        "orange-dark": {
           "ref": "{color.green.600}",
           "value": "#339f5c"
         }
@@ -4311,10 +4030,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.300}",
           "value": "#cec8c1"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.700}",
-          "value": "#4a4744"
         }
       }
     },
@@ -4337,10 +4052,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.400}",
           "value": "#9c9792"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.600}",
-          "value": "#605d59"
         }
       }
     },
@@ -4362,10 +4073,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.100}",
           "value": "#ffe7db"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.900}",
-          "value": "#712800"
         }
       }
     },
@@ -4387,10 +4094,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.300}",
           "value": "#ffb590"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.800}",
-          "value": "#923700"
         }
       }
     },
@@ -4412,10 +4115,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.400}",
           "value": "#ff945e"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.700}",
-          "value": "#b74900"
         }
       }
     },
@@ -4437,10 +4136,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.600}",
-          "value": "#d95c0a"
         }
       }
     },
@@ -4462,10 +4157,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.500}",
-          "value": "#f57630"
         }
       }
     },
@@ -4487,10 +4178,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.400}",
-          "value": "#ff945e"
         }
       }
     },
@@ -4512,10 +4199,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.800}",
           "value": "#923700"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.300}",
-          "value": "#ffb590"
         }
       }
     },
@@ -4537,10 +4220,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.400}",
           "value": "#ff945e"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.800}",
-          "value": "#923700"
         }
       }
     },
@@ -4562,10 +4241,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.700}",
-          "value": "#b74900"
         }
       }
     },
@@ -4585,10 +4260,6 @@ const data = {
           "value": "#d95c0a"
         },
         "orange": {
-          "ref": "{color.brand.600}",
-          "value": "#d95c0a"
-        },
-        "orange-dark": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
         }
@@ -4612,10 +4283,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.500}",
-          "value": "#f57630"
         }
       }
     },
@@ -4637,10 +4304,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.800}",
           "value": "#923700"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.400}",
-          "value": "#ff945e"
         }
       }
     },
@@ -4662,10 +4325,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.700}",
           "value": "#1776b5"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.400}",
-          "value": "#6abcff"
         }
       }
     },
@@ -4687,10 +4346,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.500}",
           "value": "#48a7f1"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.600}",
-          "value": "#2a8ed6"
         }
       }
     },
@@ -4712,10 +4367,6 @@ const data = {
         "orange": {
           "ref": "{color.blue.300}",
           "value": "#98d0ff"
-        },
-        "orange-dark": {
-          "ref": "{color.blue.800}",
-          "value": "#095c92"
         }
       }
     },
@@ -4737,10 +4388,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.200}",
           "value": "#e5ded7"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.750}",
-          "value": "#3d3b38"
         }
       }
     },
@@ -4762,10 +4409,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.300}",
           "value": "#ffb590"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.800}",
-          "value": "#923700"
         }
       }
     },
@@ -4787,10 +4430,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.600}",
-          "value": "#d95c0a"
         }
       }
     },
@@ -4812,10 +4451,6 @@ const data = {
         "orange": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
-        },
-        "orange-dark": {
-          "ref": "{color.brand.400}",
-          "value": "#ff945e"
         }
       }
     },
@@ -4837,10 +4472,6 @@ const data = {
         "orange": {
           "ref": "{color.green.600}",
           "value": "#339f5c"
-        },
-        "orange-dark": {
-          "ref": "{color.green.500}",
-          "value": "#51b873"
         }
       }
     },
@@ -4862,10 +4493,6 @@ const data = {
         "orange": {
           "ref": "{color.amber.500}",
           "value": "#f6a10c"
-        },
-        "orange-dark": {
-          "ref": "{color.amber.400}",
-          "value": "#ffb851"
         }
       }
     },
@@ -4885,10 +4512,6 @@ const data = {
           "value": "#e44b46"
         },
         "orange": {
-          "ref": "{color.red.600}",
-          "value": "#e44b46"
-        },
-        "orange-dark": {
           "ref": "{color.red.600}",
           "value": "#e44b46"
         }
@@ -4913,10 +4536,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.200}",
           "value": "#e5ded7"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.800}",
-          "value": "#33312e"
         }
       }
     },
@@ -4939,10 +4558,6 @@ const data = {
         "orange": {
           "ref": "{color.neutral.300}",
           "value": "#cec8c1"
-        },
-        "orange-dark": {
-          "ref": "{color.neutral.700}",
-          "value": "#4a4744"
         }
       }
     },
@@ -4955,8 +4570,7 @@ const data = {
       "modes": {
         "light": "0 1px 2px 0 rgb(45 58 74 / 0.06)",
         "dark": "0 1px 2px 0 rgb(0 0 0 / 0.32)",
-        "orange": "0 1px 2px 0 rgb(56 40 24 / 0.06)",
-        "orange-dark": "0 1px 2px 0 rgb(0 0 0 / 0.32)"
+        "orange": "0 1px 2px 0 rgb(56 40 24 / 0.06)"
       }
     },
     {
@@ -4968,8 +4582,7 @@ const data = {
       "modes": {
         "light": "0 1px 2px 0 rgb(45 58 74 / 0.06), 0 2px 6px -1px rgb(45 58 74 / 0.06)",
         "dark": "0 1px 2px 0 rgb(0 0 0 / 0.3), 0 2px 6px -1px rgb(0 0 0 / 0.24)",
-        "orange": "0 1px 2px 0 rgb(56 40 24 / 0.06), 0 2px 6px -1px rgb(56 40 24 / 0.06)",
-        "orange-dark": "0 1px 2px 0 rgb(0 0 0 / 0.3), 0 2px 6px -1px rgb(0 0 0 / 0.24)"
+        "orange": "0 1px 2px 0 rgb(56 40 24 / 0.06), 0 2px 6px -1px rgb(56 40 24 / 0.06)"
       }
     },
     {
@@ -4981,8 +4594,7 @@ const data = {
       "modes": {
         "light": "0 2px 4px -1px rgb(45 58 74 / 0.06), 0 8px 20px -4px rgb(45 58 74 / 0.1)",
         "dark": "0 2px 4px -1px rgb(0 0 0 / 0.28), 0 8px 20px -4px rgb(0 0 0 / 0.36)",
-        "orange": "0 2px 4px -1px rgb(56 40 24 / 0.06), 0 8px 20px -4px rgb(56 40 24 / 0.1)",
-        "orange-dark": "0 2px 4px -1px rgb(0 0 0 / 0.28), 0 8px 20px -4px rgb(0 0 0 / 0.36)"
+        "orange": "0 2px 4px -1px rgb(56 40 24 / 0.06), 0 8px 20px -4px rgb(56 40 24 / 0.1)"
       }
     },
     {
@@ -4994,8 +4606,7 @@ const data = {
       "modes": {
         "light": "0 4px 8px -2px rgb(45 58 74 / 0.07), 0 16px 36px -8px rgb(45 58 74 / 0.14)",
         "dark": "0 4px 8px -2px rgb(0 0 0 / 0.3), 0 16px 36px -8px rgb(0 0 0 / 0.5)",
-        "orange": "0 4px 8px -2px rgb(56 40 24 / 0.07), 0 16px 36px -8px rgb(56 40 24 / 0.14)",
-        "orange-dark": "0 4px 8px -2px rgb(0 0 0 / 0.3), 0 16px 36px -8px rgb(0 0 0 / 0.5)"
+        "orange": "0 4px 8px -2px rgb(56 40 24 / 0.07), 0 16px 36px -8px rgb(56 40 24 / 0.14)"
       }
     },
     {
@@ -5007,8 +4618,7 @@ const data = {
       "modes": {
         "light": "0 8px 16px -4px rgb(45 58 74 / 0.08), 0 28px 56px -12px rgb(45 58 74 / 0.18)",
         "dark": "0 8px 16px -4px rgb(0 0 0 / 0.32), 0 28px 56px -12px rgb(0 0 0 / 0.6)",
-        "orange": "0 8px 16px -4px rgb(56 40 24 / 0.08), 0 28px 56px -12px rgb(56 40 24 / 0.18)",
-        "orange-dark": "0 8px 16px -4px rgb(0 0 0 / 0.32), 0 28px 56px -12px rgb(0 0 0 / 0.6)"
+        "orange": "0 8px 16px -4px rgb(56 40 24 / 0.08), 0 28px 56px -12px rgb(56 40 24 / 0.18)"
       }
     },
     {
@@ -5020,8 +4630,7 @@ const data = {
       "modes": {
         "light": "0 12px 24px -6px rgb(45 58 74 / 0.1), 0 48px 96px -24px rgb(45 58 74 / 0.24)",
         "dark": "0 12px 24px -6px rgb(0 0 0 / 0.36), 0 48px 96px -24px rgb(0 0 0 / 0.72)",
-        "orange": "0 12px 24px -6px rgb(56 40 24 / 0.1), 0 48px 96px -24px rgb(56 40 24 / 0.24)",
-        "orange-dark": "0 12px 24px -6px rgb(0 0 0 / 0.36), 0 48px 96px -24px rgb(0 0 0 / 0.72)"
+        "orange": "0 12px 24px -6px rgb(56 40 24 / 0.1), 0 48px 96px -24px rgb(56 40 24 / 0.24)"
       }
     },
     {
@@ -5033,8 +4642,7 @@ const data = {
       "modes": {
         "light": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)",
         "dark": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)",
-        "orange": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)",
-        "orange-dark": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)"
+        "orange": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)"
       }
     }
   ],
@@ -5064,14 +4672,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.fg.default",
-      "bg": "color.bg.canvas",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 14.77,
-      "pass": true
-    },
-    {
       "fg": "color.fg.muted",
       "bg": "color.bg.canvas",
       "mode": "light",
@@ -5093,14 +4693,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 7.15,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.muted",
-      "bg": "color.bg.canvas",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 10.36,
       "pass": true
     },
     {
@@ -5128,14 +4720,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.fg.default",
-      "bg": "color.bg.sidebar",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 13.64,
-      "pass": true
-    },
-    {
       "fg": "color.fg.muted",
       "bg": "color.bg.sidebar",
       "mode": "light",
@@ -5157,14 +4741,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 7.48,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.muted",
-      "bg": "color.bg.sidebar",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 9.56,
       "pass": true
     },
     {
@@ -5192,14 +4768,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.fg.subtle",
-      "bg": "color.bg.sidebar",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 5.48,
-      "pass": true
-    },
-    {
       "fg": "color.fg.muted",
       "bg": "color.bg.raised",
       "mode": "light",
@@ -5224,14 +4792,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.fg.muted",
-      "bg": "color.bg.raised",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 8.62,
-      "pass": true
-    },
-    {
       "fg": "color.fg.link",
       "bg": "color.bg.canvas",
       "mode": "light",
@@ -5256,14 +4816,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.fg.link",
-      "bg": "color.bg.canvas",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 10.03,
-      "pass": true
-    },
-    {
       "fg": "color.fg.brand",
       "bg": "color.bg.canvas",
       "mode": "light",
@@ -5285,14 +4837,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 4.88,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.brand",
-      "bg": "color.bg.canvas",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.9,
       "pass": true
     },
     {
@@ -5320,14 +4864,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.brand.on-solid",
-      "bg": "color.brand.solid",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.13,
-      "pass": true
-    },
-    {
       "fg": "color.brand.fg",
       "bg": "color.brand.subtle",
       "mode": "light",
@@ -5349,14 +4885,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 4.9,
-      "pass": true
-    },
-    {
-      "fg": "color.brand.fg",
-      "bg": "color.brand.subtle",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.75,
       "pass": true
     },
     {
@@ -5384,14 +4912,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.fg.inverse",
-      "bg": "color.bg.inverse",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 16.59,
-      "pass": true
-    },
-    {
       "fg": "color.success.fg",
       "bg": "color.success.subtle",
       "mode": "light",
@@ -5416,14 +4936,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.success.fg",
-      "bg": "color.success.subtle",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 8.33,
-      "pass": true
-    },
-    {
       "fg": "color.success.on-solid",
       "bg": "color.success.solid",
       "mode": "light",
@@ -5445,14 +4957,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 4.66,
-      "pass": true
-    },
-    {
-      "fg": "color.success.on-solid",
-      "bg": "color.success.solid",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.41,
       "pass": true
     },
     {
@@ -5480,14 +4984,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.warning.fg",
-      "bg": "color.warning.subtle",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 8.99,
-      "pass": true
-    },
-    {
       "fg": "color.warning.on-solid",
       "bg": "color.warning.solid",
       "mode": "light",
@@ -5507,14 +5003,6 @@ const data = {
       "fg": "color.warning.on-solid",
       "bg": "color.warning.solid",
       "mode": "orange",
-      "min": 4.5,
-      "ratio": 8.33,
-      "pass": true
-    },
-    {
-      "fg": "color.warning.on-solid",
-      "bg": "color.warning.solid",
-      "mode": "orange-dark",
       "min": 4.5,
       "ratio": 8.33,
       "pass": true
@@ -5544,14 +5032,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.danger.fg",
-      "bg": "color.danger.subtle",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.93,
-      "pass": true
-    },
-    {
       "fg": "color.danger.on-solid",
       "bg": "color.danger.solid",
       "mode": "light",
@@ -5573,14 +5053,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 5.41,
-      "pass": true
-    },
-    {
-      "fg": "color.danger.on-solid",
-      "bg": "color.danger.solid",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.13,
       "pass": true
     },
     {
@@ -5608,14 +5080,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.info.fg",
-      "bg": "color.info.subtle",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 8.19,
-      "pass": true
-    },
-    {
       "fg": "color.info.on-solid",
       "bg": "color.info.solid",
       "mode": "light",
@@ -5637,14 +5101,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 4.89,
-      "pass": true
-    },
-    {
-      "fg": "color.info.on-solid",
-      "bg": "color.info.solid",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 7.31,
       "pass": true
     },
     {
@@ -5672,14 +5128,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.chart.series.1",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.14,
-      "pass": true
-    },
-    {
       "fg": "color.chart.series.2",
       "bg": "color.bg.surface",
       "mode": "light",
@@ -5701,14 +5149,6 @@ const data = {
       "mode": "orange",
       "min": 3,
       "ratio": 3.41,
-      "pass": true
-    },
-    {
-      "fg": "color.chart.series.2",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.49,
       "pass": true
     },
     {
@@ -5736,14 +5176,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.chart.series.3",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.08,
-      "pass": true
-    },
-    {
       "fg": "color.chart.series.4",
       "bg": "color.bg.surface",
       "mode": "light",
@@ -5765,14 +5197,6 @@ const data = {
       "mode": "orange",
       "min": 3,
       "ratio": 4.43,
-      "pass": true
-    },
-    {
-      "fg": "color.chart.series.4",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 3.45,
       "pass": true
     },
     {
@@ -5800,14 +5224,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.chart.series.5",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.7,
-      "pass": true
-    },
-    {
       "fg": "color.chart.series.6",
       "bg": "color.bg.surface",
       "mode": "light",
@@ -5829,14 +5245,6 @@ const data = {
       "mode": "orange",
       "min": 3,
       "ratio": 3.75,
-      "pass": true
-    },
-    {
-      "fg": "color.chart.series.6",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.07,
       "pass": true
     },
     {
@@ -5864,14 +5272,6 @@ const data = {
       "pass": true
     },
     {
-      "fg": "color.chart.series.7",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.19,
-      "pass": true
-    },
-    {
       "fg": "color.chart.series.8",
       "bg": "color.bg.surface",
       "mode": "light",
@@ -5893,14 +5293,6 @@ const data = {
       "mode": "orange",
       "min": 3,
       "ratio": 3.23,
-      "pass": true
-    },
-    {
-      "fg": "color.chart.series.8",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 4.73,
       "pass": true
     },
     {
@@ -5929,14 +5321,6 @@ const data = {
     },
     {
       "fg": "color.fg.subtle",
-      "bg": "color.bg.canvas",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 5.94,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.subtle",
       "bg": "color.bg.surface",
       "mode": "light",
       "min": 4.5,
@@ -5957,14 +5341,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 5.18,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.subtle",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 5.48,
       "pass": true
     },
     {
@@ -5993,14 +5369,6 @@ const data = {
     },
     {
       "fg": "color.fg.subtle",
-      "bg": "color.bg.raised",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 4.94,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.subtle",
       "bg": "color.bg.sunken",
       "mode": "light",
       "min": 4.5,
@@ -6021,14 +5389,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 4.63,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.subtle",
-      "bg": "color.bg.sunken",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 6.36,
       "pass": true
     },
     {
@@ -6057,14 +5417,6 @@ const data = {
     },
     {
       "fg": "color.border.field",
-      "bg": "color.bg.canvas",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 3.58,
-      "pass": true
-    },
-    {
-      "fg": "color.border.field",
       "bg": "color.bg.surface",
       "mode": "light",
       "min": 3,
@@ -6085,14 +5437,6 @@ const data = {
       "mode": "orange",
       "min": 3,
       "ratio": 3.35,
-      "pass": true
-    },
-    {
-      "fg": "color.border.field",
-      "bg": "color.bg.surface",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 3.5,
       "pass": true
     },
     {
@@ -6121,14 +5465,6 @@ const data = {
     },
     {
       "fg": "color.border.field",
-      "bg": "color.bg.raised",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 3.38,
-      "pass": true
-    },
-    {
-      "fg": "color.border.field",
       "bg": "color.bg.sunken",
       "mode": "light",
       "min": 3,
@@ -6149,14 +5485,6 @@ const data = {
       "mode": "orange",
       "min": 3,
       "ratio": 3.28,
-      "pass": true
-    },
-    {
-      "fg": "color.border.field",
-      "bg": "color.bg.sunken",
-      "mode": "orange-dark",
-      "min": 3,
-      "ratio": 3.57,
       "pass": true
     },
     {
@@ -6185,14 +5513,6 @@ const data = {
     },
     {
       "fg": "color.fg.muted",
-      "bg": "color.bg.sunken",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 11.1,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.muted",
       "bg": "color.bg.field",
       "mode": "light",
       "min": 4.5,
@@ -6218,14 +5538,6 @@ const data = {
     {
       "fg": "color.fg.muted",
       "bg": "color.bg.field",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 8.62,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.muted",
-      "bg": "color.bg.field",
       "mode": "light",
       "min": 4.5,
       "ratio": 7.29,
@@ -6245,14 +5557,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 7.76,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.muted",
-      "bg": "color.bg.field",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 8.62,
       "pass": true
     },
     {
@@ -6277,14 +5581,6 @@ const data = {
       "mode": "orange",
       "min": 4.5,
       "ratio": 17.79,
-      "pass": true
-    },
-    {
-      "fg": "color.fg.default",
-      "bg": "color.bg.field-hover",
-      "mode": "orange-dark",
-      "min": 4.5,
-      "ratio": 11.15,
       "pass": true
     }
   ]

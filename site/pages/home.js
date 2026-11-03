@@ -12,7 +12,7 @@ import { T } from '../i18n.js';
 
 const COPY = T(
   {
-    themes: { dark: 'Escuro', light: 'Claro', refugio: 'Refúgio', system: 'Sistema' },
+    themes: { system: 'Sistema', light: 'Lume claro', dark: 'Lume escuro', orange: 'Laranja' },
     stats: ['cores em OKLCH', 'tokens de cor', 'estilos de texto', 'ícones próprios', 'contrastes WCAG'],
     statsLabel: 'O sistema em números',
     ready: 'Pronto',
@@ -36,7 +36,7 @@ const COPY = T(
       tone: 'Tom direto',
       dark: 'Escuro',
       section: 'Fundamentos prontos',
-      text: 'Cores, tipografia e ícones já estão em tokens, nos quatro temas.',
+      text: 'Cores, tipografia e ícones já estão em tokens, nos três temas.',
       demo: 'Ver demonstração',
       template: 'Escolher modelo',
       examples: 'Exemplos',
@@ -53,7 +53,7 @@ const COPY = T(
     theme: 'Tema',
   },
   {
-    themes: { dark: 'Dark', light: 'Light', refugio: 'Refúgio', system: 'System' },
+    themes: { system: 'System', light: 'Lume light', dark: 'Lume dark', orange: 'Orange' },
     stats: ['OKLCH colors', 'color tokens', 'text styles', 'custom icons', 'WCAG contrast checks'],
     statsLabel: 'The system in numbers',
     ready: 'Done',
@@ -77,7 +77,7 @@ const COPY = T(
       tone: 'Direct tone',
       dark: 'Dark',
       section: 'Foundations ready',
-      text: 'Color, typography, and icons are already tokens, in all four themes.',
+      text: 'Color, typography, and icons are already tokens, in all three themes.',
       demo: 'Watch demo',
       template: 'Choose template',
       examples: 'Examples',
@@ -94,7 +94,7 @@ const COPY = T(
     theme: 'Theme',
   },
   {
-    themes: { dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio', system: 'Sistema' },
+    themes: { system: 'Sistema', light: 'Lume claro', dark: 'Lume oscuro', orange: 'Naranja' },
     stats: ['colores en OKLCH', 'tokens de color', 'estilos de texto', 'íconos propios', 'contrastes WCAG'],
     statsLabel: 'El sistema en números',
     ready: 'Listo',
@@ -118,7 +118,7 @@ const COPY = T(
       tone: 'Tono directo',
       dark: 'Oscuro',
       section: 'Fundamentos listos',
-      text: 'Color, tipografía e íconos ya están en tokens, en los cuatro temas.',
+      text: 'Color, tipografía e íconos ya están en tokens, en los tres temas.',
       demo: 'Ver demostración',
       template: 'Elegir plantilla',
       examples: 'Ejemplos',
@@ -141,7 +141,7 @@ const COPY = T(
 const group = (id) => navigation.find((g) => g.id === id);
 const items = (id) => group(id).items;
 
-const THEME_ICONS = { refugio: 'cabin', dark: 'moon', light: 'sun', system: 'monitor' };
+const THEME_ICONS = { system: 'monitor', light: 'sun', dark: 'moon', orange: 'palette' };
 const themes = (c) => Object.entries(THEME_ICONS).map(([value, ic]) => ({ value, label: c.themes[value], icon: ic }));
 
 const colorCount = palettes.reduce((n, p) => n + p.steps.length, 0);
@@ -325,7 +325,7 @@ export default function renderHome() {
         <div class="home-hero__try">
           <span>${c.hero.try}</span>
           <button type="button" class="ds-chip" data-menu="brand"><span class="ds-chip__icon">${icon('palette', { size: 16 })}</span><span data-label>${brandLabel(getBrand())}</span>${chev}</button>
-          <button type="button" class="ds-chip" data-menu="theme"><span class="ds-chip__icon">${icon('moon', { size: 16 })}</span><span data-label>${c.themes.dark}</span>${chev}</button>
+          <button type="button" class="ds-chip" data-menu="theme"><span class="ds-chip__icon">${icon('monitor', { size: 16 })}</span><span data-label>${c.themes.system}</span>${chev}</button>
         </div>
       </div>
 

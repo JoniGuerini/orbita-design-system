@@ -19,13 +19,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PREFIX = 'ds';
-// duas paletas, cada uma com claro e escuro: Lume (light, dark) e Laranja (orange, orange-dark)
-const MODES = ['light', 'dark', 'orange', 'orange-dark'];
+// três temas: Lume claro (light, o padrão), Lume escuro (dark) e Laranja (orange, o pêssego quente)
+const MODES = ['light', 'dark', 'orange'];
 const DEFAULT_MODE = 'light';
-// token sem valor próprio num tema herda deste outro: o Refúgio é um tema claro, parte do Claro
-// token sem valor próprio num tema herda deste outro; o Laranja escuro tem todos os valores
-const FALLBACK = { orange: 'orange-dark', light: 'orange', dark: 'orange-dark' };
-const SCHEME = { light: 'light', dark: 'dark', orange: 'light', 'orange-dark': 'dark' };
+// token sem valor próprio num tema herda deste outro; o Lume escuro tem todos os valores
+const FALLBACK = { orange: 'dark', light: 'orange' };
+const SCHEME = { light: 'light', dark: 'dark', orange: 'light' };
 // recortes de um tema: valem só dentro de um seletor e não viram tema próprio (nem vão para Figma ou exportações).
 // No JSON, a chave do recorte só aparece nos tokens que mudam ali; o resto segue o tema de base.
 const SCOPES = { 'light-sidebar': { base: 'light', selector: '[data-theme="light"] :is(.ds-sidebar, .ds-navbar)', scheme: 'dark', over: 'color.bg.sidebar' } };
@@ -336,7 +335,7 @@ export async function buildTokens({ quiet = false } = {}) {
     })
     .join('\n');
 
-  // "system" é resolvido no JS (claro ou escuro da paleta escolhida): o CSS só conhece os quatro temas
+  // "system" é resolvido no JS (Lume claro ou Lume escuro): o CSS só conhece os três temas
   const css = [
     `/**\n * Lume Design System — tokens\n * Gerado por scripts/build-tokens.mjs a partir de tokens/*.json. Não edite à mão.\n */`,
     cssBlock(':root', globalTokens, DEFAULT_MODE, emit),

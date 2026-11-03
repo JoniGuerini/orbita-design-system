@@ -3,7 +3,7 @@
  */
 import '../ds/icons/icons.js';
 import { icon } from '../ds/icons/icons.js';
-import { initTheme, bindThemeControls, setTheme, setPalette, getPalette, resolvedTheme } from '../ds/js/theme.js';
+import { initTheme, bindThemeControls, setTheme, themeFor, THEMES } from '../ds/js/theme.js';
 import { initLocale, setLocale, getLocalePreference, locale, LOCALES, LOCALE_NAMES } from '../ds/js/i18n.js';
 import { attachMenu } from '../ds/js/menu.js';
 import { initTooltips } from '../ds/js/tooltip.js';
@@ -21,11 +21,6 @@ import { t, applyStrings } from './i18n.js';
  */
 const params = new URLSearchParams(location.search);
 const EMBED = params.has('embed');
-// temas resolvidos (modo × paleta): Lume claro/escuro e Laranja claro/escuro
-const THEMES = ['light', 'dark', 'orange', 'orange-dark'];
-const isDark = (theme) => theme === 'dark' || theme === 'orange-dark';
-let paletteReady = false; // o chip de paleta é montado depois do tema inicial
-
 if (EMBED) {
   document.documentElement.dataset.embed = '';
   // rede de segurança: nenhuma escrita no armazenamento compartilhado com o app de verdade
@@ -39,43 +34,31 @@ if (EMBED) {
 function embedTheme(theme) {
   if (!THEMES.includes(theme)) return;
   document.documentElement.dataset.theme = theme;
-  const mode = isDark(theme) ? 'dark' : 'light';
   document.querySelectorAll('[data-theme-option]').forEach((btn) => {
-    const on = btn.dataset.themeOption === mode;
+    const on = btn.dataset.themeOption === theme;
     btn.setAttribute('aria-checked', String(on));
     btn.tabIndex = on ? 0 : -1;
   });
-  document.documentElement.dispatchEvent(new CustomEvent('ds:themechange', { detail: { preference: mode, palette: embedPalette(), resolved: theme } }));
-  if (paletteReady) renderPaletteMenu();
+  document.documentElement.dispatchEvent(new CustomEvent('ds:themechange', { detail: { preference: theme, resolved: theme } }));
 }
-const embedPalette = () => (document.documentElement.dataset.theme?.startsWith('orange') ? 'orange' : 'lume');
-/** Modo (claro, escuro, sistema) na paleta atual do exemplo. */
-function embedMode(mode) {
-  const dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
-  embedTheme(embedPalette() === 'orange' ? (dark ? 'orange-dark' : 'orange') : dark ? 'dark' : 'light');
-}
-function embedSetPalette(palette) {
-  const dark = isDark(document.documentElement.dataset.theme);
-  embedTheme(palette === 'orange' ? (dark ? 'orange-dark' : 'orange') : dark ? 'dark' : 'light');
-}
+/** Preferência (inclusive "Sistema") no exemplo, sem gravar nada. */
+const embedPreference = (preference) => embedTheme(themeFor(preference));
 
 function bindEmbedThemeControls() {
   const options = [...document.querySelectorAll('[data-theme-option]')];
-  options.forEach((btn) => btn.addEventListener('click', () => embedMode(btn.dataset.themeOption)));
+  options.forEach((btn) => btn.addEventListener('click', () => embedPreference(btn.dataset.themeOption)));
   options[0]?.closest('[role="radiogroup"]')?.addEventListener('keydown', (event) => {
     const delta = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
     if (!delta) return;
     event.preventDefault();
     const next = options[(options.indexOf(document.activeElement) + delta + options.length) % options.length];
     next.focus();
-    embedMode(next.dataset.themeOption);
+    embedPreference(next.dataset.themeOption);
   });
   embedTheme(THEMES.includes(params.get('theme')) ? params.get('theme') : document.documentElement.dataset.theme);
 }
 
-const applyTheme = EMBED ? embedMode : setTheme;
-const applyPalette = EMBED ? embedSetPalette : setPalette;
-const currentPalette = () => (EMBED ? embedPalette() : getPalette());
+const applyTheme = EMBED ? embedPreference : setTheme;
 
 initTheme();
 initLocale();
@@ -164,10 +147,9 @@ const palette = createCommandPalette({
       hint: page.load ? undefined : t('soon'),
       perform: () => go(page.path),
     })),
-    { id: 'palette-lume', label: t('usePalette', t('paletteLume')), group: t('actions'), icon: 'palette', keywords: ['paleta', 'palette', 'lume', 'ardósia', 'slate', 'refúgio'], perform: () => applyPalette('lume') },
-    { id: 'palette-orange', label: t('usePalette', t('paletteOrange')), group: t('actions'), icon: 'palette', keywords: ['paleta', 'palette', 'laranja', 'orange', 'naranja', 'pêssego'], perform: () => applyPalette('orange') },
-    { id: 'theme-dark', label: t('useDark'), group: t('actions'), icon: 'moon', keywords: ['dark', 'escuro', 'oscuro'], perform: () => applyTheme('dark') },
-    { id: 'theme-light', label: t('useLight'), group: t('actions'), icon: 'sun', keywords: ['light', 'claro'], perform: () => applyTheme('light') },
+    { id: 'theme-light', label: t('useLight'), group: t('actions'), icon: 'sun', keywords: ['light', 'claro', 'lume', 'refúgio', 'ardósia', 'slate'], perform: () => applyTheme('light') },
+    { id: 'theme-dark', label: t('useDark'), group: t('actions'), icon: 'moon', keywords: ['dark', 'escuro', 'oscuro', 'lume'], perform: () => applyTheme('dark') },
+    { id: 'theme-orange', label: t('useOrange'), group: t('actions'), icon: 'palette', keywords: ['laranja', 'orange', 'naranja', 'pêssego', 'peach'], perform: () => applyTheme('orange') },
     { id: 'theme-system', label: t('useSystem'), group: t('actions'), icon: 'monitor', keywords: ['system', 'sistema', 'automático'], perform: () => applyTheme('system') },
     ...LOCALES.map((l) => ({ id: `locale-${l}`, label: `${t('language')}: ${LOCALE_NAMES[l]}`, group: t('actions'), icon: 'globe', keywords: ['idioma', 'language', 'lenguaje'], perform: () => applyLocale(l) })),
     { id: 'layout-sidebar', label: t('layoutSidebarTip'), group: t('actions'), icon: 'panel-left', keywords: ['layout', 'sidebar', 'lateral'], perform: () => shell.setLayout('sidebar') },
@@ -177,30 +159,6 @@ const palette = createCommandPalette({
 });
 
 /* ───────── Idioma ───────── */
-
-/* ───────── Paleta ───────── */
-
-const paletteChip = document.querySelector('[data-palette-menu]');
-let paletteMenu = null;
-function renderPaletteMenu() {
-  paletteMenu?.destroy();
-  const names = { lume: t('paletteLume'), orange: t('paletteOrange') };
-  const current = currentPalette();
-  paletteChip.querySelector('[data-label]').textContent = names[current];
-  paletteChip.setAttribute('aria-label', `${t('palette')}: ${names[current]}`);
-  paletteMenu = attachMenu(paletteChip, {
-    label: t('palette'),
-    value: current,
-    options: [
-      { value: 'lume', label: names.lume, swatch: 'var(--ds-color-refugio-700)' },
-      { value: 'orange', label: names.orange, swatch: 'var(--ds-color-brand-400)' },
-    ],
-    onChange: applyPalette,
-  });
-}
-renderPaletteMenu();
-paletteReady = true;
-document.documentElement.addEventListener('ds:themechange', () => !EMBED && renderPaletteMenu());
 
 const localeChip = document.querySelector('[data-locale-menu]');
 const SHORT = { 'pt-BR': 'PT', en: 'EN', es: 'ES' };
@@ -230,7 +188,6 @@ document.documentElement.addEventListener('ds:localechange', () => {
   renderSidebar();
   renderNavbar();
   renderLocaleMenu();
-  renderPaletteMenu();
   route();
 });
 

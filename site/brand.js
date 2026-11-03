@@ -2,7 +2,9 @@
  * Troca da cor da marca ao vivo (demonstração): os tokens brand.* passam a apontar para outra paleta.
  * Não fica salvo — volta para pêssego ao recarregar.
  *
- * darkText: paleta clara demais para texto no tema claro (amarelos e verdes) — os textos da marca sobem um tom
+ * Só o Laranja usa a paleta brand: o Lume claro e o escuro ficam na ardósia, e a troca não muda nada neles.
+ *
+ * darkText: paleta clara demais para texto no Laranja (amarelos e verdes) — os textos da marca sobem um tom
  *   para passar de 4,5:1 sobre o fundo.
  * swapSeries: a série de gráfico da mesma paleta troca de lugar com a 1ª (a da marca), para não repetir cor.
  *   Só onde a nova ordem passou no validador de daltonismo (ΔE ≥ 8 entre vizinhas, ≥ 15 com visão típica).
@@ -36,7 +38,7 @@ export const getBrand = () => active;
 function brandCss({ value, darkText, swapSeries }) {
   const rules = [`:root { ${steps.map((s) => `--ds-color-brand-${s}: var(--ds-color-${value}-${s});`).join(' ')} }`];
   if (darkText) {
-    rules.push(`[data-theme="light"] { ${LIGHT_TEXT} }`, `@media (prefers-color-scheme: light) { :root[data-theme="system"] { ${LIGHT_TEXT} } }`);
+    rules.push(`[data-theme="orange"] { ${LIGHT_TEXT} }`);
   }
   if (swapSeries) {
     // as séries são iguais nos dois temas: a 1ª fica com a cor da série da paleta, e ela com o pêssego original

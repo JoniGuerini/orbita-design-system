@@ -202,362 +202,330 @@
     "$type": "color",
     "bg": {
       "app": {
-        "orange-dark": "{color.neutral.975}",
-        "orange": "{color.neutral.100}",
-        "light": "{color.refugio.200}",
+        "$description": "Fundo atrás dos painéis do app shell.",
         "dark": "{color.refugio.975}",
-        "$description": "Fundo atrás dos painéis do app shell."
+        "orange": "{color.neutral.100}",
+        "light": "{color.refugio.200}"
       },
       "canvas": {
-        "orange-dark": "{color.neutral.925}",
-        "orange": "{color.neutral.50}",
-        "light": "{color.refugio.100}",
+        "$description": "Fundo do painel de conteúdo.",
         "dark": "{color.refugio.950}",
-        "$description": "Fundo do painel de conteúdo."
+        "orange": "{color.neutral.50}",
+        "light": "{color.refugio.100}"
       },
       "sidebar": {
-        "orange-dark": "{color.neutral.900}",
+        "dark": "{color.refugio.900}",
         "orange": "{color.neutral.25}",
         "light": "{color.refugio.25}",
-        "dark": "{color.refugio.900}",
         "light-sidebar": "{color.refugio.800}"
       },
       "surface": {
-        "orange-dark": "{color.neutral.900}",
-        "orange": "{color.neutral.25}",
-        "light": "{color.white}",
+        "$description": "Cards e blocos sobre o canvas.",
         "dark": "{color.refugio.900}",
-        "$description": "Cards e blocos sobre o canvas."
+        "orange": "{color.neutral.25}",
+        "light": "{color.white}"
       },
       "raised": {
-        "orange-dark": "{color.neutral.850}",
-        "orange": "{color.white}",
-        "light": "{color.white}",
+        "$description": "Modais, popovers, painéis flutuantes.",
         "dark": "{color.refugio.850}",
-        "light-sidebar": "{color.refugio.750}",
-        "$description": "Modais, popovers, painéis flutuantes."
+        "orange": "{color.white}",
+        "light-sidebar": "{color.refugio.750}"
       },
       "sunken": {
-        "orange-dark": "{color.neutral.950}",
+        "$description": "Campos e áreas rebaixadas.",
+        "dark": "{color.refugio.975}",
         "orange": "{color.neutral.100}",
         "light": "{color.refugio.150}",
-        "dark": "{color.refugio.975}",
-        "light-sidebar": "{color.refugio.850}",
-        "$description": "Campos e áreas rebaixadas."
+        "light-sidebar": "{color.refugio.850}"
       },
       "muted": {
-        "orange-dark": "{color.neutral.750}",
+        "dark": "{color.refugio.750}",
         "orange": "{color.neutral.200}",
         "light": "{color.refugio.200}",
-        "dark": "{color.refugio.750}",
         "light-sidebar": "{color.refugio.700}"
       },
       "field": {
-        "orange-dark": "{color.neutral.850}",
-        "orange": "{color.white}",
-        "light": "{color.white}",
+        "$description": "Fundo de campos, seleção e chips que abrem menu: o mesmo do menu que eles abrem (raised), para os dois conversarem.",
         "dark": "{color.refugio.850}",
-        "light-sidebar": "{color.refugio.750}",
-        "$description": "Fundo de campos, seleção e chips que abrem menu: o mesmo do menu que eles abrem (raised), para os dois conversarem."
+        "orange": "{color.white}",
+        "light-sidebar": "{color.refugio.750}"
       },
       "field-hover": {
-        "orange-dark": "{color.neutral.800}",
+        "dark": "{color.refugio.800}",
         "orange": "{color.neutral.50}",
         "light": "{color.refugio.25}",
-        "dark": "{color.refugio.800}",
         "light-sidebar": "{color.refugio.700}"
       },
       "inverse": {
-        "orange-dark": "{color.neutral.100}",
+        "dark": "{color.refugio.100}",
         "orange": "{color.neutral.950}",
-        "light": "{color.refugio.800}",
-        "dark": "{color.refugio.100}"
+        "light": "{color.refugio.800}"
       },
       "hover": {
-        "orange-dark": "alpha({color.white}, 0.05)",
+        "dark": "alpha({color.white}, 0.05)",
         "orange": "alpha({color.neutral.975}, 0.045)",
         "light": "alpha({color.refugio.700}, 0.05)",
         "light-sidebar": "alpha({color.white}, 0.06)"
       },
       "pressed": {
-        "orange-dark": "alpha({color.white}, 0.08)",
+        "dark": "alpha({color.white}, 0.08)",
         "orange": "alpha({color.neutral.975}, 0.08)",
         "light": "alpha({color.refugio.700}, 0.09)",
         "light-sidebar": "alpha({color.white}, 0.1)"
       },
       "selected": {
-        "orange-dark": "alpha({color.white}, 0.07)",
+        "dark": "alpha({color.white}, 0.07)",
         "orange": "alpha({color.neutral.975}, 0.06)",
         "light": "alpha({color.refugio.700}, 0.07)",
         "light-sidebar": "alpha({color.white}, 0.09)"
       },
       "overlay": {
-        "orange-dark": "alpha({color.black}, 0.6)",
+        "dark": "alpha({color.black}, 0.6)",
         "orange": "alpha({color.neutral.975}, 0.32)",
         "light": "alpha({color.refugio.800}, 0.35)"
       }
     },
     "fg": {
       "default": {
-        "orange-dark": "{color.neutral.100}",
+        "dark": "{color.refugio.25}",
         "orange": "{color.neutral.975}",
         "light": "{color.refugio.800}",
-        "dark": "{color.refugio.25}",
         "light-sidebar": "{color.refugio.25}"
       },
       "muted": {
-        "orange-dark": "{color.neutral.300}",
+        "dark": "{color.refugio.300}",
         "orange": "{color.neutral.650}",
         "light": "{color.refugio.650}",
-        "dark": "{color.refugio.300}",
         "light-sidebar": "{color.refugio.200}"
       },
       "subtle": {
-        "orange-dark": "{color.neutral.400}",
+        "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos três temas.",
+        "dark": "{color.refugio.400}",
         "orange": "{color.neutral.550}",
         "light": "{color.refugio.550}",
-        "dark": "{color.refugio.400}",
-        "light-sidebar": "{color.refugio.300}",
-        "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos quatro temas."
+        "light-sidebar": "{color.refugio.300}"
       },
       "disabled": {
-        "orange-dark": "{color.neutral.600}",
+        "dark": "{color.refugio.600}",
         "orange": "{color.neutral.400}",
         "light": "{color.refugio.400}",
-        "dark": "{color.refugio.600}",
         "light-sidebar": "{color.refugio.500}"
       },
       "inverse": {
-        "orange-dark": "{color.neutral.975}",
+        "dark": "{color.refugio.975}",
         "orange": "{color.neutral.50}",
-        "light": "{color.refugio.25}",
-        "dark": "{color.refugio.975}"
+        "light": "{color.refugio.25}"
       },
       "brand": {
-        "orange-dark": "{color.brand.400}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.700}",
-        "light": "{color.refugio.700}",
-        "dark": "{color.refugio.200}"
+        "light": "{color.refugio.700}"
       },
       "link": {
-        "orange-dark": "{color.brand.300}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.700}",
-        "light": "{color.refugio.700}",
-        "dark": "{color.refugio.200}"
+        "light": "{color.refugio.700}"
       },
       "link-hover": {
-        "orange-dark": "{color.brand.200}",
+        "dark": "{color.refugio.100}",
         "orange": "{color.brand.800}",
-        "light": "{color.refugio.850}",
-        "dark": "{color.refugio.100}"
+        "light": "{color.refugio.850}"
       }
     },
     "border": {
       "subtle": {
-        "orange-dark": "alpha({color.white}, 0.06)",
+        "dark": "alpha({color.white}, 0.06)",
         "orange": "alpha({color.neutral.975}, 0.07)",
         "light": "alpha({color.refugio.700}, 0.14)",
         "light-sidebar": "alpha({color.white}, 0.08)"
       },
       "default": {
-        "orange-dark": "alpha({color.white}, 0.1)",
+        "dark": "alpha({color.white}, 0.1)",
         "orange": "alpha({color.neutral.975}, 0.11)",
         "light": "alpha({color.refugio.700}, 0.2)",
         "light-sidebar": "alpha({color.white}, 0.12)"
       },
       "strong": {
-        "orange-dark": "alpha({color.white}, 0.16)",
+        "dark": "alpha({color.white}, 0.16)",
         "orange": "alpha({color.neutral.975}, 0.18)",
         "light": "alpha({color.refugio.700}, 0.3)",
         "light-sidebar": "alpha({color.white}, 0.18)"
       },
       "control": {
-        "orange-dark": "alpha({color.white}, 0.13)",
+        "$description": "Contorno de chips e botões com texto — o rótulo já identifica o controle (WCAG 1.4.11 não exige 3:1 aqui).",
+        "dark": "alpha({color.white}, 0.13)",
         "orange": "alpha({color.neutral.975}, 0.15)",
         "light": "alpha({color.refugio.700}, 0.2)",
-        "light-sidebar": "alpha({color.white}, 0.14)",
-        "$description": "Contorno de chips e botões com texto — o rótulo já identifica o controle (WCAG 1.4.11 não exige 3:1 aqui)."
+        "light-sidebar": "alpha({color.white}, 0.14)"
       },
       "field": {
-        "orange-dark": "alpha({color.white}, 0.38)",
+        "$description": "Contorno de campos, seleção, composer e switch desligado: o contorno é o que identifica o controle, então passa de 3:1 em todas as superfícies.",
+        "dark": "alpha({color.white}, 0.38)",
         "orange": "alpha({color.neutral.975}, 0.48)",
         "light": "alpha({color.refugio.700}, 0.68)",
-        "light-sidebar": "alpha({color.white}, 0.44)",
-        "$description": "Contorno de campos, seleção, composer e switch desligado: o contorno é o que identifica o controle, então passa de 3:1 em todas as superfícies."
+        "light-sidebar": "alpha({color.white}, 0.44)"
       },
       "field-hover": {
-        "orange-dark": "alpha({color.white}, 0.52)",
+        "$description": "Contorno de campo no hover — mais forte que o de repouso.",
+        "dark": "alpha({color.white}, 0.52)",
         "orange": "alpha({color.neutral.975}, 0.62)",
         "light": "alpha({color.refugio.700}, 0.82)",
-        "light-sidebar": "alpha({color.white}, 0.58)",
-        "$description": "Contorno de campo no hover — mais forte que o de repouso."
+        "light-sidebar": "alpha({color.white}, 0.58)"
       },
       "focus": {
-        "orange-dark": "{color.brand.400}",
+        "dark": "{color.refugio.300}",
         "orange": "{color.brand.600}",
         "light": "{color.refugio.600}",
-        "dark": "{color.refugio.300}",
         "light-sidebar": "{color.refugio.300}"
       }
     },
     "brand": {
       "solid": {
-        "orange-dark": "{color.brand.400}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.500}",
-        "light": "{color.refugio.700}",
-        "dark": "{color.refugio.200}"
+        "light": "{color.refugio.700}"
       },
       "solid-hover": {
-        "orange-dark": "{color.brand.300}",
+        "dark": "{color.refugio.100}",
         "orange": "{color.brand.400}",
-        "light": "{color.refugio.800}",
-        "dark": "{color.refugio.100}"
+        "light": "{color.refugio.800}"
       },
       "solid-pressed": {
-        "orange-dark": "{color.brand.500}",
+        "dark": "{color.refugio.300}",
         "orange": "{color.brand.600}",
-        "light": "{color.refugio.850}",
-        "dark": "{color.refugio.300}"
+        "light": "{color.refugio.850}"
       },
       "subtle": {
-        "orange-dark": "alpha({color.brand.400}, 0.14)",
+        "dark": "alpha({color.refugio.300}, 0.14)",
         "orange": "{color.brand.50}",
-        "light": "{color.refugio.100}",
-        "dark": "alpha({color.refugio.300}, 0.14)"
+        "light": "{color.refugio.100}"
       },
       "subtle-hover": {
-        "orange-dark": "alpha({color.brand.400}, 0.2)",
+        "dark": "alpha({color.refugio.300}, 0.2)",
         "orange": "{color.brand.100}",
-        "light": "{color.refugio.150}",
-        "dark": "alpha({color.refugio.300}, 0.2)"
+        "light": "{color.refugio.150}"
       },
       "fg": {
-        "orange-dark": "{color.brand.300}",
+        "dark": "{color.refugio.200}",
         "orange": "{color.brand.700}",
-        "light": "{color.refugio.700}",
-        "dark": "{color.refugio.200}"
+        "light": "{color.refugio.700}"
       },
       "border": {
-        "orange-dark": "alpha({color.brand.400}, 0.32)",
+        "dark": "alpha({color.refugio.300}, 0.32)",
         "orange": "{color.brand.200}",
-        "light": "{color.refugio.200}",
-        "dark": "alpha({color.refugio.300}, 0.32)"
+        "light": "{color.refugio.200}"
       },
       "on-solid": {
-        "orange-dark": "{color.brand.950}",
+        "dark": "{color.refugio.900}",
         "orange": "{color.brand.950}",
-        "light": "{color.refugio.25}",
-        "dark": "{color.refugio.900}"
+        "light": "{color.refugio.25}"
       },
       "indicator": {
-        "orange-dark": "{color.brand.500}",
-        "orange": "{color.brand.500}",
-        "light": "{color.terracotta.500}",
+        "$description": "Pontinho de notificação/novidade.",
         "dark": "{color.terracotta.400}",
-        "$description": "Pontinho de notificação/novidade."
+        "orange": "{color.brand.500}",
+        "light": "{color.terracotta.500}"
       }
     },
     "success": {
       "solid": {
-        "orange-dark": "{color.green.400}",
+        "dark": "{color.green.400}",
         "orange": "{color.green.700}"
       },
       "solid-hover": {
-        "orange-dark": "{color.green.300}",
+        "dark": "{color.green.300}",
         "orange": "{color.green.800}"
       },
       "subtle": {
-        "orange-dark": "alpha({color.green.400}, 0.13)",
+        "dark": "alpha({color.green.400}, 0.13)",
         "orange": "{color.green.50}"
       },
       "fg": {
-        "orange-dark": "{color.green.300}",
+        "dark": "{color.green.300}",
         "orange": "{color.green.800}"
       },
       "border": {
-        "orange-dark": "alpha({color.green.400}, 0.3)",
+        "dark": "alpha({color.green.400}, 0.3)",
         "orange": "{color.green.200}"
       },
       "on-solid": {
-        "orange-dark": "{color.green.950}",
+        "dark": "{color.green.950}",
         "orange": "{color.white}"
       }
     },
     "warning": {
       "solid": {
-        "orange-dark": "{color.amber.400}",
-        "orange": "{color.amber.400}"
+        "dark": "{color.amber.400}"
       },
       "solid-hover": {
-        "orange-dark": "{color.amber.300}",
+        "dark": "{color.amber.300}",
         "orange": "{color.amber.500}"
       },
       "subtle": {
-        "orange-dark": "alpha({color.amber.400}, 0.13)",
+        "dark": "alpha({color.amber.400}, 0.13)",
         "orange": "{color.amber.50}"
       },
       "fg": {
-        "orange-dark": "{color.amber.300}",
+        "dark": "{color.amber.300}",
         "orange": "{color.amber.800}"
       },
       "border": {
-        "orange-dark": "alpha({color.amber.400}, 0.3)",
+        "dark": "alpha({color.amber.400}, 0.3)",
         "orange": "{color.amber.200}"
       },
       "on-solid": {
-        "orange-dark": "{color.amber.950}",
-        "orange": "{color.amber.950}"
+        "dark": "{color.amber.950}"
       }
     },
     "danger": {
       "solid": {
-        "orange-dark": "{color.red.400}",
+        "dark": "{color.red.400}",
         "orange": "{color.red.700}"
       },
       "solid-hover": {
-        "orange-dark": "{color.red.300}",
+        "dark": "{color.red.300}",
         "orange": "{color.red.800}"
       },
       "subtle": {
-        "orange-dark": "alpha({color.red.400}, 0.13)",
+        "dark": "alpha({color.red.400}, 0.13)",
         "orange": "{color.red.50}"
       },
       "fg": {
-        "orange-dark": "{color.red.300}",
+        "dark": "{color.red.300}",
         "orange": "{color.red.700}"
       },
       "border": {
-        "orange-dark": "alpha({color.red.400}, 0.3)",
+        "dark": "alpha({color.red.400}, 0.3)",
         "orange": "{color.red.200}"
       },
       "on-solid": {
-        "orange-dark": "{color.red.950}",
+        "dark": "{color.red.950}",
         "orange": "{color.white}"
       }
     },
     "info": {
       "solid": {
-        "orange-dark": "{color.blue.400}",
+        "dark": "{color.blue.400}",
         "orange": "{color.blue.700}"
       },
       "solid-hover": {
-        "orange-dark": "{color.blue.300}",
+        "dark": "{color.blue.300}",
         "orange": "{color.blue.800}"
       },
       "subtle": {
-        "orange-dark": "alpha({color.blue.400}, 0.13)",
+        "dark": "alpha({color.blue.400}, 0.13)",
         "orange": "{color.blue.50}"
       },
       "fg": {
-        "orange-dark": "{color.blue.300}",
+        "dark": "{color.blue.300}",
         "orange": "{color.blue.700}"
       },
       "border": {
-        "orange-dark": "alpha({color.blue.400}, 0.3)",
+        "dark": "alpha({color.blue.400}, 0.3)",
         "orange": "{color.blue.200}"
       },
       "on-solid": {
-        "orange-dark": "{color.blue.950}",
+        "dark": "{color.blue.950}",
         "orange": "{color.white}"
       }
     },
@@ -565,136 +533,124 @@
       "$description": "Cores de gráficos. Marcas usam estas cores; textos (rótulos, valores, legenda) usam sempre fg.*.",
       "series": {
         "1": {
-          "orange-dark": "{color.brand.600}",
-          "orange": "{color.brand.600}"
+          "dark": "{color.brand.600}"
         },
         "2": {
-          "orange-dark": "{color.blue.600}",
-          "orange": "{color.blue.600}"
+          "dark": "{color.blue.600}"
         },
         "3": {
-          "orange-dark": "{color.pink.600}",
-          "orange": "{color.pink.600}"
+          "dark": "{color.pink.600}"
         },
         "4": {
-          "orange-dark": "{color.amber.700}",
-          "orange": "{color.amber.700}"
+          "dark": "{color.amber.700}"
         },
         "5": {
-          "orange-dark": "{color.teal.600}",
-          "orange": "{color.teal.600}"
+          "dark": "{color.teal.600}"
         },
         "6": {
-          "orange-dark": "{color.red.600}",
-          "orange": "{color.red.600}"
+          "dark": "{color.red.600}"
         },
         "7": {
-          "orange-dark": "{color.violet.600}",
-          "orange": "{color.violet.600}"
+          "dark": "{color.violet.600}"
         },
         "8": {
-          "orange-dark": "{color.green.600}",
-          "orange": "{color.green.600}"
+          "dark": "{color.green.600}"
         },
-        "$description": "Categóricas: identidade de série. Ordem fixa, nunca recicle. Validada contra daltonismo (ΔE ≥ 8 entre vizinhas) e visão normal (≥ 15), nos quatro temas (o Lume usa as do Laranja); as 3 primeiras também em todos os pares (dispersão)."
+        "$description": "Categóricas: identidade de série. Ordem fixa, nunca recicle. Validada contra daltonismo (ΔE ≥ 8 entre vizinhas) e visão normal (≥ 15), nos três temas (o Lume claro usa as do Laranja); as 3 primeiras também em todos os pares (dispersão)."
       },
       "muted": {
-        "orange-dark": "{color.neutral.700}",
-        "orange": "{color.neutral.300}",
-        "light": "{color.refugio.300}",
+        "$description": "Ênfase: o contexto em cinza, para uma série se destacar.",
         "dark": "{color.refugio.700}",
-        "$description": "Ênfase: o contexto em cinza, para uma série se destacar."
+        "orange": "{color.neutral.300}",
+        "light": "{color.refugio.300}"
       },
       "other": {
-        "orange-dark": "{color.neutral.600}",
-        "orange": "{color.neutral.400}",
-        "light": "{color.refugio.400}",
+        "$description": "“Outros”: a cauda agrupada depois da 8ª série ou do 6º segmento.",
         "dark": "{color.refugio.600}",
-        "$description": "“Outros”: a cauda agrupada depois da 8ª série ou do 6º segmento."
+        "orange": "{color.neutral.400}",
+        "light": "{color.refugio.400}"
       },
       "seq": {
         "1": {
-          "orange-dark": "{color.brand.900}",
+          "dark": "{color.brand.900}",
           "orange": "{color.brand.100}"
         },
         "2": {
-          "orange-dark": "{color.brand.800}",
+          "dark": "{color.brand.800}",
           "orange": "{color.brand.300}"
         },
         "3": {
-          "orange-dark": "{color.brand.700}",
+          "dark": "{color.brand.700}",
           "orange": "{color.brand.400}"
         },
         "4": {
-          "orange-dark": "{color.brand.600}",
+          "dark": "{color.brand.600}",
           "orange": "{color.brand.500}"
         },
         "5": {
-          "orange-dark": "{color.brand.500}",
+          "dark": "{color.brand.500}",
           "orange": "{color.brand.600}"
         },
         "6": {
-          "orange-dark": "{color.brand.400}",
+          "dark": "{color.brand.400}",
           "orange": "{color.brand.700}"
         },
         "7": {
-          "orange-dark": "{color.brand.300}",
+          "dark": "{color.brand.300}",
           "orange": "{color.brand.800}"
         },
         "$description": "Sequencial: magnitude, de pouco (1) a muito (7). Um só tom; no escuro a âncora inverte (mais = mais claro)."
       },
       "ord": {
         "1": {
-          "orange-dark": "{color.brand.800}",
+          "dark": "{color.brand.800}",
           "orange": "{color.brand.400}"
         },
         "2": {
-          "orange-dark": "{color.brand.700}",
+          "dark": "{color.brand.700}",
           "orange": "{color.brand.500}"
         },
         "3": {
-          "orange-dark": "{color.brand.600}",
-          "orange": "{color.brand.600}"
+          "dark": "{color.brand.600}"
         },
         "4": {
-          "orange-dark": "{color.brand.500}",
+          "dark": "{color.brand.500}",
           "orange": "{color.brand.700}"
         },
         "5": {
-          "orange-dark": "{color.brand.400}",
+          "dark": "{color.brand.400}",
           "orange": "{color.brand.800}"
         },
         "$description": "Ordinal: etapas em sequência (funil, faixas). Mesmo tom, a ponta mais fraca ainda passa de 2:1 sobre a superfície."
       },
       "div": {
         "1": {
-          "orange-dark": "{color.blue.400}",
+          "dark": "{color.blue.400}",
           "orange": "{color.blue.700}"
         },
         "2": {
-          "orange-dark": "{color.blue.600}",
+          "dark": "{color.blue.600}",
           "orange": "{color.blue.500}"
         },
         "3": {
-          "orange-dark": "{color.blue.800}",
+          "dark": "{color.blue.800}",
           "orange": "{color.blue.300}"
         },
         "4": {
-          "orange-dark": "{color.neutral.750}",
+          "dark": "{color.refugio.750}",
           "orange": "{color.neutral.200}",
-          "light": "{color.refugio.200}",
-          "dark": "{color.refugio.750}"
+          "light": "{color.refugio.200}"
         },
         "5": {
-          "orange-dark": "{color.brand.800}",
+          "dark": "{color.brand.800}",
           "orange": "{color.brand.300}"
         },
         "6": {
-          "orange-dark": "{color.brand.600}",
+          "dark": "{color.brand.600}",
           "orange": "{color.brand.500}"
         },
         "7": {
-          "orange-dark": "{color.brand.400}",
+          "dark": "{color.brand.400}",
           "orange": "{color.brand.700}"
         },
         "$description": "Divergente: abaixo (1–3, frio) e acima (5–7, quente) de uma referência; 4 é o meio neutro."
@@ -702,31 +658,28 @@
       "status": {
         "$description": "Status em gráficos (medidor, séries que significam bom ou ruim). Reservado: nunca para identidade de série, e sempre com ícone e rótulo.",
         "good": {
-          "orange-dark": "{color.green.500}",
+          "dark": "{color.green.500}",
           "orange": "{color.green.600}"
         },
         "warning": {
-          "orange-dark": "{color.amber.400}",
+          "dark": "{color.amber.400}",
           "orange": "{color.amber.500}"
         },
         "critical": {
-          "orange-dark": "{color.red.600}",
-          "orange": "{color.red.600}"
+          "dark": "{color.red.600}"
         }
       },
       "grid": {
-        "orange-dark": "{color.neutral.800}",
-        "orange": "{color.neutral.200}",
-        "light": "{color.refugio.200}",
+        "$description": "Linhas de grade: fio de 1 px, sólido, um passo fora da superfície.",
         "dark": "{color.refugio.800}",
-        "$description": "Linhas de grade: fio de 1 px, sólido, um passo fora da superfície."
+        "orange": "{color.neutral.200}",
+        "light": "{color.refugio.200}"
       },
       "axis": {
-        "orange-dark": "{color.neutral.700}",
-        "orange": "{color.neutral.300}",
-        "light": "{color.refugio.300}",
+        "$description": "Linha de base e eixos.",
         "dark": "{color.refugio.700}",
-        "$description": "Linha de base e eixos."
+        "orange": "{color.neutral.300}",
+        "light": "{color.refugio.300}"
       }
     }
   }

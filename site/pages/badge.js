@@ -121,7 +121,7 @@ export default function renderBadge(page) {
       <header class="doc-section__header">
         <div>
           <h2 class="doc-section__title" id="tons-title">${L('Tons', 'Tones', 'Tonos')}</h2>
-          <p class="doc-section__desc">${L('O tom diz o tipo de status. Fundo suave, texto forte e contorno fino — legível nos quatro temas, sem gritar.', 'The tone says the type of status. A soft background, strong text, and a thin outline — legible in all four themes, without shouting.', 'El tono dice el tipo de estado. Fondo suave, texto fuerte y contorno fino — legible en los cuatro temas, sin gritar.')}</p>
+          <p class="doc-section__desc">${L('O tom diz o tipo de status. Fundo suave, texto forte e contorno fino — legível nos três temas, sem gritar.', 'The tone says the type of status. A soft background, strong text, and a thin outline — legible in all three themes, without shouting.', 'El tono dice el tipo de estado. Fondo suave, texto fuerte y contorno fino — legible en los tres temas, sin gritar.')}</p>
         </div>
       </header>
       <div class="cd-grid bd-tones">

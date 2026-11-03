@@ -8,10 +8,42 @@ import { tr } from '../ds/js/i18n.js';
 
 const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
-export const CURRENT_VERSION = '0.9.0';
+export const CURRENT_VERSION = '0.10.0';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 const RELEASES = [
+  {
+    version: '0.10.0',
+    date: '2026-11-03',
+    title: T('Tema Lume', 'Lume theme', 'Tema Lume'),
+    summary: T(
+      'O Refúgio virou o tema do Lume, em claro e escuro, e por padrão o site segue o sistema. O antigo Claro, o pêssego, ficou como tema Laranja.',
+      'Refúgio became the Lume theme, in light and dark, and by default the site follows the system. The old Light, the peach, stays as the Orange theme.',
+      'Refúgio se volvió el tema de Lume, en claro y oscuro, y por defecto el sitio sigue al sistema. El antiguo Claro, el melocotón, quedó como tema Naranja.',
+    ),
+    groups: [
+      {
+        name: T('Temas', 'Themes', 'Temas'),
+        items: [
+          ['novo', T(
+            'Lume escuro: o par escuro do Lume claro, na mesma ardósia e terracota, no lugar do Escuro pêssego',
+            'Lume dark: the dark pair of Lume light, in the same slate and terracotta, replacing the peach Dark',
+            'Lume oscuro: el par oscuro de Lume claro, en la misma pizarra y terracota, en lugar del Oscuro melocotón',
+          ), '/fundamentos/cores'],
+          ['melhoria', T(
+            'Sistema é o padrão: Lume claro ou Lume escuro, conforme o aparelho. O seletor da topbar fica Sistema · Lume claro · Lume escuro · Laranja',
+            'System is the default: Lume light or Lume dark, depending on the device. The topbar switcher is System · Lume light · Lume dark · Orange',
+            'Sistema es lo predeterminado: Lume claro o Lume oscuro, según el dispositivo. El selector de la topbar queda Sistema · Lume claro · Lume oscuro · Naranja',
+          ), '/fundamentos/cores'],
+          ['melhoria', T(
+            'O antigo Claro vira Laranja (data-theme="orange"); o Refúgio vira light e o Escuro, dark. Quem já tinha escolhido um tema continua nele',
+            'The old Light becomes Orange (data-theme="orange"); Refúgio becomes light and Dark, dark. Anyone who had picked a theme keeps it',
+            'El antiguo Claro pasa a Naranja (data-theme="orange"); Refúgio pasa a light y Oscuro, dark. Quien ya había elegido un tema sigue en él',
+          ), '/primeiros-passos'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.9.0',
     date: '2026-11-03',
