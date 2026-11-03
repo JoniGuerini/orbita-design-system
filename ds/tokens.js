@@ -1,6 +1,6 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-11-03T13:44:53.567Z",
+  "generatedAt": "2026-11-03T13:51:36.799Z",
   "prefix": "ds",
   "modes": [
     "dark",
@@ -4698,6 +4698,30 @@ const data = {
       "mode": "refugio",
       "min": 4.5,
       "ratio": 6.97,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.subtle",
+      "bg": "color.bg.sidebar",
+      "mode": "dark",
+      "min": 4.5,
+      "ratio": 5.48,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.subtle",
+      "bg": "color.bg.sidebar",
+      "mode": "light",
+      "min": 4.5,
+      "ratio": 5.18,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.subtle",
+      "bg": "color.bg.sidebar",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 5.14,
       "pass": true
     },
     {

@@ -24,6 +24,11 @@ const DEFAULT_MODE = 'dark';
 // token sem valor próprio num tema herda deste outro: o Refúgio é um tema claro, parte do Claro
 const FALLBACK = { light: 'dark', refugio: 'light' };
 const SCHEME = { dark: 'dark', light: 'light', refugio: 'light' };
+// recortes de um tema: valem só dentro de um seletor e não viram tema próprio (nem vão para Figma ou exportações).
+// No JSON, a chave do recorte só aparece nos tokens que mudam ali; o resto segue o tema de base.
+const SCOPES = { 'refugio-sidebar': { base: 'refugio', selector: '[data-theme="refugio"] .ds-sidebar', scheme: 'dark' } };
+const ALL_MODES = [...MODES, ...Object.keys(SCOPES)];
+for (const [id, scope] of Object.entries(SCOPES)) FALLBACK[id] = scope.base;
 const modeValue = (value, mode) => value[mode] ?? (FALLBACK[mode] ? modeValue(value, FALLBACK[mode]) : undefined);
 
 const SOURCES = [
@@ -97,7 +102,7 @@ const composite = (fg, bgRgb) => fg.rgb.map((c, i) => Math.round(c * fg.a + bgRg
 /* ───────────────────────── Tokens ───────────────────────── */
 
 const isPlain = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
-const isModes = (v) => isPlain(v) && MODES.some((m) => m in v) && Object.keys(v).every((k) => MODES.includes(k) || k.startsWith('$'));
+const isModes = (v) => isPlain(v) && ALL_MODES.some((m) => m in v) && Object.keys(v).every((k) => ALL_MODES.includes(k) || k.startsWith('$'));
 const cssVar = (name) => `--${PREFIX}-${name.replaceAll('.', '-')}`;
 const round = (n, d = 4) => +n.toFixed(d);
 
@@ -166,7 +171,8 @@ function flatten(node, pathParts, ctx, source, registry) {
       description: isPlain(raw) ? raw.$description : undefined,
     };
     if (isModes(value)) {
-      token.modes = Object.fromEntries(MODES.map((m) => [m, modeValue(value, m)]));
+      token.modes = Object.fromEntries(ALL_MODES.map((m) => [m, modeValue(value, m)]));
+      token.own = Object.keys(value).filter((k) => ALL_MODES.includes(k));
     } else {
       token.value = value;
     }
@@ -305,6 +311,18 @@ export async function buildTokens({ quiet = false } = {}) {
     }),
   );
 
+  // recortes: só os pares sobre o fundo do recorte (os outros textos não aparecem ali)
+  const scopedContrast = Object.keys(SCOPES).flatMap((mode) =>
+    checks
+      .filter(([, bg]) => themedTokens.find((t) => t.name === bg)?.own?.includes(mode))
+      .map(([fg, bg, min]) => {
+        const bgRgb = emit.solidColor(bg, mode);
+        const fgColor = parseHex(emit.resolveColor(`{${fg}}`, mode));
+        const ratio = round(contrastRatio(fgColor.a < 1 ? composite(fgColor, bgRgb) : fgColor.rgb, bgRgb), 2);
+        return { fg, bg, mode, min, ratio, pass: ratio >= min };
+      }),
+  );
+
   // CSS
   const textStyles = registry.list.filter((t) => t.type === 'typography');
   const textClasses = textStyles
@@ -321,6 +339,9 @@ export async function buildTokens({ quiet = false } = {}) {
     cssBlock(':root', globalTokens, DEFAULT_MODE, emit),
     cssBlock(`:root,\n[data-theme="${DEFAULT_MODE}"]`, themedTokens, DEFAULT_MODE, emit, [`  color-scheme: ${SCHEME[DEFAULT_MODE]};`]),
     ...MODES.filter((m) => m !== DEFAULT_MODE).map((m) => cssBlock(`[data-theme="${m}"]`, themedTokens, m, emit, [`  color-scheme: ${SCHEME[m]};`])),
+    ...Object.entries(SCOPES).map(([id, scope]) =>
+      cssBlock(scope.selector, themedTokens.filter((t) => t.own?.includes(id)), id, emit, [`  color-scheme: ${scope.scheme};`]),
+    ),
     `@media (prefers-color-scheme: light) {\n${indent(cssBlock(':root[data-theme="system"]', themedTokens, 'light', emit, ['  color-scheme: light;']))}\n}`,
     `/* Estilos de texto */\n${textClasses}`,
   ].join('\n\n');
@@ -380,7 +401,9 @@ export async function buildTokens({ quiet = false } = {}) {
     const ms = Math.round(performance.now() - started);
     console.log(`✓ tokens: ${registry.list.length} tokens, ${palettes.length} paletas → ds/tokens.css, ds/tokens.js (${ms}ms)`);
     console.log(`  contraste: ${contrast.length - failed.length}/${contrast.length} combinações atingem o mínimo`);
-    for (const c of failed) console.warn(`  ✗ [${c.mode}] ${c.fg} sobre ${c.bg}: ${c.ratio} (mín. ${c.min})`);
+    const scopedFailed = scopedContrast.filter((c) => !c.pass);
+    if (scopedContrast.length) console.log(`  recortes (${Object.keys(SCOPES).join(', ')}): ${scopedContrast.length - scopedFailed.length}/${scopedContrast.length}`);
+    for (const c of [...failed, ...scopedFailed]) console.warn(`  ✗ [${c.mode}] ${c.fg} sobre ${c.bg}: ${c.ratio} (mín. ${c.min})`);
   }
   return data;
 }

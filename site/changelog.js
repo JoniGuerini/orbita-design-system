@@ -40,6 +40,11 @@ const RELEASES = [
             'Contrast is measured in all three themes: 105 pairs, all passing. The Colors page gained a Refúgio column',
             'El contraste se mide en los tres temas: 105 combinaciones, todas aprobadas. La página Colores ganó la columna Refúgio',
           ), '/fundamentos/cores'],
+          ['novo', T(
+            'No Refúgio, a sidebar é escura, em ardósia, como a barra do app Lume',
+            'In Refúgio, the sidebar is dark slate, like the Lume app’s bar',
+            'En Refúgio, la sidebar es oscura, en pizarra, como la barra de la app Lume',
+          ), '/padroes/app-shell'],
           ['melhoria', T(
             'Os palcos dos playgrounds também mostram o Refúgio',
             'Playground stages also show Refúgio',

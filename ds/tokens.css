@@ -751,6 +751,34 @@
   --ds-gradient-divider: linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%);
 }
 
+[data-theme="refugio"] .ds-sidebar {
+  color-scheme: dark;
+
+  /* color.bg */
+  --ds-color-bg-sidebar: var(--ds-color-refugio-800);
+  --ds-color-bg-raised: var(--ds-color-refugio-750);
+  --ds-color-bg-sunken: var(--ds-color-refugio-850);
+  --ds-color-bg-muted: var(--ds-color-refugio-700);
+  --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-white) 6%, transparent);
+  --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-white) 10%, transparent);
+  --ds-color-bg-selected: color-mix(in srgb, var(--ds-color-white) 9%, transparent);
+
+  /* color.fg */
+  --ds-color-fg-default: var(--ds-color-refugio-25);
+  --ds-color-fg-muted: var(--ds-color-refugio-200);
+  --ds-color-fg-subtle: var(--ds-color-refugio-300);
+  --ds-color-fg-disabled: var(--ds-color-refugio-500);
+
+  /* color.border */
+  --ds-color-border-subtle: color-mix(in srgb, var(--ds-color-white) 8%, transparent);
+  --ds-color-border-default: color-mix(in srgb, var(--ds-color-white) 12%, transparent);
+  --ds-color-border-strong: color-mix(in srgb, var(--ds-color-white) 18%, transparent);
+  --ds-color-border-control: color-mix(in srgb, var(--ds-color-white) 14%, transparent);
+  --ds-color-border-field: color-mix(in srgb, var(--ds-color-white) 44%, transparent);
+  --ds-color-border-field-hover: color-mix(in srgb, var(--ds-color-white) 58%, transparent);
+  --ds-color-border-focus: var(--ds-color-refugio-300);
+}
+
 @media (prefers-color-scheme: light) {
   :root[data-theme="system"] {
     color-scheme: light;
