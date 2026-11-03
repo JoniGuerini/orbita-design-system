@@ -61,9 +61,9 @@ const RELEASES = [
             'Tarjetas y áreas de ejemplo bien separadas en Refúgio: el fondo de la página en el tono de Lume, áreas hundidas y marco más oscuros y contornos más firmes',
           ), '/graficos/visao-geral'],
           ['novo', T(
-            'Ícone mountain, o do Refúgio no Lume',
-            'Mountain icon, the one Lume uses for Refúgio',
-            'Ícono mountain, el de Refúgio en Lume',
+            'Ícone mountain, desenhado do zero para o Refúgio',
+            'Mountain icon, drawn from scratch for Refúgio',
+            'Ícono mountain, dibujado desde cero para Refúgio',
           ), '/fundamentos/icones'],
         ],
       },
