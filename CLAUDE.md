@@ -17,6 +17,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 
 - Conversa em português do Brasil. O texto original é PT-BR, curto e direto; o site também fala inglês e espanhol (veja Idiomas).
 - Julga pelo **refinamento visual**, não só pela completude. Prefere menos elementos a mais enfeite.
+- **Figma fica para o fim (03/11/2026):** enquanto a plataforma está sendo definida (temas, layout, fontes, logotipo), **não atualize o plugin do Figma** para acompanhar as mudanças do site — quando tudo estiver decidido, ele é revisado e regerado de uma vez (fontes, Refúgio, navbar, logotipo…). Só mexa no plugin se uma mudança de tokens quebrar o `figma:test`, e o mínimo.
 - **Figma: entregue o manifesto e deixe a conferência com ele.** Depois de mudar `figma/plugin/*`, rode `npm run figma` e `npm run figma:test`, passe o caminho de `dist/figma-plugin/manifest.json` e diga o que vale olhar. Não valide pedaço por pedaço pelo conector do Figma com capturas — em 31/10/2026 isso levou mais de uma hora, e ele confere tudo em 5 minutos. O conector só serve para uma dúvida pontual da API, com um teste pequeno e descartável.
 
 ## Direção visual
