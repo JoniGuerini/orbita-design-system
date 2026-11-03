@@ -86,7 +86,7 @@ const skeleton = () => `<a class="ds-skip-link" href="#${L('conteudo', 'content'
   <button class="ds-shell__edge" data-shell-toggle aria-controls="sidebar"><ds-icon name="chevron-left" size="16"></ds-icon></button>
   <aside class="ds-sidebar" id="sidebar" aria-label="${L('Barra lateral', 'Sidebar', 'Barra lateral')}">
     <div class="ds-sidebar__header">
-      <a class="ds-brand" href="#/"><img class="ds-brand__mark" src="assets/favicon.svg" alt="">Lume</a>
+      <a class="ds-brand" href="#/" aria-label="Lume"><img class="ds-brand__mark" src="assets/favicon.svg" alt=""><svg class="ds-brand__type" …>…</svg></a>
       <button class="ds-icon-btn ds-icon-btn--outline ds-icon-btn--lg ds-sidebar__toggle"
               data-shell-toggle aria-controls="sidebar">
         <img class="ds-sidebar__toggle-mark" src="assets/favicon.svg" alt="">

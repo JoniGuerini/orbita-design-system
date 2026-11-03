@@ -34,7 +34,7 @@ Quando aprender uma preferência nova ou fechar uma versão, atualize este arqui
 
 ## Vetos
 
-- Logotipo é a chama do Lume + o nome “Lume” (Inter Tight bold) — a chama entrou por pedido dele em 03/11/2026. Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
+- Logotipo é a chama do Lume + o nome “Lume” **desenhado do zero** (03/11/2026, pedido dele: “sem usar Inter”) — traço único de 15 unidades, pontas retas, linha de base 100, maiúsculas 72, altura de x 53; está inline em `index.html` (`.ds-brand__type`, 20,5 px de altura, cor do texto) e em `assets/logotype.svg`. Mudou o desenho? Atualize os dois. Fonte própria completa foi descartada (só o logotipo). O Figma ainda usa texto. Nada de ponto laranja depois do nome (“clichê”) nem “| Design System”.
 - Nunca o ícone de *sparkles* (estrela grande + pequena) — saiu da biblioteca. Novidades usa `megaphone`.
 - Nada de enfeite “vibe coded”, como o badge “Versão 0.1 · veja as novidades” no hero.
 - Contornos discretos: chips, botões e a busca da sidebar mantêm `border.control` fino (o rótulo já identifica). Campos, seleção, composer e switch usam `border.field` (3:1).

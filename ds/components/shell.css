@@ -81,6 +81,14 @@
   color: var(--ds-color-fg-default);
 }
 
+/* O nome é desenhado (não é texto em fonte): traço único, na cor do texto. 20 px de altura das maiúsculas,
+   o mesmo do nome em 28 px que ele substitui. O link leva o nome no aria-label. */
+.ds-brand__type {
+  flex: none;
+  width: auto;
+  height: 20.5px;
+}
+
 /* A chama tem as cores do tema Refúgio do app: é logotipo, não segue o tema daqui */
 .ds-brand__mark {
   flex: none;
