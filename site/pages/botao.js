@@ -3,6 +3,7 @@ import { contrast } from '../../ds/tokens.js';
 import { mountDocNav } from '../doc-nav.js';
 import { playgroundMarkup, mountPlayground, mountCodeCopy, codeBlock, tokenTable, a11yList, escapeHtml } from '../component-doc.js';
 import { L, ratio } from '../i18n.js';
+import { perTheme } from '../themes.js';
 
 export const styles = ['site/component-doc.css', 'site/pages/botao.css'];
 
@@ -97,7 +98,7 @@ export default function renderBotao(page) {
         <div class="doc-stat"><dt class="doc-stat__label">${L('variantes', 'variants', 'variantes')}</dt><dd class="doc-stat__value">${variants.length}</dd></div>
         <div class="doc-stat"><dt class="doc-stat__label">${L('tamanhos', 'sizes', 'tamaños')}</dt><dd class="doc-stat__value">${sizes.length}</dd></div>
         <div class="doc-stat"><dt class="doc-stat__label">${L('estados', 'states', 'estados')}</dt><dd class="doc-stat__value">${states.length}</dd></div>
-        <div class="doc-stat"><dt class="doc-stat__label">${L('contraste do primário', 'primary contrast', 'contraste del primario')}</dt><dd class="doc-stat__value">${pair('dark')}</dd></div>
+        <div class="doc-stat"><dt class="doc-stat__label">${L('contraste do primário', 'primary contrast', 'contraste del primario')}</dt><dd class="doc-stat__value">${pair('light')}</dd></div>
       </dl>
     </header>
 
@@ -259,8 +260,8 @@ export default function renderBotao(page) {
       ${a11yList([
         [L('Elemento certo', 'The right element', 'El elemento correcto'), L(`Use ${ic('&lt;button&gt;')} para ações e ${ic('&lt;a class="ds-btn"&gt;')} para navegar. O elemento traz teclado e leitor de tela de graça.`, `Use ${ic('&lt;button&gt;')} for actions and ${ic('&lt;a class="ds-btn"&gt;')} to navigate. The element brings keyboard and screen reader support for free.`, `Usa ${ic('&lt;button&gt;')} para acciones y ${ic('&lt;a class="ds-btn"&gt;')} para navegar. El elemento trae teclado y lector de pantalla gratis.`)],
         [L('Teclado', 'Keyboard', 'Teclado'), L('Tab leva o foco; Enter e Espaço acionam.', 'Tab moves focus; Enter and Space activate.', 'Tab lleva el foco; Enter y Espacio lo activan.'), ['Tab', 'Enter', L('Espaço', 'Space', 'Espacio')]],
-        [L('Foco sempre visível', 'Focus always visible', 'Foco siempre visible'), L('Anel de 2 px na cor de foco, com 2 px de respiro — nos três temas, em todas as variantes.', 'A 2 px ring in the focus color, with 2 px of offset — in all three themes, in every variant.', 'Anillo de 2 px en el color de foco, con 2 px de respiro — en los tres temas, en todas las variantes.')],
-        [L('Contraste verificado', 'Contrast checked', 'Contraste verificado'), L(`Texto do primário sobre a marca: ${pair('dark')} no escuro, ${pair('light')} no claro e ${pair('refugio')} no Refúgio, acima do mínimo de ${ratio(4.5, 1)}.`, `Primary text on the brand: ${pair('dark')} in dark, ${pair('light')} in light, and ${pair('refugio')} in Refúgio, above the ${ratio(4.5, 1)} minimum.`, `Texto del primario sobre la marca: ${pair('dark')} en oscuro, ${pair('light')} en claro y ${pair('refugio')} en Refúgio, por encima del mínimo de ${ratio(4.5, 1)}.`)],
+        [L('Foco sempre visível', 'Focus always visible', 'Foco siempre visible'), L('Anel de 2 px na cor de foco, com 2 px de respiro — nos quatro temas, em todas as variantes.', 'A 2 px ring in the focus color, with 2 px of offset — in all four themes, in every variant.', 'Anillo de 2 px en el color de foco, con 2 px de respiro — en los cuatro temas, en todas las variantes.')],
+        [L('Contraste verificado', 'Contrast checked', 'Contraste verificado'), L(`Texto do primário sobre a marca: ${perTheme(pair)}, acima do mínimo de ${ratio(4.5, 1)}.`, `Primary text on the brand: ${perTheme(pair)}, above the ${ratio(4.5, 1)} minimum.`, `Texto del primario sobre la marca: ${perTheme(pair)}, por encima del mínimo de ${ratio(4.5, 1)}.`)],
         [L('Só ícone? Dê um nome', 'Icon only? Give it a name', '¿Solo ícono? Dale un nombre'), L(`Coloque ${ic('aria-label')} no botão e uma dica com o mesmo texto.`, `Put an ${ic('aria-label')} on the button and a hint with the same text.`, `Pon ${ic('aria-label')} en el botón y una pista con el mismo texto.`)],
         [L('Desativado com cuidado', 'Disable with care', 'Desactivado con cuidado'), L(`${ic('disabled')} tira o botão do foco. Se a pessoa precisa descobrir a ação, use ${ic('aria-disabled="true"')} e explique o motivo.`, `${ic('disabled')} removes the button from focus. If people need to discover the action, use ${ic('aria-disabled="true"')} and explain why.`, `${ic('disabled')} saca el botón del foco. Si la persona necesita descubrir la acción, usa ${ic('aria-disabled="true"')} y explica el motivo.`)],
       ])}

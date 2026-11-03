@@ -3,6 +3,7 @@ import { tokens, contrast } from '../../ds/tokens.js';
 import { mountDocNav } from '../doc-nav.js';
 import { playgroundMarkup, mountPlayground, mountCodeCopy, tokenTable, a11yList, escapeHtml } from '../component-doc.js';
 import { L, ratio as fmtRatio } from '../i18n.js';
+import { THEME_IDS, themeLabel, perTheme } from '../themes.js';
 
 export const styles = ['site/component-doc.css', 'site/pages/badge.css'];
 
@@ -120,7 +121,7 @@ export default function renderBadge(page) {
       <header class="doc-section__header">
         <div>
           <h2 class="doc-section__title" id="tons-title">${L('Tons', 'Tones', 'Tonos')}</h2>
-          <p class="doc-section__desc">${L('O tom diz o tipo de status. Fundo suave, texto forte e contorno fino — legível nos três temas, sem gritar.', 'The tone says the type of status. A soft background, strong text, and a thin outline — legible in all three themes, without shouting.', 'El tono dice el tipo de estado. Fondo suave, texto fuerte y contorno fino — legible en los tres temas, sin gritar.')}</p>
+          <p class="doc-section__desc">${L('O tom diz o tipo de status. Fundo suave, texto forte e contorno fino — legível nos quatro temas, sem gritar.', 'The tone says the type of status. A soft background, strong text, and a thin outline — legible in all four themes, without shouting.', 'El tono dice el tipo de estado. Fondo suave, texto fuerte y contorno fino — legible en los cuatro temas, sin gritar.')}</p>
         </div>
       </header>
       <div class="cd-grid bd-tones">
@@ -134,7 +135,7 @@ export default function renderBadge(page) {
             <div class="cd-example__body">
               <p class="cd-example__name">${name}<code>${tone === 'neutral' ? 'ds-badge' : `ds-badge--${tone}`}</code></p>
               <p class="cd-example__text">${text}</p>
-              <p class="bd-ratio">${L(`Contraste ${fmtRatio(toneRatio(tone, 'dark'))} escuro · ${fmtRatio(toneRatio(tone, 'light'))} claro · ${fmtRatio(toneRatio(tone, 'refugio'))} Refúgio`, `Contrast ${fmtRatio(toneRatio(tone, 'dark'))} dark · ${fmtRatio(toneRatio(tone, 'light'))} light · ${fmtRatio(toneRatio(tone, 'refugio'))} Refúgio`, `Contraste ${fmtRatio(toneRatio(tone, 'dark'))} oscuro · ${fmtRatio(toneRatio(tone, 'light'))} claro · ${fmtRatio(toneRatio(tone, 'refugio'))} Refúgio`)}</p>
+              <p class="bd-ratio">${L('Contraste', 'Contrast', 'Contraste')} ${THEME_IDS.map((id) => `${fmtRatio(toneRatio(tone, id))} ${themeLabel(id)}`).join(' · ')}</p>
             </div>
           </article>`,
         ).join('')}
@@ -245,7 +246,7 @@ export default function renderBadge(page) {
       </header>
       ${a11yList([
         [L('Cor nunca sozinha', 'Never color alone', 'Nunca solo color'), L('O status está escrito (“Em revisão”). O ponto e o tom só reforçam.', 'The status is written out (“In review”). The dot and the tone only reinforce it.', 'El estado está escrito (“En revisión”). El punto y el tono solo refuerzan.')],
-        [L('Contraste verificado', 'Contrast checked', 'Contraste verificado'), L(`O texto de cada tom passa de ${fmtRatio(4.5, 1)} sobre o próprio fundo — sucesso: ${fmtRatio(toneRatio('success', 'dark'))} no escuro, ${fmtRatio(toneRatio('success', 'light'))} no claro.`, `Each tone’s text passes ${fmtRatio(4.5, 1)} on its own background — success: ${fmtRatio(toneRatio('success', 'dark'))} in dark, ${fmtRatio(toneRatio('success', 'light'))} in light.`, `El texto de cada tono supera ${fmtRatio(4.5, 1)} sobre su propio fondo — éxito: ${fmtRatio(toneRatio('success', 'dark'))} en oscuro, ${fmtRatio(toneRatio('success', 'light'))} en claro.`)],
+        [L('Contraste verificado', 'Contrast checked', 'Contraste verificado'), L(`O texto de cada tom passa de ${fmtRatio(4.5, 1)} sobre o próprio fundo — sucesso: ${perTheme((id) => fmtRatio(toneRatio('success', id)))}.`, `Each tone’s text passes ${fmtRatio(4.5, 1)} on its own background — success: ${perTheme((id) => fmtRatio(toneRatio('success', id)))}.`, `El texto de cada tono supera ${fmtRatio(4.5, 1)} sobre su propio fondo — éxito: ${perTheme((id) => fmtRatio(toneRatio('success', id)))}.`)],
         [L('Não é interativo', 'Not interactive', 'No es interactivo'), L('Badge não recebe clique nem foco. Se precisa filtrar ou abrir algo, use chip, link ou botão.', 'A badge takes no clicks or focus. If it needs to filter or open something, use a chip, link, or button.', 'El badge no recibe clic ni foco. Si necesita filtrar o abrir algo, usa chip, enlace o botón.')],
         [L('Contagem com contexto', 'A count with context', 'Conteo con contexto'), L('Um “12” solto não diz nada ao leitor de tela. Complete com texto oculto: “12 não lidas”.', 'A bare “12” tells the screen reader nothing. Complete it with hidden text: “12 unread”.', 'Un “12” suelto no dice nada al lector de pantalla. Complétalo con texto oculto: “12 sin leer”.')],
         [L('Mudou? Anuncie', 'Changed? Announce it', '¿Cambió? Anúncialo'), L(`Quando o status muda sem recarregar, coloque a mensagem numa região ${ic('aria-live="polite"')}.`, `When the status changes without a reload, put the message in an ${ic('aria-live="polite"')} region.`, `Cuando el estado cambia sin recargar, pon el mensaje en una región ${ic('aria-live="polite"')}.`)],

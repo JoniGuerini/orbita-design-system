@@ -19,14 +19,16 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PREFIX = 'ds';
-const MODES = ['dark', 'light', 'refugio'];
-const DEFAULT_MODE = 'dark';
+// duas paletas, cada uma com claro e escuro: Lume (light, dark) e Laranja (orange, orange-dark)
+const MODES = ['light', 'dark', 'orange', 'orange-dark'];
+const DEFAULT_MODE = 'light';
 // token sem valor próprio num tema herda deste outro: o Refúgio é um tema claro, parte do Claro
-const FALLBACK = { light: 'dark', refugio: 'light' };
-const SCHEME = { dark: 'dark', light: 'light', refugio: 'light' };
+// token sem valor próprio num tema herda deste outro; o Laranja escuro tem todos os valores
+const FALLBACK = { orange: 'orange-dark', light: 'orange', dark: 'orange-dark' };
+const SCHEME = { light: 'light', dark: 'dark', orange: 'light', 'orange-dark': 'dark' };
 // recortes de um tema: valem só dentro de um seletor e não viram tema próprio (nem vão para Figma ou exportações).
 // No JSON, a chave do recorte só aparece nos tokens que mudam ali; o resto segue o tema de base.
-const SCOPES = { 'refugio-sidebar': { base: 'refugio', selector: '[data-theme="refugio"] :is(.ds-sidebar, .ds-navbar)', scheme: 'dark', over: 'color.bg.sidebar' } };
+const SCOPES = { 'light-sidebar': { base: 'light', selector: '[data-theme="light"] :is(.ds-sidebar, .ds-navbar)', scheme: 'dark', over: 'color.bg.sidebar' } };
 const ALL_MODES = [...MODES, ...Object.keys(SCOPES)];
 for (const [id, scope] of Object.entries(SCOPES)) FALLBACK[id] = scope.base;
 const modeValue = (value, mode) => value[mode] ?? (FALLBACK[mode] ? modeValue(value, FALLBACK[mode]) : undefined);
@@ -334,7 +336,7 @@ export async function buildTokens({ quiet = false } = {}) {
     })
     .join('\n');
 
-  // "system" segue o sistema entre o escuro e o claro; o Refúgio só vale quando escolhido
+  // "system" é resolvido no JS (claro ou escuro da paleta escolhida): o CSS só conhece os quatro temas
   const css = [
     `/**\n * Lume Design System — tokens\n * Gerado por scripts/build-tokens.mjs a partir de tokens/*.json. Não edite à mão.\n */`,
     cssBlock(':root', globalTokens, DEFAULT_MODE, emit),
@@ -343,7 +345,6 @@ export async function buildTokens({ quiet = false } = {}) {
     ...Object.entries(SCOPES).map(([id, scope]) =>
       cssBlock(scope.selector, themedTokens.filter((t) => t.own?.includes(id)), id, emit, [`  color-scheme: ${scope.scheme};`]),
     ),
-    `@media (prefers-color-scheme: light) {\n${indent(cssBlock(':root[data-theme="system"]', themedTokens, 'light', emit, ['  color-scheme: light;']))}\n}`,
     `/* Estilos de texto */\n${textClasses}`,
   ].join('\n\n');
 

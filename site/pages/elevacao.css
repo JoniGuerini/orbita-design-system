@@ -164,7 +164,7 @@ button.el-tag:hover {
 }
 
 .el-values {
-  --doc-table-cols: minmax(0, 0.8fr) repeat(3, minmax(0, 1.2fr)) 44px;
+  --doc-table-cols: minmax(0, 0.8fr) repeat(4, minmax(0, 1fr)) 44px;
 }
 
 .el-values__token {

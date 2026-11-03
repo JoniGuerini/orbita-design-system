@@ -26,7 +26,7 @@ const STAGES = () => [
   },
   {
     name: L('Rascunho', 'Draft', 'Borrador'),
-    text: L('Tokens, CSS, JS e a página com playground. Estados forçados com data-state, nos três temas.', 'Tokens, CSS, JS, and the page with a playground. States forced with data-state, in all three themes.', 'Tokens, CSS, JS y la página con playground. Estados forzados con data-state, en los tres temas.'),
+    text: L('Tokens, CSS, JS e a página com playground. Estados forçados com data-state, nos quatro temas.', 'Tokens, CSS, JS, and the page with a playground. States forced with data-state, in all four themes.', 'Tokens, CSS, JS y la página con playground. Estados forzados con data-state, en los cuatro temas.'),
     who: L('Quem vai construir', 'Whoever will build it', 'Quien lo va a construir'),
     out: L('Pull request em rascunho', 'A draft pull request', 'Pull request en borrador'),
   },
@@ -121,7 +121,7 @@ Anatomia, variantes e estados (normal, hover, pressionado, foco, desativado, err
 O que mais foi considerado e por que ficou de fora.
 
 ### Impacto em tokens
-Tokens novos ou alterados. Contraste nos três temas.
+Tokens novos ou alterados. Contraste nos quatro temas.
 
 ### Acessibilidade
 Papel ARIA, teclado, foco, leitor de tela e movimento reduzido.
@@ -146,7 +146,7 @@ Anatomy, variants, and states (default, hover, pressed, focus, disabled, error).
 What else was considered and why it was left out.
 
 ### Token impact
-New or changed tokens. Contrast in all three themes.
+New or changed tokens. Contrast in all four themes.
 
 ### Accessibility
 ARIA role, keyboard, focus, screen reader, and reduced motion.
@@ -171,7 +171,7 @@ Anatomía, variantes y estados (normal, hover, presionado, foco, desactivado, er
 Qué más se consideró y por qué quedó fuera.
 
 ### Impacto en tokens
-Tokens nuevos o modificados. Contraste en los tres temas.
+Tokens nuevos o modificados. Contraste en los cuatro temas.
 
 ### Accesibilidad
 Rol ARIA, teclado, foco, lector de pantalla y movimiento reducido.
@@ -298,7 +298,7 @@ const CHECKLIST = () => [
     id: 'a11y',
     name: L('Acessibilidade', 'Accessibility', 'Accesibilidad'),
     items: [
-      [L('Contraste', 'Contrast', 'Contraste'), L('Texto ≥ 4,5:1 e contornos e ícones ≥ 3:1, nos três temas.', 'Text ≥ 4.5:1 and outlines and icons ≥ 3:1, in all three themes.', 'Texto ≥ 4,5:1 y contornos e íconos ≥ 3:1, en los tres temas.')],
+      [L('Contraste', 'Contrast', 'Contraste'), L('Texto ≥ 4,5:1 e contornos e ícones ≥ 3:1, nos quatro temas.', 'Text ≥ 4.5:1 and outlines and icons ≥ 3:1, in all four themes.', 'Texto ≥ 4,5:1 y contornos e íconos ≥ 3:1, en los cuatro temas.')],
       [L('Teclado', 'Keyboard', 'Teclado'), L('Tudo alcançável com Tab; setas, Enter, Espaço e Esc onde o padrão ARIA pede.', 'Everything reachable with Tab; arrows, Enter, Space, and Esc where the ARIA pattern calls for them.', 'Todo alcanzable con Tab; flechas, Enter, Espacio y Esc donde el patrón ARIA lo pide.')],
       [L('Nomes', 'Names', 'Nombres'), L('Botões de ícone com aria-label; campos com rótulo de verdade.', 'Icon buttons with aria-label; fields with a real label.', 'Botones de ícono con aria-label; campos con etiqueta de verdad.')],
       [L('Movimento', 'Motion', 'Movimiento'), L('prefers-reduced-motion respeitado; nada pisca nem anima sem motivo.', 'prefers-reduced-motion respected; nothing flashes or animates without a reason.', 'prefers-reduced-motion respetado; nada parpadea ni se anima sin motivo.')],

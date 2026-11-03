@@ -31,7 +31,7 @@ const LABELS = () => [
   ['all', L('Todos', 'All', 'Todos')],
 ];
 
-/** Menor contraste das cores de série sobre a superfície, nos três temas (vem do build). */
+/** Menor contraste das cores de série sobre a superfície, nos quatro temas (vem do build). */
 const minSeriesContrast = Math.min(...contrast.filter((c) => c.fg.startsWith('color.chart.series.') && c.bg === 'color.bg.surface').map((c) => c.ratio));
 
 const signed = (v) => `${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v)} ${L('pts', 'pts', 'pts')}`;
@@ -336,7 +336,7 @@ export default function renderBarras(page) {
         [L('Teclado', 'Keyboard', 'Teclado'), L('Tab foca o gráfico; as setas percorrem as categorias; Home e End vão às pontas; Esc fecha o tooltip.', 'Tab focuses the chart; the arrows walk through the categories; Home and End go to the ends; Esc closes the tooltip.', 'Tab enfoca el gráfico; las flechas recorren las categorías; Home y End van a los extremos; Esc cierra el tooltip.'), ['Tab', '←', '→', 'Home', 'End', 'Esc']],
         [L('Leitor de tela', 'Screen reader', 'Lector de pantalla'), L('O gráfico se anuncia com título, tipo e número de categorias. A cada seta, uma região ao vivo lê a categoria e o valor de cada série.', 'The chart announces itself with title, type, and number of categories. On each arrow press, a live region reads the category and each series’ value.', 'El gráfico se anuncia con título, tipo y número de categorías. Con cada flecha, una región en vivo lee la categoría y el valor de cada serie.')],
         [L('Cor nunca sozinha', 'Never color alone', 'Nunca solo color'), L(`Com duas séries ou mais há legenda; posição e rótulos ajudam. Para daltonismo total, impressão e alto contraste, ligue ${ic('texture')}.`, `With two or more series there’s a legend; position and labels help. For total color blindness, print, and high contrast, turn on ${ic('texture')}.`, `Con dos series o más hay leyenda; posición y etiquetas ayudan. Para daltonismo total, impresión y alto contraste, activa ${ic('texture')}.`)],
-        [L('Contraste verificado', 'Contrast checked', 'Contraste verificado'), L(`As 8 cores de série passam de 3:1 sobre a superfície nos três temas — a menor fica em ${minRatio}. A ordem das cores foi validada para protanopia e deuteranopia.`, `All 8 series colors pass 3:1 on the surface in all three themes — the lowest sits at ${minRatio}. The color order was validated for protanopia and deuteranopia.`, `Los 8 colores de serie superan 3:1 sobre la superficie en los tres temas — el menor queda en ${minRatio}. El orden de los colores se validó para protanopia y deuteranopia.`)],
+        [L('Contraste verificado', 'Contrast checked', 'Contraste verificado'), L(`As 8 cores de série passam de 3:1 sobre a superfície nos quatro temas — a menor fica em ${minRatio}. A ordem das cores foi validada para protanopia e deuteranopia.`, `All 8 series colors pass 3:1 on the surface in all four themes — the lowest sits at ${minRatio}. The color order was validated for protanopia and deuteranopia.`, `Los 8 colores de serie superan 3:1 sobre la superficie en los cuatro temas — el menor queda en ${minRatio}. El orden de los colores se validó para protanopia y deuteranopia.`)],
         [L('Movimento', 'Motion', 'Movimiento'), L('As barras crescem uma vez, quando aparecem. Com movimento reduzido, nada anima.', 'The bars grow once, when they appear. With reduced motion, nothing animates.', 'Las barras crecen una vez, cuando aparecen. Con movimiento reducido, nada se anima.')],
       ]),
     )}

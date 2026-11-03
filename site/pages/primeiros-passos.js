@@ -23,7 +23,7 @@ const COPY = T(
     steps: [
       ['Copie o design system', `O Lume não tem dependências nem build obrigatório. Leve a pasta ${code('ds/')} para o seu projeto.`],
       ['Carregue o CSS', 'Um arquivo só traz as fontes, os tokens, a base e todos os componentes. As fontes vêm junto, em ds/fonts, com as licenças.'],
-      ['Escolha o tema', `O Refúgio é o padrão. Use ${code('dark')} para o escuro, ${code('light')} para o claro ou ${code('system')} para seguir o sistema.`],
+      ['Escolha o tema', `O Lume claro (${code('light')}) é o padrão. Use ${code('dark')} para o Lume escuro, ou ${code('orange')} e ${code('orange-dark')} para a paleta Laranja. Para seguir o sistema, ${code('initTheme()')} resolve claro ou escuro.`],
       ['Ligue só o JavaScript que usar', 'Componentes visuais funcionam só com CSS. Os interativos têm um módulo cada — importe e ligue os que a tela usa.'],
     ],
     first: { title: 'Sua primeira tela', desc: 'Escolha um ponto de partida, veja em cada tema e copie. O código abaixo é exatamente o que está no palco.' },
@@ -69,7 +69,7 @@ const COPY = T(
     steps: [
       ['Copy the design system', `Lume has no dependencies and no required build. Take the ${code('ds/')} folder into your project.`],
       ['Load the CSS', 'A single file brings the fonts, the tokens, the base, and every component. The fonts ship in ds/fonts, with their licenses.'],
-      ['Pick the theme', `Refúgio is the default. Use ${code('dark')} for dark, ${code('light')} for light, or ${code('system')} to follow the system.`],
+      ['Pick the theme', `Lume light (${code('light')}) is the default. Use ${code('dark')} for Lume dark, or ${code('orange')} and ${code('orange-dark')} for the Orange palette. To follow the system, ${code('initTheme()')} resolves light or dark.`],
       ['Turn on only the JavaScript you use', 'Visual components work with CSS alone. Interactive ones have a module each — import and turn on the ones your screen uses.'],
     ],
     first: { title: 'Your first screen', desc: 'Pick a starting point, check it in each theme, and copy it. The code below is exactly what’s on the stage.' },
@@ -115,7 +115,7 @@ const COPY = T(
     steps: [
       ['Copia el design system', `Lume no tiene dependencias ni build obligatorio. Lleva la carpeta ${code('ds/')} a tu proyecto.`],
       ['Carga el CSS', 'Un solo archivo trae las fuentes, los tokens, la base y todos los componentes. Las fuentes vienen incluidas, en ds/fonts, con sus licencias.'],
-      ['Elige el tema', `Refúgio es el predeterminado. Usa ${code('dark')} para el oscuro, ${code('light')} para el claro o ${code('system')} para seguir el sistema.`],
+      ['Elige el tema', `Lume claro (${code('light')}) es el predeterminado. Usa ${code('dark')} para Lume oscuro, u ${code('orange')} y ${code('orange-dark')} para la paleta Naranja. Para seguir el sistema, ${code('initTheme()')} resuelve claro u oscuro.`],
       ['Activa solo el JavaScript que uses', 'Los componentes visuales funcionan solo con CSS. Los interactivos tienen un módulo cada uno — importa y activa los que use la pantalla.'],
     ],
     first: { title: 'Tu primera pantalla', desc: 'Elige un punto de partida, míralo en cada tema y cópialo. El código de abajo es exactamente lo que está en el escenario.' },
@@ -162,7 +162,7 @@ const countPrefix = (prefix) => tokens.filter((t) => t.name.startsWith(prefix)).
 const STEP_CODE = [
   'cp -R lume/ds ./ds',
   `<link rel="stylesheet" href="ds/ds.css">`,
-  () => `<html lang="${locale()}" data-theme="refugio">`,
+  () => `<html lang="${locale()}" data-theme="light">`,
   `<script type="module">
   import './ds/icons/icons.js';
   import { initTooltips } from './ds/js/tooltip.js';

@@ -3,7 +3,7 @@
  */
 import '../ds/icons/icons.js';
 import { icon } from '../ds/icons/icons.js';
-import { initTheme, bindThemeControls, setTheme } from '../ds/js/theme.js';
+import { initTheme, bindThemeControls, setTheme, setPalette, getPalette, resolvedTheme } from '../ds/js/theme.js';
 import { initLocale, setLocale, getLocalePreference, locale, LOCALES, LOCALE_NAMES } from '../ds/js/i18n.js';
 import { attachMenu } from '../ds/js/menu.js';
 import { initTooltips } from '../ds/js/tooltip.js';
@@ -21,7 +21,10 @@ import { t, applyStrings } from './i18n.js';
  */
 const params = new URLSearchParams(location.search);
 const EMBED = params.has('embed');
-const THEMES = ['refugio', 'dark', 'light', 'system'];
+// temas resolvidos (modo × paleta): Lume claro/escuro e Laranja claro/escuro
+const THEMES = ['light', 'dark', 'orange', 'orange-dark'];
+const isDark = (theme) => theme === 'dark' || theme === 'orange-dark';
+let paletteReady = false; // o chip de paleta é montado depois do tema inicial
 
 if (EMBED) {
   document.documentElement.dataset.embed = '';
@@ -32,33 +35,47 @@ if (EMBED) {
   } catch {}
 }
 
-/** Tema só na memória, para o modo demonstração. */
-function embedTheme(preference) {
-  if (!THEMES.includes(preference)) return;
-  document.documentElement.dataset.theme = preference;
+/** Tema só na memória, para o modo demonstração: recebe o tema resolvido (quem embute manda o do site). */
+function embedTheme(theme) {
+  if (!THEMES.includes(theme)) return;
+  document.documentElement.dataset.theme = theme;
+  const mode = isDark(theme) ? 'dark' : 'light';
   document.querySelectorAll('[data-theme-option]').forEach((btn) => {
-    const on = btn.dataset.themeOption === preference;
+    const on = btn.dataset.themeOption === mode;
     btn.setAttribute('aria-checked', String(on));
     btn.tabIndex = on ? 0 : -1;
   });
-  document.documentElement.dispatchEvent(new CustomEvent('ds:themechange', { detail: { preference, resolved: preference } }));
+  document.documentElement.dispatchEvent(new CustomEvent('ds:themechange', { detail: { preference: mode, palette: embedPalette(), resolved: theme } }));
+  if (paletteReady) renderPaletteMenu();
+}
+const embedPalette = () => (document.documentElement.dataset.theme?.startsWith('orange') ? 'orange' : 'lume');
+/** Modo (claro, escuro, sistema) na paleta atual do exemplo. */
+function embedMode(mode) {
+  const dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+  embedTheme(embedPalette() === 'orange' ? (dark ? 'orange-dark' : 'orange') : dark ? 'dark' : 'light');
+}
+function embedSetPalette(palette) {
+  const dark = isDark(document.documentElement.dataset.theme);
+  embedTheme(palette === 'orange' ? (dark ? 'orange-dark' : 'orange') : dark ? 'dark' : 'light');
 }
 
 function bindEmbedThemeControls() {
   const options = [...document.querySelectorAll('[data-theme-option]')];
-  options.forEach((btn) => btn.addEventListener('click', () => embedTheme(btn.dataset.themeOption)));
+  options.forEach((btn) => btn.addEventListener('click', () => embedMode(btn.dataset.themeOption)));
   options[0]?.closest('[role="radiogroup"]')?.addEventListener('keydown', (event) => {
     const delta = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
     if (!delta) return;
     event.preventDefault();
     const next = options[(options.indexOf(document.activeElement) + delta + options.length) % options.length];
     next.focus();
-    embedTheme(next.dataset.themeOption);
+    embedMode(next.dataset.themeOption);
   });
   embedTheme(THEMES.includes(params.get('theme')) ? params.get('theme') : document.documentElement.dataset.theme);
 }
 
-const applyTheme = EMBED ? embedTheme : setTheme;
+const applyTheme = EMBED ? embedMode : setTheme;
+const applyPalette = EMBED ? embedSetPalette : setPalette;
+const currentPalette = () => (EMBED ? embedPalette() : getPalette());
 
 initTheme();
 initLocale();
@@ -147,7 +164,8 @@ const palette = createCommandPalette({
       hint: page.load ? undefined : t('soon'),
       perform: () => go(page.path),
     })),
-    { id: 'theme-refugio', label: t('useRefugio'), group: t('actions'), icon: 'cabin', keywords: ['refúgio', 'refugio', 'lume', 'ardósia', 'slate'], perform: () => applyTheme('refugio') },
+    { id: 'palette-lume', label: t('usePalette', t('paletteLume')), group: t('actions'), icon: 'palette', keywords: ['paleta', 'palette', 'lume', 'ardósia', 'slate', 'refúgio'], perform: () => applyPalette('lume') },
+    { id: 'palette-orange', label: t('usePalette', t('paletteOrange')), group: t('actions'), icon: 'palette', keywords: ['paleta', 'palette', 'laranja', 'orange', 'naranja', 'pêssego'], perform: () => applyPalette('orange') },
     { id: 'theme-dark', label: t('useDark'), group: t('actions'), icon: 'moon', keywords: ['dark', 'escuro', 'oscuro'], perform: () => applyTheme('dark') },
     { id: 'theme-light', label: t('useLight'), group: t('actions'), icon: 'sun', keywords: ['light', 'claro'], perform: () => applyTheme('light') },
     { id: 'theme-system', label: t('useSystem'), group: t('actions'), icon: 'monitor', keywords: ['system', 'sistema', 'automático'], perform: () => applyTheme('system') },
@@ -159,6 +177,30 @@ const palette = createCommandPalette({
 });
 
 /* ───────── Idioma ───────── */
+
+/* ───────── Paleta ───────── */
+
+const paletteChip = document.querySelector('[data-palette-menu]');
+let paletteMenu = null;
+function renderPaletteMenu() {
+  paletteMenu?.destroy();
+  const names = { lume: t('paletteLume'), orange: t('paletteOrange') };
+  const current = currentPalette();
+  paletteChip.querySelector('[data-label]').textContent = names[current];
+  paletteChip.setAttribute('aria-label', `${t('palette')}: ${names[current]}`);
+  paletteMenu = attachMenu(paletteChip, {
+    label: t('palette'),
+    value: current,
+    options: [
+      { value: 'lume', label: names.lume, swatch: 'var(--ds-color-refugio-700)' },
+      { value: 'orange', label: names.orange, swatch: 'var(--ds-color-brand-400)' },
+    ],
+    onChange: applyPalette,
+  });
+}
+renderPaletteMenu();
+paletteReady = true;
+document.documentElement.addEventListener('ds:themechange', () => !EMBED && renderPaletteMenu());
 
 const localeChip = document.querySelector('[data-locale-menu]');
 const SHORT = { 'pt-BR': 'PT', en: 'EN', es: 'ES' };
@@ -188,6 +230,7 @@ document.documentElement.addEventListener('ds:localechange', () => {
   renderSidebar();
   renderNavbar();
   renderLocaleMenu();
+  renderPaletteMenu();
   route();
 });
 

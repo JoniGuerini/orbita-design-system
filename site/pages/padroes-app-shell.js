@@ -1,6 +1,9 @@
 import { icon } from '../../ds/icons/icons.js';
 import { tokens } from '../../ds/tokens.js';
-import { resolvedTheme } from '../../ds/js/theme.js';
+import { resolvedTheme, themeFor } from '../../ds/js/theme.js';
+import { isDarkTheme } from '../themes.js';
+
+const modeOf = (theme) => (isDarkTheme(theme) ? 'dark' : 'light');
 import { locale } from '../../ds/js/i18n.js';
 import { mountDocNav } from '../doc-nav.js';
 import { mountCodeCopy, codeBlock, tokenTable, a11yList } from '../component-doc.js';
@@ -31,7 +34,7 @@ const PARTS = () => [
   ['.ds-account', [1, 0.5, 0, 0], L('Cartão da conta', 'Account card', 'Tarjeta de la cuenta'), L('Fica preso no pé da sidebar: conta, versão ou workspace.', 'Pinned to the foot of the sidebar: account, version, or workspace.', 'Queda fija al pie de la sidebar: cuenta, versión o workspace.')],
   ['.ds-main', [0.94, 0.16, 0, 0], L('Painel principal', 'Main panel', 'Panel principal'), L(`O conteúdo da página, com respiro lateral de ${px('layout.gutter')} px e largura de leitura limitada.`, `The page content, with ${px('layout.gutter')} px side padding and a limited reading width.`, `El contenido de la página, con respiro lateral de ${px('layout.gutter')} px y ancho de lectura limitado.`)],
   ['#breadcrumb', [1, 0.5, 16, 0], L('Topbar e trilha', 'Top bar and breadcrumb', 'Barra superior y ruta'), L(`${px('layout.topbar')} px, fixa no topo do painel: transparente no início, opaca ao rolar.`, `${px('layout.topbar')} px, fixed at the top of the panel: transparent at first, opaque on scroll.`, `${px('layout.topbar')} px, fija arriba del panel: transparente al inicio, opaca al desplazarse.`), '.ds-topbar'],
-  ['.ds-topbar .ds-segmented', [0, 0.5, -16, 0], L('Tema', 'Theme', 'Tema'), L('Escuro, claro ou o do sistema. A escolha vale para o app inteiro.', 'Dark, light, or the system’s. The choice applies to the whole app.', 'Oscuro, claro o el del sistema. La elección vale para toda la app.')],
+  ['.ds-topbar .ds-segmented', [0, 0.5, -16, 0], L('Modo', 'Mode', 'Modo'), L('Claro, escuro ou o do sistema, na paleta escolhida ao lado. A escolha vale para o app inteiro.', 'Light, dark, or the system’s, in the palette chosen next to it. The choice applies to the whole app.', 'Claro, oscuro o el del sistema, en la paleta elegida al lado. La elección vale para toda la app.')],
 ];
 
 const SHORTCUTS = () => [
@@ -136,12 +139,12 @@ document.getElementById('shell')
   // → { sidebar: 'expanded' | 'collapsed', mobile: false, mobileOpen: false }`;
 
 const embedCode = () => `<!-- ${L('o app de verdade, sem gravar preferências', 'the real app, without saving preferences', 'la app de verdad, sin guardar preferencias')} -->
-<iframe src="index.html?embed&theme=light&sidebar=collapsed#/"></iframe>
+<iframe src="index.html?embed&theme=orange&sidebar=collapsed#/"></iframe>
 
 <script type="module">
   const app = iframe.contentWindow.lumeEmbed;   // ${L('mesma origem', 'same origin', 'mismo origen')}
   app.shell.toggle();
-  app.setTheme('dark');
+  app.setTheme('dark');          // ${L('tema resolvido: light · dark · orange · orange-dark', 'resolved theme: light · dark · orange · orange-dark', 'tema resuelto: light · dark · orange · orange-dark')}
   app.setLocale('${locale()}');
   app.go('/componentes/botao');
 </script>`;
@@ -193,7 +196,7 @@ export default function renderAppShell(page) {
           ${segmented('layout', L('Layout do exemplo', 'Example layout', 'Diseño del ejemplo'), [{ value: 'sidebar', label: L('Sidebar', 'Sidebar', 'Sidebar'), icon: 'panel-left' }, { value: 'navbar', label: L('Navbar', 'Navbar', 'Navbar'), icon: 'panel-top' }], 'sidebar')}
           <button type="button" class="ds-btn ds-btn--secondary ds-btn--sm" data-demo-toggle disabled>${icon('panel-left', { size: 16 })}<span data-demo-toggle-label>${L('Recolher menu', 'Collapse menu', 'Contraer menú')}</span></button>
           <span class="pa-demo__spacer"></span>
-          ${segmented('theme', L('Tema do exemplo', 'Example theme', 'Tema del ejemplo'), [{ value: 'refugio', label: 'Refúgio', icon: 'cabin' }, { value: 'dark', label: L('Escuro', 'Dark', 'Oscuro'), icon: 'moon' }, { value: 'light', label: L('Claro', 'Light', 'Claro'), icon: 'sun' }], theme)}
+          ${segmented('theme', L('Modo do exemplo', 'Example mode', 'Modo del ejemplo'), [{ value: 'light', label: L('Claro', 'Light', 'Claro'), icon: 'sun' }, { value: 'dark', label: L('Escuro', 'Dark', 'Oscuro'), icon: 'moon' }], modeOf(theme))}
           <button type="button" class="ds-icon-btn ds-icon-btn--muted" data-demo-reload aria-label="${L('Recarregar o exemplo', 'Reload the example', 'Recargar el ejemplo')}" data-ds-tooltip="${L('Recarregar o exemplo', 'Reload the example', 'Recargar el ejemplo')}">${icon('refresh', { size: 18 })}</button>
         </div>
         ${frame('live', L('Exemplo ao vivo do Lume', 'Live Lume example', 'Ejemplo en vivo de Lume'))}
@@ -570,9 +573,9 @@ export function mount(root) {
     liveApi?.setLayout?.(value);
   });
   const themeGroup = bindSegmented(root.querySelector('[data-segmented="theme"]'), (value) => {
-    theme = value;
-    liveApi?.setTheme(value);
-    anatomyApi?.setTheme(value);
+    theme = themeFor(value);
+    liveApi?.setTheme(theme);
+    anatomyApi?.setTheme(theme);
   });
 
   const onToggle = () => liveApi?.shell.toggle();
@@ -695,7 +698,7 @@ export function mount(root) {
   // segue o tema do site quando ele muda (o usuário ainda pode escolher outro só para o exemplo)
   const onSiteTheme = (e) => {
     theme = e.detail.resolved;
-    themeGroup.set(theme);
+    themeGroup.set(modeOf(theme));
     liveApi?.setTheme(theme);
     anatomyApi?.setTheme(theme);
   };
