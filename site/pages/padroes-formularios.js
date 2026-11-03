@@ -148,7 +148,6 @@ function demoForm() {
 
     <fieldset class="ds-form__section">
       ${legend('01', L('Sobre o projeto', 'About the project', 'Sobre el proyecto'))}
-      <p class="ds-form__section-desc">${L('O básico para achar o projeto depois.', 'The basics to find the project later.', 'Lo básico para encontrar el proyecto después.')}</p>
       <div class="ds-form__row">
         ${textField({ id: 'pf-demo-nome', name: 'nome', label: projectName(), minlength: 3, max: 40, hint: L('Aparece no menu e na busca.', 'Shows in the menu and in search.', 'Aparece en el menú y en la búsqueda.'), autocomplete: 'off', errors: { required: giveName() } })}
         ${textField({
@@ -168,7 +167,6 @@ function demoForm() {
 
     <fieldset class="ds-form__section">
       ${legend('02', L('Time e acesso', 'Team and access', 'Equipo y acceso'))}
-      <p class="ds-form__section-desc">${L('Dá para mudar depois, nas configurações do projeto.', 'You can change this later, in the project settings.', 'Se puede cambiar después, en la configuración del proyecto.')}</p>
       <div class="ds-form__row">
         ${selectField({ id: 'pf-demo-time', label: L('Time', 'Team', 'Equipo'), options: TEAMS(), placeholder: L('Escolha o time', 'Choose the team', 'Elige el equipo'), hint: L('Quem cuida do projeto no dia a dia.', 'Who looks after the project day to day.', 'Quién cuida del proyecto día a día.') })}
         ${textField({ id: 'pf-demo-email', name: 'email', type: 'email', label: emailLabel(), autocomplete: 'email', hint: L('Mandamos o resumo semanal para cá.', 'We send the weekly summary here.', 'Enviamos el resumen semanal aquí.'), errors: { required: L('Informe um e-mail para receber os avisos.', 'Enter an email to receive the notices.', 'Indica un correo para recibir los avisos.') } })}
@@ -344,7 +342,6 @@ const htmlCode = () => `<form class="ds-form" id="${L('projeto', 'project', 'pro
 
   <fieldset class="ds-form__section">
     <legend class="ds-form__legend"><span class="ds-section__stamp">01</span>${L('Sobre o projeto', 'About the project', 'Sobre el proyecto')}</legend>
-    <p class="ds-form__section-desc">${L('O básico para achar o projeto depois.', 'The basics to find the project later.', 'Lo básico para encontrar el proyecto después.')}</p>
     <div class="ds-form__row">
       <div class="ds-form-field">
         <label class="ds-form-field__label" for="${L('nome', 'name', 'nombre')}">${projectName()}</label>
@@ -446,8 +443,8 @@ export default function renderFormularios(page) {
       `<div class="cd-grid pf-layout-grid">
         ${example(
           L('Uma coluna, rótulo em cima', 'One column, label on top', 'Una columna, etiqueta arriba'),
-          L(`O olho desce numa linha só. Rótulo ao lado do campo obriga a ler em zigue-zague — e não cabe no celular. Fora de uma seção, empilhe com ${ic('.ds-form__stack')}.`, `The eye goes down a single line. A label beside the field forces zigzag reading — and doesn’t fit on phones. Outside a section, stack with ${ic('.ds-form__stack')}.`, `El ojo baja en una sola línea. La etiqueta al lado del campo obliga a leer en zigzag — y no cabe en el móvil. Fuera de una sección, apila con ${ic('.ds-form__stack')}.`),
-          `<div class="pf-mini"><div class="ds-form__stack">${textField({ id: 'pf-ex-l1', label: L('Nome completo', 'Full name', 'Nombre completo'), required: true })}${textField({ id: 'pf-ex-l2', label: L('E-mail', 'Email', 'Correo'), required: true })}</div></div>`,
+          L('O olho desce numa linha só. Rótulo ao lado do campo obriga a ler em zigue-zague — e não cabe no celular.', 'The eye goes down a single line. A label beside the field forces zigzag reading — and doesn’t fit on phones.', 'El ojo baja en una sola línea. La etiqueta al lado del campo obliga a leer en zigzag — y no cabe en el móvil.'),
+          `<div class="pf-mini">${textField({ id: 'pf-ex-l1', label: L('Nome completo', 'Full name', 'Nombre completo'), required: true })}${textField({ id: 'pf-ex-l2', label: L('E-mail', 'Email', 'Correo'), required: true })}</div>`,
         )}
         ${example(
           L('Lado a lado, só o que anda junto', 'Side by side, only what goes together', 'Lado a lado, solo lo que va junto'),
@@ -466,8 +463,8 @@ export default function renderFormularios(page) {
         )}
         ${example(
           L('Seções com carimbo', 'Stamped sections', 'Secciones con sello'),
-          L(`Formulário com mais de seis campos ganha seções numeradas, como no painel: ${ic('01 · Endereço')}. Se a seção pede contexto, uma frase curta embaixo: ${ic('.ds-form__section-desc')}.`, `A form with more than six fields gets numbered sections, like in the panel: ${ic('01 · Address')}. If a section needs context, a short sentence below: ${ic('.ds-form__section-desc')}.`, `Un formulario con más de seis campos recibe secciones numeradas, como en el panel: ${ic('01 · Dirección')}. Si la sección pide contexto, una frase corta debajo: ${ic('.ds-form__section-desc')}.`),
-          `<div class="pf-mini"><fieldset class="ds-form__section">${legend('02', addressLabel())}<p class="ds-form__section-desc">${L('Para onde mandamos a nota.', 'Where we send the invoice.', 'Adonde enviamos la factura.')}</p>${textField({ id: 'pf-ex-l8', label: L('Rua', 'Street', 'Calle') })}</fieldset></div>`,
+          L(`Formulário com mais de seis campos ganha seções numeradas, como no painel: ${ic('01 · Endereço')}.`, `A form with more than six fields gets numbered sections, like in the panel: ${ic('01 · Address')}.`, `Un formulario con más de seis campos recibe secciones numeradas, como en el panel: ${ic('01 · Dirección')}.`),
+          `<div class="pf-mini"><fieldset class="ds-form__section">${legend('02', addressLabel())}${textField({ id: 'pf-ex-l8', label: L('Rua', 'Street', 'Calle') })}</fieldset></div>`,
         )}
         ${example(
           L('A dica fica embaixo, sempre visível', 'The hint sits below, always visible', 'La pista queda debajo, siempre visible'),

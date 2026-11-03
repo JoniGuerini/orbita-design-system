@@ -89,16 +89,6 @@
   margin: var(--ds-space-200) -12px 0 0;
 }
 
-.ds-panel__lead {
-  grid-column: 1;
-  grid-row: 2;
-  max-width: 60ch;
-  margin-top: var(--ds-space-200);
-  color: var(--ds-color-fg-muted);
-  font: var(--ds-text-body-md);
-  letter-spacing: var(--ds-text-body-md-tracking);
-}
-
 .ds-panel__toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -199,10 +189,6 @@
   }
 
   .ds-panel__title {
-    margin-top: var(--ds-space-150);
-  }
-
-  .ds-panel__lead {
     margin-top: var(--ds-space-150);
   }
 

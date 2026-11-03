@@ -260,7 +260,6 @@
  *   <div data-form-summary></div>                         ← resumo de erros entra aqui (opcional)
  *   <fieldset class="ds-form__section">
  *     <legend class="ds-form__legend"><span class="ds-section__stamp">01</span>Sobre o projeto</legend>
- *     <p class="ds-form__section-desc">Aparece para todo o time.</p>
  *     <div class="ds-form__row">…dois .ds-form-field lado a lado…</div>
  *   </fieldset>
  *   <div class="ds-form__actions">
@@ -284,13 +283,6 @@
 /* o lugar do resumo não ocupa espaço enquanto não há erro */
 .ds-form > [data-form-summary]:empty {
   display: none;
-}
-
-.ds-form__stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--ds-space-250);
-  min-width: 0;
 }
 
 .ds-form__row {
@@ -334,13 +326,6 @@
 
 .ds-form__legend + * {
   clear: both;
-}
-
-.ds-form__section-desc {
-  margin-top: calc(-1 * var(--ds-space-150));
-  color: var(--ds-color-fg-muted);
-  font: var(--ds-text-body-sm);
-  letter-spacing: var(--ds-text-body-sm-tracking);
 }
 
 .ds-form__note {

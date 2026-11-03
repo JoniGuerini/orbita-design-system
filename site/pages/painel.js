@@ -1,6 +1,6 @@
 import { icon } from '../../ds/icons/icons.js';
 import { mountDocNav } from '../doc-nav.js';
-import { playgroundMarkup, mountPlayground, mountCodeCopy, codeBlock, tokenTable, a11yList, escapeHtml } from '../component-doc.js';
+import { playgroundMarkup, mountPlayground, mountCodeCopy, tokenTable, a11yList, escapeHtml } from '../component-doc.js';
 import { L } from '../i18n.js';
 
 export const styles = ['site/component-doc.css', 'site/pages/painel.css'];
@@ -17,7 +17,6 @@ const directTone = () => L('Tom direto', 'Direct tone', 'Tono directo');
 const examples = () => L('Exemplos', 'Examples', 'Ejemplos');
 const chooseFormat = () => L('Escolher formato', 'Choose format', 'Elegir formato');
 const opening = () => L('Abertura', 'Opening', 'Apertura');
-const leadText = () => L('Duas cenas curtas para apresentar o produto a quem ainda não conhece.', 'Two short scenes to introduce the product to people who don’t know it yet.', 'Dos escenas cortas para presentar el producto a quien todavía no lo conoce.');
 
 const SECTIONS = () => [
   ['00', opening(), L('Comece pelo problema de quem vai ler: o que está travando hoje e por que isso importa agora.', 'Start with the reader’s problem: what’s stuck today and why it matters now.', 'Empieza por el problema de quien va a leer: qué está trabado hoy y por qué importa ahora.'), L('Na cena', 'In the scene', 'En la escena')],
@@ -40,7 +39,6 @@ function panel(s) {
           : ''
       }
       ${s.aside === 'on' ? `<div class="ds-panel__aside"><button type="button" class="ds-btn ds-btn--ghost ds-btn--sm">${icon('star', { size: 18 })}${examples()}</button></div>` : ''}
-      ${s.lead === 'on' ? `<p class="ds-panel__lead">${leadText()}</p>` : ''}
     </header>
     ${
       s.toolbar === 'on'
@@ -79,7 +77,6 @@ function panelCode(s) {
   if (s.aside === 'on') {
     lines.push('    <div class="ds-panel__aside">', `      <button class="ds-btn ds-btn--ghost ds-btn--sm"><ds-icon name="star"></ds-icon>${examples()}</button>`, '    </div>');
   }
-  if (s.lead === 'on') lines.push(`    <p class="ds-panel__lead">${leadText()}</p>`);
   lines.push('  </header>');
   if (s.toolbar === 'on') {
     lines.push('  <div class="ds-panel__toolbar">', `    <button class="ds-chip">${directTone()} …</button>`, '    <span class="ds-panel__spacer"></span>', '    <span class="ds-panel__meta">~3 min</span>', '  </div>');
@@ -297,29 +294,6 @@ export default function renderPainel(page) {
           </ul>
         </article>
       </div>
-      <h3 class="doc-subhead">${L('Cards', 'Cards', 'Tarjetas')} <span class="doc-subhead__meta">${L('três jeitos de usar', 'three ways to use them', 'tres formas de usarlas')}</span></h3>
-      <div class="cd-grid pn-cards">
-        ${[
-          ['ds-card', L('Padrão', 'Default', 'Predeterminada'), L('Superfície sobre o canvas, com contorno sutil. Para agrupar um conteúdo.', 'A surface on the canvas with a subtle outline. To group content.', 'Superficie sobre el canvas, con contorno sutil. Para agrupar un contenido.'), 'div'],
-          ['ds-card ds-card--raised', L('Elevado', 'Raised', 'Elevada'), L('Fundo elevado e sombra grande. Para o card que precisa passar à frente dos outros.', 'A raised background and a large shadow. For the card that needs to stand out from the rest.', 'Fondo elevado y sombra grande. Para la tarjeta que necesita destacarse de las demás.'), 'div'],
-          ['ds-card ds-card--interactive', L('Clicável', 'Interactive', 'Clicable'), L('O card inteiro é um link: o contorno reforça no hover. Passe o mouse ou use Tab.', 'The whole card is a link: the outline strengthens on hover. Hover it or press Tab.', 'Toda la tarjeta es un enlace: el contorno se refuerza con hover. Pasa el mouse o usa Tab.'), 'a'],
-        ]
-          .map(
-            ([cls, name, text, tag]) => `<article class="cd-example">
-              <div class="cd-example__preview">
-                <${tag} class="${cls} pn-card"${tag === 'a' ? ' href="#/componentes/botao"' : ''}>
-                  <p class="pn-card__title">${tag === 'a' ? L('Botão', 'Button', 'Botón') : launchScript()}</p>
-                  <p class="pn-card__text">${tag === 'a' ? L('Abre a página do Botão.', 'Opens the Button page.', 'Abre la página del Botón.') : L('Atualizado há 2 dias', 'Updated 2 days ago', 'Actualizado hace 2 días')}</p>
-                </${tag}>
-              </div>
-              <div class="cd-example__body"><p class="cd-example__name">${name}<code>${cls.split(' ').pop()}</code></p><p class="cd-example__text">${text}</p></div>
-            </article>`,
-          )
-          .join('')}
-      </div>
-      ${codeBlock(`<div class="ds-card">…</div>
-<div class="ds-card ds-card--raised">…</div>
-<a class="ds-card ds-card--interactive" href="/projetos/lancamento">…</a>`)}
     </section>
 
     <section class="doc-section" id="acessibilidade" aria-labelledby="a11y-title">
@@ -394,7 +368,6 @@ export function mount(root) {
     controls: [
       { id: 'actions', label: L('Ações', 'Actions', 'Acciones'), value: 'on', options: ON_OFF(L('Com ícones', 'With icons', 'Con íconos'), L('Sem ícones', 'Without icons', 'Sin íconos')) },
       { id: 'aside', label: 'Aside', value: 'on', options: ON_OFF(L('Com “Exemplos”', 'With “Examples”', 'Con “Ejemplos”'), L('Sem aside', 'No aside', 'Sin aside')) },
-      { id: 'lead', label: L('Introdução', 'Lead', 'Introducción'), value: 'on', options: ON_OFF(L('Com parágrafo', 'With paragraph', 'Con párrafo'), L('Sem parágrafo', 'No paragraph', 'Sin párrafo')) },
       { id: 'toolbar', label: L('Barra', 'Bar', 'Barra'), value: 'on', options: ON_OFF(L('Com chips', 'With chips', 'Con chips'), L('Sem barra', 'No bar', 'Sin barra')) },
       { id: 'footer', label: L('Rodapé', 'Footer', 'Pie'), value: 'on', options: ON_OFF(L('Com ação', 'With action', 'Con acción'), L('Sem rodapé', 'No footer', 'Sin pie')) },
       { id: 'title', label: L('Título', 'Title', 'Título'), value: 'default', options: [{ value: 'default', label: L('Padrão', 'Default', 'Predeterminado') }, { value: 'hero', label: L('Destaque', 'Hero', 'Destacado') }] },

@@ -42,21 +42,6 @@ const RELEASES = [
           ), '/primeiros-passos'],
         ],
       },
-      {
-        name: T('Componentes', 'Components', 'Componentes'),
-        items: [
-          ['melhoria', T(
-            'Painel: parágrafo de introdução (ds-panel__lead) no playground e os cards padrão, elevado e clicável com exemplo ao vivo',
-            'Panel: a lead paragraph (ds-panel__lead) in the playground, and the default, raised, and interactive cards with live examples',
-            'Panel: párrafo de introducción (ds-panel__lead) en el playground y las tarjetas predeterminada, elevada y clicable con ejemplo en vivo',
-          ), '/componentes/painel'],
-          ['melhoria', T(
-            'Formulários: descrição de seção (ds-form__section-desc) e campos empilhados (ds-form__stack) nos exemplos',
-            'Forms: section description (ds-form__section-desc) and stacked fields (ds-form__stack) in the examples',
-            'Formularios: descripción de sección (ds-form__section-desc) y campos apilados (ds-form__stack) en los ejemplos',
-          ), '/padroes/formularios'],
-        ],
-      },
     ],
   },
   {
