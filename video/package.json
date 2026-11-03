@@ -1,0 +1,22 @@
+{
+  "name": "orbita-video",
+  "private": true,
+  "type": "module",
+  "description": "Vídeo animado do Órbita em React + Motion. Separado do DS, que segue sem dependências.",
+  "scripts": {
+    "dev": "vite",
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/inter-tight": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "motion": "^14.9.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.2.1",
+    "vite": "^8.3.5"
+  }
+}
