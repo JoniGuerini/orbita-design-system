@@ -121,7 +121,7 @@ export default function renderBotao(page) {
       <header class="doc-section__header">
         <div>
           <h2 class="doc-section__title" id="playground-title">Playground</h2>
-          <p class="doc-section__desc">${L('Monte o botão, veja nos dois temas e copie o código pronto.', 'Build the button, check it in both themes, and copy the ready code.', 'Arma el botón, míralo en los dos temas y copia el código listo.')}</p>
+          <p class="doc-section__desc">${L('Monte o botão, veja em cada tema e copie o código pronto.', 'Build the button, check it in each theme, and copy the ready code.', 'Arma el botón, míralo en cada tema y copia el código listo.')}</p>
         </div>
       </header>
       ${playgroundMarkup('botao')}

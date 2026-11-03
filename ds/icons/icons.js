@@ -103,6 +103,7 @@ const DEFINITIONS = [
   ['sliders', 'interface', 'ajustes controles preferências', path('M4 7h9M17 7h3M4 17h3M11 17h9') + circle(15, 7, 2) + circle(9, 17, 2)],
   ['sun', 'interface', 'tema claro dia', circle(12, 12, 4) + path('M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4')],
   ['moon', 'interface', 'tema escuro noite', path('M10.5 3.5a7.5 7.5 0 0 0 10 10A8.5 8.5 0 1 1 10.5 3.5z')],
+  ['mountain', 'interface', 'montanha tema refúgio natureza', path('m8 4.5 4 8 5-5 5 15H2l6-18z')],
   ['monitor', 'interface', 'sistema tela desktop', rect(3, 4, 18, 12.5, 2.5) + path('M8.5 20.5h7M12 16.5v4')],
   ['eye', 'interface', 'visualizar mostrar ver', path('M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z') + circle(12, 12, 3)],
   ['eye-off', 'interface', 'ocultar esconder senha', path('M10 5.7a9.6 9.6 0 0 1 2-.2c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.6 3.4M6.6 6.6C4 8.3 2.5 12 2.5 12S6 18.5 12 18.5a9.4 9.4 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M3.5 3.5l17 17')],

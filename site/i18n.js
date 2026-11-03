@@ -24,9 +24,11 @@ const STRINGS = {
   theme: T('Tema', 'Theme', 'Tema'),
   dark: T('Escuro', 'Dark', 'Oscuro'),
   light: T('Claro', 'Light', 'Claro'),
+  refugio: T('Refúgio', 'Refúgio', 'Refúgio'),
   system: T('Sistema', 'System', 'Sistema'),
   darkTheme: T('Tema escuro', 'Dark theme', 'Tema oscuro'),
   lightTheme: T('Tema claro', 'Light theme', 'Tema claro'),
+  refugioTheme: T('Tema Refúgio', 'Refúgio theme', 'Tema Refúgio'),
   followSystem: T('Seguir o sistema', 'Match system', 'Seguir el sistema'),
   language: T('Idioma', 'Language', 'Idioma'),
   languageSystem: T((name) => `Sistema · ${name}`, (name) => `System · ${name}`, (name) => `Sistema · ${name}`),
@@ -38,6 +40,7 @@ const STRINGS = {
   soon: T('Em breve', 'Soon', 'Pronto'),
   useDark: T('Usar tema escuro', 'Use dark theme', 'Usar tema oscuro'),
   useLight: T('Usar tema claro', 'Use light theme', 'Usar tema claro'),
+  useRefugio: T('Usar tema Refúgio', 'Use Refúgio theme', 'Usar tema Refúgio'),
   useSystem: T('Seguir tema do sistema', 'Match system theme', 'Seguir el tema del sistema'),
   toggleMenu: T('Recolher ou expandir menu', 'Collapse or expand menu', 'Contraer o expandir el menú'),
 };
@@ -75,6 +78,8 @@ const PALETTE_LABELS = {
   blue: T('Azul', 'Blue', 'Azul'),
   violet: T('Violeta', 'Violet', 'Violeta'),
   pink: T('Rosa', 'Pink', 'Rosa'),
+  refugio: T('Refúgio · Ardósia fria', 'Refúgio · Cool slate', 'Refúgio · Pizarra fría'),
+  terracotta: T('Terracota', 'Terracotta', 'Terracota'),
 };
 
 const TOKEN_DESCRIPTIONS = {

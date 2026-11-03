@@ -19,8 +19,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PREFIX = 'ds';
-const MODES = ['dark', 'light'];
+const MODES = ['dark', 'light', 'refugio'];
 const DEFAULT_MODE = 'dark';
+// token sem valor próprio num tema herda deste outro: o Refúgio é um tema claro, parte do Claro
+const FALLBACK = { light: 'dark', refugio: 'light' };
+const SCHEME = { dark: 'dark', light: 'light', refugio: 'light' };
+const modeValue = (value, mode) => value[mode] ?? (FALLBACK[mode] ? modeValue(value, FALLBACK[mode]) : undefined);
 
 const SOURCES = [
   { file: 'foundation.json', themed: false },
@@ -162,7 +166,7 @@ function flatten(node, pathParts, ctx, source, registry) {
       description: isPlain(raw) ? raw.$description : undefined,
     };
     if (isModes(value)) {
-      token.modes = Object.fromEntries(MODES.map((m) => [m, value[m] ?? value[DEFAULT_MODE]]));
+      token.modes = Object.fromEntries(MODES.map((m) => [m, modeValue(value, m)]));
     } else {
       token.value = value;
     }
@@ -311,13 +315,13 @@ export async function buildTokens({ quiet = false } = {}) {
     })
     .join('\n');
 
-  const otherMode = MODES.find((m) => m !== DEFAULT_MODE);
+  // "system" segue o sistema entre o escuro e o claro; o Refúgio só vale quando escolhido
   const css = [
     `/**\n * Lume Design System — tokens\n * Gerado por scripts/build-tokens.mjs a partir de tokens/*.json. Não edite à mão.\n */`,
     cssBlock(':root', globalTokens, DEFAULT_MODE, emit),
-    cssBlock(`:root,\n[data-theme="${DEFAULT_MODE}"]`, themedTokens, DEFAULT_MODE, emit, [`  color-scheme: ${DEFAULT_MODE};`]),
-    cssBlock(`[data-theme="${otherMode}"]`, themedTokens, otherMode, emit, [`  color-scheme: ${otherMode};`]),
-    `@media (prefers-color-scheme: ${otherMode}) {\n${indent(cssBlock(':root[data-theme="system"]', themedTokens, otherMode, emit, [`  color-scheme: ${otherMode};`]))}\n}`,
+    cssBlock(`:root,\n[data-theme="${DEFAULT_MODE}"]`, themedTokens, DEFAULT_MODE, emit, [`  color-scheme: ${SCHEME[DEFAULT_MODE]};`]),
+    ...MODES.filter((m) => m !== DEFAULT_MODE).map((m) => cssBlock(`[data-theme="${m}"]`, themedTokens, m, emit, [`  color-scheme: ${SCHEME[m]};`])),
+    `@media (prefers-color-scheme: light) {\n${indent(cssBlock(':root[data-theme="system"]', themedTokens, 'light', emit, ['  color-scheme: light;']))}\n}`,
     `/* Estilos de texto */\n${textClasses}`,
   ].join('\n\n');
 

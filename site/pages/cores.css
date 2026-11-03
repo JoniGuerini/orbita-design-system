@@ -171,11 +171,11 @@
 
 .token-table,
 .contrast-table {
-  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) 44px;
+  --doc-table-cols: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)) 44px;
 }
 
 .contrast-table {
-  --doc-table-cols: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) 64px;
+  --doc-table-cols: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr)) 64px;
 }
 
 .token-name {
@@ -240,7 +240,7 @@
 
 .theme-previews {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--ds-space-150);
 }
 
@@ -253,7 +253,7 @@
 }
 
 .theme-preview__stage {
-  padding: var(--ds-space-500);
+  padding: var(--ds-space-300);
   background: var(--ds-color-bg-canvas);
   color: var(--ds-color-fg-default);
 }
@@ -331,7 +331,7 @@
 .contrast-cell {
   display: flex;
   align-items: center;
-  gap: var(--ds-space-150);
+  gap: var(--ds-space-100);
   min-width: 0;
 }
 
@@ -339,8 +339,8 @@
   flex: none;
   display: grid;
   place-items: center;
-  width: 52px;
-  height: 36px;
+  width: 40px;
+  height: 32px;
   border-radius: var(--ds-radius-sm);
   border: 1px solid var(--ds-color-border-subtle);
   font: var(--ds-font-weight-semibold) 0.9375rem/1 var(--ds-font-family-sans);

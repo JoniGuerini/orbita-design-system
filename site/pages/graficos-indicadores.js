@@ -176,7 +176,7 @@ export default function renderIndicadores(page) {
       ${NAV().map(([id, label]) => `<button type="button" class="doc-nav__link" data-target="${id}">${label}</button>`).join('')}
     </nav>
 
-    ${section('in-playground', 'Playground', L('Monte o indicador, veja nos dois temas e copie o código. Troque “Bom quando” para ver a mesma alta virar piora.', 'Build the indicator, see it in both themes, and copy the code. Switch “Good when” to watch the same rise become worse.', 'Arma el indicador, míralo en los dos temas y copia el código. Cambia “Bueno cuando” para ver la misma alza volverse empeora.'), playgroundMarkup('indicador'))}
+    ${section('in-playground', 'Playground', L('Monte o indicador, veja em cada tema e copie o código. Troque “Bom quando” para ver a mesma alta virar piora.', 'Build the indicator, see it in each theme, and copy the code. Switch “Good when” to watch the same rise become worse.', 'Arma el indicador, míralo en cada tema y copia el código. Cambia “Bueno cuando” para ver la misma alza volverse empeora.'), playgroundMarkup('indicador'))}
 
     ${section(
       'in-anatomia',

@@ -157,7 +157,7 @@ export default function renderCampoDeTexto(page) {
     </nav>
 
     <section class="doc-section" id="playground" aria-labelledby="playground-title">
-      ${sectionHead('playground', 'Playground', L('Monte o campo, veja nos dois temas e copie o código. O campo do palco funciona: digite para ver o contador.', 'Build the field, check it in both themes, and copy the code. The field on the stage works: type to see the counter.', 'Arma el campo, míralo en los dos temas y copia el código. El campo del escenario funciona: escribe para ver el contador.'))}
+      ${sectionHead('playground', 'Playground', L('Monte o campo, veja em cada tema e copie o código. O campo do palco funciona: digite para ver o contador.', 'Build the field, check it in each theme, and copy the code. The field on the stage works: type to see the counter.', 'Arma el campo, míralo en cada tema y copia el código. El campo del escenario funciona: escribe para ver el contador.'))}
       ${playgroundMarkup('campo')}
     </section>
 

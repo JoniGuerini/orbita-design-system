@@ -184,6 +184,39 @@
   --ds-color-pink-900: #6a2648;
   --ds-color-pink-950: #43102b;
 
+  /* color.refugio */
+  --ds-color-refugio-25: #f8fafd;
+  --ds-color-refugio-50: #f2f5f8;
+  --ds-color-refugio-100: #eef2f6;
+  --ds-color-refugio-150: #e8edf3;
+  --ds-color-refugio-200: #dae0e8;
+  --ds-color-refugio-300: #c0cad6;
+  --ds-color-refugio-400: #93a0b0;
+  --ds-color-refugio-500: #728295;
+  --ds-color-refugio-550: #5c6c7f;
+  --ds-color-refugio-600: #53657a;
+  --ds-color-refugio-650: #46586e;
+  --ds-color-refugio-700: #3e5166;
+  --ds-color-refugio-750: #354558;
+  --ds-color-refugio-800: #2b3847;
+  --ds-color-refugio-850: #232f3d;
+  --ds-color-refugio-900: #1d2734;
+  --ds-color-refugio-950: #161f29;
+  --ds-color-refugio-975: #10171f;
+
+  /* color.terracotta */
+  --ds-color-terracotta-50: #fff4f1;
+  --ds-color-terracotta-100: #fee7e0;
+  --ds-color-terracotta-200: #fbd2c5;
+  --ds-color-terracotta-300: #f5b9a6;
+  --ds-color-terracotta-400: #de9680;
+  --ds-color-terracotta-500: #c97b63;
+  --ds-color-terracotta-600: #b0644d;
+  --ds-color-terracotta-700: #94513c;
+  --ds-color-terracotta-800: #79412f;
+  --ds-color-terracotta-900: #613427;
+  --ds-color-terracotta-950: #3c1c12;
+
   /* space */
   --ds-space-0: 0;
   --ds-space-025: 0.125rem;
@@ -586,6 +619,133 @@
   --ds-shadow-lg: 0 4px 8px -2px rgb(56 40 24 / 0.07), 0 16px 36px -8px rgb(56 40 24 / 0.14);
   --ds-shadow-xl: 0 8px 16px -4px rgb(56 40 24 / 0.08), 0 28px 56px -12px rgb(56 40 24 / 0.18);
   --ds-shadow-2xl: 0 12px 24px -6px rgb(56 40 24 / 0.1), 0 48px 96px -24px rgb(56 40 24 / 0.24);
+
+  /* gradient */
+  --ds-gradient-divider: linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%);
+}
+
+[data-theme="refugio"] {
+  color-scheme: light;
+
+  /* color.bg */
+  --ds-color-bg-app: var(--ds-color-refugio-150);
+  --ds-color-bg-canvas: var(--ds-color-refugio-50);
+  --ds-color-bg-sidebar: var(--ds-color-refugio-25);
+  --ds-color-bg-surface: var(--ds-color-white);
+  --ds-color-bg-raised: var(--ds-color-white);
+  --ds-color-bg-sunken: var(--ds-color-refugio-100);
+  --ds-color-bg-muted: var(--ds-color-refugio-200);
+  --ds-color-bg-inverse: var(--ds-color-refugio-800);
+  --ds-color-bg-hover: color-mix(in srgb, var(--ds-color-refugio-700) 5%, transparent);
+  --ds-color-bg-pressed: color-mix(in srgb, var(--ds-color-refugio-700) 9%, transparent);
+  --ds-color-bg-selected: color-mix(in srgb, var(--ds-color-refugio-700) 7%, transparent);
+  --ds-color-bg-overlay: color-mix(in srgb, var(--ds-color-refugio-800) 35%, transparent);
+
+  /* color.fg */
+  --ds-color-fg-default: var(--ds-color-refugio-800);
+  --ds-color-fg-muted: var(--ds-color-refugio-650);
+  --ds-color-fg-subtle: var(--ds-color-refugio-550);
+  --ds-color-fg-disabled: var(--ds-color-refugio-400);
+  --ds-color-fg-inverse: var(--ds-color-refugio-25);
+  --ds-color-fg-brand: var(--ds-color-refugio-700);
+  --ds-color-fg-link: var(--ds-color-refugio-700);
+  --ds-color-fg-link-hover: var(--ds-color-refugio-850);
+
+  /* color.border */
+  --ds-color-border-subtle: color-mix(in srgb, var(--ds-color-refugio-700) 8%, transparent);
+  --ds-color-border-default: color-mix(in srgb, var(--ds-color-refugio-700) 14%, transparent);
+  --ds-color-border-strong: color-mix(in srgb, var(--ds-color-refugio-700) 25%, transparent);
+  --ds-color-border-control: color-mix(in srgb, var(--ds-color-refugio-700) 18%, transparent);
+  --ds-color-border-field: color-mix(in srgb, var(--ds-color-refugio-700) 68%, transparent);
+  --ds-color-border-field-hover: color-mix(in srgb, var(--ds-color-refugio-700) 82%, transparent);
+  --ds-color-border-focus: var(--ds-color-refugio-600);
+
+  /* color.brand */
+  --ds-color-brand-solid: var(--ds-color-refugio-700);
+  --ds-color-brand-solid-hover: var(--ds-color-refugio-800);
+  --ds-color-brand-solid-pressed: var(--ds-color-refugio-850);
+  --ds-color-brand-subtle: var(--ds-color-refugio-100);
+  --ds-color-brand-subtle-hover: var(--ds-color-refugio-150);
+  --ds-color-brand-fg: var(--ds-color-refugio-700);
+  --ds-color-brand-border: var(--ds-color-refugio-200);
+  --ds-color-brand-on-solid: var(--ds-color-refugio-25);
+  --ds-color-brand-indicator: var(--ds-color-terracotta-500);
+
+  /* color.success */
+  --ds-color-success-solid: var(--ds-color-green-700);
+  --ds-color-success-solid-hover: var(--ds-color-green-800);
+  --ds-color-success-subtle: var(--ds-color-green-50);
+  --ds-color-success-fg: var(--ds-color-green-800);
+  --ds-color-success-border: var(--ds-color-green-200);
+  --ds-color-success-on-solid: var(--ds-color-white);
+
+  /* color.warning */
+  --ds-color-warning-solid: var(--ds-color-amber-400);
+  --ds-color-warning-solid-hover: var(--ds-color-amber-500);
+  --ds-color-warning-subtle: var(--ds-color-amber-50);
+  --ds-color-warning-fg: var(--ds-color-amber-800);
+  --ds-color-warning-border: var(--ds-color-amber-200);
+  --ds-color-warning-on-solid: var(--ds-color-amber-950);
+
+  /* color.danger */
+  --ds-color-danger-solid: var(--ds-color-red-700);
+  --ds-color-danger-solid-hover: var(--ds-color-red-800);
+  --ds-color-danger-subtle: var(--ds-color-red-50);
+  --ds-color-danger-fg: var(--ds-color-red-700);
+  --ds-color-danger-border: var(--ds-color-red-200);
+  --ds-color-danger-on-solid: var(--ds-color-white);
+
+  /* color.info */
+  --ds-color-info-solid: var(--ds-color-blue-700);
+  --ds-color-info-solid-hover: var(--ds-color-blue-800);
+  --ds-color-info-subtle: var(--ds-color-blue-50);
+  --ds-color-info-fg: var(--ds-color-blue-700);
+  --ds-color-info-border: var(--ds-color-blue-200);
+  --ds-color-info-on-solid: var(--ds-color-white);
+
+  /* color.chart */
+  --ds-color-chart-series-1: var(--ds-color-brand-600);
+  --ds-color-chart-series-2: var(--ds-color-blue-600);
+  --ds-color-chart-series-3: var(--ds-color-pink-600);
+  --ds-color-chart-series-4: var(--ds-color-amber-700);
+  --ds-color-chart-series-5: var(--ds-color-teal-600);
+  --ds-color-chart-series-6: var(--ds-color-red-600);
+  --ds-color-chart-series-7: var(--ds-color-violet-600);
+  --ds-color-chart-series-8: var(--ds-color-green-600);
+  --ds-color-chart-muted: var(--ds-color-refugio-300);
+  --ds-color-chart-other: var(--ds-color-refugio-400);
+  --ds-color-chart-seq-1: var(--ds-color-brand-100);
+  --ds-color-chart-seq-2: var(--ds-color-brand-300);
+  --ds-color-chart-seq-3: var(--ds-color-brand-400);
+  --ds-color-chart-seq-4: var(--ds-color-brand-500);
+  --ds-color-chart-seq-5: var(--ds-color-brand-600);
+  --ds-color-chart-seq-6: var(--ds-color-brand-700);
+  --ds-color-chart-seq-7: var(--ds-color-brand-800);
+  --ds-color-chart-ord-1: var(--ds-color-brand-400);
+  --ds-color-chart-ord-2: var(--ds-color-brand-500);
+  --ds-color-chart-ord-3: var(--ds-color-brand-600);
+  --ds-color-chart-ord-4: var(--ds-color-brand-700);
+  --ds-color-chart-ord-5: var(--ds-color-brand-800);
+  --ds-color-chart-div-1: var(--ds-color-blue-700);
+  --ds-color-chart-div-2: var(--ds-color-blue-500);
+  --ds-color-chart-div-3: var(--ds-color-blue-300);
+  --ds-color-chart-div-4: var(--ds-color-refugio-200);
+  --ds-color-chart-div-5: var(--ds-color-brand-300);
+  --ds-color-chart-div-6: var(--ds-color-brand-500);
+  --ds-color-chart-div-7: var(--ds-color-brand-700);
+  --ds-color-chart-status-good: var(--ds-color-green-600);
+  --ds-color-chart-status-warning: var(--ds-color-amber-500);
+  --ds-color-chart-status-critical: var(--ds-color-red-600);
+  --ds-color-chart-grid: var(--ds-color-refugio-200);
+  --ds-color-chart-axis: var(--ds-color-refugio-300);
+
+  /* shadow */
+  --ds-shadow-xs: 0 1px 2px 0 rgb(45 58 74 / 0.06);
+  --ds-shadow-sm: 0 1px 2px 0 rgb(45 58 74 / 0.06), 0 2px 6px -1px rgb(45 58 74 / 0.06);
+  --ds-shadow-md: 0 2px 4px -1px rgb(45 58 74 / 0.06), 0 8px 20px -4px rgb(45 58 74 / 0.1);
+  --ds-shadow-lg: 0 4px 8px -2px rgb(45 58 74 / 0.07), 0 16px 36px -8px rgb(45 58 74 / 0.14);
+  --ds-shadow-xl: 0 8px 16px -4px rgb(45 58 74 / 0.08), 0 28px 56px -12px rgb(45 58 74 / 0.18);
+  --ds-shadow-2xl: 0 12px 24px -6px rgb(45 58 74 / 0.1), 0 48px 96px -24px rgb(45 58 74 / 0.24);
 
   /* gradient */
   --ds-gradient-divider: linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%);

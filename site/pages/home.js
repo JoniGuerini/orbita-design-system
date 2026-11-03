@@ -12,7 +12,7 @@ import { T } from '../i18n.js';
 
 const COPY = T(
   {
-    themes: { dark: 'Escuro', light: 'Claro', system: 'Sistema' },
+    themes: { dark: 'Escuro', light: 'Claro', refugio: 'Refúgio', system: 'Sistema' },
     stats: ['cores em OKLCH', 'tokens de cor', 'estilos de texto', 'ícones próprios', 'contrastes WCAG'],
     statsLabel: 'O sistema em números',
     ready: 'Pronto',
@@ -53,7 +53,7 @@ const COPY = T(
     theme: 'Tema',
   },
   {
-    themes: { dark: 'Dark', light: 'Light', system: 'System' },
+    themes: { dark: 'Dark', light: 'Light', refugio: 'Refúgio', system: 'System' },
     stats: ['OKLCH colors', 'color tokens', 'text styles', 'custom icons', 'WCAG contrast checks'],
     statsLabel: 'The system in numbers',
     ready: 'Done',
@@ -94,7 +94,7 @@ const COPY = T(
     theme: 'Theme',
   },
   {
-    themes: { dark: 'Oscuro', light: 'Claro', system: 'Sistema' },
+    themes: { dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio', system: 'Sistema' },
     stats: ['colores en OKLCH', 'tokens de color', 'estilos de texto', 'íconos propios', 'contrastes WCAG'],
     statsLabel: 'El sistema en números',
     ready: 'Listo',
@@ -141,7 +141,7 @@ const COPY = T(
 const group = (id) => navigation.find((g) => g.id === id);
 const items = (id) => group(id).items;
 
-const THEME_ICONS = { dark: 'moon', light: 'sun', system: 'monitor' };
+const THEME_ICONS = { dark: 'moon', light: 'sun', refugio: 'mountain', system: 'monitor' };
 const themes = (c) => Object.entries(THEME_ICONS).map(([value, ic]) => ({ value, label: c.themes[value], icon: ic }));
 
 const colorCount = palettes.reduce((n, p) => n + p.steps.length, 0);

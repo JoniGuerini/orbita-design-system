@@ -69,6 +69,7 @@ export const ICON_KEYWORDS = {
   sliders: ['adjustments controls preferences', 'ajustes controles preferencias'],
   sun: ['light theme day', 'tema claro día'],
   moon: ['dark theme night', 'tema oscuro noche'],
+  mountain: ['mountain refúgio theme nature', 'montaña tema refúgio naturaleza'],
   monitor: ['system screen desktop', 'sistema pantalla escritorio'],
   eye: ['view show see', 'ver mostrar visualizar'],
   'eye-off': ['hide conceal password', 'ocultar esconder contraseña'],

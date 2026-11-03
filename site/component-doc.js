@@ -15,9 +15,9 @@ import { tr } from '../ds/js/i18n.js';
 import { T } from './i18n.js';
 
 const TEXT = T(
-  { copy: 'Copiar código', copied: 'Código copiado', stageTheme: 'Tema do palco', dark: 'Escuro', light: 'Claro', token: 'Token', role: 'Papel' },
-  { copy: 'Copy code', copied: 'Code copied', stageTheme: 'Stage theme', dark: 'Dark', light: 'Light', token: 'Token', role: 'Role' },
-  { copy: 'Copiar código', copied: 'Código copiado', stageTheme: 'Tema del escenario', dark: 'Oscuro', light: 'Claro', token: 'Token', role: 'Función' },
+  { copy: 'Copiar código', copied: 'Código copiado', stageTheme: 'Tema do palco', dark: 'Escuro', light: 'Claro', refugio: 'Refúgio', token: 'Token', role: 'Papel' },
+  { copy: 'Copy code', copied: 'Code copied', stageTheme: 'Stage theme', dark: 'Dark', light: 'Light', refugio: 'Refúgio', token: 'Token', role: 'Role' },
+  { copy: 'Copiar código', copied: 'Código copiado', stageTheme: 'Tema del escenario', dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio', token: 'Token', role: 'Función' },
 );
 
 export const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -43,6 +43,7 @@ export function playgroundMarkup(id, { wide = false } = {}) {
       <div class="ds-segmented cd-playground__theme" role="radiogroup" aria-label="${t.stageTheme}">
         <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="true" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
         <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="false" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="refugio" aria-checked="false" aria-label="${t.refugio}">${icon('mountain', { size: 16 })}</button>
       </div>
     </div>
     <div class="cd-playground__controls" data-controls></div>

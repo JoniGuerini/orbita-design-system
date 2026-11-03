@@ -1,10 +1,11 @@
 // Gerado por scripts/build-tokens.mjs — não edite à mão.
 const data = {
-  "generatedAt": "2026-10-31T17:48:42.518Z",
+  "generatedAt": "2026-11-03T13:13:39.394Z",
   "prefix": "ds",
   "modes": [
     "dark",
-    "light"
+    "light",
+    "refugio"
   ],
   "defaultMode": "dark",
   "palettes": [
@@ -1311,6 +1312,254 @@ const data = {
           "contrastOnBlack": 1.35
         }
       ]
+    },
+    {
+      "name": "refugio",
+      "label": "Refúgio · Ardósia fria",
+      "hue": 253,
+      "chroma": 0.043,
+      "steps": [
+        {
+          "step": "25",
+          "hex": "#f8fafd",
+          "oklch": "oklch(98.5% 0.004 253)",
+          "cssVar": "--ds-color-refugio-25",
+          "contrastOnWhite": 1.05,
+          "contrastOnBlack": 20.08
+        },
+        {
+          "step": "50",
+          "hex": "#f2f5f8",
+          "oklch": "oklch(96.9% 0.005 253)",
+          "cssVar": "--ds-color-refugio-50",
+          "contrastOnWhite": 1.09,
+          "contrastOnBlack": 19.19
+        },
+        {
+          "step": "100",
+          "hex": "#eef2f6",
+          "oklch": "oklch(95.9% 0.007 253)",
+          "cssVar": "--ds-color-refugio-100",
+          "contrastOnWhite": 1.12,
+          "contrastOnBlack": 18.67
+        },
+        {
+          "step": "150",
+          "hex": "#e8edf3",
+          "oklch": "oklch(94.4% 0.01 253)",
+          "cssVar": "--ds-color-refugio-150",
+          "contrastOnWhite": 1.18,
+          "contrastOnBlack": 17.84
+        },
+        {
+          "step": "200",
+          "hex": "#dae0e8",
+          "oklch": "oklch(90.5% 0.013 253)",
+          "cssVar": "--ds-color-refugio-200",
+          "contrastOnWhite": 1.33,
+          "contrastOnBlack": 15.81
+        },
+        {
+          "step": "300",
+          "hex": "#c0cad6",
+          "oklch": "oklch(83.5% 0.019 253)",
+          "cssVar": "--ds-color-refugio-300",
+          "contrastOnWhite": 1.66,
+          "contrastOnBlack": 12.66
+        },
+        {
+          "step": "400",
+          "hex": "#93a0b0",
+          "oklch": "oklch(70% 0.028 253)",
+          "cssVar": "--ds-color-refugio-400",
+          "contrastOnWhite": 2.66,
+          "contrastOnBlack": 7.9
+        },
+        {
+          "step": "500",
+          "hex": "#728295",
+          "oklch": "oklch(60% 0.034 253)",
+          "cssVar": "--ds-color-refugio-500",
+          "contrastOnWhite": 3.93,
+          "contrastOnBlack": 5.34
+        },
+        {
+          "step": "550",
+          "hex": "#5c6c7f",
+          "oklch": "oklch(52.5% 0.036 253)",
+          "cssVar": "--ds-color-refugio-550",
+          "contrastOnWhite": 5.38,
+          "contrastOnBlack": 3.91
+        },
+        {
+          "step": "600",
+          "hex": "#53657a",
+          "oklch": "oklch(50% 0.04 253)",
+          "cssVar": "--ds-color-refugio-600",
+          "contrastOnWhite": 5.98,
+          "contrastOnBlack": 3.51
+        },
+        {
+          "step": "650",
+          "hex": "#46586e",
+          "oklch": "oklch(45.5% 0.042 253)",
+          "cssVar": "--ds-color-refugio-650",
+          "contrastOnWhite": 7.29,
+          "contrastOnBlack": 2.88
+        },
+        {
+          "step": "700",
+          "hex": "#3e5166",
+          "oklch": "oklch(42.7% 0.043 253)",
+          "cssVar": "--ds-color-refugio-700",
+          "contrastOnWhite": 8.16,
+          "contrastOnBlack": 2.57
+        },
+        {
+          "step": "750",
+          "hex": "#354558",
+          "oklch": "oklch(38.5% 0.039 253)",
+          "cssVar": "--ds-color-refugio-750",
+          "contrastOnWhite": 9.8,
+          "contrastOnBlack": 2.14
+        },
+        {
+          "step": "800",
+          "hex": "#2b3847",
+          "oklch": "oklch(33.5% 0.033 253)",
+          "cssVar": "--ds-color-refugio-800",
+          "contrastOnWhite": 11.94,
+          "contrastOnBlack": 1.76
+        },
+        {
+          "step": "850",
+          "hex": "#232f3d",
+          "oklch": "oklch(30% 0.03 253)",
+          "cssVar": "--ds-color-refugio-850",
+          "contrastOnWhite": 13.59,
+          "contrastOnBlack": 1.55
+        },
+        {
+          "step": "900",
+          "hex": "#1d2734",
+          "oklch": "oklch(27% 0.028 253)",
+          "cssVar": "--ds-color-refugio-900",
+          "contrastOnWhite": 15.09,
+          "contrastOnBlack": 1.39
+        },
+        {
+          "step": "950",
+          "hex": "#161f29",
+          "oklch": "oklch(23.5% 0.024 253)",
+          "cssVar": "--ds-color-refugio-950",
+          "contrastOnWhite": 16.64,
+          "contrastOnBlack": 1.26
+        },
+        {
+          "step": "975",
+          "hex": "#10171f",
+          "oklch": "oklch(20% 0.019 253)",
+          "cssVar": "--ds-color-refugio-975",
+          "contrastOnWhite": 18.04,
+          "contrastOnBlack": 1.16
+        }
+      ]
+    },
+    {
+      "name": "terracotta",
+      "label": "Terracota",
+      "hue": 38,
+      "chroma": 0.104,
+      "steps": [
+        {
+          "step": "50",
+          "hex": "#fff4f1",
+          "oklch": "oklch(97.5% 0.012 38)",
+          "cssVar": "--ds-color-terracotta-50",
+          "contrastOnWhite": 1.08,
+          "contrastOnBlack": 19.46
+        },
+        {
+          "step": "100",
+          "hex": "#fee7e0",
+          "oklch": "oklch(94.5% 0.027 38)",
+          "cssVar": "--ds-color-terracotta-100",
+          "contrastOnWhite": 1.19,
+          "contrastOnBlack": 17.72
+        },
+        {
+          "step": "200",
+          "hex": "#fbd2c5",
+          "oklch": "oklch(89.5% 0.05 38)",
+          "cssVar": "--ds-color-terracotta-200",
+          "contrastOnWhite": 1.39,
+          "contrastOnBlack": 15.13
+        },
+        {
+          "step": "300",
+          "hex": "#f5b9a6",
+          "oklch": "oklch(83.5% 0.075 38)",
+          "cssVar": "--ds-color-terracotta-300",
+          "contrastOnWhite": 1.7,
+          "contrastOnBlack": 12.37
+        },
+        {
+          "step": "400",
+          "hex": "#de9680",
+          "oklch": "oklch(74% 0.094 38)",
+          "cssVar": "--ds-color-terracotta-400",
+          "contrastOnWhite": 2.39,
+          "contrastOnBlack": 8.78
+        },
+        {
+          "step": "500",
+          "hex": "#c97b63",
+          "oklch": "oklch(66.1% 0.104 38)",
+          "cssVar": "--ds-color-terracotta-500",
+          "contrastOnWhite": 3.23,
+          "contrastOnBlack": 6.5
+        },
+        {
+          "step": "600",
+          "hex": "#b0644d",
+          "oklch": "oklch(58.5% 0.104 38)",
+          "cssVar": "--ds-color-terracotta-600",
+          "contrastOnWhite": 4.4,
+          "contrastOnBlack": 4.78
+        },
+        {
+          "step": "700",
+          "hex": "#94513c",
+          "oklch": "oklch(51% 0.096 38)",
+          "cssVar": "--ds-color-terracotta-700",
+          "contrastOnWhite": 6,
+          "contrastOnBlack": 3.5
+        },
+        {
+          "step": "800",
+          "hex": "#79412f",
+          "oklch": "oklch(44% 0.083 38)",
+          "cssVar": "--ds-color-terracotta-800",
+          "contrastOnWhite": 8.05,
+          "contrastOnBlack": 2.61
+        },
+        {
+          "step": "900",
+          "hex": "#613427",
+          "oklch": "oklch(38% 0.069 38)",
+          "cssVar": "--ds-color-terracotta-900",
+          "contrastOnWhite": 10.35,
+          "contrastOnBlack": 2.03
+        },
+        {
+          "step": "950",
+          "hex": "#3c1c12",
+          "oklch": "oklch(27% 0.054 38)",
+          "cssVar": "--ds-color-terracotta-950",
+          "contrastOnWhite": 15.36,
+          "contrastOnBlack": 1.37
+        }
+      ]
     }
   ],
   "tokens": [
@@ -2296,6 +2545,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.100}",
           "value": "#f3ede5"
+        },
+        "refugio": {
+          "ref": "{color.refugio.150}",
+          "value": "#e8edf3"
         }
       }
     },
@@ -2314,6 +2567,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.50}",
           "value": "#f9f5f1"
+        },
+        "refugio": {
+          "ref": "{color.refugio.50}",
+          "value": "#f2f5f8"
         }
       }
     },
@@ -2331,6 +2588,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.25}",
           "value": "#fefaf7"
+        },
+        "refugio": {
+          "ref": "{color.refugio.25}",
+          "value": "#f8fafd"
         }
       }
     },
@@ -2349,6 +2610,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.25}",
           "value": "#fefaf7"
+        },
+        "refugio": {
+          "ref": "{color.white}",
+          "value": "#ffffff"
         }
       }
     },
@@ -2365,6 +2630,10 @@ const data = {
           "value": "#2c2a27"
         },
         "light": {
+          "ref": "{color.white}",
+          "value": "#ffffff"
+        },
+        "refugio": {
           "ref": "{color.white}",
           "value": "#ffffff"
         }
@@ -2385,6 +2654,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.100}",
           "value": "#f3ede5"
+        },
+        "refugio": {
+          "ref": "{color.refugio.100}",
+          "value": "#eef2f6"
         }
       }
     },
@@ -2402,6 +2675,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.200}",
           "value": "#e5ded7"
+        },
+        "refugio": {
+          "ref": "{color.refugio.200}",
+          "value": "#dae0e8"
         }
       }
     },
@@ -2419,6 +2696,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.950}",
           "value": "#151412"
+        },
+        "refugio": {
+          "ref": "{color.refugio.800}",
+          "value": "#2b3847"
         }
       }
     },
@@ -2436,6 +2717,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.045)",
           "value": "#0f0e0c0b"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.05)",
+          "value": "#3e51660d"
         }
       }
     },
@@ -2453,6 +2738,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.08)",
           "value": "#0f0e0c14"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.09)",
+          "value": "#3e516617"
         }
       }
     },
@@ -2470,6 +2759,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.06)",
           "value": "#0f0e0c0f"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.07)",
+          "value": "#3e516612"
         }
       }
     },
@@ -2487,6 +2780,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.32)",
           "value": "#0f0e0c52"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.800}, 0.35)",
+          "value": "#2b384759"
         }
       }
     },
@@ -2504,6 +2801,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.975}",
           "value": "#0f0e0c"
+        },
+        "refugio": {
+          "ref": "{color.refugio.800}",
+          "value": "#2b3847"
         }
       }
     },
@@ -2521,6 +2822,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.650}",
           "value": "#55524f"
+        },
+        "refugio": {
+          "ref": "{color.refugio.650}",
+          "value": "#46586e"
         }
       }
     },
@@ -2539,6 +2844,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.550}",
           "value": "#6d6a66"
+        },
+        "refugio": {
+          "ref": "{color.refugio.550}",
+          "value": "#5c6c7f"
         }
       }
     },
@@ -2556,6 +2865,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.400}",
           "value": "#9c9792"
+        },
+        "refugio": {
+          "ref": "{color.refugio.400}",
+          "value": "#93a0b0"
         }
       }
     },
@@ -2573,6 +2886,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.50}",
           "value": "#f9f5f1"
+        },
+        "refugio": {
+          "ref": "{color.refugio.25}",
+          "value": "#f8fafd"
         }
       }
     },
@@ -2590,6 +2907,10 @@ const data = {
         "light": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
+        },
+        "refugio": {
+          "ref": "{color.refugio.700}",
+          "value": "#3e5166"
         }
       }
     },
@@ -2607,6 +2928,10 @@ const data = {
         "light": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
+        },
+        "refugio": {
+          "ref": "{color.refugio.700}",
+          "value": "#3e5166"
         }
       }
     },
@@ -2624,6 +2949,10 @@ const data = {
         "light": {
           "ref": "{color.brand.800}",
           "value": "#923700"
+        },
+        "refugio": {
+          "ref": "{color.refugio.850}",
+          "value": "#232f3d"
         }
       }
     },
@@ -2641,6 +2970,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.07)",
           "value": "#0f0e0c12"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.08)",
+          "value": "#3e516614"
         }
       }
     },
@@ -2658,6 +2991,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.11)",
           "value": "#0f0e0c1c"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.14)",
+          "value": "#3e516624"
         }
       }
     },
@@ -2675,6 +3012,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.18)",
           "value": "#0f0e0c2e"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.25)",
+          "value": "#3e516640"
         }
       }
     },
@@ -2693,6 +3034,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.15)",
           "value": "#0f0e0c26"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.18)",
+          "value": "#3e51662e"
         }
       }
     },
@@ -2711,6 +3056,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.48)",
           "value": "#0f0e0c7a"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.68)",
+          "value": "#3e5166ad"
         }
       }
     },
@@ -2729,6 +3078,10 @@ const data = {
         "light": {
           "ref": "alpha({color.neutral.975}, 0.62)",
           "value": "#0f0e0c9e"
+        },
+        "refugio": {
+          "ref": "alpha({color.refugio.700}, 0.82)",
+          "value": "#3e5166d1"
         }
       }
     },
@@ -2746,6 +3099,10 @@ const data = {
         "light": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
+        },
+        "refugio": {
+          "ref": "{color.refugio.600}",
+          "value": "#53657a"
         }
       }
     },
@@ -2763,6 +3120,10 @@ const data = {
         "light": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
+        },
+        "refugio": {
+          "ref": "{color.refugio.700}",
+          "value": "#3e5166"
         }
       }
     },
@@ -2780,6 +3141,10 @@ const data = {
         "light": {
           "ref": "{color.brand.400}",
           "value": "#ff945e"
+        },
+        "refugio": {
+          "ref": "{color.refugio.800}",
+          "value": "#2b3847"
         }
       }
     },
@@ -2797,6 +3162,10 @@ const data = {
         "light": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
+        },
+        "refugio": {
+          "ref": "{color.refugio.850}",
+          "value": "#232f3d"
         }
       }
     },
@@ -2814,6 +3183,10 @@ const data = {
         "light": {
           "ref": "{color.brand.50}",
           "value": "#fff4ef"
+        },
+        "refugio": {
+          "ref": "{color.refugio.100}",
+          "value": "#eef2f6"
         }
       }
     },
@@ -2831,6 +3204,10 @@ const data = {
         "light": {
           "ref": "{color.brand.100}",
           "value": "#ffe7db"
+        },
+        "refugio": {
+          "ref": "{color.refugio.150}",
+          "value": "#e8edf3"
         }
       }
     },
@@ -2848,6 +3225,10 @@ const data = {
         "light": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
+        },
+        "refugio": {
+          "ref": "{color.refugio.700}",
+          "value": "#3e5166"
         }
       }
     },
@@ -2865,6 +3246,10 @@ const data = {
         "light": {
           "ref": "{color.brand.200}",
           "value": "#ffd1ba"
+        },
+        "refugio": {
+          "ref": "{color.refugio.200}",
+          "value": "#dae0e8"
         }
       }
     },
@@ -2882,6 +3267,10 @@ const data = {
         "light": {
           "ref": "{color.brand.950}",
           "value": "#451400"
+        },
+        "refugio": {
+          "ref": "{color.refugio.25}",
+          "value": "#f8fafd"
         }
       }
     },
@@ -2900,6 +3289,10 @@ const data = {
         "light": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
+        },
+        "refugio": {
+          "ref": "{color.terracotta.500}",
+          "value": "#c97b63"
         }
       }
     },
@@ -2915,6 +3308,10 @@ const data = {
           "value": "#72cb8b"
         },
         "light": {
+          "ref": "{color.green.700}",
+          "value": "#1e854a"
+        },
+        "refugio": {
           "ref": "{color.green.700}",
           "value": "#1e854a"
         }
@@ -2934,6 +3331,10 @@ const data = {
         "light": {
           "ref": "{color.green.800}",
           "value": "#0f6939"
+        },
+        "refugio": {
+          "ref": "{color.green.800}",
+          "value": "#0f6939"
         }
       }
     },
@@ -2949,6 +3350,10 @@ const data = {
           "value": "#72cb8b21"
         },
         "light": {
+          "ref": "{color.green.50}",
+          "value": "#effaf1"
+        },
+        "refugio": {
           "ref": "{color.green.50}",
           "value": "#effaf1"
         }
@@ -2968,6 +3373,10 @@ const data = {
         "light": {
           "ref": "{color.green.800}",
           "value": "#0f6939"
+        },
+        "refugio": {
+          "ref": "{color.green.800}",
+          "value": "#0f6939"
         }
       }
     },
@@ -2983,6 +3392,10 @@ const data = {
           "value": "#72cb8b4d"
         },
         "light": {
+          "ref": "{color.green.200}",
+          "value": "#bdeac6"
+        },
+        "refugio": {
           "ref": "{color.green.200}",
           "value": "#bdeac6"
         }
@@ -3002,6 +3415,10 @@ const data = {
         "light": {
           "ref": "{color.white}",
           "value": "#ffffff"
+        },
+        "refugio": {
+          "ref": "{color.white}",
+          "value": "#ffffff"
         }
       }
     },
@@ -3017,6 +3434,10 @@ const data = {
           "value": "#ffb851"
         },
         "light": {
+          "ref": "{color.amber.400}",
+          "value": "#ffb851"
+        },
+        "refugio": {
           "ref": "{color.amber.400}",
           "value": "#ffb851"
         }
@@ -3036,6 +3457,10 @@ const data = {
         "light": {
           "ref": "{color.amber.500}",
           "value": "#f6a10c"
+        },
+        "refugio": {
+          "ref": "{color.amber.500}",
+          "value": "#f6a10c"
         }
       }
     },
@@ -3051,6 +3476,10 @@ const data = {
           "value": "#ffb85121"
         },
         "light": {
+          "ref": "{color.amber.50}",
+          "value": "#fff9f0"
+        },
+        "refugio": {
           "ref": "{color.amber.50}",
           "value": "#fff9f0"
         }
@@ -3070,6 +3499,10 @@ const data = {
         "light": {
           "ref": "{color.amber.800}",
           "value": "#874e00"
+        },
+        "refugio": {
+          "ref": "{color.amber.800}",
+          "value": "#874e00"
         }
       }
     },
@@ -3085,6 +3518,10 @@ const data = {
           "value": "#ffb8514d"
         },
         "light": {
+          "ref": "{color.amber.200}",
+          "value": "#ffe2b6"
+        },
+        "refugio": {
           "ref": "{color.amber.200}",
           "value": "#ffe2b6"
         }
@@ -3104,6 +3541,10 @@ const data = {
         "light": {
           "ref": "{color.amber.950}",
           "value": "#432200"
+        },
+        "refugio": {
+          "ref": "{color.amber.950}",
+          "value": "#432200"
         }
       }
     },
@@ -3119,6 +3560,10 @@ const data = {
           "value": "#ff9087"
         },
         "light": {
+          "ref": "{color.red.700}",
+          "value": "#c13834"
+        },
+        "refugio": {
           "ref": "{color.red.700}",
           "value": "#c13834"
         }
@@ -3138,6 +3583,10 @@ const data = {
         "light": {
           "ref": "{color.red.800}",
           "value": "#9b2825"
+        },
+        "refugio": {
+          "ref": "{color.red.800}",
+          "value": "#9b2825"
         }
       }
     },
@@ -3153,6 +3602,10 @@ const data = {
           "value": "#ff908721"
         },
         "light": {
+          "ref": "{color.red.50}",
+          "value": "#fff4f3"
+        },
+        "refugio": {
           "ref": "{color.red.50}",
           "value": "#fff4f3"
         }
@@ -3172,6 +3625,10 @@ const data = {
         "light": {
           "ref": "{color.red.700}",
           "value": "#c13834"
+        },
+        "refugio": {
+          "ref": "{color.red.700}",
+          "value": "#c13834"
         }
       }
     },
@@ -3187,6 +3644,10 @@ const data = {
           "value": "#ff90874d"
         },
         "light": {
+          "ref": "{color.red.200}",
+          "value": "#ffcfca"
+        },
+        "refugio": {
           "ref": "{color.red.200}",
           "value": "#ffcfca"
         }
@@ -3206,6 +3667,10 @@ const data = {
         "light": {
           "ref": "{color.white}",
           "value": "#ffffff"
+        },
+        "refugio": {
+          "ref": "{color.white}",
+          "value": "#ffffff"
         }
       }
     },
@@ -3221,6 +3686,10 @@ const data = {
           "value": "#6abcff"
         },
         "light": {
+          "ref": "{color.blue.700}",
+          "value": "#1776b5"
+        },
+        "refugio": {
           "ref": "{color.blue.700}",
           "value": "#1776b5"
         }
@@ -3240,6 +3709,10 @@ const data = {
         "light": {
           "ref": "{color.blue.800}",
           "value": "#095c92"
+        },
+        "refugio": {
+          "ref": "{color.blue.800}",
+          "value": "#095c92"
         }
       }
     },
@@ -3255,6 +3728,10 @@ const data = {
           "value": "#6abcff21"
         },
         "light": {
+          "ref": "{color.blue.50}",
+          "value": "#f0f8ff"
+        },
+        "refugio": {
           "ref": "{color.blue.50}",
           "value": "#f0f8ff"
         }
@@ -3274,6 +3751,10 @@ const data = {
         "light": {
           "ref": "{color.blue.700}",
           "value": "#1776b5"
+        },
+        "refugio": {
+          "ref": "{color.blue.700}",
+          "value": "#1776b5"
         }
       }
     },
@@ -3289,6 +3770,10 @@ const data = {
           "value": "#6abcff4d"
         },
         "light": {
+          "ref": "{color.blue.200}",
+          "value": "#bfe1ff"
+        },
+        "refugio": {
           "ref": "{color.blue.200}",
           "value": "#bfe1ff"
         }
@@ -3308,6 +3793,10 @@ const data = {
         "light": {
           "ref": "{color.white}",
           "value": "#ffffff"
+        },
+        "refugio": {
+          "ref": "{color.white}",
+          "value": "#ffffff"
         }
       }
     },
@@ -3323,6 +3812,10 @@ const data = {
           "value": "#d95c0a"
         },
         "light": {
+          "ref": "{color.brand.600}",
+          "value": "#d95c0a"
+        },
+        "refugio": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
         }
@@ -3342,6 +3835,10 @@ const data = {
         "light": {
           "ref": "{color.blue.600}",
           "value": "#2a8ed6"
+        },
+        "refugio": {
+          "ref": "{color.blue.600}",
+          "value": "#2a8ed6"
         }
       }
     },
@@ -3357,6 +3854,10 @@ const data = {
           "value": "#cd5892"
         },
         "light": {
+          "ref": "{color.pink.600}",
+          "value": "#cd5892"
+        },
+        "refugio": {
           "ref": "{color.pink.600}",
           "value": "#cd5892"
         }
@@ -3376,6 +3877,10 @@ const data = {
         "light": {
           "ref": "{color.amber.700}",
           "value": "#a86600"
+        },
+        "refugio": {
+          "ref": "{color.amber.700}",
+          "value": "#a86600"
         }
       }
     },
@@ -3391,6 +3896,10 @@ const data = {
           "value": "#019d90"
         },
         "light": {
+          "ref": "{color.teal.600}",
+          "value": "#019d90"
+        },
+        "refugio": {
           "ref": "{color.teal.600}",
           "value": "#019d90"
         }
@@ -3410,6 +3919,10 @@ const data = {
         "light": {
           "ref": "{color.red.600}",
           "value": "#e44b46"
+        },
+        "refugio": {
+          "ref": "{color.red.600}",
+          "value": "#e44b46"
         }
       }
     },
@@ -3427,6 +3940,10 @@ const data = {
         "light": {
           "ref": "{color.violet.600}",
           "value": "#9070dd"
+        },
+        "refugio": {
+          "ref": "{color.violet.600}",
+          "value": "#9070dd"
         }
       }
     },
@@ -3442,6 +3959,10 @@ const data = {
           "value": "#339f5c"
         },
         "light": {
+          "ref": "{color.green.600}",
+          "value": "#339f5c"
+        },
+        "refugio": {
           "ref": "{color.green.600}",
           "value": "#339f5c"
         }
@@ -3462,6 +3983,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.300}",
           "value": "#cec8c1"
+        },
+        "refugio": {
+          "ref": "{color.refugio.300}",
+          "value": "#c0cad6"
         }
       }
     },
@@ -3480,6 +4005,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.400}",
           "value": "#9c9792"
+        },
+        "refugio": {
+          "ref": "{color.refugio.400}",
+          "value": "#93a0b0"
         }
       }
     },
@@ -3495,6 +4024,10 @@ const data = {
           "value": "#712800"
         },
         "light": {
+          "ref": "{color.brand.100}",
+          "value": "#ffe7db"
+        },
+        "refugio": {
           "ref": "{color.brand.100}",
           "value": "#ffe7db"
         }
@@ -3514,6 +4047,10 @@ const data = {
         "light": {
           "ref": "{color.brand.300}",
           "value": "#ffb590"
+        },
+        "refugio": {
+          "ref": "{color.brand.300}",
+          "value": "#ffb590"
         }
       }
     },
@@ -3529,6 +4066,10 @@ const data = {
           "value": "#b74900"
         },
         "light": {
+          "ref": "{color.brand.400}",
+          "value": "#ff945e"
+        },
+        "refugio": {
           "ref": "{color.brand.400}",
           "value": "#ff945e"
         }
@@ -3548,6 +4089,10 @@ const data = {
         "light": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
+        },
+        "refugio": {
+          "ref": "{color.brand.500}",
+          "value": "#f57630"
         }
       }
     },
@@ -3563,6 +4108,10 @@ const data = {
           "value": "#f57630"
         },
         "light": {
+          "ref": "{color.brand.600}",
+          "value": "#d95c0a"
+        },
+        "refugio": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
         }
@@ -3582,6 +4131,10 @@ const data = {
         "light": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
+        },
+        "refugio": {
+          "ref": "{color.brand.700}",
+          "value": "#b74900"
         }
       }
     },
@@ -3597,6 +4150,10 @@ const data = {
           "value": "#ffb590"
         },
         "light": {
+          "ref": "{color.brand.800}",
+          "value": "#923700"
+        },
+        "refugio": {
           "ref": "{color.brand.800}",
           "value": "#923700"
         }
@@ -3616,6 +4173,10 @@ const data = {
         "light": {
           "ref": "{color.brand.400}",
           "value": "#ff945e"
+        },
+        "refugio": {
+          "ref": "{color.brand.400}",
+          "value": "#ff945e"
         }
       }
     },
@@ -3631,6 +4192,10 @@ const data = {
           "value": "#b74900"
         },
         "light": {
+          "ref": "{color.brand.500}",
+          "value": "#f57630"
+        },
+        "refugio": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
         }
@@ -3650,6 +4215,10 @@ const data = {
         "light": {
           "ref": "{color.brand.600}",
           "value": "#d95c0a"
+        },
+        "refugio": {
+          "ref": "{color.brand.600}",
+          "value": "#d95c0a"
         }
       }
     },
@@ -3665,6 +4234,10 @@ const data = {
           "value": "#f57630"
         },
         "light": {
+          "ref": "{color.brand.700}",
+          "value": "#b74900"
+        },
+        "refugio": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
         }
@@ -3684,6 +4257,10 @@ const data = {
         "light": {
           "ref": "{color.brand.800}",
           "value": "#923700"
+        },
+        "refugio": {
+          "ref": "{color.brand.800}",
+          "value": "#923700"
         }
       }
     },
@@ -3699,6 +4276,10 @@ const data = {
           "value": "#6abcff"
         },
         "light": {
+          "ref": "{color.blue.700}",
+          "value": "#1776b5"
+        },
+        "refugio": {
           "ref": "{color.blue.700}",
           "value": "#1776b5"
         }
@@ -3718,6 +4299,10 @@ const data = {
         "light": {
           "ref": "{color.blue.500}",
           "value": "#48a7f1"
+        },
+        "refugio": {
+          "ref": "{color.blue.500}",
+          "value": "#48a7f1"
         }
       }
     },
@@ -3733,6 +4318,10 @@ const data = {
           "value": "#095c92"
         },
         "light": {
+          "ref": "{color.blue.300}",
+          "value": "#98d0ff"
+        },
+        "refugio": {
           "ref": "{color.blue.300}",
           "value": "#98d0ff"
         }
@@ -3752,6 +4341,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.200}",
           "value": "#e5ded7"
+        },
+        "refugio": {
+          "ref": "{color.refugio.200}",
+          "value": "#dae0e8"
         }
       }
     },
@@ -3767,6 +4360,10 @@ const data = {
           "value": "#923700"
         },
         "light": {
+          "ref": "{color.brand.300}",
+          "value": "#ffb590"
+        },
+        "refugio": {
           "ref": "{color.brand.300}",
           "value": "#ffb590"
         }
@@ -3786,6 +4383,10 @@ const data = {
         "light": {
           "ref": "{color.brand.500}",
           "value": "#f57630"
+        },
+        "refugio": {
+          "ref": "{color.brand.500}",
+          "value": "#f57630"
         }
       }
     },
@@ -3801,6 +4402,10 @@ const data = {
           "value": "#ff945e"
         },
         "light": {
+          "ref": "{color.brand.700}",
+          "value": "#b74900"
+        },
+        "refugio": {
           "ref": "{color.brand.700}",
           "value": "#b74900"
         }
@@ -3820,6 +4425,10 @@ const data = {
         "light": {
           "ref": "{color.green.600}",
           "value": "#339f5c"
+        },
+        "refugio": {
+          "ref": "{color.green.600}",
+          "value": "#339f5c"
         }
       }
     },
@@ -3837,6 +4446,10 @@ const data = {
         "light": {
           "ref": "{color.amber.500}",
           "value": "#f6a10c"
+        },
+        "refugio": {
+          "ref": "{color.amber.500}",
+          "value": "#f6a10c"
         }
       }
     },
@@ -3852,6 +4465,10 @@ const data = {
           "value": "#e44b46"
         },
         "light": {
+          "ref": "{color.red.600}",
+          "value": "#e44b46"
+        },
+        "refugio": {
           "ref": "{color.red.600}",
           "value": "#e44b46"
         }
@@ -3872,6 +4489,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.200}",
           "value": "#e5ded7"
+        },
+        "refugio": {
+          "ref": "{color.refugio.200}",
+          "value": "#dae0e8"
         }
       }
     },
@@ -3890,6 +4511,10 @@ const data = {
         "light": {
           "ref": "{color.neutral.300}",
           "value": "#cec8c1"
+        },
+        "refugio": {
+          "ref": "{color.refugio.300}",
+          "value": "#c0cad6"
         }
       }
     },
@@ -3901,7 +4526,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "0 1px 2px 0 rgb(0 0 0 / 0.32)",
-        "light": "0 1px 2px 0 rgb(56 40 24 / 0.06)"
+        "light": "0 1px 2px 0 rgb(56 40 24 / 0.06)",
+        "refugio": "0 1px 2px 0 rgb(45 58 74 / 0.06)"
       }
     },
     {
@@ -3912,7 +4538,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "0 1px 2px 0 rgb(0 0 0 / 0.3), 0 2px 6px -1px rgb(0 0 0 / 0.24)",
-        "light": "0 1px 2px 0 rgb(56 40 24 / 0.06), 0 2px 6px -1px rgb(56 40 24 / 0.06)"
+        "light": "0 1px 2px 0 rgb(56 40 24 / 0.06), 0 2px 6px -1px rgb(56 40 24 / 0.06)",
+        "refugio": "0 1px 2px 0 rgb(45 58 74 / 0.06), 0 2px 6px -1px rgb(45 58 74 / 0.06)"
       }
     },
     {
@@ -3923,7 +4550,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "0 2px 4px -1px rgb(0 0 0 / 0.28), 0 8px 20px -4px rgb(0 0 0 / 0.36)",
-        "light": "0 2px 4px -1px rgb(56 40 24 / 0.06), 0 8px 20px -4px rgb(56 40 24 / 0.1)"
+        "light": "0 2px 4px -1px rgb(56 40 24 / 0.06), 0 8px 20px -4px rgb(56 40 24 / 0.1)",
+        "refugio": "0 2px 4px -1px rgb(45 58 74 / 0.06), 0 8px 20px -4px rgb(45 58 74 / 0.1)"
       }
     },
     {
@@ -3934,7 +4562,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "0 4px 8px -2px rgb(0 0 0 / 0.3), 0 16px 36px -8px rgb(0 0 0 / 0.5)",
-        "light": "0 4px 8px -2px rgb(56 40 24 / 0.07), 0 16px 36px -8px rgb(56 40 24 / 0.14)"
+        "light": "0 4px 8px -2px rgb(56 40 24 / 0.07), 0 16px 36px -8px rgb(56 40 24 / 0.14)",
+        "refugio": "0 4px 8px -2px rgb(45 58 74 / 0.07), 0 16px 36px -8px rgb(45 58 74 / 0.14)"
       }
     },
     {
@@ -3945,7 +4574,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "0 8px 16px -4px rgb(0 0 0 / 0.32), 0 28px 56px -12px rgb(0 0 0 / 0.6)",
-        "light": "0 8px 16px -4px rgb(56 40 24 / 0.08), 0 28px 56px -12px rgb(56 40 24 / 0.18)"
+        "light": "0 8px 16px -4px rgb(56 40 24 / 0.08), 0 28px 56px -12px rgb(56 40 24 / 0.18)",
+        "refugio": "0 8px 16px -4px rgb(45 58 74 / 0.08), 0 28px 56px -12px rgb(45 58 74 / 0.18)"
       }
     },
     {
@@ -3956,7 +4586,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "0 12px 24px -6px rgb(0 0 0 / 0.36), 0 48px 96px -24px rgb(0 0 0 / 0.72)",
-        "light": "0 12px 24px -6px rgb(56 40 24 / 0.1), 0 48px 96px -24px rgb(56 40 24 / 0.24)"
+        "light": "0 12px 24px -6px rgb(56 40 24 / 0.1), 0 48px 96px -24px rgb(56 40 24 / 0.24)",
+        "refugio": "0 12px 24px -6px rgb(45 58 74 / 0.1), 0 48px 96px -24px rgb(45 58 74 / 0.24)"
       }
     },
     {
@@ -3967,7 +4598,8 @@ const data = {
       "themed": true,
       "modes": {
         "dark": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)",
-        "light": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)"
+        "light": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)",
+        "refugio": "linear-gradient(90deg, var(--ds-color-border-strong) 0%, transparent 100%)"
       }
     }
   ],
@@ -3989,6 +4621,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.fg.default",
+      "bg": "color.bg.canvas",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 10.91,
+      "pass": true
+    },
+    {
       "fg": "color.fg.muted",
       "bg": "color.bg.canvas",
       "mode": "dark",
@@ -4005,6 +4645,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.canvas",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 6.66,
+      "pass": true
+    },
+    {
       "fg": "color.fg.default",
       "bg": "color.bg.sidebar",
       "mode": "dark",
@@ -4018,6 +4666,14 @@ const data = {
       "mode": "light",
       "min": 4.5,
       "ratio": 18.59,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.default",
+      "bg": "color.bg.sidebar",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 11.42,
       "pass": true
     },
     {
@@ -4038,6 +4694,14 @@ const data = {
     },
     {
       "fg": "color.fg.muted",
+      "bg": "color.bg.sidebar",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 6.97,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
       "bg": "color.bg.raised",
       "mode": "dark",
       "min": 4.5,
@@ -4050,6 +4714,14 @@ const data = {
       "mode": "light",
       "min": 4.5,
       "ratio": 7.76,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.raised",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 7.29,
       "pass": true
     },
     {
@@ -4069,6 +4741,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.fg.link",
+      "bg": "color.bg.canvas",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 7.46,
+      "pass": true
+    },
+    {
       "fg": "color.fg.brand",
       "bg": "color.bg.canvas",
       "mode": "dark",
@@ -4082,6 +4762,14 @@ const data = {
       "mode": "light",
       "min": 4.5,
       "ratio": 4.88,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.brand",
+      "bg": "color.bg.canvas",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 7.46,
       "pass": true
     },
     {
@@ -4101,6 +4789,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.brand.on-solid",
+      "bg": "color.brand.solid",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 7.8,
+      "pass": true
+    },
+    {
       "fg": "color.brand.fg",
       "bg": "color.brand.subtle",
       "mode": "dark",
@@ -4114,6 +4810,14 @@ const data = {
       "mode": "light",
       "min": 4.5,
       "ratio": 4.9,
+      "pass": true
+    },
+    {
+      "fg": "color.brand.fg",
+      "bg": "color.brand.subtle",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 7.25,
       "pass": true
     },
     {
@@ -4133,6 +4837,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.fg.inverse",
+      "bg": "color.bg.inverse",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 11.42,
+      "pass": true
+    },
+    {
       "fg": "color.success.fg",
       "bg": "color.success.subtle",
       "mode": "dark",
@@ -4144,6 +4856,14 @@ const data = {
       "fg": "color.success.fg",
       "bg": "color.success.subtle",
       "mode": "light",
+      "min": 4.5,
+      "ratio": 6.33,
+      "pass": true
+    },
+    {
+      "fg": "color.success.fg",
+      "bg": "color.success.subtle",
+      "mode": "refugio",
       "min": 4.5,
       "ratio": 6.33,
       "pass": true
@@ -4165,6 +4885,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.success.on-solid",
+      "bg": "color.success.solid",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 4.66,
+      "pass": true
+    },
+    {
       "fg": "color.warning.fg",
       "bg": "color.warning.subtle",
       "mode": "dark",
@@ -4176,6 +4904,14 @@ const data = {
       "fg": "color.warning.fg",
       "bg": "color.warning.subtle",
       "mode": "light",
+      "min": 4.5,
+      "ratio": 6.43,
+      "pass": true
+    },
+    {
+      "fg": "color.warning.fg",
+      "bg": "color.warning.subtle",
+      "mode": "refugio",
       "min": 4.5,
       "ratio": 6.43,
       "pass": true
@@ -4197,6 +4933,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.warning.on-solid",
+      "bg": "color.warning.solid",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 8.33,
+      "pass": true
+    },
+    {
       "fg": "color.danger.fg",
       "bg": "color.danger.subtle",
       "mode": "dark",
@@ -4208,6 +4952,14 @@ const data = {
       "fg": "color.danger.fg",
       "bg": "color.danger.subtle",
       "mode": "light",
+      "min": 4.5,
+      "ratio": 5.02,
+      "pass": true
+    },
+    {
+      "fg": "color.danger.fg",
+      "bg": "color.danger.subtle",
+      "mode": "refugio",
       "min": 4.5,
       "ratio": 5.02,
       "pass": true
@@ -4229,6 +4981,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.danger.on-solid",
+      "bg": "color.danger.solid",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 5.41,
+      "pass": true
+    },
+    {
       "fg": "color.info.fg",
       "bg": "color.info.subtle",
       "mode": "dark",
@@ -4240,6 +5000,14 @@ const data = {
       "fg": "color.info.fg",
       "bg": "color.info.subtle",
       "mode": "light",
+      "min": 4.5,
+      "ratio": 4.56,
+      "pass": true
+    },
+    {
+      "fg": "color.info.fg",
+      "bg": "color.info.subtle",
+      "mode": "refugio",
       "min": 4.5,
       "ratio": 4.56,
       "pass": true
@@ -4261,6 +5029,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.info.on-solid",
+      "bg": "color.info.solid",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 4.89,
+      "pass": true
+    },
+    {
       "fg": "color.chart.series.1",
       "bg": "color.bg.surface",
       "mode": "dark",
@@ -4274,6 +5050,14 @@ const data = {
       "mode": "light",
       "min": 3,
       "ratio": 3.69,
+      "pass": true
+    },
+    {
+      "fg": "color.chart.series.1",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.83,
       "pass": true
     },
     {
@@ -4293,6 +5077,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.chart.series.2",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.54,
+      "pass": true
+    },
+    {
       "fg": "color.chart.series.3",
       "bg": "color.bg.surface",
       "mode": "dark",
@@ -4306,6 +5098,14 @@ const data = {
       "mode": "light",
       "min": 3,
       "ratio": 3.74,
+      "pass": true
+    },
+    {
+      "fg": "color.chart.series.3",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.88,
       "pass": true
     },
     {
@@ -4325,6 +5125,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.chart.series.4",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 4.6,
+      "pass": true
+    },
+    {
       "fg": "color.chart.series.5",
       "bg": "color.bg.surface",
       "mode": "dark",
@@ -4338,6 +5146,14 @@ const data = {
       "mode": "light",
       "min": 3,
       "ratio": 3.25,
+      "pass": true
+    },
+    {
+      "fg": "color.chart.series.5",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.37,
       "pass": true
     },
     {
@@ -4357,6 +5173,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.chart.series.6",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.89,
+      "pass": true
+    },
+    {
       "fg": "color.chart.series.7",
       "bg": "color.bg.surface",
       "mode": "dark",
@@ -4373,6 +5197,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.chart.series.7",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.79,
+      "pass": true
+    },
+    {
       "fg": "color.chart.series.8",
       "bg": "color.bg.surface",
       "mode": "dark",
@@ -4386,6 +5218,14 @@ const data = {
       "mode": "light",
       "min": 3,
       "ratio": 3.23,
+      "pass": true
+    },
+    {
+      "fg": "color.chart.series.8",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.36,
       "pass": true
     },
     {
@@ -4406,6 +5246,14 @@ const data = {
     },
     {
       "fg": "color.fg.subtle",
+      "bg": "color.bg.canvas",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 4.91,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.subtle",
       "bg": "color.bg.surface",
       "mode": "dark",
       "min": 4.5,
@@ -4422,6 +5270,14 @@ const data = {
     },
     {
       "fg": "color.fg.subtle",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 5.38,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.subtle",
       "bg": "color.bg.raised",
       "mode": "dark",
       "min": 4.5,
@@ -4432,6 +5288,14 @@ const data = {
       "fg": "color.fg.subtle",
       "bg": "color.bg.raised",
       "mode": "light",
+      "min": 4.5,
+      "ratio": 5.38,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.subtle",
+      "bg": "color.bg.raised",
+      "mode": "refugio",
       "min": 4.5,
       "ratio": 5.38,
       "pass": true
@@ -4453,6 +5317,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.fg.subtle",
+      "bg": "color.bg.sunken",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 4.78,
+      "pass": true
+    },
+    {
       "fg": "color.border.field",
       "bg": "color.bg.canvas",
       "mode": "dark",
@@ -4466,6 +5338,14 @@ const data = {
       "mode": "light",
       "min": 3,
       "ratio": 3.34,
+      "pass": true
+    },
+    {
+      "fg": "color.border.field",
+      "bg": "color.bg.canvas",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.4,
       "pass": true
     },
     {
@@ -4486,6 +5366,14 @@ const data = {
     },
     {
       "fg": "color.border.field",
+      "bg": "color.bg.surface",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.57,
+      "pass": true
+    },
+    {
+      "fg": "color.border.field",
       "bg": "color.bg.raised",
       "mode": "dark",
       "min": 3,
@@ -4498,6 +5386,14 @@ const data = {
       "mode": "light",
       "min": 3,
       "ratio": 3.37,
+      "pass": true
+    },
+    {
+      "fg": "color.border.field",
+      "bg": "color.bg.raised",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.57,
       "pass": true
     },
     {
@@ -4517,6 +5413,14 @@ const data = {
       "pass": true
     },
     {
+      "fg": "color.border.field",
+      "bg": "color.bg.sunken",
+      "mode": "refugio",
+      "min": 3,
+      "ratio": 3.35,
+      "pass": true
+    },
+    {
       "fg": "color.fg.muted",
       "bg": "color.bg.sunken",
       "mode": "dark",
@@ -4530,6 +5434,14 @@ const data = {
       "mode": "light",
       "min": 4.5,
       "ratio": 6.67,
+      "pass": true
+    },
+    {
+      "fg": "color.fg.muted",
+      "bg": "color.bg.sunken",
+      "mode": "refugio",
+      "min": 4.5,
+      "ratio": 6.48,
       "pass": true
     }
   ]

@@ -8,10 +8,62 @@ import { tr } from '../ds/js/i18n.js';
 
 const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
-export const CURRENT_VERSION = '0.8.0';
+export const CURRENT_VERSION = '0.9.0';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 const RELEASES = [
+  {
+    version: '0.9.0',
+    date: '2026-11-03',
+    title: T('Refúgio', 'Refúgio', 'Refúgio'),
+    summary: T(
+      'Um terceiro tema, o Refúgio: as cores do tema de mesmo nome do app Lume — claro, de ardósia fria e terracota —, ao lado do Escuro e do Claro.',
+      'A third theme, Refúgio: the colors of the Lume app’s theme of the same name — light, cool slate and terracotta — next to Dark and Light.',
+      'Un tercer tema, Refúgio: los colores del tema del mismo nombre de la app Lume — claro, de pizarra fría y terracota —, junto al Oscuro y el Claro.',
+    ),
+    groups: [
+      {
+        name: T('Temas', 'Themes', 'Temas'),
+        items: [
+          ['novo', T(
+            'Tema Refúgio no seletor da topbar, na busca e no “Experimente ao vivo”: fundos e textos em ardósia, botão primário ardósia e terracota no indicador',
+            'Refúgio theme in the topbar switcher, in search, and in “Try it live”: slate backgrounds and text, a slate primary button, and terracotta on the indicator',
+            'Tema Refúgio en el selector de la topbar, en la búsqueda y en “Pruébalo en vivo”: fondos y textos en pizarra, botón primario pizarra y terracota en el indicador',
+          ), '/fundamentos/cores'],
+          ['novo', T(
+            'Paletas Refúgio · Ardósia fria e Terracota, geradas em OKLCH a partir das cores do app Lume',
+            'Refúgio · Cool slate and Terracotta palettes, generated in OKLCH from the Lume app’s colors',
+            'Paletas Refúgio · Pizarra fría y Terracota, generadas en OKLCH a partir de los colores de la app Lume',
+          ), '/fundamentos/cores'],
+          ['melhoria', T(
+            'O contraste é medido nos três temas: 105 combinações, todas aprovadas. A página Cores ganhou a coluna Refúgio',
+            'Contrast is measured in all three themes: 105 pairs, all passing. The Colors page gained a Refúgio column',
+            'El contraste se mide en los tres temas: 105 combinaciones, todas aprobadas. La página Colores ganó la columna Refúgio',
+          ), '/fundamentos/cores'],
+          ['melhoria', T(
+            'Os palcos dos playgrounds também mostram o Refúgio',
+            'Playground stages also show Refúgio',
+            'Los escenarios de los playgrounds también muestran Refúgio',
+          ), '/componentes/botao'],
+          ['novo', T(
+            'Ícone mountain, o do Refúgio no Lume',
+            'Mountain icon, the one Lume uses for Refúgio',
+            'Ícono mountain, el de Refúgio en Lume',
+          ), '/fundamentos/icones'],
+        ],
+      },
+      {
+        name: T('Início', 'Home', 'Inicio'),
+        items: [
+          ['melhoria', T(
+            'O roadmap mostra as versões recentes que cabem ao lado dos padrões, e os dois cards terminam alinhados',
+            'The roadmap shows the recent versions that fit next to the patterns, and both cards end aligned',
+            'El roadmap muestra las versiones recientes que caben junto a los patrones, y las dos tarjetas terminan alineadas',
+          ), '/'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.8.0',
     date: '2026-11-03',

@@ -38,21 +38,22 @@ const COPY = T(
     semantic: { title: 'Tokens semânticos', desc: 'É isso que os componentes consomem. Cada token aponta para uma primitiva diferente em cada tema — o nome descreve a função, não a cor.', groupLabel: 'Grupo de tokens' },
     copyVar: (v) => `Copiar var(${v})`,
     copyTooltip: 'Copiar variável',
-    head: { token: 'Token', dark: 'Escuro', light: 'Claro' },
+    head: { token: 'Token', dark: 'Escuro', light: 'Claro', refugio: 'Refúgio' },
     themes: {
       title: 'Temas',
-      desc: 'Escuro é o padrão da marca; claro e “seguir o sistema” vêm prontos. Como os temas vivem em atributos, dá até para misturar: um bloco claro dentro de uma tela escura.',
+      desc: 'Escuro é o padrão da marca; claro, Refúgio e “seguir o sistema” vêm prontos. O Refúgio é o tema claro de ardósia e terracota do app Lume. Como os temas vivem em atributos, dá até para misturar: um bloco claro dentro de uma tela escura.',
       dark: 'Escuro',
       light: 'Claro',
+      refugio: 'Refúgio',
       default: 'padrão',
       card: ['Exemplo', 'Lançamento da versão 0.1', 'Os mesmos componentes e os mesmos tokens — só o tema muda.', 'Tom direto', 'Pronto', 'Revisar', 'Publicar', 'Cancelar'],
-      code: ['escuro (padrão)', 'claro', 'segue o sistema operacional', 'tema aninhado: só este bloco fica claro'],
+      code: ['escuro (padrão)', 'claro', 'segue o sistema operacional', 'tema aninhado: só este bloco fica claro', 'claro, ardósia e terracota (app Lume)'],
     },
     contrast: {
       title: 'Contraste',
-      desc: 'Toda combinação de texto e fundo usada pelos componentes é verificada no build, nos dois temas, contra o WCAG 2.2. Texto comum pede 4,5:1; texto terciário, 3:1.',
+      desc: 'Toda combinação de texto e fundo usada pelos componentes é verificada no build, nos três temas, contra o WCAG 2.2. Texto comum pede 4,5:1; texto terciário, 3:1.',
       approved: 'combinações aprovadas',
-      head: ['Texto sobre fundo', 'Escuro', 'Claro', 'Mínimo'],
+      head: ['Texto sobre fundo', 'Escuro', 'Claro', 'Refúgio', 'Mínimo'],
       on: (bg) => `sobre ${bg}`,
       levels: { large: 'AA grande', fail: 'Falha' },
     },
@@ -90,21 +91,22 @@ const COPY = T(
     semantic: { title: 'Semantic tokens', desc: 'This is what components consume. Each token points to a different primitive in each theme — the name describes the role, not the color.', groupLabel: 'Token group' },
     copyVar: (v) => `Copy var(${v})`,
     copyTooltip: 'Copy variable',
-    head: { token: 'Token', dark: 'Dark', light: 'Light' },
+    head: { token: 'Token', dark: 'Dark', light: 'Light', refugio: 'Refúgio' },
     themes: {
       title: 'Themes',
-      desc: 'Dark is the brand default; light and “match system” come ready. Since themes live in attributes, you can even mix them: a light block inside a dark screen.',
+      desc: 'Dark is the brand default; light, Refúgio, and “match system” come ready. Refúgio is the Lume app’s light slate-and-terracotta theme. Since themes live in attributes, you can even mix them: a light block inside a dark screen.',
       dark: 'Dark',
       light: 'Light',
+      refugio: 'Refúgio',
       default: 'default',
       card: ['Example', 'Version 0.1 launch', 'The same components and the same tokens — only the theme changes.', 'Direct tone', 'Done', 'Review', 'Publish', 'Cancel'],
-      code: ['dark (default)', 'light', 'follows the operating system', 'nested theme: only this block turns light'],
+      code: ['dark (default)', 'light', 'follows the operating system', 'nested theme: only this block turns light', 'light, slate and terracotta (Lume app)'],
     },
     contrast: {
       title: 'Contrast',
-      desc: 'Every text and background pair the components use is checked in the build, in both themes, against WCAG 2.2. Regular text needs 4.5:1; tertiary text, 3:1.',
+      desc: 'Every text and background pair the components use is checked in the build, in all three themes, against WCAG 2.2. Regular text needs 4.5:1; tertiary text, 3:1.',
       approved: 'pairs passing',
-      head: ['Text on background', 'Dark', 'Light', 'Minimum'],
+      head: ['Text on background', 'Dark', 'Light', 'Refúgio', 'Minimum'],
       on: (bg) => `on ${bg}`,
       levels: { large: 'AA large', fail: 'Fail' },
     },
@@ -142,21 +144,22 @@ const COPY = T(
     semantic: { title: 'Tokens semánticos', desc: 'Esto es lo que consumen los componentes. Cada token apunta a una primitiva distinta en cada tema — el nombre describe la función, no el color.', groupLabel: 'Grupo de tokens' },
     copyVar: (v) => `Copiar var(${v})`,
     copyTooltip: 'Copiar variable',
-    head: { token: 'Token', dark: 'Oscuro', light: 'Claro' },
+    head: { token: 'Token', dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio' },
     themes: {
       title: 'Temas',
-      desc: 'Oscuro es el predeterminado de la marca; claro y “seguir el sistema” vienen listos. Como los temas viven en atributos, hasta se pueden mezclar: un bloque claro dentro de una pantalla oscura.',
+      desc: 'Oscuro es el predeterminado de la marca; claro, Refúgio y “seguir el sistema” vienen listos. Refúgio es el tema claro de pizarra y terracota de la app Lume. Como los temas viven en atributos, hasta se pueden mezclar: un bloque claro dentro de una pantalla oscura.',
       dark: 'Oscuro',
       light: 'Claro',
+      refugio: 'Refúgio',
       default: 'predeterminado',
       card: ['Ejemplo', 'Lanzamiento de la versión 0.1', 'Los mismos componentes y los mismos tokens — solo cambia el tema.', 'Tono directo', 'Listo', 'Revisar', 'Publicar', 'Cancelar'],
-      code: ['oscuro (predeterminado)', 'claro', 'sigue el sistema operativo', 'tema anidado: solo este bloque queda claro'],
+      code: ['oscuro (predeterminado)', 'claro', 'sigue el sistema operativo', 'tema anidado: solo este bloque queda claro', 'claro, pizarra y terracota (app Lume)'],
     },
     contrast: {
       title: 'Contraste',
-      desc: 'Cada combinación de texto y fondo que usan los componentes se comprueba en el build, en los dos temas, contra WCAG 2.2. El texto común pide 4,5:1; el texto terciario, 3:1.',
+      desc: 'Cada combinación de texto y fondo que usan los componentes se comprueba en el build, en los tres temas, contra WCAG 2.2. El texto común pide 4,5:1; el texto terciario, 3:1.',
       approved: 'combinaciones aprobadas',
-      head: ['Texto sobre fondo', 'Oscuro', 'Claro', 'Mínimo'],
+      head: ['Texto sobre fondo', 'Oscuro', 'Claro', 'Refúgio', 'Mínimo'],
       on: (bg) => `sobre ${bg}`,
       levels: { large: 'AA grande', fail: 'Falla' },
     },
@@ -269,6 +272,7 @@ function tokenRows(c) {
         </div>
         ${tokenValue(t, 'dark')}
         ${tokenValue(t, 'light')}
+        ${tokenValue(t, 'refugio')}
         <button type="button" class="ds-icon-btn ds-icon-btn--muted" data-copy="var(${t.cssVar})" aria-label="${c.copyVar(t.cssVar)}" data-ds-tooltip="${c.copyTooltip}">${icon('copy', { size: 18 })}</button>
       </div>`;
     })
@@ -366,7 +370,7 @@ export default function renderCores(page) {
       </div>
       <p class="token-group-desc" data-group-desc>${groupDesc(c)}</p>
       <div class="doc-table token-table">
-        <div class="doc-table__head" aria-hidden="true"><span>${c.head.token}</span><span>${c.head.dark}</span><span>${c.head.light}</span><span></span></div>
+        <div class="doc-table__head" aria-hidden="true"><span>${c.head.token}</span><span>${c.head.dark}</span><span>${c.head.light}</span><span>${c.head.refugio}</span><span></span></div>
         <div data-token-rows>${tokenRows(c)}</div>
       </div>
     </section>
@@ -382,6 +386,7 @@ export default function renderCores(page) {
         ${[
           ['dark', th.dark, th.default],
           ['light', th.light, ''],
+          ['refugio', th.refugio, ''],
         ]
           .map(
             ([mode, label, note]) => `<figure class="theme-preview">
@@ -410,6 +415,7 @@ export default function renderCores(page) {
       </div>
       <pre class="ds-code theme-code"><code>&lt;html data-theme="dark"&gt;     <span class="ds-code__comment">&lt;!-- ${th.code[0]} --&gt;</span>
 &lt;html data-theme="light"&gt;    <span class="ds-code__comment">&lt;!-- ${th.code[1]} --&gt;</span>
+&lt;html data-theme="refugio"&gt;  <span class="ds-code__comment">&lt;!-- ${th.code[4]} --&gt;</span>
 &lt;html data-theme="system"&gt;   <span class="ds-code__comment">&lt;!-- ${th.code[2]} --&gt;</span>
 
 &lt;section data-theme="light"&gt; <span class="ds-code__comment">&lt;!-- ${th.code[3]} --&gt;</span></code></pre>
@@ -431,6 +437,7 @@ export default function renderCores(page) {
               <div class="token-name"><span class="token-name__label">${short(p.fg)}</span><span class="token-name__var">${c.contrast.on(short(p.bg))}</span></div>
               ${contrastCell(c, p, 'dark')}
               ${contrastCell(c, p, 'light')}
+              ${contrastCell(c, p, 'refugio')}
               <span class="contrast-min">${ratio(p.min, Number.isInteger(p.min) ? 0 : 1)}</span>
             </div>`,
           )

@@ -183,161 +183,197 @@
       "app": {
         "dark": "{color.neutral.975}",
         "light": "{color.neutral.100}",
+        "refugio": "{color.refugio.150}",
         "$description": "Fundo atrás dos painéis do app shell."
       },
       "canvas": {
         "dark": "{color.neutral.925}",
         "light": "{color.neutral.50}",
+        "refugio": "{color.refugio.50}",
         "$description": "Fundo do painel de conteúdo."
       },
       "sidebar": {
         "dark": "{color.neutral.900}",
-        "light": "{color.neutral.25}"
+        "light": "{color.neutral.25}",
+        "refugio": "{color.refugio.25}"
       },
       "surface": {
         "dark": "{color.neutral.900}",
         "light": "{color.neutral.25}",
+        "refugio": "{color.white}",
         "$description": "Cards e blocos sobre o canvas."
       },
       "raised": {
         "dark": "{color.neutral.850}",
         "light": "{color.white}",
+        "refugio": "{color.white}",
         "$description": "Modais, popovers, painéis flutuantes."
       },
       "sunken": {
         "dark": "{color.neutral.950}",
         "light": "{color.neutral.100}",
+        "refugio": "{color.refugio.100}",
         "$description": "Campos e áreas rebaixadas."
       },
       "muted": {
         "dark": "{color.neutral.750}",
-        "light": "{color.neutral.200}"
+        "light": "{color.neutral.200}",
+        "refugio": "{color.refugio.200}"
       },
       "inverse": {
         "dark": "{color.neutral.100}",
-        "light": "{color.neutral.950}"
+        "light": "{color.neutral.950}",
+        "refugio": "{color.refugio.800}"
       },
       "hover": {
         "dark": "alpha({color.white}, 0.05)",
-        "light": "alpha({color.neutral.975}, 0.045)"
+        "light": "alpha({color.neutral.975}, 0.045)",
+        "refugio": "alpha({color.refugio.700}, 0.05)"
       },
       "pressed": {
         "dark": "alpha({color.white}, 0.08)",
-        "light": "alpha({color.neutral.975}, 0.08)"
+        "light": "alpha({color.neutral.975}, 0.08)",
+        "refugio": "alpha({color.refugio.700}, 0.09)"
       },
       "selected": {
         "dark": "alpha({color.white}, 0.07)",
-        "light": "alpha({color.neutral.975}, 0.06)"
+        "light": "alpha({color.neutral.975}, 0.06)",
+        "refugio": "alpha({color.refugio.700}, 0.07)"
       },
       "overlay": {
         "dark": "alpha({color.black}, 0.6)",
-        "light": "alpha({color.neutral.975}, 0.32)"
+        "light": "alpha({color.neutral.975}, 0.32)",
+        "refugio": "alpha({color.refugio.800}, 0.35)"
       }
     },
     "fg": {
       "default": {
         "dark": "{color.neutral.100}",
-        "light": "{color.neutral.975}"
+        "light": "{color.neutral.975}",
+        "refugio": "{color.refugio.800}"
       },
       "muted": {
         "dark": "{color.neutral.300}",
-        "light": "{color.neutral.650}"
+        "light": "{color.neutral.650}",
+        "refugio": "{color.refugio.650}"
       },
       "subtle": {
         "dark": "{color.neutral.400}",
         "light": "{color.neutral.550}",
+        "refugio": "{color.refugio.550}",
         "$description": "Texto apagado (marcas de eixo, metadados). Passa de 4,5:1 em todas as superfícies, nos dois temas."
       },
       "disabled": {
         "dark": "{color.neutral.600}",
-        "light": "{color.neutral.400}"
+        "light": "{color.neutral.400}",
+        "refugio": "{color.refugio.400}"
       },
       "inverse": {
         "dark": "{color.neutral.975}",
-        "light": "{color.neutral.50}"
+        "light": "{color.neutral.50}",
+        "refugio": "{color.refugio.25}"
       },
       "brand": {
         "dark": "{color.brand.400}",
-        "light": "{color.brand.700}"
+        "light": "{color.brand.700}",
+        "refugio": "{color.refugio.700}"
       },
       "link": {
         "dark": "{color.brand.300}",
-        "light": "{color.brand.700}"
+        "light": "{color.brand.700}",
+        "refugio": "{color.refugio.700}"
       },
       "link-hover": {
         "dark": "{color.brand.200}",
-        "light": "{color.brand.800}"
+        "light": "{color.brand.800}",
+        "refugio": "{color.refugio.850}"
       }
     },
     "border": {
       "subtle": {
         "dark": "alpha({color.white}, 0.06)",
-        "light": "alpha({color.neutral.975}, 0.07)"
+        "light": "alpha({color.neutral.975}, 0.07)",
+        "refugio": "alpha({color.refugio.700}, 0.08)"
       },
       "default": {
         "dark": "alpha({color.white}, 0.1)",
-        "light": "alpha({color.neutral.975}, 0.11)"
+        "light": "alpha({color.neutral.975}, 0.11)",
+        "refugio": "alpha({color.refugio.700}, 0.14)"
       },
       "strong": {
         "dark": "alpha({color.white}, 0.16)",
-        "light": "alpha({color.neutral.975}, 0.18)"
+        "light": "alpha({color.neutral.975}, 0.18)",
+        "refugio": "alpha({color.refugio.700}, 0.25)"
       },
       "control": {
         "dark": "alpha({color.white}, 0.13)",
         "light": "alpha({color.neutral.975}, 0.15)",
+        "refugio": "alpha({color.refugio.700}, 0.18)",
         "$description": "Contorno de chips e botões com texto — o rótulo já identifica o controle (WCAG 1.4.11 não exige 3:1 aqui)."
       },
       "field": {
         "dark": "alpha({color.white}, 0.38)",
         "light": "alpha({color.neutral.975}, 0.48)",
+        "refugio": "alpha({color.refugio.700}, 0.68)",
         "$description": "Contorno de campos, seleção, composer e switch desligado: o contorno é o que identifica o controle, então passa de 3:1 em todas as superfícies."
       },
       "field-hover": {
         "dark": "alpha({color.white}, 0.52)",
         "light": "alpha({color.neutral.975}, 0.62)",
+        "refugio": "alpha({color.refugio.700}, 0.82)",
         "$description": "Contorno de campo no hover — mais forte que o de repouso."
       },
       "focus": {
         "dark": "{color.brand.400}",
-        "light": "{color.brand.600}"
+        "light": "{color.brand.600}",
+        "refugio": "{color.refugio.600}"
       }
     },
     "brand": {
       "solid": {
         "dark": "{color.brand.400}",
-        "light": "{color.brand.500}"
+        "light": "{color.brand.500}",
+        "refugio": "{color.refugio.700}"
       },
       "solid-hover": {
         "dark": "{color.brand.300}",
-        "light": "{color.brand.400}"
+        "light": "{color.brand.400}",
+        "refugio": "{color.refugio.800}"
       },
       "solid-pressed": {
         "dark": "{color.brand.500}",
-        "light": "{color.brand.600}"
+        "light": "{color.brand.600}",
+        "refugio": "{color.refugio.850}"
       },
       "subtle": {
         "dark": "alpha({color.brand.400}, 0.14)",
-        "light": "{color.brand.50}"
+        "light": "{color.brand.50}",
+        "refugio": "{color.refugio.100}"
       },
       "subtle-hover": {
         "dark": "alpha({color.brand.400}, 0.2)",
-        "light": "{color.brand.100}"
+        "light": "{color.brand.100}",
+        "refugio": "{color.refugio.150}"
       },
       "fg": {
         "dark": "{color.brand.300}",
-        "light": "{color.brand.700}"
+        "light": "{color.brand.700}",
+        "refugio": "{color.refugio.700}"
       },
       "border": {
         "dark": "alpha({color.brand.400}, 0.32)",
-        "light": "{color.brand.200}"
+        "light": "{color.brand.200}",
+        "refugio": "{color.refugio.200}"
       },
       "on-solid": {
         "dark": "{color.brand.950}",
-        "light": "{color.brand.950}"
+        "light": "{color.brand.950}",
+        "refugio": "{color.refugio.25}"
       },
       "indicator": {
         "dark": "{color.brand.500}",
         "light": "{color.brand.500}",
+        "refugio": "{color.terracotta.500}",
         "$description": "Pontinho de notificação/novidade."
       }
     },
@@ -485,11 +521,13 @@
       "muted": {
         "dark": "{color.neutral.700}",
         "light": "{color.neutral.300}",
+        "refugio": "{color.refugio.300}",
         "$description": "Ênfase: o contexto em cinza, para uma série se destacar."
       },
       "other": {
         "dark": "{color.neutral.600}",
         "light": "{color.neutral.400}",
+        "refugio": "{color.refugio.400}",
         "$description": "“Outros”: a cauda agrupada depois da 8ª série ou do 6º segmento."
       },
       "seq": {
@@ -561,7 +599,8 @@
         },
         "4": {
           "dark": "{color.neutral.750}",
-          "light": "{color.neutral.200}"
+          "light": "{color.neutral.200}",
+          "refugio": "{color.refugio.200}"
         },
         "5": {
           "dark": "{color.brand.800}",
@@ -595,11 +634,13 @@
       "grid": {
         "dark": "{color.neutral.800}",
         "light": "{color.neutral.200}",
+        "refugio": "{color.refugio.200}",
         "$description": "Linhas de grade: fio de 1 px, sólido, um passo fora da superfície."
       },
       "axis": {
         "dark": "{color.neutral.700}",
         "light": "{color.neutral.300}",
+        "refugio": "{color.refugio.300}",
         "$description": "Linha de base e eixos."
       }
     }

@@ -17,7 +17,7 @@
       document.documentElement.setAttribute('data-ds-scrollbars', '');
       try {
         var t = localStorage.getItem('ds-theme');
-        if (t === 'light' || t === 'dark' || t === 'system') document.documentElement.dataset.theme = t;
+        if (t === 'light' || t === 'dark' || t === 'refugio' || t === 'system') document.documentElement.dataset.theme = t;
       } catch (e) {}
       try {
         var l = null;
@@ -102,6 +102,7 @@
             <div class="ds-segmented" role="radiogroup" aria-label="Tema" data-i18n-attr="aria-label:theme">
               <button type="button" class="ds-segmented__item" role="radio" data-theme-option="dark" aria-label="Escuro" data-ds-tooltip="Tema escuro" data-i18n-attr="aria-label:dark; data-ds-tooltip:darkTheme" data-ds-tooltip-placement="bottom"><ds-icon name="moon" size="16"></ds-icon></button>
               <button type="button" class="ds-segmented__item" role="radio" data-theme-option="light" aria-label="Claro" data-ds-tooltip="Tema claro" data-i18n-attr="aria-label:light; data-ds-tooltip:lightTheme" data-ds-tooltip-placement="bottom"><ds-icon name="sun" size="16"></ds-icon></button>
+              <button type="button" class="ds-segmented__item" role="radio" data-theme-option="refugio" aria-label="Refúgio" data-ds-tooltip="Tema Refúgio" data-i18n-attr="aria-label:refugio; data-ds-tooltip:refugioTheme" data-ds-tooltip-placement="bottom"><ds-icon name="mountain" size="16"></ds-icon></button>
               <button type="button" class="ds-segmented__item" role="radio" data-theme-option="system" aria-label="Sistema" data-ds-tooltip="Seguir o sistema" data-i18n-attr="aria-label:system; data-ds-tooltip:followSystem" data-ds-tooltip-placement="bottom"><ds-icon name="monitor" size="16"></ds-icon></button>
             </div>
           </header>
