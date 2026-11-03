@@ -6,6 +6,12 @@
     <title>Órbita — vídeo</title>
   </head>
   <body>
+    <script>
+      // o vídeo é em português; os gráficos do DS formatam números e datas pelo idioma salvo
+      try { localStorage.setItem('ds-locale', 'pt-BR'); } catch {}
+      // os gráficos animam ao entrar na tela; aqui quem decide é o relógio do vídeo
+      window.IntersectionObserver = class { observe() {} unobserve() {} disconnect() {} takeRecords() { return []; } };
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

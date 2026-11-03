@@ -41,7 +41,7 @@ const frame = async (t) => {
       new Promise((resolve) => {
         window.__seek(t);
         // um quadro para o Motion escrever no DOM, outro para o React assentar estados
-        requestAnimationFrame(() => requestAnimationFrame(resolve));
+        requestAnimationFrame(() => requestAnimationFrame(() => (window.__sync(), resolve())));
       }),
     t,
   );
