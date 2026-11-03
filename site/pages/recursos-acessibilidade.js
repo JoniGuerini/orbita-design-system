@@ -485,7 +485,7 @@ export default function renderAcessibilidade(page) {
     ${section(
       'ra-movimento',
       L('Movimento', 'Motion', 'Movimiento'),
-      L('Movimento orienta, mas pode enjoar quem tem sensibilidade vestibular. Quando o sistema pede menos movimento, o Órbita troca animação por mudança imediata — o resultado é o mesmo, sem o caminho.', 'Motion orients, but it can sicken people with vestibular sensitivity. When the system asks for less motion, Órbita swaps animation for an immediate change — the result is the same, without the journey.', 'El movimiento orienta, pero puede marear a quien tiene sensibilidad vestibular. Cuando el sistema pide menos movimiento, Órbita cambia la animación por un cambio inmediato — el resultado es el mismo, sin el recorrido.'),
+      L('Movimento orienta, mas pode enjoar quem tem sensibilidade vestibular. Quando o sistema pede menos movimento, o Lume troca animação por mudança imediata — o resultado é o mesmo, sem o caminho.', 'Motion orients, but it can sicken people with vestibular sensitivity. When the system asks for less motion, Lume swaps animation for an immediate change — the result is the same, without the journey.', 'El movimiento orienta, pero puede marear a quien tiene sensibilidad vestibular. Cuando el sistema pide menos movimiento, Lume cambia la animación por un cambio inmediato — el resultado es el mismo, sin el recorrido.'),
       `<p class="ra-pref" data-ra-pref></p>
       <div class="ra-motion">
         <div class="ra-motion__head"><span></span><p>${L('Com movimento', 'With motion', 'Con movimiento')}</p><p>${L('Movimento reduzido', 'Reduced motion', 'Movimiento reducido')}</p></div>
@@ -501,8 +501,8 @@ export default function renderAcessibilidade(page) {
         </div>
         <div class="ra-motion__row">
           <div class="ra-motion__label"><p>${L('Escrevendo…', 'Typing…', 'Escribiendo…')}</p></div>
-          <div class="ra-motion__cell">${typingHtml(L('Órbita está escrevendo', 'Órbita is typing', 'Órbita está escribiendo'))}</div>
-          <div class="ra-motion__cell ra-reduced">${typingHtml(L('Órbita está escrevendo', 'Órbita is typing', 'Órbita está escribiendo'))}</div>
+          <div class="ra-motion__cell">${typingHtml(L('Lume está escrevendo', 'Lume is typing', 'Lume está escribiendo'))}</div>
+          <div class="ra-motion__cell ra-reduced">${typingHtml(L('Lume está escrevendo', 'Lume is typing', 'Lume está escribiendo'))}</div>
         </div>
       </div>
 

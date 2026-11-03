@@ -1,5 +1,5 @@
 /**
- * Órbita — gráfico de barras (colunas e barras horizontais).
+ * Lume — gráfico de barras (colunas e barras horizontais).
  *
  * barChart(host, {
  *   categories: ['Jan', 'Fev', …],

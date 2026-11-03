@@ -1,5 +1,5 @@
 /**
- * Órbita — dispersão e bolhas.
+ * Lume — dispersão e bolhas.
  *
  * scatterChart(host, {
  *   series: [{ name, color?, points: [{ x, y, size?, label? }] }],   até 3 séries (todas as cores se tocam)
@@ -29,7 +29,7 @@ export function scatterChart(host, input) {
     const series = (opts.series ?? []).map((s, i) => ({ ...s, index: i, paint: paint(s.color, i), points: (s.points ?? []).filter((p) => Number.isFinite(+p.x) && Number.isFinite(+p.y)) }));
     if (series.length > 3 && !warned) {
       warned = true;
-      console.warn(`[Órbita] ${msg('chart.scatterTooManySeries')}`);
+      console.warn(`[Lume] ${msg('chart.scatterTooManySeries')}`);
     }
     return { height: 320, x: {}, y: {}, ...opts, series };
   }

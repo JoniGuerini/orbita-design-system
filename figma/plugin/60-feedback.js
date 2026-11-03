@@ -271,8 +271,8 @@
   }
 
   /** Resumo de erros do formulário: alerta de perigo com links para cada campo. */
-  ORB.lib = ORB.lib || {};
-  ORB.lib.errorSummary = function (w, title, items) { return errorSummary(w, title, items); };
+  LUME.lib = LUME.lib || {};
+  LUME.lib.errorSummary = function (w, title, items) { return errorSummary(w, title, items); };
 
   async function errorSummary(w, title, items) {
     var col = alertColors('danger');

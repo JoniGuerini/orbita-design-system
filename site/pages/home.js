@@ -25,7 +25,7 @@ const COPY = T(
     },
     hero: {
       title: 'Vamos construir com refinamento.',
-      lead: 'O Órbita reúne tokens, tipografia, ícones, componentes e gráficos para que cada tela nasça consistente, acessível e cuidada nos detalhes.',
+      lead: 'O Lume reúne tokens, tipografia, ícones, componentes e gráficos para que cada tela nasça consistente, acessível e cuidada nos detalhes.',
       start: 'Começar agora',
       components: 'Ver componentes',
       try: 'Experimente ao vivo',
@@ -66,7 +66,7 @@ const COPY = T(
     },
     hero: {
       title: 'Let’s build with refinement.',
-      lead: 'Órbita brings together tokens, typography, icons, components, and charts so every screen starts out consistent, accessible, and carefully detailed.',
+      lead: 'Lume brings together tokens, typography, icons, components, and charts so every screen starts out consistent, accessible, and carefully detailed.',
       start: 'Get started',
       components: 'See components',
       try: 'Try it live',
@@ -107,7 +107,7 @@ const COPY = T(
     },
     hero: {
       title: 'Construyamos con refinamiento.',
-      lead: 'Órbita reúne tokens, tipografía, íconos, componentes y gráficos para que cada pantalla nazca consistente, accesible y cuidada en los detalles.',
+      lead: 'Lume reúne tokens, tipografía, íconos, componentes y gráficos para que cada pantalla nazca consistente, accesible y cuidada en los detalles.',
       start: 'Empezar ahora',
       components: 'Ver componentes',
       try: 'Pruébalo en vivo',
@@ -429,7 +429,7 @@ export default function renderHome() {
     </div>
 
     <footer class="site-footer">
-      <p>Órbita Design System · v${CURRENT_VERSION}</p>
+      <p>Lume Design System · v${CURRENT_VERSION}</p>
       <p>${c.footer(colorCount, tokens.length, generated)}</p>
     </footer>
   </div>`;

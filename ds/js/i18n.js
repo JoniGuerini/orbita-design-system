@@ -1,5 +1,5 @@
 /**
- * Idioma: 'pt-BR', 'en' ou 'es' — ou 'system', que segue o idioma do sistema (o que o Órbita não tiver vira inglês).
+ * Idioma: 'pt-BR', 'en' ou 'es' — ou 'system', que segue o idioma do sistema (o que o Lume não tiver vira inglês).
  * Aplica em <html lang="…">, persiste em localStorage e avisa com o evento ds:localechange.
  *
  *   msg('select.empty', 'abc')          // texto de um componente do DS no idioma atual
@@ -23,7 +23,7 @@ export function getLocalePreference() {
   return 'system';
 }
 
-/** O primeiro idioma do sistema que o Órbita tem; senão, inglês. */
+/** O primeiro idioma do sistema que o Lume tem; senão, inglês. */
 export function systemLocale() {
   for (const tag of navigator.languages?.length ? navigator.languages : [navigator.language]) {
     const lang = String(tag).toLowerCase();

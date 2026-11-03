@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Monta o plugin "Órbita para Figma" em dist/figma-plugin/:
+ * Monta o plugin "Lume para Figma" em dist/figma-plugin/:
  *   manifest.json   importe no Figma: Plugins → Desenvolvimento → Importar plugin do manifesto…
  *   code.js         figma/plugin/*.js em ordem + DATA (variáveis e estilos), ICONS e META
  *   ui.html         a janela do plugin
@@ -53,7 +53,7 @@ export async function buildFigmaPlugin({ only, out } = {}) {
   const parts = [];
   for (const f of files) parts.push(`// ───── ${f} ─────\n${await readFile(path.join(SRC, f), 'utf8')}`);
 
-  const header = `// Órbita para Figma ${version} — gerado por scripts/build-figma-plugin.mjs em ${data.generatedAt}. Não edite à mão: edite figma/plugin/.\n`;
+  const header = `// Lume para Figma ${version} — gerado por scripts/build-figma-plugin.mjs em ${data.generatedAt}. Não edite à mão: edite figma/plugin/.\n`;
   const code = `${header}var DATA = ${JSON.stringify(figmaVariables(data))};\nvar ICONS = ${JSON.stringify(icons)};\nvar META = ${JSON.stringify(meta)};\n\n${parts.join('\n\n')}`;
 
   // sintaxe válida e sem ?. / ?? fora de strings (o sandbox do Figma pode não aceitar)
@@ -67,7 +67,7 @@ export async function buildFigmaPlugin({ only, out } = {}) {
   if (risky.length) throw new Error(`Use || e checagens explícitas em vez de ?. / ?? no código do plugin:\n  ${risky.join('\n  ')}`);
 
   const manifest = {
-    name: 'Órbita para Figma',
+    name: 'Lume para Figma',
     id: 'orbita-design-system',
     api: '1.0.0',
     main: 'code.js',

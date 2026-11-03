@@ -1,5 +1,5 @@
 /**
- * Órbita — gráficos: núcleo compartilhado.
+ * Lume — gráficos: núcleo compartilhado.
  *
  * Tudo o que os gráficos têm em comum: formatação de números (pt-BR), escalas, cores por papel,
  * medição de texto, a moldura (<figure> com título, legenda, tooltip, tabela e região ao vivo)
@@ -114,7 +114,7 @@ export function paint(color, index = 0) {
     if (index < 8) return `var(--ds-color-chart-series-${index + 1})`;
     if (!warnedPalette) {
       warnedPalette = true;
-      console.warn(`[Órbita] ${msg('chart.tooManySeries')}`);
+      console.warn(`[Lume] ${msg('chart.tooManySeries')}`);
     }
     return 'var(--ds-color-chart-other)';
   }

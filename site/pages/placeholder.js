@@ -8,7 +8,7 @@ export default function renderPlaceholder(page) {
     <article class="ds-panel" aria-labelledby="page-title">
       <header class="ds-panel__header">
         <div>
-          <p class="ds-panel__eyebrow">${page.group ?? 'Órbita'}</p>
+          <p class="ds-panel__eyebrow">${page.group ?? 'Lume'}</p>
           <h1 class="ds-panel__title" id="page-title">${page.label}</h1>
         </div>
         <div class="ds-panel__actions">

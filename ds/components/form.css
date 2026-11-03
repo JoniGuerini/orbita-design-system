@@ -266,7 +266,7 @@
  * </form>
  *
  * Modificadores: .ds-form__row--3 (três colunas) · .ds-form__actions--sticky (rodapé fixo em formulários longos;
- * personalize o fundo com --ds-form-surface) · .ds-field__affix (texto fixo dentro do campo, ex.: "orbita.app/")
+ * personalize o fundo com --ds-form-surface) · .ds-field__affix (texto fixo dentro do campo, ex.: "lume.app/")
  */
 .ds-form {
   --ds-form-surface: var(--ds-color-bg-surface);

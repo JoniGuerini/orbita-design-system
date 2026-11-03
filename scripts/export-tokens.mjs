@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Exporta os tokens do Órbita para Figma e outras ferramentas.
+ * Exporta os tokens do Lume para Figma e outras ferramentas.
  *
  * Lê ds/tokens.js (gerado por `npm run tokens`) e escreve em dist/tokens/:
  *   figma-variables.json        coleções + estilos (o que o plugin lê)

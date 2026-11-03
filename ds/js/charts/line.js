@@ -1,5 +1,5 @@
 /**
- * Órbita — gráfico de linhas e de áreas.
+ * Lume — gráfico de linhas e de áreas.
  *
  * lineChart(host, {
  *   categories: ['01/10', '02/10', …],

@@ -25,7 +25,7 @@ const code = await readFile(path.join(built.outDir, 'code.js'), 'utf8');
 const figma = createMockFigma({ missingFonts: arg('missing-font') ? [arg('missing-font')] : [] });
 
 async function run(label, fig = figma, options = {}) {
-  const context = vm.createContext({ figma: fig, console, __ORBITA_TEST__: true, setTimeout, Promise });
+  const context = vm.createContext({ figma: fig, console, __LUME_TEST__: true, setTimeout, Promise });
   vm.runInContext(code, context, { filename: 'code.js' });
   const t0 = performance.now();
   const summary = await context.main({ strict: !process.argv.includes('--loose'), ...options });
@@ -80,7 +80,7 @@ try {
     const out = [];
     for (const page of fig.root.children) {
       for (const top of page.children) {
-        for (const o of fig._overflowsOf(top)) out.push(`${top.name.replace('Órbita · ', '')} › ${o.node.name} (${o.need} > ${o.have} px)`);
+        for (const o of fig._overflowsOf(top)) out.push(`${top.name.replace('Lume · ', '')} › ${o.node.name} (${o.need} > ${o.have} px)`);
       }
     }
     return out;
@@ -89,14 +89,14 @@ try {
   if (overflows.length) problems.push(`conteúdo vazando da linha: ${overflows.slice(0, 40).join('; ')}${overflows.length > 40 ? ` e mais ${overflows.length - 40}` : ''}`);
 
   // plano gratuito: um modo por coleção e 3 páginas por arquivo. Gerar só o Escuro tem de caber (a Page 1 vazia
-  // vira uma página do Órbita), pedir os dois modos tem de explicar a recusa e, quando o arquivo vai para um
+  // vira uma página do Lume), pedir os dois modos tem de explicar a recusa e, quando o arquivo vai para um
   // plano pago, o Claro entra sem duplicar nem trocar ids.
   const free = createMockFigma({ maxModes: 1, maxPages: 3 });
   const semModes = (fig) => fig._collections.find((c) => c.name === 'Semânticos').modes.map((m) => m.name).join(' · ');
   const stages = (fig, mode) => fig.root.children.flatMap((p) => p.findAll((n) => n.name === `Modo ${mode}`)).length;
   const solo = await run('Plano gratuito', free, { modes: ['Escuro'] });
   const f1 = census(free);
-  if (f1.pages.join(' · ') !== 'Órbita · Fundamentos · Órbita · Ícones · Órbita · Componentes') problems.push(`plano gratuito: páginas ${f1.pages.join(' · ')}`);
+  if (f1.pages.join(' · ') !== 'Lume · Fundamentos · Lume · Ícones · Lume · Componentes') problems.push(`plano gratuito: páginas ${f1.pages.join(' · ')}`);
   if (semModes(free) !== 'Escuro') problems.push(`plano gratuito: Semânticos ficou com os modos ${semModes(free)}`);
   if (stages(free, 'Claro') || !stages(free, 'Escuro')) problems.push(`plano gratuito: prévias Claro ${stages(free, 'Claro')}, Escuro ${stages(free, 'Escuro')}`);
   const soloOverflows = overflowsIn(free);
@@ -125,9 +125,9 @@ try {
   // páginas, coleções, modos, sombras, componentes e propriedades — sem duplicar nem trocar ids, e nenhum
   // texto fica sem tradução (o que não está em figma/plugin/02-dicionario.js aparece em missing.json).
   const LANG_NAMES = {
-    en: { pages: 'Órbita · Foundations · Órbita · Icons · Órbita · Components', sem: 'Semantic', modes: 'Dark · Light', icon: 'Icon', stage: 'Light mode' },
-    es: { pages: 'Órbita · Fundamentos · Órbita · Íconos · Órbita · Componentes', sem: 'Semánticos', modes: 'Oscuro · Claro', icon: 'Ícono', stage: 'Modo Claro' },
-    'pt-BR': { pages: 'Órbita · Fundamentos · Órbita · Ícones · Órbita · Componentes', sem: 'Semânticos', modes: 'Escuro · Claro', icon: 'Ícone', stage: 'Modo Claro' },
+    en: { pages: 'Lume · Foundations · Lume · Icons · Lume · Components', sem: 'Semantic', modes: 'Dark · Light', icon: 'Icon', stage: 'Light mode' },
+    es: { pages: 'Lume · Fundamentos · Lume · Íconos · Lume · Componentes', sem: 'Semánticos', modes: 'Oscuro · Claro', icon: 'Ícono', stage: 'Modo Claro' },
+    'pt-BR': { pages: 'Lume · Fundamentos · Lume · Ícones · Lume · Componentes', sem: 'Semânticos', modes: 'Escuro · Claro', icon: 'Ícone', stage: 'Modo Claro' },
   };
   const missing = {};
   const langRuns = [];
@@ -135,10 +135,10 @@ try {
   const nameAll = (lang) => {
     for (const page of figma.root.children) {
       const id = page.getPluginData('orbita-page');
-      if (id) (titles[`page/${id}`] ??= {})[lang] = page.name.replace('Órbita · ', '');
+      if (id) (titles[`page/${id}`] ??= {})[lang] = page.name.replace('Lume · ', '');
       for (const n of page.children) {
         const key = n.getPluginData('orbita-key');
-        if (key.startsWith('block/')) (titles[key] ??= {})[lang] = n.name.replace('Órbita · ', '');
+        if (key.startsWith('block/')) (titles[key] ??= {})[lang] = n.name.replace('Lume · ', '');
       }
     }
   };
@@ -184,7 +184,7 @@ try {
   const summary = {
     version: built.version,
     generatedAt: new Date().toISOString(),
-    pages: c2.pages.filter((p) => p.startsWith('Órbita')),
+    pages: c2.pages.filter((p) => p.startsWith('Lume')),
     components: (c2.byType.COMPONENT ?? 0) - (c2.keys ? Object.keys(c2.keys).filter((k) => k.startsWith('icon/')).length : 0),
     sets: c2.byType.COMPONENT_SET ?? 0,
     icons: Object.keys(c2.keys).filter((k) => k.startsWith('icon/')).length,
@@ -330,7 +330,7 @@ function nodeHtml(n, parent) {
 }
 
 const pagesHtml = figma.root.children
-  .filter((p) => p.name.startsWith('Órbita'))
+  .filter((p) => p.name.startsWith('Lume'))
   .map((p) => {
     const w = Math.max(...p.children.map((c) => c.x + c.width), 100);
     const h = Math.max(...p.children.map((c) => c.y + c.height), 100);
@@ -340,7 +340,7 @@ const pagesHtml = figma.root.children
   })
   .join('');
 
-const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Prévia · Órbita para Figma</title>
+const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Prévia · Lume para Figma</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../ds/tokens.css">
 <style>body{margin:0;background:#111;color:#ccc;font:13px Inter,sans-serif}header{position:sticky;top:0;z-index:9;display:flex;gap:16px;align-items:center;padding:10px 16px;background:#1b1b1b;border-bottom:1px solid #333}

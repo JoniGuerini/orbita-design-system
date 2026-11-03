@@ -5,7 +5,7 @@ import { T } from '../i18n.js';
 const COPY = T(
   {
     eyebrow: 'Erro 404',
-    title: 'Essa página saiu de órbita.',
+    title: 'Essa página ficou no escuro.',
     close: 'Fechar e voltar ao início',
     what: 'O que aconteceu',
     text: (path) => `Não encontramos ${path}. Ela pode ter mudado de lugar ou ainda não existir.`,
@@ -14,7 +14,7 @@ const COPY = T(
   },
   {
     eyebrow: 'Error 404',
-    title: 'This page drifted out of orbit.',
+    title: 'This page is lost in the dark.',
     close: 'Close and go back home',
     what: 'What happened',
     text: (path) => `We couldn’t find ${path}. It may have moved or may not exist yet.`,
@@ -23,7 +23,7 @@ const COPY = T(
   },
   {
     eyebrow: 'Error 404',
-    title: 'Esta página salió de órbita.',
+    title: 'Esta página se quedó a oscuras.',
     close: 'Cerrar y volver al inicio',
     what: 'Qué pasó',
     text: (path) => `No encontramos ${path}. Puede que haya cambiado de lugar o que todavía no exista.`,

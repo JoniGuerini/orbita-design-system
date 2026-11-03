@@ -11,7 +11,7 @@ export const styles = 'site/pages/raios.css';
 
 const COPY = T(
   {
-    lead: 'Cantos generosos dão o tom calmo do Órbita. Uma escala curta — do detalhe à pílula — e uma regra simples para cantos dentro de cantos.',
+    lead: 'Cantos generosos dão o tom calmo do Lume. Uma escala curta — do detalhe à pílula — e uma regra simples para cantos dentro de cantos.',
     stats: (small, large) => ['tokens de raio', `px, do ${small} ao ${large}`, 'px no botão', 'para pílulas'],
     onThisPage: 'Nesta página',
     nav: ['Escala', 'Raios aninhados', 'Onde usar', 'Uso'],
@@ -49,7 +49,7 @@ const COPY = T(
     },
   },
   {
-    lead: 'Generous corners set Órbita’s calm tone. A short scale — from detail to pill — and one simple rule for corners inside corners.',
+    lead: 'Generous corners set Lume’s calm tone. A short scale — from detail to pill — and one simple rule for corners inside corners.',
     stats: (small, large) => ['radius tokens', `px, from ${small} to ${large}`, 'px on the button', 'for pills'],
     onThisPage: 'On this page',
     nav: ['Scale', 'Nested radii', 'Where to use', 'Usage'],
@@ -86,7 +86,7 @@ const COPY = T(
     },
   },
   {
-    lead: 'Las esquinas generosas dan el tono tranquilo de Órbita. Una escala corta — del detalle a la píldora — y una regla simple para esquinas dentro de esquinas.',
+    lead: 'Las esquinas generosas dan el tono tranquilo de Lume. Una escala corta — del detalle a la píldora — y una regla simple para esquinas dentro de esquinas.',
     stats: (small, large) => ['tokens de radio', `px, de ${small} a ${large}`, 'px en el botón', 'para píldoras'],
     onThisPage: 'En esta página',
     nav: ['Escala', 'Radios anidados', 'Dónde usar', 'Uso'],

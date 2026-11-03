@@ -80,7 +80,7 @@ const DOCS = () => [
   [L('Plano de metas 2026', '2026 goals plan', 'Plan de metas 2026'), 'Bruno Lima', 'planilha'],
   [L('Ata da reunião de produto', 'Product meeting minutes', 'Acta de la reunión de producto'), 'Carla Dias', 'pdf'],
   [L('Contrato de parceria', 'Partnership agreement', 'Contrato de asociación'), 'Diego Rocha', 'pdf'],
-  [L('Guia de marca Órbita', 'Órbita brand guide', 'Guía de marca Órbita'), 'Elisa Prado', 'pdf'],
+  [L('Guia de marca Lume', 'Lume brand guide', 'Guía de marca Lume'), 'Elisa Prado', 'pdf'],
   [L('Orçamento de marketing', 'Marketing budget', 'Presupuesto de marketing'), 'Fábio Nunes', 'planilha'],
 ];
 

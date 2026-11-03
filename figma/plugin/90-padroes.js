@@ -20,11 +20,11 @@
     return a;
   }
 
-  /** O carimbo do Órbita no cabeçalho da resposta: “Ó” sobre o tom da marca. */
+  /** O carimbo do Lume no cabeçalho da resposta: “L” sobre o tom da marca. */
   async function mark(size) {
     var s = size || 24;
     var m = box('Marca', { dir: 'H', align: 'center', cross: 'center', w: s, h: s, radius: 'radius/sm', fill: 'color/brand/subtle' });
-    add(m, await text('Ó', { style: 'label-sm', weight: 'Bold', color: 'color/brand/fg' }));
+    add(m, await text('L', { style: 'label-sm', weight: 'Bold', color: 'color/brand/fg' }));
     return m;
   }
 
@@ -69,7 +69,7 @@
           }
           var head = box('Cabeçalho', { dir: 'H', gap: 'space/100', cross: 'center' });
           add(head, await mark(24));
-          add(head, await text('Órbita', { style: 'eyebrow', color: 'color/fg/default' }));
+          add(head, await text('Lume', { style: 'eyebrow', color: 'color/fg/default' }));
           add(head, await text('·', { style: 'eyebrow', color: 'color/fg/subtle' }));
           add(head, await text('09:41', { style: 'eyebrow', color: 'color/fg/subtle', prop: 'Hora', name: 'Hora' }));
           add(c, head);
@@ -94,7 +94,7 @@
       };
     });
     P.msg = await variants('mensagem', 'Mensagem', items, {
-      description: 'Pergunta em balão sólido à direita; resposta em texto de leitura, sem balão, com o carimbo do Órbita e as ações.',
+      description: 'Pergunta em balão sólido à direita; resposta em texto de leitura, sem balão, com o carimbo do Lume e as ações.',
       columns: 2,
       gap: 32,
       rowGap: 32,
@@ -104,7 +104,7 @@
     return P.msg;
   }
 
-  var SCENES = [['01', 'Abertura', 'Tela escura. O nome Órbita aparece, sem enfeite.'], ['02', 'O problema', 'Três telas do mesmo produto, cada uma de um jeito.'], ['03', 'A virada', 'Um token muda e todas as telas mudam juntas.']];
+  var SCENES = [['01', 'Abertura', 'Tela escura. O nome Lume aparece, sem enfeite.'], ['02', 'O problema', 'Três telas do mesmo produto, cada uma de um jeito.'], ['03', 'A virada', 'Um token muda e todas as telas mudam juntas.']];
 
   async function resultCard() {
     if (P.card && !P.card.removed) return P.card;
@@ -113,7 +113,7 @@
       var head = box('Cabeçalho', { dir: 'H', gap: 'space/150', align: 'between' });
       var titles = box('Títulos', { dir: 'V', gap: 2 });
       add(titles, await text('Roteiro · 3 cenas · ~45 s', { style: 'eyebrow', color: 'color/fg/subtle', prop: 'Rótulo', name: 'Rótulo' }));
-      add(titles, await text('Lançamento do Órbita 0.4', { style: 'heading-sm', color: 'color/fg/default', prop: 'Título', name: 'Título' }));
+      add(titles, await text('Lançamento do Lume 0.4', { style: 'heading-sm', color: 'color/fg/default', prop: 'Título', name: 'Título' }));
       add(head, titles);
       var tools = box('Ferramentas', { dir: 'H', gap: 2 });
       add(tools, iconButton('copy', 32));
@@ -230,12 +230,12 @@
     return P.attachment;
   }
 
-  var SUGGESTIONS = [['list', 'Crie um roteiro de 3 cenas'], ['file-text', 'Resuma o que é o Órbita'], ['palette', 'Por onde começo os tokens?']];
+  var SUGGESTIONS = [['list', 'Crie um roteiro de 3 cenas'], ['file-text', 'Resuma o que é o Lume'], ['palette', 'Por onde começo os tokens?']];
 
   /** Sugestões (.ds-suggestions): chips pequenos com ícone, na conversa vazia — clicar preenche o composer. */
   async function suggestions() {
     if (P.suggestions && !P.suggestions.removed) return P.suggestions;
-    var chips = ORB.lib.chipSet ? await ORB.lib.chipSet() : null;
+    var chips = LUME.lib.chipSet ? await LUME.lib.chipSet() : null;
     P.suggestions = await component('sugestoes', 'Sugestões', async function (c) {
       box(c.name, { dir: 'H', wrap: true, gap: 'space/100', rowGap: 'space/100', w: COMPOSER_W }, c);
       for (var sg of SUGGESTIONS) {
@@ -351,14 +351,14 @@
       // sidebar flutuante
       var side = box('Sidebar', { dir: 'V', gap: 'space/100', pad: [0, 12, 12, 12], w: 232, fill: 'color/bg/sidebar', stroke: 'color/border/subtle', radius: 'radius/2xl', clip: true });
       var head = box('Cabeçalho', { dir: 'H', align: 'between', cross: 'center', h: 64, pad: [0, 4] });
-      add(head, await text('Órbita', { style: 'heading-md', weight: 'Bold', color: 'color/fg/default' }));
+      add(head, await text('Lume', { style: 'heading-md', weight: 'Bold', color: 'color/fg/default' }));
       var toggle = box('Recolher', { dir: 'H', align: 'center', cross: 'center', w: 36, h: 36, radius: 'radius/md', stroke: 'color/border/control' });
       add(toggle, icon('panel-left', 18, 'color/fg/default'));
       add(head, toggle);
       add(side, head, { fillW: true });
       var search = box('Busca', { dir: 'H', gap: 10, pad: [0, 12], cross: 'center', h: 40, radius: 'radius/md', stroke: 'color/border/control' });
       add(search, icon('search', 16, 'color/fg/subtle'));
-      add(search, await text('Buscar no Órbita', { style: 'body-sm', color: 'color/fg/subtle' }), { grow: true });
+      add(search, await text('Buscar no Lume', { style: 'body-sm', color: 'color/fg/subtle' }), { grow: true });
       var kbd = box('Atalho', { dir: 'H', pad: [1, 6], radius: 'radius/xs', stroke: 'color/border/default' });
       add(kbd, await text('⌘K', { style: 'caption', color: 'color/fg/subtle' }));
       add(search, kbd);
@@ -380,7 +380,7 @@
       add(badge, icon('package', 16, 'color/fg/muted'));
       add(account, badge);
       var acc = box('Versão', { dir: 'V', gap: 0 });
-      add(acc, await text('Órbita ' + META.version.replace(/\.0$/, ''), { style: 'heading-xs', color: 'color/fg/default' }));
+      add(acc, await text('Lume ' + META.version.replace(/\.0$/, ''), { style: 'heading-xs', color: 'color/fg/default' }));
       add(acc, await text('Ver o que há de novo', { style: 'caption', color: 'color/fg/subtle', w: 110, truncate: true }), { fillW: true });
       add(account, acc, { grow: true });
       add(account, icon('chevron-right', 16, 'color/fg/subtle'));

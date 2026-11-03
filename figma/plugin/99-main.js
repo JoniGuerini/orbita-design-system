@@ -1,5 +1,5 @@
 /**
- * Órbita para Figma — orquestração: variáveis → fontes → páginas → blocos → arrumação na página.
+ * Lume para Figma — orquestração: variáveis → fontes → páginas → blocos → arrumação na página.
  * A UI (ui.html) escolhe o que gerar; sem UI (testes), gera tudo.
  */
 
@@ -14,7 +14,7 @@ var GAP_X = 96;
 var GAP_Y = 200;
 
 function say(msg) {
-  ORB.progress(msg);
+  LUME.progress(msg);
 }
 
 /** Fundo escuro da página, como uma mesa de trabalho (primitiva fixa: páginas não usam variáveis). */
@@ -35,7 +35,7 @@ async function rowTitle(page, key, label, count) {
   if (old) old.remove();
   var t = box('Categoria · ' + label, { dir: 'V', gap: 6 });
   t.setPluginData(KEY, key);
-  ORB.registry[key] = t;
+  LUME.registry[key] = t;
   add(t, await text(label, { style: 'display-sm', color: 'color/neutral/300' }));
   add(t, await text(count + (count === 1 ? L3(' bloco', ' block', ' bloque') : L3(' blocos', ' blocks', ' bloques')), { style: 'body-md', color: 'color/neutral/600', raw: true }));
   page.appendChild(t);
@@ -57,14 +57,14 @@ async function cover(page, id) {
     var old = live(k);
     if (old) old.remove();
   });
-  var c = box('Órbita · Capa', { dir: 'V', gap: 20, pad: [56, 64], w: 1120, fill: 'color/neutral/950', radius: 36 });
+  var c = box('Lume · Capa', { dir: 'V', gap: 20, pad: [56, 64], w: 1120, fill: 'color/neutral/950', radius: 36 });
   c.setPluginData(KEY, key);
-  ORB.registry[key] = c;
-  add(c, await text('ÓRBITA DESIGN SYSTEM · ' + META.version, { style: 'overline', color: 'color/brand/400', raw: true }));
+  LUME.registry[key] = c;
+  add(c, await text('LUME DESIGN SYSTEM · ' + META.version, { style: 'overline', color: 'color/brand/400', raw: true }));
   add(c, await text(id, { style: 'display-md', color: 'color/neutral/50' }));
-  var modes = ORB.active.length > 1
+  var modes = LUME.active.length > 1
     ? L3('nos modos Claro e Escuro', 'in Light and Dark modes', 'en los modos Claro y Oscuro')
-    : L3('no modo ', 'in ', 'en el modo ') + L(ORB.active[0]) + L3('', ' mode', '');
+    : L3('no modo ', 'in ', 'en el modo ') + L(LUME.active[0]) + L3('', ' mode', '');
   var intro = L3(
     'Cada bloco é um componente: o conjunto de variantes, exemplos montados com instâncias e o mesmo exemplo {modos}. Cores, medidas e textos vêm das variáveis e dos estilos do arquivo.',
     'Each block is a component: the variant set, examples built with instances, and the same example {modos}. Colors, sizes, and text come from the file’s variables and styles.',
@@ -135,7 +135,7 @@ async function main(options) {
   setLang(options.locale || 'pt-BR');
   var wanted = options.pages || ['Fundamentos', 'Ícones', 'Componentes'];
   var chosen = options.modes && options.modes.length ? options.modes : ['Claro', 'Escuro'];
-  ORB.active = ['Claro', 'Escuro'].filter(function (m) { return chosen.indexOf(m) >= 0; });
+  LUME.active = ['Claro', 'Escuro'].filter(function (m) { return chosen.indexOf(m) >= 0; });
 
   say(L3('Lendo o arquivo…', 'Reading the file…', 'Leyendo el archivo…'));
   await loadRegistry();
@@ -150,7 +150,7 @@ async function main(options) {
   var order = ['Ícones', 'Fundamentos', 'Componentes'];
   for (var pageId of order) {
     if (wanted.indexOf(pageId) < 0 && pageId !== 'Ícones') continue;
-    var page = ORB.pages[pageId];
+    var page = LUME.pages[pageId];
     await figma.setCurrentPageAsync(page);
     pageBackground(page);
     if (pageId === 'Ícones' && wanted.indexOf('Ícones') < 0) {
@@ -162,7 +162,7 @@ async function main(options) {
     var built = [];
     for (var def of defs) {
       say(L(pageId) + ' · ' + L(def.title) + '…');
-      ORB.block = def.id;
+      LUME.block = def.id;
       try {
         var content = await def.build({ page: page });
         var node = await docBlock(def, content);
@@ -173,7 +173,7 @@ async function main(options) {
         if (options.strict) throw err;
       }
     }
-    ORB.block = 'arrumação';
+    LUME.block = 'arrumação';
     await arrange(page, pageId, built);
   }
 
@@ -183,25 +183,25 @@ async function main(options) {
     if (ic && ic.getPluginData('orbita-lang') !== LANG) nameIcon(ic, i);
   });
 
-  var first = ORB.pages[wanted[wanted.length - 1]] || ORB.pages.Componentes;
+  var first = LUME.pages[wanted[wanted.length - 1]] || LUME.pages.Componentes;
   await figma.setCurrentPageAsync(first);
-  var r = ORB.report;
+  var r = LUME.report;
   var counts = L3(
     r.blocos + ' blocos, ' + r.componentes + ' componentes (' + r.variantes + ' variantes), ' + r.icones + ' ícones, ' + r.variaveis + ' variáveis',
     r.blocos + ' blocks, ' + r.componentes + ' components (' + r.variantes + ' variants), ' + r.icones + ' icons, ' + r.variaveis + ' variables',
     r.blocos + ' bloques, ' + r.componentes + ' componentes (' + r.variantes + ' variantes), ' + r.icones + ' íconos, ' + r.variaveis + ' variables',
   );
-  var only = L3(', só no modo ', ', ', ', solo en el modo ') + L(ORB.active[0]) + L3('.', ' mode only.', '.');
-  return 'Órbita: ' + counts + (ORB.active.length > 1 ? '.' : only) +
+  var only = L3(', só no modo ', ', ', ', solo en el modo ') + L(LUME.active[0]) + L3('.', ' mode only.', '.');
+  return 'Lume: ' + counts + (LUME.active.length > 1 ? '.' : only) +
     (r.avisos.length ? L3(' Avisos: ', ' Warnings: ', ' Avisos: ') + r.avisos.join(' · ') : '');
 }
 
 /* ───────── Entrada ───────── */
 
-if (typeof __ORBITA_TEST__ === 'undefined') {
+if (typeof __LUME_TEST__ === 'undefined') {
   if (typeof __html__ !== 'undefined') {
     figma.showUI(__html__, { width: 380, height: 780, themeColors: true });
-    ORB.progress = function (msg) { figma.ui.postMessage({ type: 'progress', message: msg }); };
+    LUME.progress = function (msg) { figma.ui.postMessage({ type: 'progress', message: msg }); };
     // modos e idioma ficam guardados neste computador: num arquivo de plano gratuito, não precisa escolher toda vez
     Promise.all([figma.clientStorage.getAsync('orbita-modes'), figma.clientStorage.getAsync('orbita-locale')]).then(function (saved) {
       figma.ui.postMessage({ type: 'init', modes: saved[0] || null, locale: saved[1] || 'system' });
@@ -219,6 +219,6 @@ if (typeof __ORBITA_TEST__ === 'undefined') {
       });
     };
   } else {
-    main({}).then(function (summary) { figma.closePlugin(summary); }).catch(function (err) { figma.closePlugin(L3('Órbita: erro — ', 'Órbita: error — ', 'Órbita: error — ') + err.message); });
+    main({}).then(function (summary) { figma.closePlugin(summary); }).catch(function (err) { figma.closePlugin(L3('Lume: erro — ', 'Lume: error — ', 'Lume: error — ') + err.message); });
   }
 }

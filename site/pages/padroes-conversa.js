@@ -25,7 +25,7 @@ const SUGGESTIONS = () => {
   const [script, summary] = COMMANDS();
   return [
     ['list', L('Crie um roteiro de 3 cenas', 'Write a 3-scene script', 'Crea un guion de 3 escenas'), script.id],
-    ['file-text', L('Resuma o que é o Órbita', 'Sum up what Órbita is', 'Resume qué es Órbita'), summary.id],
+    ['file-text', L('Resuma o que é o Lume', 'Sum up what Lume is', 'Resume qué es Lume'), summary.id],
     ['palette', L('Por onde começo os tokens?', 'Where do I start with tokens?', '¿Por dónde empiezo los tokens?'), null],
   ];
 };
@@ -43,7 +43,7 @@ const KEYS = () => [
 const kbd = (keys, joiner = '+') => keys.map((k) => `<kbd class="ds-kbd">${k}</kbd>`).join(` <span class="pc-keys__join">${joiner}</span> `);
 const now = () => dateFormat({ hour: '2-digit', minute: '2-digit' }).format(new Date());
 const placeholder = () => L('Pergunte algo ou digite / para comandos', 'Ask something or type / for commands', 'Pregunta algo o escribe / para comandos');
-const composerLabel = () => L('Mensagem para o Órbita', 'Message to Órbita', 'Mensaje para Órbita');
+const composerLabel = () => L('Mensagem para o Lume', 'Message to Lume', 'Mensaje para Lume');
 const askShort = () => L('Pergunte ou digite /', 'Ask or type /', 'Pregunta o escribe /');
 
 /* ───────── Cartões de resultado ───────── */
@@ -54,12 +54,12 @@ const tools = (label) => `<div class="ds-result-card__tools">
   </div>`;
 
 const SCENES = () => [
-  ['01', L('Abertura', 'Opening', 'Apertura'), L('Tela escura. O nome Órbita aparece, sem enfeite.', 'Dark screen. The name Órbita appears, no frills.', 'Pantalla oscura. El nombre Órbita aparece, sin adornos.')],
+  ['01', L('Abertura', 'Opening', 'Apertura'), L('Tela escura. O nome Lume aparece, sem enfeite.', 'Dark screen. The name Lume appears, no frills.', 'Pantalla oscura. El nombre Lume aparece, sin adornos.')],
   ['02', L('O problema', 'The problem', 'El problema'), L('Três telas do mesmo produto, cada uma de um jeito.', 'Three screens of the same product, each one different.', 'Tres pantallas del mismo producto, cada una distinta.')],
   ['03', L('A virada', 'The turn', 'El giro'), L('Um token muda e todas as telas mudam juntas.', 'One token changes and every screen changes with it.', 'Un token cambia y todas las pantallas cambian juntas.')],
 ];
 
-function roteiroCard(title = L('Lançamento do Órbita 0.2', 'Órbita 0.2 launch', 'Lanzamiento de Órbita 0.2')) {
+function roteiroCard(title = L('Lançamento do Lume 0.2', 'Lume 0.2 launch', 'Lanzamiento de Lume 0.2')) {
   return `<section class="ds-result-card" aria-label="${L('Roteiro', 'Script', 'Guion')}: ${escapeHtml(title)}">
     <header class="ds-result-card__head">
       <div><p class="ds-result-card__eyebrow">${L('Roteiro · 3 cenas · ~45 s', 'Script · 3 scenes · ~45 s', 'Guion · 3 escenas · ~45 s')}</p><p class="ds-result-card__title">${escapeHtml(title)}</p></div>
@@ -78,7 +78,7 @@ function roteiroCard(title = L('Lançamento do Órbita 0.2', 'Órbita 0.2 launch
 function summaryCard() {
   return `<section class="ds-result-card" aria-label="${L('Resumo em três frases', 'Three-sentence summary', 'Resumen en tres frases')}">
     <header class="ds-result-card__head">
-      <div><p class="ds-result-card__eyebrow">${L('Resumo · 3 frases', 'Summary · 3 sentences', 'Resumen · 3 frases')}</p><p class="ds-result-card__title">${L('O Órbita em poucas palavras', 'Órbita in a few words', 'Órbita en pocas palabras')}</p></div>
+      <div><p class="ds-result-card__eyebrow">${L('Resumo · 3 frases', 'Summary · 3 sentences', 'Resumen · 3 frases')}</p><p class="ds-result-card__title">${L('O Lume em poucas palavras', 'Lume in a few words', 'Lume en pocas palabras')}</p></div>
       ${tools(L('resumo', 'summary', 'resumen'))}
     </header>
     <p class="ds-result-card__text">${L('Design system escuro e quente, com tokens em OKLCH. Os componentes só consomem tokens semânticos. Tema claro e escuro, contraste verificado e teclado em tudo.', 'A dark, warm design system with OKLCH tokens. Components only consume semantic tokens. Light and dark themes, checked contrast, and keyboard support everywhere.', 'Design system oscuro y cálido, con tokens en OKLCH. Los componentes solo consumen tokens semánticos. Tema claro y oscuro, contraste verificado y teclado en todo.')}</p>
@@ -140,14 +140,14 @@ function replyFor({ text, command, attachments }, mode, variant = 0) {
     case 'roteiro':
       return {
         paragraphs: [...read, alt ? L('Outra versão, mais curta: três cenas de 15 segundos.', 'Another version, shorter: three 15-second scenes.', 'Otra versión, más corta: tres escenas de 15 segundos.') : L('Montei um roteiro curto, em três cenas. Cada uma cabe em até 20 segundos.', 'I put together a short script in three scenes. Each fits in up to 20 seconds.', 'Armé un guion corto, en tres escenas. Cada una cabe en hasta 20 segundos.')],
-        card: withCard ? roteiroCard(alt ? L('Órbita 0.2 em 45 segundos', 'Órbita 0.2 in 45 seconds', 'Órbita 0.2 en 45 segundos') : undefined) : '',
+        card: withCard ? roteiroCard(alt ? L('Lume 0.2 em 45 segundos', 'Lume 0.2 in 45 seconds', 'Lume 0.2 en 45 segundos') : undefined) : '',
       };
     case 'resumir':
       return {
         paragraphs: [
           ...read,
           L('Em três frases:', 'In three sentences:', 'En tres frases:'),
-          L('O Órbita é um design system escuro e quente, com tokens gerados em OKLCH. Os componentes consomem só tokens semânticos, então a marca muda trocando uma cor. Tudo tem tema claro e escuro, contraste verificado e teclado.', 'Órbita is a dark, warm design system with tokens generated in OKLCH. Components only consume semantic tokens, so the brand changes by swapping one color. Everything has light and dark themes, checked contrast, and keyboard support.', 'Órbita es un design system oscuro y cálido, con tokens generados en OKLCH. Los componentes solo consumen tokens semánticos, así que la marca cambia cambiando un color. Todo tiene tema claro y oscuro, contraste verificado y teclado.'),
+          L('O Lume é um design system escuro e quente, com tokens gerados em OKLCH. Os componentes consomem só tokens semânticos, então a marca muda trocando uma cor. Tudo tem tema claro e escuro, contraste verificado e teclado.', 'Lume is a dark, warm design system with tokens generated in OKLCH. Components only consume semantic tokens, so the brand changes by swapping one color. Everything has light and dark themes, checked contrast, and keyboard support.', 'Lume es un design system oscuro y cálido, con tokens generados en OKLCH. Los componentes solo consumen tokens semánticos, así que la marca cambia cambiando un color. Todo tiene tema claro y oscuro, contraste verificado y teclado.'),
         ],
         card: withCard ? summaryCard() : '',
       };
@@ -186,7 +186,7 @@ function demoMarkup() {
     </header>
     <div class="pc-demo__scroll" data-scroll>
       <div class="pc-welcome" data-welcome>
-        <span class="ds-message__mark pc-welcome__mark" aria-hidden="true">Ó</span>
+        <span class="ds-message__mark pc-welcome__mark" aria-hidden="true">L</span>
         <p class="pc-welcome__title">${L('Como posso ajudar?', 'How can I help?', '¿Cómo puedo ayudar?')}</p>
         <p class="pc-welcome__text">${L('Pergunte em português, anexe um arquivo ou digite <kbd class="ds-kbd">/</kbd> para ver os comandos.', 'Ask in English, attach a file, or type <kbd class="ds-kbd">/</kbd> to see the commands.', 'Pregunta en español, adjunta un archivo o escribe <kbd class="ds-kbd">/</kbd> para ver los comandos.')}</p>
         <div class="ds-suggestions">
@@ -428,7 +428,7 @@ const composer = createComposer(document.querySelector('#composer'), {
 /* ───────── Exemplos estáticos ───────── */
 
 const thread = (inner, cls = '') => `<div class="ds-thread ${cls}" inert>${inner}</div>`;
-const askSummary = () => L('Resuma o que é o Órbita', 'Sum up what Órbita is', 'Resume qué es Órbita');
+const askSummary = () => L('Resuma o que é o Lume', 'Sum up what Lume is', 'Resume qué es Lume');
 const scriptReply = () => L('Montei um roteiro curto, em três cenas. Cada uma cabe em até 20 segundos.', 'I put together a short script in three scenes. Each fits in up to 20 seconds.', 'Armé un guion corto, en tres escenas. Cada una cabe en hasta 20 segundos.');
 
 const BALLOONS = () => [
@@ -478,7 +478,7 @@ const STATES = () => [
     L('Primeira mensagem', 'First message', 'Primer mensaje'),
     L('Conversa vazia: um convite curto e três sugestões concretas, que ensinam o que dá para pedir.', 'An empty conversation: a short invitation and three concrete suggestions that teach what you can ask for.', 'Conversación vacía: una invitación corta y tres sugerencias concretas, que enseñan qué se puede pedir.'),
     `<div class="pc-welcome pc-welcome--static">
-      <span class="ds-message__mark pc-welcome__mark" aria-hidden="true">Ó</span>
+      <span class="ds-message__mark pc-welcome__mark" aria-hidden="true">L</span>
       <p class="pc-welcome__title">${L('Como posso ajudar?', 'How can I help?', '¿Cómo puedo ayudar?')}</p>
       <div class="ds-suggestions">${SUGGESTIONS().map(([glyph, label]) => `<span class="ds-chip ds-chip--sm"><span class="ds-chip__icon">${icon(glyph, { size: 14 })}</span>${label}</span>`).join('')}</div>
     </div>`,
@@ -556,7 +556,7 @@ function anatomyMarkup() {
           <div class="ds-message__body" data-pin="1"><p>${L('Monte um roteiro para o lançamento da 0.2', 'Write a script for the 0.2 launch', 'Arma un guion para el lanzamiento de la 0.2')}</p></div>
         </article>
         <article class="ds-message" data-latest>
-          <header class="ds-message__head" data-pin="3"><span class="ds-message__mark">Ó</span><span class="ds-message__author">Órbita</span><time>14:32</time></header>
+          <header class="ds-message__head" data-pin="3"><span class="ds-message__mark">L</span><span class="ds-message__author">Lume</span><time>14:32</time></header>
           <div class="ds-message__body" data-pin="4"><p>${L('Li o briefing. Montei um roteiro curto, em três cenas.', 'I read the briefing. I put together a short script in three scenes.', 'Leí el briefing. Armé un guion corto, en tres escenas.')}</p></div>
           <div class="pc-pin-block" data-pin="5">${roteiroCard()}</div>
           <div class="ds-message__actions" data-pin="6">
@@ -759,8 +759,8 @@ export default function renderConversa(page) {
   </article>
   <article class="ds-message">
     <header class="ds-message__head">
-      <span class="ds-message__mark" aria-hidden="true">Ó</span>
-      <span class="ds-message__author">Órbita</span><time>14:32</time>
+      <span class="ds-message__mark" aria-hidden="true">L</span>
+      <span class="ds-message__author">Lume</span><time>14:32</time>
     </header>
     <div class="ds-message__body"><p>${L('Montei um roteiro em três cenas.', 'I put together a script in three scenes.', 'Armé un guion en tres escenas.')}</p></div>
     <section class="ds-result-card">…</section>

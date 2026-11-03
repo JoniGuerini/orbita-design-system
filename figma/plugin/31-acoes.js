@@ -1,9 +1,9 @@
 /**
  * Ações: Botão de ícone, Ação inline, Chip e Badge.
- * Mesmo desenho de ds/components/button.css e chip.css. Os construtores ficam em ORB.lib para outros blocos.
+ * Mesmo desenho de ds/components/button.css e chip.css. Os construtores ficam em LUME.lib para outros blocos.
  */
 (function () {
-  ORB.lib = ORB.lib || {};
+  LUME.lib = LUME.lib || {};
 
   var STATES = ['Normal', 'Hover', 'Pressionado', 'Foco', 'Desativado'];
 
@@ -68,7 +68,7 @@
     });
     return IB_SET;
   }
-  ORB.lib.iconButtonSet = iconButtonSet;
+  LUME.lib.iconButtonSet = iconButtonSet;
 
   function ib(set, variante, tamanho, name) {
     return instance(set, { Variante: variante, Tamanho: tamanho, Estado: 'Normal' }, { 'Ícone': name });
@@ -190,7 +190,7 @@
     });
     return IA_SET;
   }
-  ORB.lib.inlineSet = inlineSet;
+  LUME.lib.inlineSet = inlineSet;
 
   /** Cabeçalho de seção do painel: "01 · Abertura" — selo + rótulo apagado. */
   async function sectionHead(stamp, label) {
@@ -199,7 +199,7 @@
     add(h, await text(label, { style: 'label-sm', color: 'color/fg/muted' }));
     return h;
   }
-  ORB.lib.sectionHead = sectionHead;
+  LUME.lib.sectionHead = sectionHead;
 
   defineBlock({
     id: 'acao-inline',
@@ -246,7 +246,7 @@
         ].concat(themed('Ação inline', async function () {
           var card = box('Painel', { dir: 'V', gap: 12, pad: 24, fill: 'color/bg/surface', stroke: 'color/border/subtle', radius: 'radius/xl', w: 400 });
           add(card, await sectionHead('01', 'Abertura'));
-          add(card, await text('Tela escura. O nome Órbita aparece, sem enfeite.', { style: 'body-sm', color: 'color/fg/default', w: 340 }));
+          add(card, await text('Tela escura. O nome Lume aparece, sem enfeite.', { style: 'body-sm', color: 'color/fg/default', w: 340 }));
           add(card, instance(set, { Variante: 'Padrão', Estado: 'Normal' }, { 'Rótulo': 'Na cena', 'Ícone à esquerda': true, 'Trocar ícone': 'video' }));
           return card;
         })),
@@ -307,7 +307,7 @@
     });
     return CHIP_SET;
   }
-  ORB.lib.chipSet = chipSet;
+  LUME.lib.chipSet = chipSet;
 
   var RM_SET = null;
   async function removableSet() {
@@ -339,7 +339,7 @@
     });
     return RM_SET;
   }
-  ORB.lib.removableChipSet = removableSet;
+  LUME.lib.removableChipSet = removableSet;
 
   function chip(set, type, size, state, label, extra) {
     var o = { 'Rótulo': label };
@@ -461,7 +461,7 @@
     });
     return BADGE_SET;
   }
-  ORB.lib.badgeSet = badgeSet;
+  LUME.lib.badgeSet = badgeSet;
 
   function badge(set, tone, label, o) {
     o = o || {};
@@ -469,7 +469,7 @@
     var over = o.count ? { 'Número': label } : { 'Rótulo': label, 'Ponto': !!o.dot };
     return instance(set, props, over);
   }
-  ORB.lib.badge = badge;
+  LUME.lib.badge = badge;
 
   defineBlock({
     id: 'badge',

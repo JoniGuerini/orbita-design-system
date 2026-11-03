@@ -3,7 +3,7 @@
  * Modo conector: o mesmo código do plugin, em partes que cabem numa execução do conector do Figma
  * (use_figma: até 50 mil caracteres, sem setPluginData, uma troca de página por vez).
  *
- *   - pluginData vira um registro guardado num texto da página "Órbita · registro" do arquivo
+ *   - pluginData vira um registro guardado num texto da página "Lume · registro" do arquivo
  *   - cada parte roda um pedaço: tokens, ícones, um arquivo de blocos, ou a arrumação de uma página
  *   - dependências entre arquivos (o conjunto do Botão, do Chip…) são buscadas no arquivo, não refeitas
  *
@@ -123,9 +123,9 @@ function cutFunction(code, name) {
 }
 
 const PRELUDE = String.raw`
-var __ORBITA_TEST__ = true;
+var __LUME_TEST__ = true;
 var __PD = {};
-var __REG = 'Órbita · registro';
+var __REG = 'Lume · registro';
 async function __regText() {
   var p = figma.root.children.find(function (x) { return x.name === __REG; });
   if (!p) return null;
@@ -158,16 +158,16 @@ async function loadTokensFromFile() {
   var cols = await figma.variables.getLocalVariableCollectionsAsync();
   var vars = await figma.variables.getLocalVariablesAsync();
   var byId = {};
-  cols.forEach(function (c) { byId[c.id] = c; ORB.collections[c.name] = c; });
+  cols.forEach(function (c) { byId[c.id] = c; LUME.collections[c.name] = c; });
   ['Primitivas', 'Dimensões', 'Semânticos'].forEach(function (name) {
-    vars.forEach(function (v) { var c = byId[v.variableCollectionId]; if (c && c.name === name) ORB.vars[v.name] = v; });
+    vars.forEach(function (v) { var c = byId[v.variableCollectionId]; if (c && c.name === name) LUME.vars[v.name] = v; });
   });
-  var sem = ORB.collections['Semânticos'];
-  if (sem) sem.modes.forEach(function (m) { ORB.modes[m.name] = m.modeId; });
-  (await figma.getLocalTextStylesAsync()).forEach(function (s) { ORB.textStyles[s.name] = s; });
-  (await figma.getLocalEffectStylesAsync()).forEach(function (s) { ORB.effectStyles[s.name] = s; });
+  var sem = LUME.collections['Semânticos'];
+  if (sem) sem.modes.forEach(function (m) { LUME.modes[m.name] = m.modeId; });
+  (await figma.getLocalTextStylesAsync()).forEach(function (s) { LUME.textStyles[s.name] = s; });
+  (await figma.getLocalEffectStylesAsync()).forEach(function (s) { LUME.effectStyles[s.name] = s; });
 }
-var __PAGES = ['Órbita · Fundamentos', 'Órbita · Ícones', 'Órbita · Componentes'];
+var __PAGES = ['Lume · Fundamentos', 'Lume · Ícones', 'Lume · Componentes'];
 `;
 
 /** Dependências entre arquivos: no conector, buscam o que outra parte já criou (sem redesenhar). */
@@ -177,16 +177,16 @@ async function buttonSet() { return __need('set/botao', 'COMPONENT_SET', 'Botão
 async function msOptionSet() { return __need('set/ms-opcao', 'COMPONENT_SET', 'Seleção/Opção'); }
 async function msMenu() { return __need('cmp/ms-menu', 'COMPONENT', 'Seleção/Menu múltiplo'); }
 async function msTriggerSet() { return __need('set/ms-gatilho', 'COMPONENT_SET', 'Seleção/Gatilho'); }
-ORB.lib = ORB.lib || {};
-ORB.lib.chipSet = async function () { return __need('set/chip', 'COMPONENT_SET', 'Chip'); };
-ORB.lib.badgeSet = async function () { return __need('set/badge', 'COMPONENT_SET', 'Badge'); };
-ORB.lib.iconButtonSet = async function () { return __need('set/botao-icone', 'COMPONENT_SET', 'Botão de ícone'); };
-ORB.lib.removableChipSet = async function () { return __need('set/chip-removivel', 'COMPONENT_SET', 'Chip removível'); };
-ORB.lib.inlineSet = async function () { return __need('set/acao-inline', 'COMPONENT_SET', 'Ação inline'); };
-ORB.lib.fieldSet = async function () { return __need('set/campo', 'COMPONENT_SET', 'Campo de texto'); };
-ORB.lib.formFieldSet = async function () { return __need('set/campo-rotulo', 'COMPONENT_SET', 'Campo com rótulo'); };
-ORB.lib.selectTriggerSet = async function () { return __need('set/selecao-gatilho', 'COMPONENT_SET', 'Seleção/Gatilho'); };
-ORB.lib.checkboxSet = async function () { return __need('set/checkbox', 'COMPONENT_SET', 'Checkbox'); };
+LUME.lib = LUME.lib || {};
+LUME.lib.chipSet = async function () { return __need('set/chip', 'COMPONENT_SET', 'Chip'); };
+LUME.lib.badgeSet = async function () { return __need('set/badge', 'COMPONENT_SET', 'Badge'); };
+LUME.lib.iconButtonSet = async function () { return __need('set/botao-icone', 'COMPONENT_SET', 'Botão de ícone'); };
+LUME.lib.removableChipSet = async function () { return __need('set/chip-removivel', 'COMPONENT_SET', 'Chip removível'); };
+LUME.lib.inlineSet = async function () { return __need('set/acao-inline', 'COMPONENT_SET', 'Ação inline'); };
+LUME.lib.fieldSet = async function () { return __need('set/campo', 'COMPONENT_SET', 'Campo de texto'); };
+LUME.lib.formFieldSet = async function () { return __need('set/campo-rotulo', 'COMPONENT_SET', 'Campo com rótulo'); };
+LUME.lib.selectTriggerSet = async function () { return __need('set/selecao-gatilho', 'COMPONENT_SET', 'Seleção/Gatilho'); };
+LUME.lib.checkboxSet = async function () { return __need('set/checkbox', 'COMPONENT_SET', 'Checkbox'); };
 `;
 
 const driverTokens = `
@@ -194,25 +194,25 @@ await __loadPD();
 await importTokens();
 await loadFonts();
 await __savePD(false);
-return { parte: 'tokens', variaveis: Object.keys(ORB.vars).length, estilosTexto: Object.keys(ORB.textStyles).length, estilosEfeito: Object.keys(ORB.effectStyles).length, avisos: ORB.report.avisos };`;
+return { parte: 'tokens', variaveis: Object.keys(LUME.vars).length, estilosTexto: Object.keys(LUME.textStyles).length, estilosEfeito: Object.keys(LUME.effectStyles).length, avisos: LUME.report.avisos };`;
 
 const driverIcons = `
 await __loadPD();
 await loadTokensFromFile();
 await loadRegistry(__PAGES);
-var page = await ensurePage('Órbita · Ícones');
+var page = await ensurePage('Lume · Ícones');
 await figma.setCurrentPageAsync(page);
 var made = ICONS.map(function (i) { return iconComponent(i.name).id; });
 await __savePD(false);
-return { parte: 'ícones', criados: made.length, primeiro: made[0], ultimo: made[made.length - 1], avisos: ORB.report.avisos };`;
+return { parte: 'ícones', criados: made.length, primeiro: made[0], ultimo: made[made.length - 1], avisos: LUME.report.avisos };`;
 
 const driverBlocks = (pageId) => `
 await __loadPD();
 await loadTokensFromFile();
 await loadFonts();
 await loadRegistry(__PAGES);
-await ensurePage('Órbita · Ícones');
-var page = await ensurePage(${JSON.stringify(`Órbita · ${pageId}`)});
+await ensurePage('Lume · Ícones');
+var page = await ensurePage(${JSON.stringify(`Lume · ${pageId}`)});
 await figma.setCurrentPageAsync(page);
 var right = page.children.reduce(function (m, n) { return Math.max(m, n.x + n.width); }, 0);
 var out = [];
@@ -226,14 +226,14 @@ for (var def of BLOCKS.filter(function (b) { return b.page === ${JSON.stringify(
   out.push({ id: node.id, titulo: def.title, w: Math.round(node.width), h: Math.round(node.height) });
 }
 await __savePD(false);
-return { parte: 'blocos', pagina: page.name, blocos: out, relatorio: ORB.report };`;
+return { parte: 'blocos', pagina: page.name, blocos: out, relatorio: LUME.report };`;
 
 const driverArrange = (pageId) => `
 await __loadPD();
 await loadTokensFromFile();
 await loadFonts();
 await loadRegistry(__PAGES);
-var page = await ensurePage(${JSON.stringify(`Órbita · ${pageId}`)});
+var page = await ensurePage(${JSON.stringify(`Lume · ${pageId}`)});
 await figma.setCurrentPageAsync(page);
 pageBackground(page);
 var built = page.children.filter(function (n) { return __getPD(n, KEY).indexOf('block/') === 0; }).map(function (n) {
@@ -259,7 +259,7 @@ const meta = {
   iconCount: icons.length,
   iconCategories: iconsMod.iconCategories,
   easings: data.tokens.filter((t) => t.type === 'cubicBezier').map((t) => ({ name: t.name.split('.').pop(), css: t.css, points: t.css.match(/-?[\d.]+/g).map(Number) })),
-  pageIntro: { 'Órbita · Componentes': 'Cada bloco é um componente: o conjunto de variantes, exemplos montados com instâncias e o mesmo exemplo nos modos Claro e Escuro. Cores, medidas e textos vêm das variáveis e dos estilos do arquivo.' },
+  pageIntro: { 'Lume · Componentes': 'Cada bloco é um componente: o conjunto de variantes, exemplos montados com instâncias e o mesmo exemplo nos modos Claro e Escuro. Cores, medidas e textos vêm das variáveis e dos estilos do arquivo.' },
 };
 const vars = figmaVariables(data);
 const col = (name) => vars.collections.find((c) => c.name === name);
@@ -325,7 +325,7 @@ for (const pageId of ['Ícones', 'Fundamentos', 'Componentes']) {
    junta núcleo + pedaço num eval só (o conector roda em modo estrito: funções de um eval não vazam). */
 const LIB = PRELUDE + runtimeNoImport + STUBS + HELPERS + main;
 const LIB_GET = String.raw`
-var __libPage = figma.root.children.find(function (x) { return x.name === 'Órbita · registro'; });
+var __libPage = figma.root.children.find(function (x) { return x.name === 'Lume · registro'; });
 if (!__libPage) throw new Error('Rode antes a parte que guarda o código');
 await __libPage.loadAsync();
 var __lib = __libPage.findOne(function (n) { return n.type === 'TEXT' && n.name === 'código'; });
@@ -334,8 +334,8 @@ if (!__lib) throw new Error('Rode antes a parte que guarda o código');
 const slimChunks = [];
 const libMin = minify(LIB);
 slimChunks.push(['00-guardar-codigo', minify(String.raw`
-var __p = figma.root.children.find(function (x) { return x.name === 'Órbita · registro'; }) || figma.createPage();
-__p.name = 'Órbita · registro';
+var __p = figma.root.children.find(function (x) { return x.name === 'Lume · registro'; }) || figma.createPage();
+__p.name = 'Lume · registro';
 await __p.loadAsync();
 await figma.loadFontAsync({ family: 'Inter', style: 'Regular' });
 var __t = __p.findOne(function (n) { return n.type === 'TEXT' && n.name === 'código'; });

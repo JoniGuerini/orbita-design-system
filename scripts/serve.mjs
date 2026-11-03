@@ -68,4 +68,4 @@ http
       res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' }).end(String(err));
     }
   })
-  .listen(PORT, () => console.log(`\n  Órbita DS → http://localhost:${PORT}\n`));
+  .listen(PORT, () => console.log(`\n  Lume DS → http://localhost:${PORT}\n`));

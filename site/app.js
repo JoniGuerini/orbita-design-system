@@ -1,5 +1,5 @@
 /**
- * Site de documentação do Órbita — monta o shell, a navegação, a busca e o roteador (hash).
+ * Site de documentação do Lume — monta o shell, a navegação, a busca e o roteador (hash).
  */
 import '../ds/icons/icons.js';
 import { icon } from '../ds/icons/icons.js';
@@ -17,7 +17,7 @@ import { t, applyStrings } from './i18n.js';
 /*
  * Modo demonstração (?embed): o app roda dentro de um iframe nas páginas de documentação
  * (ex.: Padrões › App shell). Nada é gravado — tema, sidebar e grupos ficam só na memória —
- * e a página que embute controla tudo por window.orbitaEmbed.
+ * e a página que embute controla tudo por window.lumeEmbed.
  */
 const params = new URLSearchParams(location.search);
 const EMBED = params.has('embed');
@@ -77,14 +77,14 @@ const newsSeen = () => {
   }
 };
 
-// o cartão da conta mostra a versão atual (Órbita 0.7) e só aparece enquanto ela não foi vista;
+// o cartão da conta mostra a versão atual (Lume 0.7) e só aparece enquanto ela não foi vista;
 // nos exemplos embutidos do App shell ele fica sempre, porque a anatomia aponta para ele
 const shortVersion = CURRENT_VERSION.replace(/\.0$/, '');
 function renderAccount() {
   document.querySelectorAll('.ds-account').forEach((card) => {
     card.dataset.dsTooltip = t('accountTooltip', shortVersion);
     const title = card.querySelector('.ds-account__title');
-    if (title) title.textContent = `Órbita ${shortVersion}`;
+    if (title) title.textContent = `Lume ${shortVersion}`;
     const footer = card.closest('.ds-sidebar__footer');
     if (footer) footer.hidden = !EMBED && newsSeen();
   });
@@ -242,7 +242,7 @@ async function route() {
 
   setActiveNavItem(navEl, page ? `#${page.path}` : null);
   renderBreadcrumb(page);
-  document.title = !page ? `${t('notFound')} · Órbita` : page.path === '/' ? 'Órbita Design System' : `${page.label} · Órbita`;
+  document.title = !page ? `${t('notFound')} · Lume` : page.path === '/' ? 'Lume Design System' : `${page.label} · Lume`;
 
   const mod = await (page?.load?.() ?? import(page ? './pages/placeholder.js' : './pages/not-found.js'));
   await Promise.all([].concat(mod.styles ?? []).map(loadStyles));
@@ -261,4 +261,4 @@ addEventListener('hashchange', route);
 route();
 
 // a página que embute o app (mesma origem) controla a demonstração por aqui
-if (EMBED) window.orbitaEmbed = { shell, palette, go, setTheme: embedTheme, setLocale: applyLocale, root: document.getElementById('shell') };
+if (EMBED) window.lumeEmbed = { shell, palette, go, setTheme: embedTheme, setLocale: applyLocale, root: document.getElementById('shell') };

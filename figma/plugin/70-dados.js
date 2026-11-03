@@ -292,7 +292,7 @@
       add(toolbar, meta);
       add(c, toolbar);
       var body = box('Seções', { dir: 'V', gap: 'space/500' });
-      add(body, instance(sec, { 'Ação': 'Com ação' }, { 'Número': '01', 'Rótulo': 'Abertura', 'Texto': 'Tela escura. O nome Órbita aparece, sem enfeite.' }), { fillW: true });
+      add(body, instance(sec, { 'Ação': 'Com ação' }, { 'Número': '01', 'Rótulo': 'Abertura', 'Texto': 'Tela escura. O nome Lume aparece, sem enfeite.' }), { fillW: true });
       add(body, instance(sec, { 'Ação': 'Sem ação' }, { 'Número': '02', 'Rótulo': 'O problema', 'Texto': 'Três telas do mesmo produto, cada uma de um jeito.' }), { fillW: true });
       add(c, body, { fillW: true });
       var footer = box('Rodapé', { dir: 'H', gap: 'space/150', pad: ['space/200', 0, 0, 0] });

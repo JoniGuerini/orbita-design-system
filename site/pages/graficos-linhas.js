@@ -382,7 +382,7 @@ export default function renderLinhas(page) {
     ${section(
       'api',
       'API',
-      L('Uma função, as mesmas regras de todos os gráficos do Órbita.', 'One function, the same rules as every Órbita chart.', 'Una función, las mismas reglas de todos los gráficos de Órbita.'),
+      L('Uma função, as mesmas regras de todos os gráficos do Lume.', 'One function, the same rules as every Lume chart.', 'Una función, las mismas reglas de todos los gráficos de Lume.'),
       `${codeBlock(`import { lineChart } from './ds/js/charts.js';
 
 const chart = lineChart(document.querySelector('#${L('receita', 'revenue', 'ingresos')}'), {

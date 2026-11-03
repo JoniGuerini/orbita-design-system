@@ -1,8 +1,8 @@
 /**
- * Órbita — composer (caixa de mensagem) e ajudantes de conversa.
+ * Lume — composer (caixa de mensagem) e ajudantes de conversa.
  *
  *   const composer = createComposer(document.querySelector('#composer'), {
- *     label: 'Mensagem para o Órbita',
+ *     label: 'Mensagem para o Lume',
  *     placeholder: 'Pergunte algo ou digite / para comandos',
  *     commands: [{ id: 'resumir', label: 'Resumir', description: 'Resume em três frases', icon: 'file-text' }],
  *     maxLength: 2000,
@@ -123,7 +123,7 @@ export function composerHtml({
 }
 
 /** Indicador "escrevendo" (pontos param com movimento reduzido). */
-export function typingHtml(label = msg('composer.typing', 'Órbita')) {
+export function typingHtml(label = msg('composer.typing', 'Lume')) {
   return `<div class="ds-typing"><span class="ds-typing__dots" aria-hidden="true"><i></i><i></i><i></i></span><span>${esc(label)}</span></div>`;
 }
 
@@ -136,10 +136,10 @@ const MESSAGE_ACTIONS = [
 
 /**
  * Mensagem.
- * { role: 'user' | 'assistant', id?, author = 'Órbita', time?, html? | text?, attachments?, card? (HTML),
+ * { role: 'user' | 'assistant', id?, author = 'Lume', time?, html? | text?, attachments?, card? (HTML),
  *   actions = true (só na resposta), status?: 'error', meta? (texto extra), busy? }
  */
-export function messageHtml({ role = 'assistant', id, author = 'Órbita', time, html, text, attachments = [], card = '', actions = true, status, meta, busy = false, latest = false } = {}) {
+export function messageHtml({ role = 'assistant', id, author = 'Lume', time, html, text, attachments = [], card = '', actions = true, status, meta, busy = false, latest = false } = {}) {
   const body = html ?? (text ? String(text).split(/\n{2,}/).map((p) => `<p>${esc(p)}</p>`).join('') : '');
   const attrs = [`class="ds-message${role === 'user' ? ' ds-message--user' : ''}"`, id && `data-message="${esc(id)}"`, status && `data-status="${esc(status)}"`, busy && 'aria-busy="true"', latest && 'data-latest'].filter(Boolean).join(' ');
   const files = attachments.length ? `<div class="ds-message__attachments">${attachments.map((a) => attachmentHtml(a)).join('')}</div>` : '';
@@ -153,7 +153,7 @@ export function messageHtml({ role = 'assistant', id, author = 'Órbita', time, 
     return `<article ${attrs} aria-label="${msg('composer.youSaid')}">${files}${body ? `<div class="ds-message__body">${body}</div>` : ''}${footer}</article>`;
   }
   return `<article ${attrs} aria-label="${esc(msg('composer.replied', author))}">
-    <header class="ds-message__head"><span class="ds-message__mark" aria-hidden="true">Ó</span><span class="ds-message__author">${esc(author)}</span>${time ? `<time>${esc(time)}</time>` : ''}</header>
+    <header class="ds-message__head"><span class="ds-message__mark" aria-hidden="true">L</span><span class="ds-message__author">${esc(author)}</span>${time ? `<time>${esc(time)}</time>` : ''}</header>
     ${files}
     <div class="ds-message__body" data-body>${body}</div>
     ${card}

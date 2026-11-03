@@ -303,7 +303,7 @@ export default function renderHeatmap(page) {
     ${section(
       'api',
       'API',
-      L('Duas funções com as mesmas regras de todos os gráficos do Órbita: update, setLoading e destroy.', 'Two functions with the same rules as every Órbita chart: update, setLoading, and destroy.', 'Dos funciones con las mismas reglas de todos los gráficos de Órbita: update, setLoading y destroy.'),
+      L('Duas funções com as mesmas regras de todos os gráficos do Lume: update, setLoading e destroy.', 'Two functions with the same rules as every Lume chart: update, setLoading, and destroy.', 'Dos funciones con las mismas reglas de todos los gráficos de Lume: update, setLoading y destroy.'),
       `${codeBlock(`import { heatmap, calendarHeatmap } from './ds/js/charts.js';
 
 heatmap(document.querySelector('#${L('pedidos', 'orders', 'pedidos')}'), {

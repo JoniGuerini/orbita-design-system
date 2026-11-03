@@ -36,7 +36,7 @@ const slugError = () => L('Use só letras, números e hífen.', 'Use only letter
 const projectHint = () => L('Aparece no menu e na busca.', 'Shows up in the menu and in search.', 'Aparece en el menú y en la búsqueda.');
 const emailHint = () => L('Vamos usar para avisos da conta.', 'We’ll use it for account notices.', 'La usaremos para avisos de la cuenta.');
 const emailError = () => L('Use um e-mail completo, como nome@empresa.com.', 'Use a full email, like name@company.com.', 'Usa un correo completo, como nombre@empresa.com.');
-const examplePlaceholder = () => L('Ex.: Órbita', 'E.g. Órbita', 'Ej.: Órbita');
+const examplePlaceholder = () => L('Ex.: Lume', 'E.g. Lume', 'Ej.: Lume');
 
 /* ───────── Campo (playground, exemplos e código) ───────── */
 
@@ -46,7 +46,7 @@ function field(o) {
   const forced = ['hover', 'focus'].includes(o.state) ? ` data-state="${o.state}"` : '';
   const invalid = o.state === 'invalid';
   const describedBy = [o.hint && !invalid && `${id}-hint`, invalid && `${id}-error`].filter(Boolean).join(' ');
-  const value = o.state === 'readonly' ? o.value || 'orbita-design-system' : o.value || '';
+  const value = o.state === 'readonly' ? o.value || 'lume-design-system' : o.value || '';
   const attrs = [
     `class="ds-field__input"`,
     `id="${id}"`,
@@ -93,7 +93,7 @@ function fieldCode(s) {
     `type="text"`,
     `placeholder="${examplePlaceholder()}"`,
     s.state === 'disabled' && 'disabled',
-    s.state === 'readonly' && 'readonly value="orbita-design-system"',
+    s.state === 'readonly' && 'readonly value="lume-design-system"',
     invalid && 'aria-invalid="true"',
     describedBy && `aria-describedby="${describedBy}"`,
     s.counter === 'on' && `maxlength="${COUNTER_MAX}"`,
@@ -213,7 +213,7 @@ export default function renderCampoDeTexto(page) {
         ${states.map(
           ([id, name, text]) => `<article class="cd-example">
             <div class="cd-example__preview tf-states__preview" inert>
-              ${field({ id: `tf-state-${id}`, label: L('Slug do projeto', 'Project slug', 'Slug del proyecto'), state: id, placeholder: 'orbita-ds', value: id === 'invalid' ? 'Órbita DS!' : '', inert: true })}
+              ${field({ id: `tf-state-${id}`, label: L('Slug do projeto', 'Project slug', 'Slug del proyecto'), state: id, placeholder: 'lume-ds', value: id === 'invalid' ? 'Lume DS!' : '', inert: true })}
             </div>
             <div class="cd-example__body"><p class="cd-example__name">${name}</p><p class="cd-example__text">${text}</p></div>
           </article>`,
@@ -352,7 +352,7 @@ export function mount(root) {
         hint: s.hint === 'on' ? projectHint() : '',
         counter: s.counter === 'on',
         placeholder: examplePlaceholder(),
-        value: s.state === 'invalid' ? 'Órbita DS!' : '',
+        value: s.state === 'invalid' ? 'Lume DS!' : '',
       })}</div>`,
     code: fieldCode,
   });

@@ -11,7 +11,7 @@ export const styles = 'site/pages/elevacao.css';
 
 const COPY = T(
   {
-    lead: 'No Órbita, profundidade vem primeiro da cor da superfície e só depois da sombra. Camadas claras, sombras macias e uma ordem de empilhamento sem surpresas.',
+    lead: 'No Lume, profundidade vem primeiro da cor da superfície e só depois da sombra. Camadas claras, sombras macias e uma ordem de empilhamento sem surpresas.',
     stats: ['camadas de superfície', 'sombras', 'níveis de z-index'],
     onThisPage: 'Nesta página',
     nav: ['Camadas', 'Sombras', 'Quando elevar', 'Empilhamento', 'Uso'],
@@ -63,7 +63,7 @@ const COPY = T(
     },
   },
   {
-    lead: 'In Órbita, depth comes first from the surface color and only then from the shadow. Clear layers, soft shadows, and a stacking order with no surprises.',
+    lead: 'In Lume, depth comes first from the surface color and only then from the shadow. Clear layers, soft shadows, and a stacking order with no surprises.',
     stats: ['surface layers', 'shadows', 'z-index levels'],
     onThisPage: 'On this page',
     nav: ['Layers', 'Shadows', 'When to elevate', 'Stacking', 'Usage'],
@@ -115,7 +115,7 @@ const COPY = T(
     },
   },
   {
-    lead: 'En Órbita, la profundidad viene primero del color de la superficie y solo después de la sombra. Capas claras, sombras suaves y un orden de apilamiento sin sorpresas.',
+    lead: 'En Lume, la profundidad viene primero del color de la superficie y solo después de la sombra. Capas claras, sombras suaves y un orden de apilamiento sin sorpresas.',
     stats: ['capas de superficie', 'sombras', 'niveles de z-index'],
     onThisPage: 'En esta página',
     nav: ['Capas', 'Sombras', 'Cuándo elevar', 'Apilamiento', 'Uso'],

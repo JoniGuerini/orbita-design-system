@@ -1,5 +1,5 @@
 /**
- * Imitação da API de plugins do Figma — só o que o plugin do Órbita usa, com as mesmas regras
+ * Imitação da API de plugins do Figma — só o que o plugin do Lume usa, com as mesmas regras
  * que o Figma impõe (e os mesmos erros quando elas são quebradas):
  *   - texto só muda depois de loadFontAsync da fonte dele
  *   - FILL só em filho de auto layout; HUG só em auto layout ou texto; WRAP só na horizontal

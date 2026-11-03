@@ -1,5 +1,5 @@
 /**
- * Órbita para Figma — núcleo do plugin.
+ * Lume para Figma — núcleo do plugin.
  *
  * Roda no sandbox de plugins do Figma (sem módulos): o build (scripts/build-figma-plugin.mjs) junta
  * figma/plugin/*.js em ordem e injeta DATA (variáveis e estilos), ICONS e META antes deste arquivo.
@@ -14,7 +14,7 @@
 
 /* eslint-disable no-unused-vars */
 
-var ORB = {
+var LUME = {
   vars: {}, // nome → Variable
   collections: {}, // nome em português ('Semânticos') → VariableCollection
   modes: {}, // 'Escuro' | 'Claro' → modeId (coleção Semânticos)
@@ -42,7 +42,7 @@ function hexToRgba(hex) {
 }
 
 function warn(msg) {
-  if (ORB.report.avisos.indexOf(msg) < 0) ORB.report.avisos.push(msg);
+  if (LUME.report.avisos.indexOf(msg) < 0) LUME.report.avisos.push(msg);
 }
 
 function pick(obj, key, fallback) {
@@ -53,7 +53,7 @@ function pick(obj, key, fallback) {
 
 /** Modos que esta execução gera: numa coleção com temas, só os escolhidos; nas outras, o único que há. */
 function modesOf(c) {
-  return c.modes.length > 1 ? c.modes.filter(function (m) { return ORB.active.indexOf(m) >= 0; }) : c.modes;
+  return c.modes.length > 1 ? c.modes.filter(function (m) { return LUME.active.indexOf(m) >= 0; }) : c.modes;
 }
 
 /** addMode com a recusa do plano gratuito explicada (o Figma só diz “Limited to 1 modes only”). */
@@ -103,7 +103,7 @@ async function importTokens() {
     var vars = {};
     allVars.filter(function (v) { return v.variableCollectionId === col.id; }).forEach(function (v) { vars[v.name] = v; });
     byCollection[c.name] = { col: col, modeIds: modeIds, vars: vars };
-    ORB.collections[c.name] = col;
+    LUME.collections[c.name] = col;
   }
   // coleções que já estão no arquivo e não vieram agora (importação em partes): os aliases podem apontar para elas
   collections.forEach(function (col) {
@@ -114,7 +114,7 @@ async function importTokens() {
     col.modes.forEach(function (m) { modeIds[canonical(m.name, modeNames)] = m.modeId; });
     allVars.filter(function (v) { return v.variableCollectionId === col.id; }).forEach(function (v) { vars[v.name] = v; });
     byCollection[id] = { col: col, modeIds: modeIds, vars: vars };
-    ORB.collections[id] = col;
+    LUME.collections[id] = col;
   });
 
   // 1º: todas as variáveis existem (os aliases precisam delas)
@@ -129,7 +129,7 @@ async function importTokens() {
       if (v.hiddenFromPublishing) variable.hiddenFromPublishing = true;
       if (v.codeSyntax) variable.setVariableCodeSyntax('WEB', v.codeSyntax);
       entry.vars[v.name] = variable;
-      ORB.report.variaveis++;
+      LUME.report.variaveis++;
     }
   }
 
@@ -151,13 +151,13 @@ async function importTokens() {
   ['Primitivas', 'Dimensões', 'Semânticos'].forEach(function (name) {
     var e = byCollection[name];
     if (!e) return;
-    Object.keys(e.vars).forEach(function (k) { ORB.vars[k] = e.vars[k]; });
+    Object.keys(e.vars).forEach(function (k) { LUME.vars[k] = e.vars[k]; });
   });
   var sem = byCollection['Semânticos'];
-  ORB.modes = sem ? sem.modeIds : {};
+  LUME.modes = sem ? sem.modeIds : {};
 
   var textStyles = await figma.getLocalTextStylesAsync();
-  textStyles.forEach(function (x) { ORB.textStyles[x.name] = x; });
+  textStyles.forEach(function (x) { LUME.textStyles[x.name] = x; });
   for (var s of DATA.textStyles || []) {
     var font = await ensureFont(s.fontFamily, s.fontStyle);
     var style = textStyles.find(function (x) { return x.name === s.name; }) || figma.createTextStyle();
@@ -168,8 +168,8 @@ async function importTokens() {
     style.lineHeight = { unit: 'PIXELS', value: s.lineHeight };
     style.letterSpacing = { unit: 'PERCENT', value: s.letterSpacing };
     style.textCase = s.textCase;
-    ORB.textStyles[s.name] = style;
-    ORB.report.estilos++;
+    LUME.textStyles[s.name] = style;
+    LUME.report.estilos++;
   }
 
   // sombras: 'Escuro/shadow/sm' — o modo no começo do nome vai no idioma ativo
@@ -186,25 +186,25 @@ async function importTokens() {
     fx.effects = e.effects.map(function (l) {
       return { type: 'DROP_SHADOW', color: l.color, offset: { x: l.x, y: l.y }, radius: l.blur, spread: l.spread, visible: true, blendMode: 'NORMAL', showShadowBehindNode: false };
     });
-    ORB.effectStyles[e.name] = fx;
-    ORB.report.estilos++;
+    LUME.effectStyles[e.name] = fx;
+    LUME.report.estilos++;
   }
 }
 
 /** Carrega a fonte; sem ela (Inter Tight ou JetBrains Mono ausentes), cai para Inter no mesmo peso. */
 async function ensureFont(family, style) {
   var id = family + '/' + style;
-  if (ORB.fonts[id]) return ORB.fonts[id];
+  if (LUME.fonts[id]) return LUME.fonts[id];
   try {
     await figma.loadFontAsync({ family: family, style: style });
-    ORB.fonts[id] = { family: family, style: style };
+    LUME.fonts[id] = { family: family, style: style };
   } catch (err) {
     warn(L3('Fonte ausente: ', 'Missing font: ', 'Fuente ausente: ') + family + ' ' + style + L3(' (usei Inter)', ' (used Inter)', ' (usé Inter)'));
     var fallback = { family: 'Inter', style: style };
     try { await figma.loadFontAsync(fallback); } catch (e2) { fallback = { family: 'Inter', style: 'Regular' }; await figma.loadFontAsync(fallback); }
-    ORB.fonts[id] = fallback;
+    LUME.fonts[id] = fallback;
   }
-  return ORB.fonts[id];
+  return LUME.fonts[id];
 }
 
 async function loadFonts() {
@@ -215,7 +215,7 @@ async function loadFonts() {
 /* ───────── Variáveis nos nós ───────── */
 
 function V(name) {
-  var v = ORB.vars[name];
+  var v = LUME.vars[name];
   if (!v) throw new Error(L3('Variável não encontrada: ', 'Variable not found: ', 'Variable no encontrada: ') + name);
   return v;
 }
@@ -279,8 +279,8 @@ function shadow(node, size) {
 
 /** Fixa o modo da coleção Semânticos neste nó (e em tudo dentro dele). */
 function setMode(node, modeName) {
-  var col = ORB.collections['Semânticos'];
-  var id = ORB.modes[modeName];
+  var col = LUME.collections['Semânticos'];
+  var id = LUME.modes[modeName];
   if (!col || !id) return node;
   node.setExplicitVariableModeForCollection(col, id);
   return node;
@@ -363,7 +363,7 @@ function addAll(parent, children, o) {
 }
 
 /**
- * Texto com estilo do Órbita. o: { style: 'label-md', color, w, align, name, weight (sobrepõe o peso), size, prop, raw }
+ * Texto com estilo do Lume. o: { style: 'label-md', color, w, align, name, weight (sobrepõe o peso), size, prop, raw }
  * prop: nome da propriedade de componente de texto que este nó expõe (ex.: 'Rótulo').
  * O texto passa por L(); raw: true para um texto que já vem traduzido ou que não se traduz (código).
  */
@@ -372,7 +372,7 @@ async function text(chars, o) {
   chars = o.raw ? String(chars) : L(String(chars));
   var t = figma.createText();
   var styleName = 'text/' + (o.style || 'body-sm');
-  var style = ORB.textStyles[styleName];
+  var style = LUME.textStyles[styleName];
   t.fontName = style ? style.fontName : await ensureFont('Inter', 'Regular');
   t.characters = chars;
   if (style) await t.setTextStyleIdAsync(style.id);
@@ -415,10 +415,10 @@ function exposes(node, field, propName) {
 /* ───────── Registro (rodar de novo atualiza) ───────── */
 
 /**
- * Páginas do Órbita: id ('Componentes') → nome em português ('Órbita · Componentes'), traduzido por L().
+ * Páginas do Lume: id ('Componentes') → nome em português ('Lume · Componentes'), traduzido por L().
  * A página guarda o id (pluginData orbita-page); as de versões antigas são achadas pelo nome, em qualquer idioma.
  */
-var PAGES = { Fundamentos: 'Órbita · Fundamentos', 'Ícones': 'Órbita · Ícones', Componentes: 'Órbita · Componentes' };
+var PAGES = { Fundamentos: 'Lume · Fundamentos', 'Ícones': 'Lume · Ícones', Componentes: 'Lume · Componentes' };
 
 function pageId(page) {
   var id = page.getPluginData(PAGE);
@@ -429,15 +429,15 @@ function pageId(page) {
 async function loadRegistry() {
   for (var page of figma.root.children) {
     var id = pageId(page);
-    if (!id || ORB.pages[id]) continue;
+    if (!id || LUME.pages[id]) continue;
     await page.loadAsync();
-    ORB.pages[id] = page;
-    page.findAll(function (n) { return !!n.getPluginData(KEY); }).forEach(function (n) { ORB.registry[n.getPluginData(KEY)] = n; });
+    LUME.pages[id] = page;
+    page.findAll(function (n) { return !!n.getPluginData(KEY); }).forEach(function (n) { LUME.registry[n.getPluginData(KEY)] = n; });
   }
 }
 
 function live(key, type) {
-  var n = ORB.registry[key];
+  var n = LUME.registry[key];
   if (!n || n.removed) return null;
   if (type && n.type !== type) return null;
   return n;
@@ -460,9 +460,9 @@ function addPage() {
   } catch (err) {
     if (/Starter plan|\d+ pages/.test(String(err && err.message))) {
       throw new Error(L3(
-        'O plano gratuito do Figma aceita 3 páginas por arquivo, e o Órbita usa 3 (Fundamentos, Ícones e Componentes). Apague as outras páginas do arquivo, ou use um arquivo novo, e rode de novo.',
-        'Figma’s free plan allows 3 pages per file, and Órbita uses 3 (Foundations, Icons, and Components). Delete the file’s other pages, or use a new file, and run again.',
-        'El plan gratuito de Figma admite 3 páginas por archivo, y Órbita usa 3 (Fundamentos, Íconos y Componentes). Borra las otras páginas del archivo, o usa un archivo nuevo, y vuelve a ejecutarlo.',
+        'O plano gratuito do Figma aceita 3 páginas por arquivo, e o Lume usa 3 (Fundamentos, Ícones e Componentes). Apague as outras páginas do arquivo, ou use um arquivo novo, e rode de novo.',
+        'Figma’s free plan allows 3 pages per file, and Lume uses 3 (Foundations, Icons, and Components). Delete the file’s other pages, or use a new file, and run again.',
+        'El plan gratuito de Figma admite 3 páginas por archivo, y Lume usa 3 (Fundamentos, Íconos y Componentes). Borra las otras páginas del archivo, o usa un archivo nuevo, y vuelve a ejecutarlo.',
       ));
     }
     throw err;
@@ -470,14 +470,14 @@ function addPage() {
 }
 
 async function ensurePage(id) {
-  var page = ORB.pages[id];
-  // a página vazia do arquivo novo vira uma do Órbita: o plano gratuito aceita 3 páginas, e o Órbita usa 3
+  var page = LUME.pages[id];
+  // a página vazia do arquivo novo vira uma do Lume: o plano gratuito aceita 3 páginas, e o Lume usa 3
   if (!page) page = await blankDefaultPage();
   if (!page) page = addPage();
   page.name = L(PAGES[id]);
   page.setPluginData(PAGE, id);
   await page.loadAsync();
-  ORB.pages[id] = page;
+  LUME.pages[id] = page;
   return page;
 }
 
@@ -491,7 +491,7 @@ function upsertComponent(key, name) {
   } else {
     c = figma.createComponent();
     c.setPluginData(KEY, key);
-    ORB.registry[key] = c;
+    LUME.registry[key] = c;
   }
   c.name = name;
   c.description = '';
@@ -505,7 +505,7 @@ async function component(key, name, build, o) {
   var c = upsertComponent('cmp/' + key, L(name));
   await build(c);
   if (o && o.description) c.description = L(o.description);
-  ORB.report.componentes++;
+  LUME.report.componentes++;
   return c;
 }
 
@@ -524,7 +524,7 @@ async function variants(key, name, items, o) {
     var c = upsertComponent('var/' + key + '/' + vname, variantName(it.props));
     await it.build(c, it.props);
     comps.push(c);
-    ORB.report.variantes++;
+    LUME.report.variantes++;
   }
   var setKey = 'set/' + key;
   var set = live(setKey, 'COMPONENT_SET');
@@ -535,7 +535,7 @@ async function variants(key, name, items, o) {
     comps.forEach(function (c) { stage.appendChild(c); });
     set = figma.combineAsVariants(comps, stage);
     set.setPluginData(KEY, setKey);
-    ORB.registry[setKey] = set;
+    LUME.registry[setKey] = set;
   }
   set.name = L(name);
   if (o.description) set.description = L(o.description);
@@ -619,7 +619,7 @@ async function variants(key, name, items, o) {
       });
     });
   }
-  ORB.report.componentes++;
+  LUME.report.componentes++;
   return set;
 }
 
@@ -704,7 +704,7 @@ var ICON_INDEX = {};
 ICONS.forEach(function (i) { ICON_INDEX[i.name] = i; });
 
 /** Componente do ícone (criado sob demanda; a página de Ícones organiza depois). */
-// muda quando o jeito de montar o ícone muda: força refazer os ícones na mesma versão do Órbita
+// muda quando o jeito de montar o ícone muda: força refazer os ícones na mesma versão do Lume
 var ICON_FORMAT = 'contorno';
 
 /** Nome e palavras-chave do ícone no idioma ativo (as camadas também: “Ícone”, “Icon”, “Ícono”). */
@@ -728,8 +728,8 @@ function iconComponent(name) {
   if (!c) {
     c = figma.createComponent();
     c.setPluginData(KEY, key);
-    ORB.registry[key] = c;
-    var holder = ORB.pages['Ícones'] || figma.currentPage;
+    LUME.registry[key] = c;
+    var holder = LUME.pages['Ícones'] || figma.currentPage;
     holder.appendChild(c);
   } else c.children.slice().forEach(function (ch) { ch.remove(); });
   c.resize(24, 24);
@@ -779,7 +779,7 @@ function iconComponent(name) {
   nameIcon(c, def);
   colorIcon(c, 'color/fg/default');
   c.setPluginData('orbita-built', META.version + '/' + ICON_FORMAT);
-  ORB.report.icones++;
+  LUME.report.icones++;
   return c;
 }
 
@@ -835,11 +835,11 @@ async function docBlock(def, content) {
   var key = 'block/' + def.id;
   clearBlock(key);
   var w = def.width || BLOCK_W;
-  var block = box('Órbita · ' + def.title, { dir: 'V', gap: 0, pad: 14, w: w, fill: 'color/bg/app', radius: 36 });
+  var block = box('Lume · ' + def.title, { dir: 'V', gap: 0, pad: 14, w: w, fill: 'color/bg/app', radius: 36 });
   block.setPluginData(KEY, key);
   block.setPluginData('orbita-row', def.row || '');
   block.setPluginData('orbita-order', String(def.order || 0));
-  ORB.registry[key] = block;
+  LUME.registry[key] = block;
   setMode(block, 'Claro');
 
   // cabeçalho: primitivas de propósito — escuro nos dois modos, como uma capa
@@ -853,7 +853,7 @@ async function docBlock(def, content) {
   add(row, await text(def.description, { style: 'body-sm', color: 'color/neutral/400', w: w - 14 * 2 - 80 - 260, name: 'Descrição' }), { grow: true });
   var tags = box('Tags', { dir: 'H', gap: 8 });
   for (var t of def.tags || ['Componente', 'Claro · Escuro']) {
-    if (t === 'Claro · Escuro') t = ORB.active.join(' · ');
+    if (t === 'Claro · Escuro') t = LUME.active.join(' · ');
     var pill = box('Tag', { dir: 'H', pad: [5, 12], radius: 'radius/full', fill: 'color/neutral/900', stroke: 'color/neutral/800' });
     add(pill, await text(t, { style: 'caption', color: 'color/neutral/300' }));
     add(tags, pill);
@@ -890,15 +890,15 @@ async function docBlock(def, content) {
     }
     add(body, sec);
   }
-  ORB.report.blocos++;
+  LUME.report.blocos++;
   return block;
 }
 
 /** Seções finais: o mesmo exemplo em cada modo escolhido das variáveis (Claro e Escuro, ou um só). */
 function themed(title, build, o) {
   o = o || {};
-  var both = ORB.active.length > 1;
-  return ORB.active.map(function (mode) {
+  var both = LUME.active.length > 1;
+  return LUME.active.map(function (mode) {
     var description = mode === 'Claro'
       ? o.light || 'Modo Claro das variáveis'
       : o.dark || (both ? 'O mesmo componente no modo Escuro' : 'Modo Escuro das variáveis');

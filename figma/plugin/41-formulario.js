@@ -151,8 +151,8 @@
             fillChildren: true,
             node: function () {
               return [
-                instance(set, { Tamanho: 'M', Estado: 'Vazio' }, { 'Ícone': true, 'Trocar ícone': 'search', 'Valor': 'Buscar no Órbita' }),
-                instance(set, { Tamanho: 'M', Estado: 'Preenchido' }, { 'Ícone': true, 'Trocar ícone': 'mail', 'Valor': 'ana@orbita.app' }),
+                instance(set, { Tamanho: 'M', Estado: 'Vazio' }, { 'Ícone': true, 'Trocar ícone': 'search', 'Valor': 'Buscar no Lume' }),
+                instance(set, { Tamanho: 'M', Estado: 'Preenchido' }, { 'Ícone': true, 'Trocar ícone': 'mail', 'Valor': 'ana@lume.app' }),
               ];
             },
           },
@@ -258,8 +258,8 @@
           },
         ].concat(themed('Campo com rótulo', async function () {
           var card = box('Cartão', { dir: 'V', gap: 20, pad: 24, w: 380, fill: 'color/bg/surface', stroke: 'color/border/subtle', radius: 'radius/xl' });
-          add(card, setText(instance(set, { Tipo: 'Padrão' }, { 'Rótulo': 'Endereço', 'Dica': 'Letras minúsculas, números e hífen.' }), 'Valor', 'orbita.app/lancamento'), { fillW: true });
-          add(card, setText(instance(set, { Tipo: 'Erro' }, { 'Rótulo': 'E-mail para avisos', 'Erro': 'Use um e-mail no formato nome@empresa.com.' }), 'Valor', 'ana@orbita'), { fillW: true });
+          add(card, setText(instance(set, { Tipo: 'Padrão' }, { 'Rótulo': 'Endereço', 'Dica': 'Letras minúsculas, números e hífen.' }), 'Valor', 'lume.app/lancamento'), { fillW: true });
+          add(card, setText(instance(set, { Tipo: 'Erro' }, { 'Rótulo': 'E-mail para avisos', 'Erro': 'Use um e-mail no formato nome@empresa.com.' }), 'Valor', 'ana@lume'), { fillW: true });
           return card;
         })),
       };
@@ -379,10 +379,10 @@
     return SEL.search;
   }
 
-  ORB.lib = ORB.lib || {};
-  ORB.lib.fieldSet = fieldSet;
-  ORB.lib.formFieldSet = formFieldSet;
-  ORB.lib.selectTriggerSet = selectTriggerSet;
+  LUME.lib = LUME.lib || {};
+  LUME.lib.fieldSet = fieldSet;
+  LUME.lib.formFieldSet = formFieldSet;
+  LUME.lib.selectTriggerSet = selectTriggerSet;
 
   defineBlock({
     id: 'selecao',
@@ -391,7 +391,7 @@
     order: 4,
     group: 'Seleção',
     title: 'Seleção',
-    description: 'Escolher um item de uma lista. A lista é do Órbita — nada de menu nativo do sistema —, abre colada ao campo e marca a escolha com um check.',
+    description: 'Escolher um item de uma lista. A lista é do Lume — nada de menu nativo do sistema —, abre colada ao campo e marca a escolha com um check.',
     build: async function () {
       var trigger = await selectTriggerSet();
       var option = await selectOptionSet();
@@ -524,7 +524,7 @@
           add(g1, await text('Notificações', { style: 'label-md' }));
           add(g1, instance(check, { Marcação: 'Marcado', Estado: 'Normal' }, { 'Rótulo': 'Avisos por e-mail', 'Descrição': 'Um resumo por semana' }));
           add(g1, instance(check, { Marcação: 'Desmarcado', Estado: 'Normal' }, { 'Rótulo': 'Menções', 'Com descrição': false }));
-          add(g1, instance(check, { Marcação: 'Marcado', Estado: 'Normal' }, { 'Rótulo': 'Novidades do Órbita', 'Com descrição': false }));
+          add(g1, instance(check, { Marcação: 'Marcado', Estado: 'Normal' }, { 'Rótulo': 'Novidades do Lume', 'Com descrição': false }));
           add(card, g1);
           var g2 = box('Visibilidade', { dir: 'V', gap: 'space/150' });
           add(g2, await text('Visibilidade', { style: 'label-md' }));
@@ -629,5 +629,5 @@
       };
     },
   });
-  ORB.lib.checkboxSet = checkboxSet;
+  LUME.lib.checkboxSet = checkboxSet;
 })();

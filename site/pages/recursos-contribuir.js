@@ -21,7 +21,7 @@ const STAGES = () => [
   {
     name: L('Proposta', 'Proposal', 'Propuesta'),
     text: L('O modelo preenchido: o problema, quem usa, o que já existe e o impacto em tokens e acessibilidade.', 'The filled-in template: the problem, who uses it, what already exists, and the impact on tokens and accessibility.', 'La plantilla completa: el problema, quién lo usa, lo que ya existe y el impacto en tokens y accesibilidad.'),
-    who: L('Quem teve a ideia + alguém do Órbita', 'Whoever had the idea + someone from Órbita', 'Quien tuvo la idea + alguien de Órbita'),
+    who: L('Quem teve a ideia + alguém do Lume', 'Whoever had the idea + someone from Lume', 'Quien tuvo la idea + alguien de Lume'),
     out: L('Aceita, ajustada ou recusada com motivo', 'Accepted, adjusted, or declined with a reason', 'Aceptada, ajustada o rechazada con motivo'),
   },
   {
@@ -39,7 +39,7 @@ const STAGES = () => [
   {
     name: L('Publicado', 'Published', 'Publicado'),
     text: L('Entra em Novidades com uma versão nova. A bolinha da sidebar avisa todo mundo.', 'It goes into What’s new with a new version. The dot in the sidebar lets everyone know.', 'Entra en Novedades con una versión nueva. El puntito de la sidebar avisa a todo el mundo.'),
-    who: L('Quem mantém o Órbita', 'Whoever maintains Órbita', 'Quien mantiene Órbita'),
+    who: L('Quem mantém o Lume', 'Whoever maintains Lume', 'Quien mantiene Lume'),
     out: L(`Versão nova — hoje, ${CURRENT_VERSION}`, `A new version — today, ${CURRENT_VERSION}`, `Versión nueva — hoy, ${CURRENT_VERSION}`),
   },
 ];
@@ -64,7 +64,7 @@ const RESULTS = () => ({
     tone: 'info',
     icon: 'info',
     title: L('Fica no produto, por enquanto', 'It stays in the product, for now', 'Se queda en el producto, por ahora'),
-    text: L('Construa com os tokens e componentes do Órbita e anote onde usou. Quando aparecer na segunda tela, volte aqui.', 'Build it with Órbita’s tokens and components and note where you used it. When it shows up on a second screen, come back here.', 'Constrúyelo con los tokens y componentes de Órbita y anota dónde lo usaste. Cuando aparezca en una segunda pantalla, vuelve aquí.'),
+    text: L('Construa com os tokens e componentes do Lume e anote onde usou. Quando aparecer na segunda tela, volte aqui.', 'Build it with Lume’s tokens and components and note where you used it. When it shows up on a second screen, come back here.', 'Constrúyelo con los tokens y componentes de Lume y anota dónde lo usaste. Cuando aparezca en una segunda pantalla, vuelve aquí.'),
   },
   token: {
     tone: 'success',
@@ -112,7 +112,7 @@ O que acontece hoje e onde. Links ou prints de pelo menos duas telas.
 Times, produtos e com que frequência.
 
 ### O que já existe
-Componentes, padrões ou tokens do Órbita que chegam perto — e por que não bastam.
+Componentes, padrões ou tokens do Lume que chegam perto — e por que não bastam.
 
 ### Proposta
 Anatomia, variantes e estados (normal, hover, pressionado, foco, desativado, erro).
@@ -137,7 +137,7 @@ What happens today and where. Links or screenshots from at least two screens.
 Teams, products, and how often.
 
 ### What already exists
-Órbita components, patterns, or tokens that come close — and why they aren’t enough.
+Lume components, patterns, or tokens that come close — and why they aren’t enough.
 
 ### Proposal
 Anatomy, variants, and states (default, hover, pressed, focus, disabled, error).
@@ -162,7 +162,7 @@ Qué pasa hoy y dónde. Enlaces o capturas de al menos dos pantallas.
 Equipos, productos y con qué frecuencia.
 
 ### Lo que ya existe
-Componentes, patrones o tokens de Órbita que se acercan — y por qué no alcanzan.
+Componentes, patrones o tokens de Lume que se acercan — y por qué no alcanzan.
 
 ### Propuesta
 Anatomía, variantes y estados (normal, hover, presionado, foco, desactivado, error).
@@ -382,7 +382,7 @@ const RELEASES = [
 
 const AFTER = () => [
   ['megaphone', L('A bolinha de Novidades volta na sidebar para quem ainda não viu a versão.', 'The What’s new dot comes back in the sidebar for anyone who hasn’t seen the version yet.', 'El puntito de Novedades vuelve a la sidebar para quien todavía no vio la versión.')],
-  ['package', L(`O cartão da conta mostra a versão nova — hoje, Órbita ${CURRENT_VERSION.replace(/\.0$/, '')}.`, `The account card shows the new version — today, Órbita ${CURRENT_VERSION.replace(/\.0$/, '')}.`, `La tarjeta de la cuenta muestra la versión nueva — hoy, Órbita ${CURRENT_VERSION.replace(/\.0$/, '')}.`)],
+  ['package', L(`O cartão da conta mostra a versão nova — hoje, Lume ${CURRENT_VERSION.replace(/\.0$/, '')}.`, `The account card shows the new version — today, Lume ${CURRENT_VERSION.replace(/\.0$/, '')}.`, `La tarjeta de la cuenta muestra la versión nueva — hoy, Lume ${CURRENT_VERSION.replace(/\.0$/, '')}.`)],
   ['history', L('O roadmap do Início e a página Novidades leem o mesmo arquivo; não há outro lugar para atualizar.', 'The Home roadmap and the What’s new page read the same file; there’s nowhere else to update.', 'El roadmap del Inicio y la página Novedades leen el mismo archivo; no hay otro lugar que actualizar.')],
 ];
 
@@ -396,7 +396,7 @@ const DONE = () => [
 ];
 
 const FAQ = () => [
-  [L('Preciso pedir permissão para usar algo que não está no Órbita?', 'Do I need permission to use something that isn’t in Órbita?', '¿Necesito pedir permiso para usar algo que no está en Órbita?'), L('Não. Construa no seu produto com os tokens e componentes que existem. A proposta vem quando a peça se repete.', 'No. Build it in your product with the tokens and components that exist. The proposal comes when the piece repeats.', 'No. Constrúyelo en tu producto con los tokens y componentes que existen. La propuesta llega cuando la pieza se repite.')],
+  [L('Preciso pedir permissão para usar algo que não está no Lume?', 'Do I need permission to use something that isn’t in Lume?', '¿Necesito pedir permiso para usar algo que no está en Lume?'), L('Não. Construa no seu produto com os tokens e componentes que existem. A proposta vem quando a peça se repete.', 'No. Build it in your product with the tokens and components that exist. The proposal comes when the piece repeats.', 'No. Constrúyelo en tu producto con los tokens y componentes que existen. La propuesta llega cuando la pieza se repite.')],
   [L('E se o meu caso for diferente de tudo?', 'What if my case is unlike anything else?', '¿Y si mi caso es distinto de todo?'), L('Comece pela conversa, não pelo código: traga os exemplos. Às vezes é uma variante; às vezes, um padrão com peças que já existem.', 'Start with a conversation, not code: bring the examples. Sometimes it’s a variant; sometimes, a pattern with pieces that already exist.', 'Empieza por la conversación, no por el código: trae los ejemplos. A veces es una variante; a veces, un patrón con piezas que ya existen.')],
   [L('Posso criar um token só para o meu componente?', 'Can I create a token just for my component?', '¿Puedo crear un token solo para mi componente?'), L('Só se ele tiver um papel que outros componentes também possam ter. Tokens nomeiam papéis (fg.muted, border.focus), não lugares.', 'Only if it has a role other components could have too. Tokens name roles (fg.muted, border.focus), not places.', 'Solo si tiene un rol que otros componentes también puedan tener. Los tokens nombran roles (fg.muted, border.focus), no lugares.')],
   [L('Quanto tempo leva uma revisão?', 'How long does a review take?', '¿Cuánto tarda una revisión?'), L('Depende do tamanho. Uma correção ou um token passa rápido; um componente novo leva mais, porque passa por design e por código — e pela página com playground.', 'It depends on the size. A fix or a token goes quickly; a new component takes longer, because it goes through design and code — and the page with a playground.', 'Depende del tamaño. Una corrección o un token pasa rápido; un componente nuevo tarda más, porque pasa por diseño y por código — y por la página con playground.')],
@@ -471,7 +471,7 @@ export default function renderContribuir(page) {
       <div>
         <p class="doc-header__eyebrow">${page.group}</p>
         <h1 class="doc-header__title">${page.label}</h1>
-        <p class="doc-header__lead">${L('O Órbita cresce com o que os times precisam. Este é o caminho de uma ideia até virar versão — com as regras da casa, o checklist da revisão e como publicar.', 'Órbita grows with what teams need. This is the path from an idea to a version — with the house rules, the review checklist, and how to publish.', 'Órbita crece con lo que los equipos necesitan. Este es el camino de una idea hasta convertirse en versión — con las reglas de la casa, el checklist de la revisión y cómo publicar.')}</p>
+        <p class="doc-header__lead">${L('O Lume cresce com o que os times precisam. Este é o caminho de uma ideia até virar versão — com as regras da casa, o checklist da revisão e como publicar.', 'Lume grows with what teams need. This is the path from an idea to a version — with the house rules, the review checklist, and how to publish.', 'Lume crece con lo que los equipos necesitan. Este es el camino de una idea hasta convertirse en versión — con las reglas de la casa, el checklist de la revisión y cómo publicar.')}</p>
       </div>
       <dl class="doc-stats">
         <div class="doc-stat"><dt class="doc-stat__label">${L('etapas', 'stages', 'etapas')}</dt><dd class="doc-stat__value">${stages.length}</dd></div>
@@ -673,7 +673,7 @@ export default function renderContribuir(page) {
       <aside class="rc-cta" aria-label="${L('Próximos passos', 'Next steps', 'Próximos pasos')}">
         <div>
           <p class="rc-cta__title">${L('Pronto para começar?', 'Ready to start?', '¿Listo para empezar?')}</p>
-          <p class="rc-cta__text">${L(`Veja o que mudou nas últimas versões ou monte sua primeira tela com o Órbita — ${countGroup('componentes')} componentes e ${countGroup('padroes')} padrões esperando.`, `See what changed in the latest versions or build your first screen with Órbita — ${countGroup('componentes')} components and ${countGroup('padroes')} patterns waiting.`, `Mira lo que cambió en las últimas versiones o arma tu primera pantalla con Órbita — ${countGroup('componentes')} componentes y ${countGroup('padroes')} patrones esperando.`)}</p>
+          <p class="rc-cta__text">${L(`Veja o que mudou nas últimas versões ou monte sua primeira tela com o Lume — ${countGroup('componentes')} componentes e ${countGroup('padroes')} padrões esperando.`, `See what changed in the latest versions or build your first screen with Lume — ${countGroup('componentes')} components and ${countGroup('padroes')} patterns waiting.`, `Mira lo que cambió en las últimas versiones o arma tu primera pantalla con Lume — ${countGroup('componentes')} componentes y ${countGroup('padroes')} patrones esperando.`)}</p>
         </div>
         <div class="rc-cta__actions">
           <a class="ds-btn ds-btn--secondary" href="#/novidades">${icon('megaphone', { size: 18 })}${L('Ver Novidades', 'See What’s new', 'Ver Novedades')}</a>

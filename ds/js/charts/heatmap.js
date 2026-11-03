@@ -1,5 +1,5 @@
 /**
- * Órbita — mapas de calor: matriz e calendário.
+ * Lume — mapas de calor: matriz e calendário.
  *
  * heatmap(host, {
  *   rows: ['Seg', …], columns: ['0h', …], values: [[…], …],   values[linha][coluna]; null = sem dado

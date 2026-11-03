@@ -197,8 +197,8 @@
   async function filterBar() {
     if (B.bar && !B.bar.removed) return B.bar;
     var field = await filterFieldSet();
-    var removable = ORB.lib.removableChipSet ? await ORB.lib.removableChipSet() : null;
-    var inline = ORB.lib.inlineSet ? await ORB.lib.inlineSet() : null;
+    var removable = LUME.lib.removableChipSet ? await LUME.lib.removableChipSet() : null;
+    var inline = LUME.lib.inlineSet ? await LUME.lib.inlineSet() : null;
     B.bar = await component('barra-filtros', 'Filtros/Barra', async function (c) {
       box(c.name, { dir: 'V', gap: 'space/150', w: 880 }, c);
       var bar = box('Barra', { dir: 'H', gap: 'space/100', cross: 'center' });
@@ -255,16 +255,16 @@
   /* ───────── Formulário ───────── */
 
   async function formExample() {
-    var formField = ORB.lib.formFieldSet ? await ORB.lib.formFieldSet() : null;
-    var trigger = ORB.lib.selectTriggerSet ? await ORB.lib.selectTriggerSet() : null;
-    var check = ORB.lib.checkboxSet ? await ORB.lib.checkboxSet() : null;
+    var formField = LUME.lib.formFieldSet ? await LUME.lib.formFieldSet() : null;
+    var trigger = LUME.lib.selectTriggerSet ? await LUME.lib.selectTriggerSet() : null;
+    var check = LUME.lib.checkboxSet ? await LUME.lib.checkboxSet() : null;
     var buttons = await buttonSet();
     var form = box('Formulário', { dir: 'V', gap: 'space/400', w: 400 });
     var head = box('Cabeçalho', { dir: 'V', gap: 'space/050' });
     add(head, await text('Clientes', { style: 'eyebrow', color: 'color/fg/subtle' }));
     add(head, await text('Novo cliente', { style: 'heading-lg', color: 'color/fg/default' }));
     add(form, head);
-    if (ORB.lib.errorSummary) add(form, await ORB.lib.errorSummary(400, 'Revise 2 campos para salvar', ['Nome do cliente: diga o nome da nota fiscal', 'E-mail: use o formato nome@empresa.com']), { fillW: true });
+    if (LUME.lib.errorSummary) add(form, await LUME.lib.errorSummary(400, 'Revise 2 campos para salvar', ['Nome do cliente: diga o nome da nota fiscal', 'E-mail: use o formato nome@empresa.com']), { fillW: true });
     var fields = box('Campos', { dir: 'V', gap: 'space/300' });
     if (formField) {
       add(fields, setText(instance(formField, { Tipo: 'Erro' }, { 'Rótulo': 'Nome do cliente', 'Erro': 'Diga o nome como aparece na nota fiscal.', 'Contador': false }), 'Valor', ''), { fillW: true });

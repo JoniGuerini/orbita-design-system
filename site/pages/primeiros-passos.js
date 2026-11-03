@@ -21,7 +21,7 @@ const COPY = T(
     nav: ['Instalação', 'Primeira tela', 'Tokens', 'JavaScript', 'Sua marca', 'Estrutura', 'Próximos passos'],
     install: { title: 'Instalação', desc: 'Quatro passos. Nenhum precisa de terminal além do primeiro.', step: (n) => `Passo ${n}: ` },
     steps: [
-      ['Copie o design system', `O Órbita não tem dependências nem build obrigatório. Leve a pasta ${code('ds/')} para o seu projeto.`],
+      ['Copie o design system', `O Lume não tem dependências nem build obrigatório. Leve a pasta ${code('ds/')} para o seu projeto.`],
       ['Carregue as fontes e o CSS', 'Um arquivo só traz tokens, base e todos os componentes. As fontes vêm do Google Fonts.'],
       ['Escolha o tema', `Escuro é o padrão da marca. Use ${code('light')} para o claro ou ${code('system')} para seguir o sistema.`],
       ['Ligue só o JavaScript que usar', 'Componentes visuais funcionam só com CSS. Os interativos têm um módulo cada — importe e ligue os que a tela usa.'],
@@ -67,7 +67,7 @@ const COPY = T(
     nav: ['Installation', 'First screen', 'Tokens', 'JavaScript', 'Your brand', 'Structure', 'Next steps'],
     install: { title: 'Installation', desc: 'Four steps. Only the first one needs a terminal.', step: (n) => `Step ${n}: ` },
     steps: [
-      ['Copy the design system', `Órbita has no dependencies and no required build. Take the ${code('ds/')} folder into your project.`],
+      ['Copy the design system', `Lume has no dependencies and no required build. Take the ${code('ds/')} folder into your project.`],
       ['Load the fonts and the CSS', 'A single file brings the tokens, the base, and every component. The fonts come from Google Fonts.'],
       ['Pick the theme', `Dark is the brand default. Use ${code('light')} for light or ${code('system')} to follow the system.`],
       ['Turn on only the JavaScript you use', 'Visual components work with CSS alone. Interactive ones have a module each — import and turn on the ones your screen uses.'],
@@ -113,7 +113,7 @@ const COPY = T(
     nav: ['Instalación', 'Primera pantalla', 'Tokens', 'JavaScript', 'Tu marca', 'Estructura', 'Siguientes pasos'],
     install: { title: 'Instalación', desc: 'Cuatro pasos. Solo el primero necesita terminal.', step: (n) => `Paso ${n}: ` },
     steps: [
-      ['Copia el design system', `Órbita no tiene dependencias ni build obligatorio. Lleva la carpeta ${code('ds/')} a tu proyecto.`],
+      ['Copia el design system', `Lume no tiene dependencias ni build obligatorio. Lleva la carpeta ${code('ds/')} a tu proyecto.`],
       ['Carga las fuentes y el CSS', 'Un solo archivo trae los tokens, la base y todos los componentes. Las fuentes vienen de Google Fonts.'],
       ['Elige el tema', `Oscuro es el predeterminado de la marca. Usa ${code('light')} para el claro o ${code('system')} para seguir el sistema.`],
       ['Activa solo el JavaScript que uses', 'Los componentes visuales funcionan solo con CSS. Los interactivos tienen un módulo cada uno — importa y activa los que use la pantalla.'],
@@ -160,7 +160,7 @@ const tokenCount = tokens.length + palettes.reduce((n, p) => n + p.steps.length,
 const countPrefix = (prefix) => tokens.filter((t) => t.name.startsWith(prefix)).length;
 
 const STEP_CODE = [
-  'cp -R orbita/ds ./ds',
+  'cp -R lume/ds ./ds',
   `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Inter+Tight:wght@500..800&family=JetBrains+Mono:wght@400..600&display=swap">
 <link rel="stylesheet" href="ds/ds.css">`,
@@ -282,7 +282,7 @@ export default function renderPrimeirosPassos(page) {
   <div class="page doc">
     <header class="doc-header">
       <div>
-        <p class="doc-header__eyebrow">Órbita</p>
+        <p class="doc-header__eyebrow">Lume</p>
         <h1 class="doc-header__title">${page.label}</h1>
         <p class="doc-header__lead">${page.description} ${c.lead}</p>
       </div>

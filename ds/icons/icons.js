@@ -1,5 +1,5 @@
 /**
- * Órbita — biblioteca de ícones
+ * Lume — biblioteca de ícones
  *
  * Grid de 24×24, traço 1,5 (1,75 em tamanhos ≤ 16 px), pontas e junções arredondadas,
  * área útil de 2 px de respiro. Todos usam currentColor.
@@ -197,7 +197,7 @@ const escapeAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;
 /** Retorna o SVG de um ícone como string. */
 export function icon(name, { size = 20, strokeWidth, label, className = '' } = {}) {
   const def = icons[name];
-  if (!def) console.warn(`[órbita] ícone "${name}" não existe.`);
+  if (!def) console.warn(`[Lume] ícone "${name}" não existe.`);
   const px = Number(size);
   const sw = strokeWidth ?? (px <= 16 ? 1.75 : 1.5);
   const a11y = label ? `role="img" aria-label="${escapeAttr(label)}"` : 'aria-hidden="true"';

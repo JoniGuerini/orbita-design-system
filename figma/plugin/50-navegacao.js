@@ -3,7 +3,7 @@
  * Mesmo desenho de ds/components/tabs.css, form.css (.ds-segmented), menu.css e feedback.css (.ds-breadcrumb).
  */
 (function () {
-  ORB.lib = ORB.lib || {};
+  LUME.lib = LUME.lib || {};
 
   function focusInside(c) {
     stroke(c, 'color/border/focus', 'focus-ring/width', { align: 'INSIDE' });
@@ -135,7 +135,7 @@
           { title: 'Lista segmentada', description: 'Fundo rebaixado e a selecionada em destaque.', node: seg, fill: false },
         ].concat(themed('Abas', async function () {
           var panel = box('Painel', { dir: 'V', gap: 20, pad: [20, 24, 28, 24], fill: 'color/bg/surface', stroke: 'color/border/subtle', radius: 'radius/xl', w: 416 });
-          add(panel, await text('Projeto Órbita', { style: 'heading-sm' }));
+          add(panel, await text('Projeto Lume', { style: 'heading-sm' }));
           var list = line.createInstance();
           add(panel, list, { fillW: true });
           var lines = box('Conteúdo', { dir: 'V', gap: 8 });
@@ -197,7 +197,7 @@
       });
     }, { description: 'Escuro, claro e sistema — o mesmo controle da topbar.' });
   }
-  ORB.lib.themeControl = themeControl;
+  LUME.lib.themeControl = themeControl;
 
   async function textControl() {
     var set = await segmentSet();
@@ -301,7 +301,7 @@
     });
     return MENU_SET;
   }
-  ORB.lib.menuItemSet = menuItemSet;
+  LUME.lib.menuItemSet = menuItemSet;
 
   async function menuGroup() {
     return component('menu-grupo', 'Menu/Grupo', async function (c) {
@@ -378,8 +378,8 @@
           { title: 'Menu montado', description: 'Fundo elevado, contorno forte e sombra.', node: menu, fill: false },
         ].concat(themed('Menu', async function () {
           var col = box('Gatilho e menu', { dir: 'V', gap: 8 });
-          if (ORB.lib.chipSet) {
-            var chips = await ORB.lib.chipSet();
+          if (LUME.lib.chipSet) {
+            var chips = await LUME.lib.chipSet();
             add(col, instance(chips, { Tipo: 'Seletor', Tamanho: 'M', Estado: 'Selecionado' }, { 'Rótulo': 'Visualização' }));
           }
           add(col, menu.createInstance());
@@ -466,7 +466,7 @@
         ].concat(themed('Trilha', async function () {
           var bar = box('Topbar', { dir: 'H', gap: 32, cross: 'center', pad: [12, 12, 12, 20], fill: 'color/bg/canvas', stroke: 'color/border/subtle', radius: 'radius/xl' });
           add(bar, t.createInstance());
-          if (ORB.lib.themeControl) add(bar, (await ORB.lib.themeControl()).createInstance());
+          if (LUME.lib.themeControl) add(bar, (await LUME.lib.themeControl()).createInstance());
           return bar;
         })),
       };

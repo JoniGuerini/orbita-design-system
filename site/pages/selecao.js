@@ -208,7 +208,7 @@ export default function renderSelecao(page) {
       <div>
         <p class="doc-header__eyebrow">${page.group}</p>
         <h1 class="doc-header__title">${page.label}</h1>
-        <p class="doc-header__lead">${L(`Para escolher uma ou várias opções numa lista. A lista é do Órbita — mesmo visual dos menus, com busca quando cresce —, mas o valor mora num ${ic('&lt;select&gt;')} real, que vai junto no formulário.`, `For choosing one or several options from a list. The list is Órbita’s own — the same look as menus, with search when it grows — but the value lives in a real ${ic('&lt;select&gt;')} that goes along with the form.`, `Para elegir una o varias opciones de una lista. La lista es de Órbita — el mismo aspecto de los menús, con búsqueda cuando crece —, pero el valor vive en un ${ic('&lt;select&gt;')} real, que va junto con el formulario.`)}</p>
+        <p class="doc-header__lead">${L(`Para escolher uma ou várias opções numa lista. A lista é do Lume — mesmo visual dos menus, com busca quando cresce —, mas o valor mora num ${ic('&lt;select&gt;')} real, que vai junto no formulário.`, `For choosing one or several options from a list. The list is Lume’s own — the same look as menus, with search when it grows — but the value lives in a real ${ic('&lt;select&gt;')} that goes along with the form.`, `Para elegir una o varias opciones de una lista. La lista es de Lume — el mismo aspecto de los menús, con búsqueda cuando crece —, pero el valor vive en un ${ic('&lt;select&gt;')} real, que va junto con el formulario.`)}</p>
       </div>
       <dl class="doc-stats">
         <div class="doc-stat"><dt class="doc-stat__label">${L('tipos', 'types', 'tipos')}</dt><dd class="doc-stat__value">3</dd></div>

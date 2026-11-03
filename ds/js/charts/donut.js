@@ -1,5 +1,5 @@
 /**
- * Órbita — gráfico de rosca (parte do todo).
+ * Lume — gráfico de rosca (parte do todo).
  *
  * donutChart(host, {
  *   items: [{ name: 'Pix', value: 420, color? }],

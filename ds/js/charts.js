@@ -1,5 +1,5 @@
 /**
- * Órbita — gráficos.
+ * Lume — gráficos.
  *
  *   import { barChart, lineChart, donutChart, heatmap, calendarHeatmap, scatterChart,
  *            sparkline, statTile, meter } from './ds/js/charts.js';

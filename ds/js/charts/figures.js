@@ -1,5 +1,5 @@
 /**
- * Órbita — quando o gráfico é um número: indicador (stat), sparkline e medidor.
+ * Lume — quando o gráfico é um número: indicador (stat), sparkline e medidor.
  *
  * Geram HTML (string), sem estado — use em qualquer lugar:
  *

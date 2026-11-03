@@ -10,7 +10,7 @@
  * houver “ · ”, traduz cada parte. Frases montadas no código com valores usam L3(pt, en, es).
  * Texto que não está no dicionário volta como veio e vai para MISSING — o figma:test acusa.
  *
- * Palavras ambíguas: 'grafico-linhas|Linha' vale só dentro daquele bloco (ORB.block) e 'Tipo=Linha' só
+ * Palavras ambíguas: 'grafico-linhas|Linha' vale só dentro daquele bloco (LUME.block) e 'Tipo=Linha' só
  * para o valor daquela propriedade de variante. Nomes de variantes e de propriedades nunca usam o
  * contexto do bloco (Lg): outro bloco precisa achar a mesma variante pelo mesmo nome.
  */
@@ -88,7 +88,7 @@ function L(s, global) {
   if (s === undefined || s === null) return s;
   s = String(s);
   if (LANG === 'pt-BR' || s === '') return s;
-  var hit = (!global && ORB.block && DICT[ORB.block + '|' + s]) || DICT[s];
+  var hit = (!global && LUME.block && DICT[LUME.block + '|' + s]) || DICT[s];
   if (hit) {
     var t = pickLang(hit);
     OUT[t] = true;
@@ -115,6 +115,6 @@ function L(s, global) {
     OUT[joined] = true;
     return joined;
   }
-  if (needsTranslation(s)) MISSING[s] = ORB.block || '—';
+  if (needsTranslation(s)) MISSING[s] = LUME.block || '—';
   return LANG === 'en' ? enNumbers(s) : s;
 }

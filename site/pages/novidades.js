@@ -73,7 +73,7 @@ export default function renderNovidades(page) {
   <div class="page doc">
     <header class="doc-header">
       <div>
-        <p class="doc-header__eyebrow">Órbita</p>
+        <p class="doc-header__eyebrow">Lume</p>
         <h1 class="doc-header__title">${page.label}</h1>
         <p class="doc-header__lead">${L('Tudo o que mudou, versão a versão — e o que vem por aí.', 'Everything that changed, version by version — and what’s coming next.', 'Todo lo que cambió, versión a versión — y lo que viene.')}</p>
       </div>

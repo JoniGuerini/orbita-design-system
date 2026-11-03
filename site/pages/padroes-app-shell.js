@@ -85,7 +85,7 @@ const skeleton = () => `<a class="ds-skip-link" href="#${L('conteudo', 'content'
 <div class="ds-shell" id="shell">
   <aside class="ds-sidebar" id="sidebar" aria-label="${L('Barra lateral', 'Sidebar', 'Barra lateral')}">
     <div class="ds-sidebar__header">
-      <a class="ds-brand" href="#/">Órbita</a>
+      <a class="ds-brand" href="#/">Lume</a>
       <button class="ds-icon-btn ds-icon-btn--outline ds-icon-btn--lg ds-sidebar__toggle"
               data-shell-toggle aria-controls="sidebar">
         <ds-icon name="panel-left" class="ds-sidebar__toggle-collapse"></ds-icon>
@@ -137,7 +137,7 @@ const embedCode = () => `<!-- ${L('o app de verdade, sem gravar preferências', 
 <iframe src="index.html?embed&theme=light&sidebar=collapsed#/"></iframe>
 
 <script type="module">
-  const app = iframe.contentWindow.orbitaEmbed;   // ${L('mesma origem', 'same origin', 'mismo origen')}
+  const app = iframe.contentWindow.lumeEmbed;   // ${L('mesma origem', 'same origin', 'mismo origen')}
   app.shell.toggle();
   app.setTheme('dark');
   app.setLocale('${locale()}');
@@ -193,7 +193,7 @@ export default function renderAppShell(page) {
           ${segmented('theme', L('Tema do exemplo', 'Example theme', 'Tema del ejemplo'), [{ value: 'dark', label: L('Escuro', 'Dark', 'Oscuro'), icon: 'moon' }, { value: 'light', label: L('Claro', 'Light', 'Claro'), icon: 'sun' }], theme)}
           <button type="button" class="ds-icon-btn ds-icon-btn--muted" data-demo-reload aria-label="${L('Recarregar o exemplo', 'Reload the example', 'Recargar el ejemplo')}" data-ds-tooltip="${L('Recarregar o exemplo', 'Reload the example', 'Recargar el ejemplo')}">${icon('refresh', { size: 18 })}</button>
         </div>
-        ${frame('live', L('Exemplo ao vivo do Órbita', 'Live Órbita example', 'Ejemplo en vivo de Órbita'))}
+        ${frame('live', L('Exemplo ao vivo do Lume', 'Live Lume example', 'Ejemplo en vivo de Lume'))}
         <p class="pa-demo__status" data-demo-status aria-live="polite"></p>
       </div>`,
     )}
@@ -223,7 +223,7 @@ export default function renderAppShell(page) {
         <article class="pa-state">
           <div class="pa-state__art" aria-hidden="true">
             <div class="pa-mini" data-mode="expanded">
-              <span class="pa-mini__brand">Órbita</span><span class="pa-mini__search"><i></i><b></b></span>
+              <span class="pa-mini__brand">Lume</span><span class="pa-mini__search"><i></i><b></b></span>
               ${[64, 52, 70].map((w) => `<span class="pa-mini__item"><i></i><b style="width:${w}%"></b></span>`).join('')}
               <span class="pa-mini__group"><b></b></span>
               ${[58, 44].map((w) => `<span class="pa-mini__item"><i></i><b style="width:${w}%"></b></span>`).join('')}
@@ -377,7 +377,7 @@ export default function renderAppShell(page) {
           .join('')}
       </div>
       <h3 class="doc-subhead">${L('Modo demonstração', 'Demo mode', 'Modo demostración')} <span class="doc-subhead__meta">?embed</span></h3>
-      <p class="pa-paragraph">${L(`É o que esta página usa. Com ${ic('?embed')} na URL, o app não grava tema, sidebar nem grupos, e quem embute controla tudo por ${ic('orbitaEmbed')}.`, `It’s what this page uses. With ${ic('?embed')} in the URL, the app doesn’t save theme, sidebar, or groups, and the embedding page controls everything through ${ic('orbitaEmbed')}.`, `Es lo que usa esta página. Con ${ic('?embed')} en la URL, la app no guarda tema, sidebar ni grupos, y quien la incrusta controla todo con ${ic('orbitaEmbed')}.`)}</p>
+      <p class="pa-paragraph">${L(`É o que esta página usa. Com ${ic('?embed')} na URL, o app não grava tema, sidebar nem grupos, e quem embute controla tudo por ${ic('lumeEmbed')}.`, `It’s what this page uses. With ${ic('?embed')} in the URL, the app doesn’t save theme, sidebar, or groups, and the embedding page controls everything through ${ic('lumeEmbed')}.`, `Es lo que usa esta página. Con ${ic('?embed')} en la URL, la app no guarda tema, sidebar ni grupos, y quien la incrusta controla todo con ${ic('lumeEmbed')}.`)}</p>
       ${codeBlock(embedCode())}`,
     )}
 
@@ -446,12 +446,12 @@ function bindSegmented(group, onChange) {
   };
 }
 
-/** Espera o app do iframe expor window.orbitaEmbed. */
+/** Espera o app do iframe expor window.lumeEmbed. */
 function whenReady(iframe, cb) {
   let tries = 0;
   let timer;
   const check = () => {
-    const api = iframe.contentWindow?.orbitaEmbed;
+    const api = iframe.contentWindow?.lumeEmbed;
     if (api) return cb(api);
     if (++tries < 80) timer = setTimeout(check, 100);
   };

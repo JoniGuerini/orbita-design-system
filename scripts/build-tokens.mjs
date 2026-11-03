@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Build de tokens do Órbita.
+ * Build de tokens do Lume.
  *
  * Lê tokens/*.json e gera:
  *   ds/tokens.css — custom properties (primitivas, fundação, temas) + classes de texto
@@ -313,7 +313,7 @@ export async function buildTokens({ quiet = false } = {}) {
 
   const otherMode = MODES.find((m) => m !== DEFAULT_MODE);
   const css = [
-    `/**\n * Órbita Design System — tokens\n * Gerado por scripts/build-tokens.mjs a partir de tokens/*.json. Não edite à mão.\n */`,
+    `/**\n * Lume Design System — tokens\n * Gerado por scripts/build-tokens.mjs a partir de tokens/*.json. Não edite à mão.\n */`,
     cssBlock(':root', globalTokens, DEFAULT_MODE, emit),
     cssBlock(`:root,\n[data-theme="${DEFAULT_MODE}"]`, themedTokens, DEFAULT_MODE, emit, [`  color-scheme: ${DEFAULT_MODE};`]),
     cssBlock(`[data-theme="${otherMode}"]`, themedTokens, otherMode, emit, [`  color-scheme: ${otherMode};`]),

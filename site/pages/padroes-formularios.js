@@ -15,7 +15,7 @@ export const styles = ['site/component-doc.css', 'site/pages/padroes-formularios
 const ic = (s) => `<code class="ds-inline-code">${s}</code>`;
 
 const TEAMS = () => [L('Pagamentos', 'Payments', 'Pagos'), L('Cartões', 'Cards', 'Tarjetas'), L('Investimentos', 'Investments', 'Inversiones'), L('Seguros', 'Insurance', 'Seguros'), L('Plataforma', 'Platform', 'Plataforma')];
-const TAKEN = new Set(['pagamentos', 'cartoes', 'payments', 'cards', 'pagos', 'tarjetas', 'orbita', 'admin']);
+const TAKEN = new Set(['pagamentos', 'cartoes', 'payments', 'cards', 'pagos', 'tarjetas', 'lume', 'admin']);
 const takenExample = () => L('pagamentos', 'payments', 'pagos');
 
 const RULES = () => [
@@ -154,7 +154,7 @@ function demoForm() {
           id: 'pf-demo-endereco',
           name: 'endereco',
           label: addressLabel(),
-          affix: 'orbita.app/',
+          affix: 'lume.app/',
           pattern: '[a-z0-9]+(-[a-z0-9]+)*',
           title: L('Use letras minúsculas, números e hífen, como time-de-pagamentos.', 'Use lowercase letters, numbers, and hyphens, like payments-team.', 'Usa letras minúsculas, números y guion, como equipo-de-pagos.'),
           hint: addressHint(),
@@ -304,8 +304,8 @@ function longForm() {
       <fieldset class="ds-form__section">
         ${legend('01', L('Dados da empresa', 'Company details', 'Datos de la empresa'))}
         <div class="ds-form__row">
-          ${textField({ id: 'pf-long-razao', name: 'razao', label: L('Razão social', 'Legal name', 'Razón social'), value: 'Órbita Tecnologia Ltda.', ...plain })}
-          ${textField({ id: 'pf-long-fantasia', name: 'fantasia', label: L('Nome fantasia', 'Trade name', 'Nombre comercial'), value: 'Órbita', ...plain })}
+          ${textField({ id: 'pf-long-razao', name: 'razao', label: L('Razão social', 'Legal name', 'Razón social'), value: 'Lume Tecnologia Ltda.', ...plain })}
+          ${textField({ id: 'pf-long-fantasia', name: 'fantasia', label: L('Nome fantasia', 'Trade name', 'Nombre comercial'), value: 'Lume', ...plain })}
         </div>
       </fieldset>
       <fieldset class="ds-form__section">
@@ -323,7 +323,7 @@ function longForm() {
       </fieldset>
       <fieldset class="ds-form__section">
         ${legend('03', L('Faturamento', 'Billing', 'Facturación'))}
-        ${textField({ id: 'pf-long-email', name: 'emailfat', type: 'email', label: L('E-mail para notas fiscais', 'Email for invoices', 'Correo para facturas'), value: 'financeiro@orbita.app', ...plain })}
+        ${textField({ id: 'pf-long-email', name: 'emailfat', type: 'email', label: L('E-mail para notas fiscais', 'Email for invoices', 'Correo para facturas'), value: 'financeiro@lume.app', ...plain })}
         ${textField({ id: 'pf-long-obs', name: 'obs', label: L('Observações', 'Notes', 'Observaciones'), ...plain, multiline: true, hint: L('Vai impressa na nota.', 'Printed on the invoice.', 'Va impresa en la factura.') })}
       </fieldset>
       <div class="ds-form__actions ds-form__actions--sticky">
@@ -469,7 +469,7 @@ export default function renderFormularios(page) {
         ${example(
           L('A dica fica embaixo, sempre visível', 'The hint sits below, always visible', 'La pista queda debajo, siempre visible'),
           L('Placeholder some na primeira letra. O que a pessoa precisa saber para acertar vai na dica, que continua lá.', 'A placeholder disappears on the first letter. What people need to know to get it right goes in the hint, which stays there.', 'El placeholder desaparece con la primera letra. Lo que la persona necesita saber para acertar va en la pista, que sigue ahí.'),
-          `<div class="pf-mini">${textField({ id: 'pf-ex-l9', label: addressLabel(), affix: 'orbita.app/', hint: addressHint() })}</div>`,
+          `<div class="pf-mini">${textField({ id: 'pf-ex-l9', label: addressLabel(), affix: 'lume.app/', hint: addressHint() })}</div>`,
         )}
       </div>`,
     )}

@@ -20,7 +20,7 @@ const RAW = [
   {
     id: 'main',
     items: [
-      { label: T('Início', 'Home', 'Inicio'), icon: 'home', path: '/', load: () => import('./pages/home.js'), description: T('Visão geral do Órbita Design System.', 'An overview of the Órbita Design System.', 'Visión general del Órbita Design System.') },
+      { label: T('Início', 'Home', 'Inicio'), icon: 'home', path: '/', load: () => import('./pages/home.js'), description: T('Visão geral do Lume Design System.', 'An overview of the Lume Design System.', 'Visión general del Lume Design System.') },
       { label: T('Primeiros passos', 'Getting started', 'Primeros pasos'), icon: 'zap', path: '/primeiros-passos', load: () => import('./pages/primeiros-passos.js'), description: T('Como instalar, importar os estilos e usar os tokens no seu projeto.', 'How to install, import the styles, and use the tokens in your project.', 'Cómo instalar, importar los estilos y usar los tokens en tu proyecto.') },
       { label: T('Novidades', 'What’s new', 'Novedades'), icon: 'megaphone', path: '/novidades', load: () => import('./pages/novidades.js'), dot: true, description: T('Tudo o que mudou em cada versão.', 'Everything that changed in each version.', 'Todo lo que cambió en cada versión.') },
     ],

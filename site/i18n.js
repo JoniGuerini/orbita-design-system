@@ -11,15 +11,15 @@ export const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 export const L = (pt, en, es) => tr(T(pt, en, es));
 
 const STRINGS = {
-  description: T('Órbita — tokens, tipografia, ícones e componentes para produtos refinados.', 'Órbita — tokens, typography, icons, and components for refined products.', 'Órbita — tokens, tipografía, íconos y componentes para productos refinados.'),
+  description: T('Lume — tokens, tipografia, ícones e componentes para produtos refinados.', 'Lume — tokens, typography, icons, and components for refined products.', 'Lume — tokens, tipografía, íconos y componentes para productos refinados.'),
   skip: T('Pular para o conteúdo', 'Skip to content', 'Saltar al contenido'),
   sidebar: T('Barra lateral', 'Sidebar', 'Barra lateral'),
-  goHome: T('Órbita, ir para o início', 'Órbita, go to home', 'Órbita, ir al inicio'),
+  goHome: T('Lume, ir para o início', 'Lume, go to home', 'Lume, ir al inicio'),
   search: T('Buscar', 'Search', 'Buscar'),
-  searchOrbita: T('Buscar no Órbita', 'Search Órbita', 'Buscar en Órbita'),
+  searchLume: T('Buscar no Lume', 'Search Lume', 'Buscar en Lume'),
   mainNav: T('Principal', 'Main', 'Principal'),
   whatsNew: T('Ver o que há de novo', 'See what’s new', 'Ver las novedades'),
-  accountTooltip: T((v) => `Órbita ${v} · novidades`, (v) => `Órbita ${v} · what’s new`, (v) => `Órbita ${v} · novedades`),
+  accountTooltip: T((v) => `Lume ${v} · novidades`, (v) => `Lume ${v} · what’s new`, (v) => `Lume ${v} · novedades`),
   youAreHere: T('Você está em', 'You are here', 'Estás en'),
   theme: T('Tema', 'Theme', 'Tema'),
   dark: T('Escuro', 'Dark', 'Oscuro'),

@@ -7,7 +7,7 @@
 
 /** Uma palavra do dicionário, no idioma ativo (para as regras). */
 function W(pt) {
-  var hit = (ORB.block && DICT[ORB.block + '|' + pt]) || DICT[pt];
+  var hit = (LUME.block && DICT[LUME.block + '|' + pt]) || DICT[pt];
   return hit ? pickLang(hit) : null;
 }
 
@@ -29,7 +29,7 @@ RULES.push(
   [/^Duração de (.+)$/, function (m) { return L3('', 'Duration of ', 'Duración de ') + m[1]; }],
   [/^Sombra (\w+)$/, function (m) { return L3('', 'Shadow ', 'Sombra ') + m[1]; }],
   [/^([\d.,]+) mil$/, function (m) { return LANG === 'en' ? enNumbers(m[1]) + 'K' : m[1] + ' mil'; }],
-  [/^Órbita ([\d.]+)$/, function (m) { return m[0]; }],
+  [/^Lume ([\d.]+)$/, function (m) { return m[0]; }],
   [/^Os mesmos (\d+) ícones do código, como componentes de 24 px\. Arraste uma instância e troque a cor por qualquer variável de texto; nos componentes, use a propriedade “Trocar ícone”\.$/, function (m) {
     return L3('',
       'The same ' + m[1] + ' icons as in code, as 24 px components. Drag an instance and change its color to any text variable; in components, use the “Swap icon” property.',
@@ -56,7 +56,7 @@ RULES.push(
 
 // iguais nas três línguas: nomes próprios, siglas, termos que o produto usa como estão
 [
-  'Órbita', 'Figma', 'Pro', 'Inter', 'Inter Tight', 'JetBrains Mono', 'Semi Bold', 'Regular', 'Medium', 'Bold', 'KB', 'MB', 'XS', 'M', '2xl', '3xl',
+  'Lume', 'Figma', 'Pro', 'Inter', 'Inter Tight', 'JetBrains Mono', 'Semi Bold', 'Regular', 'Medium', 'Bold', 'KB', 'MB', 'XS', 'M', '2xl', '3xl',
   'Hover', 'Ghost', 'Breadcrumb', 'App shell', 'Sidebar', 'Topbar', 'Avatar', 'Online', 'Offline', 'Design', 'Interface', 'Feedback', 'Composer', 'Placeholder', 'Layout',
   'Breakpoints', 'Toast', 'Tooltip', 'Badge', 'Chip', 'Chips', 'Switch', 'Modal', 'Menu', 'Checkbox', 'Radio', 'Status', 'Heatmap', 'Sparkline', 'Pix', 'Tags',
   'AS', 'BL', 'CM', 'DR', 'PG', 'LM', 'RS', 'TP', 'JV', 'AM', 'JS', 'CSS', 'HTML', 'OKLCH', 'SVG', 'PDF', 'CSV', 'URL', 'API', 'WCAG', 'Esc', 'Enter', 'Tab', 'Shift',
@@ -124,9 +124,9 @@ Object.assign(DICT, {
   'Código inline e nomes de token.': ['Inline code and token names.', 'Código inline y nombres de token.'],
 
   /* ───────── Páginas, capa e linhas do canvas ───────── */
-  'Órbita · Fundamentos': ['Órbita · Foundations', 'Órbita · Fundamentos'],
-  'Órbita · Ícones': ['Órbita · Icons', 'Órbita · Íconos'],
-  'Órbita · Componentes': ['Órbita · Components', 'Órbita · Componentes'],
+  'Lume · Fundamentos': ['Lume · Foundations', 'Lume · Fundamentos'],
+  'Lume · Ícones': ['Lume · Icons', 'Lume · Íconos'],
+  'Lume · Componentes': ['Lume · Components', 'Lume · Componentes'],
   'Fundamentos': ['Foundations', 'Fundamentos'],
   'Ícones': ['Icons', 'Íconos'],
   'ícones': ['icons', 'íconos'],
@@ -282,7 +282,7 @@ Object.assign(DICT, {
   'Trilha': ['Breadcrumb', 'Ruta'],
   'Painel principal': ['Main panel', 'Panel principal'],
   'Cartões': ['Cards', 'Tarjetas'],
-  'Buscar no Órbita': ['Search Órbita', 'Buscar en Órbita'],
+  'Buscar no Lume': ['Search Lume', 'Buscar en Lume'],
   'Ver o que há de novo': ['See what’s new', 'Ver las novedades'],
   'Miniatura': ['Thumbnail', 'Miniatura'],
   'Variáveis': ['Variables', 'Variables'],

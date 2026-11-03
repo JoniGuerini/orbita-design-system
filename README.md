@@ -1,5 +1,6 @@
-# Órbita Design System
+# Lume Design System
 
+O design system do app Lume (até a versão 0.7, chamado Órbita).
 Design system escuro-quente, plano e calmo: acento pêssego, contornos finos, títulos bem apertados e páginas montadas como painéis.
 Sem dependências: HTML, CSS custom properties e JavaScript nativo (ES modules). Funciona com qualquer stack.
 

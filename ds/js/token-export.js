@@ -1,5 +1,5 @@
 /**
- * Órbita — exportação dos tokens para Figma e outras ferramentas.
+ * Lume — exportação dos tokens para Figma e outras ferramentas.
  *
  * Funções puras: recebem os dados de ds/tokens.js (o mesmo objeto, no navegador ou no Node)
  * e devolvem cada formato pronto para salvar. Nada aqui acessa rede ou DOM.
@@ -18,7 +18,7 @@
 export const COLLECTIONS = { primitives: 'Primitivas', semantic: 'Semânticos', dimensions: 'Dimensões' };
 export const MODES = { dark: 'Escuro', light: 'Claro' };
 const VALUE_MODE = 'Valor';
-const EXT = 'com.orbita';
+const EXT = 'com.lume';
 
 /* ───────── Utilidades ───────── */
 
@@ -208,8 +208,8 @@ export function figmaVariables(data) {
   const ref = (v) =>
     v.alias ? { alias: figmaName(v.alias), collection: v.collection === 'primitives' ? COLLECTIONS.primitives : COLLECTIONS.semantic } : v.hex;
   return {
-    $schema: 'orbita/figma-variables@1',
-    name: 'Órbita',
+    $schema: 'lume/figma-variables@1',
+    name: 'Lume',
     generatedAt: data.generatedAt,
     collections: [
       {
@@ -322,14 +322,14 @@ export function figmaRestPayload(data) {
 /* ───────── Figma: plugin de desenvolvimento (qualquer plano) ───────── */
 
 const PLUGIN_RUNTIME = String.raw`
-// Órbita → Figma. Cria ou atualiza as variáveis e os estilos pelo nome; pode rodar quantas vezes quiser.
+// Lume → Figma. Cria ou atualiza as variáveis e os estilos pelo nome; pode rodar quantas vezes quiser.
 function hexToRgba(hex) {
   var h = String(hex).replace('#', '');
   var n = function (i) { return parseInt(h.slice(i, i + 2), 16) / 255; };
   return { r: n(0), g: n(2), b: n(4), a: h.length === 8 ? n(6) : 1 };
 }
 
-// o plugin “Órbita para Figma” pode ter criado tudo em inglês ou espanhol: acha a coleção, o modo e a sombra em qualquer idioma
+// o plugin “Lume para Figma” pode ter criado tudo em inglês ou espanhol: acha a coleção, o modo e a sombra em qualquer idioma
 var OTHER_NAMES = { 'Primitivas': ['Primitives'], 'Semânticos': ['Semantic'], 'Dimensões': ['Dimensions', 'Dimensiones'], 'Escuro': ['Dark', 'Oscuro'], 'Claro': ['Light'], 'Valor': ['Value'] };
 function same(found, name) { return found === name || (OTHER_NAMES[name] || []).indexOf(found) >= 0; }
 function sameStyle(found, name) {
@@ -417,18 +417,18 @@ async function run() {
     report.estilos++;
   }
 
-  var msg = 'Órbita: ' + report.criadas + ' variáveis criadas, ' + report.atualizadas + ' atualizadas, ' + report.estilos + ' estilos.';
+  var msg = 'Lume: ' + report.criadas + ' variáveis criadas, ' + report.atualizadas + ' atualizadas, ' + report.estilos + ' estilos.';
   if (report.fontes.length) msg += ' Fontes ausentes: ' + Array.from(new Set(report.fontes)).join(', ') + '.';
   figma.closePlugin(msg);
 }
 
-run().catch(function (err) { figma.closePlugin('Órbita: erro — ' + err.message); });
+run().catch(function (err) { figma.closePlugin('Lume: erro — ' + err.message); });
 `;
 
 export function figmaPlugin(data) {
   const manifest = {
-    name: 'Órbita · importar tokens',
-    id: 'orbita-tokens-import',
+    name: 'Lume · importar tokens',
+    id: 'lume-tokens-import',
     api: '1.0.0',
     main: 'code.js',
     editorType: ['figma'],
@@ -455,7 +455,7 @@ export function toDTCG(data) {
   const colorValue = ({ ref, value }) => (plainRef(ref) ? `{${plainRef(ref)}}` : value);
   const shadowValue = (css) => parseShadow(css).map((l) => ({ color: l.hex, offsetX: `${l.x}px`, offsetY: `${l.y}px`, blur: `${l.blur}px`, spread: `${l.spread}px` }));
   const root = {
-    $description: 'Órbita Design System — tokens no formato W3C Design Tokens. Temas: $value é o escuro (padrão); os dois estão em $extensions.com.orbita.modes.',
+    $description: 'Lume Design System — tokens no formato W3C Design Tokens. Temas: $value é o escuro (padrão); os dois estão em $extensions.com.lume.modes.',
     $extensions: { [EXT]: { generatedAt: data.generatedAt, modes: data.modes, defaultMode: data.defaultMode, prefix: data.prefix } },
   };
 
@@ -537,7 +537,7 @@ export function toFlat(data) {
     else if (t.modes) out[t.name] = { ...base, dark: t.modes.dark, light: t.modes.light };
     else out[t.name] = { ...base, value: t.css };
   }
-  return { $meta: { name: 'Órbita Design System', generatedAt: data.generatedAt, modes: data.modes, defaultMode: data.defaultMode, prefix: data.prefix }, tokens: out };
+  return { $meta: { name: 'Lume Design System', generatedAt: data.generatedAt, modes: data.modes, defaultMode: data.defaultMode, prefix: data.prefix }, tokens: out };
 }
 
 /* ───────── Contagens e arquivos ───────── */

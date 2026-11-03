@@ -272,7 +272,7 @@ export default function renderBusca(page) {
           </ol>
           <div class="pb-palette__try">
             <button type="button" class="ds-btn ds-btn--primary" data-open-demo>${icon('search', { size: 18 })}${L('Abrir a paleta de exemplo', 'Open the example palette', 'Abrir la paleta de ejemplo')}</button>
-            <p class="pb-note">${L(`Uma paleta só deste exemplo, com os comandos de um app de pedidos. ${kbd(MOD, 'K')} continua abrindo a do Órbita.`, `A palette just for this example, with the commands of an orders app. ${kbd(MOD, 'K')} still opens Órbita’s.`, `Una paleta solo de este ejemplo, con los comandos de una app de pedidos. ${kbd(MOD, 'K')} sigue abriendo la de Órbita.`)}</p>
+            <p class="pb-note">${L(`Uma paleta só deste exemplo, com os comandos de um app de pedidos. ${kbd(MOD, 'K')} continua abrindo a do Lume.`, `A palette just for this example, with the commands of an orders app. ${kbd(MOD, 'K')} still opens Lume’s.`, `Una paleta solo de este ejemplo, con los comandos de una app de pedidos. ${kbd(MOD, 'K')} sigue abriendo la de Lume.`)}</p>
           </div>
         </div>
       </div>`,
@@ -378,7 +378,7 @@ export default function renderBusca(page) {
       L('Atalho é um caminho a mais, nunca o único. Mostre-o onde a ação aparece — no tooltip, no menu, na paleta — e quem usa muito aprende sozinho.', 'A shortcut is one more path, never the only one. Show it where the action appears — in the tooltip, the menu, the palette — and frequent users learn it on their own.', 'Un atajo es un camino más, nunca el único. Muéstralo donde aparece la acción — en el tooltip, en el menú, en la paleta — y quien lo usa mucho lo aprende solo.'),
       `<div class="pb-shortcuts">
         <div class="doc-table pb-keys">
-          <div class="doc-table__head" aria-hidden="true"><span>${L('Teclas', 'Keys', 'Teclas')}</span><span>${L('No Órbita', 'In Órbita', 'En Órbita')}</span></div>
+          <div class="doc-table__head" aria-hidden="true"><span>${L('Teclas', 'Keys', 'Teclas')}</span><span>${L('No Lume', 'In Lume', 'En Lume')}</span></div>
           ${[
             [[MOD, 'K'], L('Abrir ou fechar a busca', 'Open or close search', 'Abrir o cerrar la búsqueda')],
             [['/'], L('Abrir a busca (fora de campos)', 'Open search (outside fields)', 'Abrir la búsqueda (fuera de campos)')],
