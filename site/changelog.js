@@ -81,6 +81,11 @@ const RELEASES = [
         name: T('App shell', 'App shell', 'App shell'),
         items: [
           ['novo', T(
+            'Menu em colunas (maxRows): lista longa vira grade, com no máximo 5 itens por coluna e as colunas equilibradas. A navbar usa nos grupos — Componentes abre em 4 × 4, sem rolagem',
+            'Menu in columns (maxRows): a long list becomes a grid, at most 5 items per column, with balanced columns. The navbar uses it for its groups — Components opens as 4 × 4, no scrolling',
+            'Menú en columnas (maxRows): una lista larga se vuelve una cuadrícula, con como máximo 5 elementos por columna y columnas equilibradas. La navbar lo usa en sus grupos — Componentes abre en 4 × 4, sin desplazamiento',
+          ), '/componentes/menu'],
+          ['novo', T(
             'O nome Lume no logotipo passou a ser escrito em Geist Serif, a fonte dos títulos',
             'The Lume name in the logo is now set in Geist Serif, the heading font',
             'El nombre Lume del logotipo pasó a escribirse en Geist Serif, la fuente de los títulos',

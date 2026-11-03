@@ -2,7 +2,8 @@ import { icon } from '../../ds/icons/icons.js';
 import { attachMenu, menuContent } from '../../ds/js/menu.js';
 import { toast } from '../../ds/js/toast.js';
 import { mountDocNav } from '../doc-nav.js';
-import { playgroundMarkup, mountPlayground, mountCodeCopy, tokenTable, a11yList } from '../component-doc.js';
+import { playgroundMarkup, mountPlayground, mountCodeCopy, tokenTable, a11yList, codeBlock } from '../component-doc.js';
+import { navigation } from '../nav.js';
 import { L } from '../i18n.js';
 
 export const styles = ['site/component-doc.css', 'site/pages/menu.css'];
@@ -118,6 +119,7 @@ export default function renderMenu(page) {
       ${[
         ['playground', 'Playground'],
         ['modos', L('Modos', 'Modes', 'Modos')],
+        ['colunas', L('Colunas', 'Columns', 'Columnas')],
         ['itens', L('Itens', 'Items', 'Elementos')],
         ['teclado', L('Teclado', 'Keyboard', 'Teclado')],
         ['acessibilidade', L('Acessibilidade', 'Accessibility', 'Accesibilidad')],
@@ -165,6 +167,30 @@ export default function renderMenu(page) {
           </div>
         </article>
       </div>
+    </section>
+
+    <section class="doc-section" id="colunas" aria-labelledby="colunas-title">
+      <header class="doc-section__header">
+        <div>
+          <h2 class="doc-section__title" id="colunas-title">${L('Colunas', 'Columns', 'Columnas')}</h2>
+          <p class="doc-section__desc">${L('Lista longa não rola nem vira um menu gigante: com maxRows, cada coluna leva no máximo esse número de itens e o resto segue para a coluna do lado, dividido por igual. É o que a navbar usa nos grupos.', 'A long list doesn’t scroll or turn into a giant menu: with maxRows, each column holds at most that many items and the rest moves to the next column, split evenly. It’s what the navbar uses for its groups.', 'Una lista larga no se desplaza ni se vuelve un menú gigante: con maxRows, cada columna lleva como máximo esa cantidad de elementos y el resto pasa a la columna de al lado, repartido por igual. Es lo que usa la navbar en sus grupos.')}</p>
+        </div>
+      </header>
+      <article class="cd-example">
+        <div class="cd-example__preview">
+          <button type="button" class="ds-chip" data-mn-demo="columns"><span>${navigation.find((g) => g.id === 'componentes').label}</span><span class="ds-chip__chevron">${icon('chevron-down', { size: 14 })}</span></button>
+        </div>
+        <div class="cd-example__body">
+          <p class="cd-example__name">${L('Em colunas', 'In columns', 'En columnas')}<code>maxRows: 5</code></p>
+          <p class="cd-example__text">${L('16 itens com até 5 por coluna viram 4 colunas de 4 — não 5, 5, 5 e 1. ↑/↓ descem a coluna e passam para a próxima; ←/→ pulam de coluna. Perto da borda, o menu desliza para caber na tela.', '16 items with up to 5 per column become 4 columns of 4 — not 5, 5, 5, and 1. ↑/↓ go down the column and on to the next; ←/→ jump between columns. Near the edge, the menu slides to fit on screen.', '16 elementos con hasta 5 por columna se vuelven 4 columnas de 4 — no 5, 5, 5 y 1. ↑/↓ bajan por la columna y pasan a la siguiente; ←/→ saltan de columna. Cerca del borde, el menú se desliza para caber en la pantalla.')}</p>
+        </div>
+      </article>
+      ${codeBlock(`attachMenu(${L('botao', 'button', 'boton')}, {
+  label: '${navigation.find((g) => g.id === 'componentes').label}',
+  options: ${L('paginas', 'pages', 'paginas')}.map((p) => ({ value: p.href, label: p.label, icon: p.icon })),
+  maxRows: 5,   // ${L('no máximo 5 por coluna, equilibrado', 'at most 5 per column, balanced', 'como máximo 5 por columna, equilibrado')}
+  onChange: (href) => (location.hash = href),
+});`)}
     </section>
 
     <section class="doc-section" id="itens" aria-labelledby="itens-title">
@@ -355,7 +381,15 @@ export function mount(root) {
   // menus fixos da seção "Modos"
   const demoRadio = root.querySelector('[data-mn-demo="radio"]');
   const demoAction = root.querySelector('[data-mn-demo="action"]');
+  const demoColumns = root.querySelector('[data-mn-demo="columns"]');
+  const componentsGroup = navigation.find((g) => g.id === 'componentes');
   const modeMenus = [
+    attachMenu(demoColumns, {
+      label: componentsGroup.label,
+      options: componentsGroup.items.map((i) => ({ value: i.path, label: i.label, icon: i.icon })),
+      maxRows: 5,
+      onChange: (path) => (location.hash = path),
+    }),
     attachMenu(demoRadio, {
       label: sortBy(),
       value: 'recent',

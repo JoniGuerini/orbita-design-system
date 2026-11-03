@@ -262,6 +262,7 @@ export function renderNavbarNav(container, groups, { attachMenu, go }) {
       menu: attachMenu(button, {
         label: group.label,
         options: group.items.map((i) => ({ value: i.href, label: i.label, icon: i.icon })),
+        maxRows: 5, // grupos longos (Componentes tem 16 páginas) abrem em grade, sem rolagem
         value: null,
         onChange: go,
       }),

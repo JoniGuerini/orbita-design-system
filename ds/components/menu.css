@@ -30,6 +30,19 @@
     transform var(--ds-duration-base) var(--ds-easing-emphasized);
 }
 
+/* Colunas: lista longa vira grade (até --_rows itens por coluna), sem rolagem */
+.ds-menu--columns {
+  max-width: calc(100vw - 16px);
+}
+
+.ds-menu__grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(var(--_rows), auto);
+  grid-auto-columns: minmax(184px, 1fr);
+  column-gap: 2px;
+}
+
 .ds-menu__label {
   padding: var(--ds-space-100) var(--ds-space-150) var(--ds-space-075);
   color: var(--ds-color-fg-subtle);

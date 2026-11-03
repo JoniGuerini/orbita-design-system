@@ -21,6 +21,11 @@
  *   });
  *
  * Itens especiais: { type: 'separator' }, { type: 'group', label } e { …, disabled: true }.
+ *
+ * Colunas — listas longas viram uma grade em vez de rolar: maxRows é o máximo de itens por coluna;
+ * passando disso, os itens seguem para a coluna do lado, equilibrados (16 itens com maxRows 5 → 4 × 4).
+ *   attachMenu(botao, { label: 'Componentes', options, maxRows: 5, onChange });
+ * ↑/↓ andam na ordem (desce a coluna e passa para a próxima); ←/→ pulam de coluna.
  * menu.destroy() ao sair da página.
  *
  * Padrão ARIA: gatilho com aria-haspopup="menu" + menu com menuitemradio (seleção) ou menuitem (ação).
@@ -39,11 +44,15 @@ const normalize = (s) =>
     .toLowerCase();
 
 /** HTML dos itens — usado pelo menu e pelas prévias estáticas da documentação. */
-export function menuContent({ label, options = [], value, mode = 'radio' } = {}) {
+/** Linhas da grade: o mínimo de colunas que respeita maxRows, com os itens divididos por igual. */
+export function menuRows(count, maxRows) {
+  if (!maxRows || count <= maxRows) return 0;
+  return Math.ceil(count / Math.ceil(count / maxRows));
+}
+
+export function menuContent({ label, options = [], value, mode = 'radio', rows = 0 } = {}) {
   const radio = mode !== 'action';
-  return (
-    (label ? `<p class="ds-menu__label" aria-hidden="true">${escape(label)}</p>` : '') +
-    options
+  const items = options
       .map((o) => {
         if (o.type === 'separator') return '<div class="ds-menu__separator" role="separator"></div>';
         if (o.type === 'group') return `<p class="ds-menu__group" aria-hidden="true">${escape(o.label)}</p>`;
@@ -60,11 +69,14 @@ export function menuContent({ label, options = [], value, mode = 'radio' } = {})
           ${lead}<span class="ds-menu__text">${escape(o.label)}</span>${trail}
         </button>`;
       })
-      .join('')
+      .join('');
+  return (
+    (label ? `<p class="ds-menu__label" aria-hidden="true">${escape(label)}</p>` : '') +
+    (rows ? `<div class="ds-menu__grid" style="--_rows:${rows}">${items}</div>` : items)
   );
 }
 
-export function attachMenu(trigger, { label, options, value, onChange, mode = 'radio' }) {
+export function attachMenu(trigger, { label, options, value, onChange, mode = 'radio', maxRows = 0 }) {
   const id = `ds-menu-${++uid}`;
   const menu = document.createElement('div');
   menu.className = 'ds-menu';
@@ -72,6 +84,8 @@ export function attachMenu(trigger, { label, options, value, onChange, mode = 'r
   menu.setAttribute('role', 'menu');
   if (label) menu.setAttribute('aria-label', label);
   if (mode === 'action') menu.dataset.mode = 'action';
+  const rows = menuRows(options.filter((o) => !o.type).length, maxRows);
+  if (rows) menu.classList.add('ds-menu--columns');
   document.body.append(menu);
 
   trigger.setAttribute('aria-haspopup', 'menu');
@@ -82,7 +96,7 @@ export function attachMenu(trigger, { label, options, value, onChange, mode = 'r
   const items = () => [...menu.querySelectorAll('.ds-menu__item:not([aria-disabled="true"])')];
 
   function render() {
-    menu.innerHTML = menuContent({ label, options, value: current, mode });
+    menu.innerHTML = menuContent({ label, options, value: current, mode, rows });
   }
 
   function position() {
@@ -90,7 +104,8 @@ export function attachMenu(trigger, { label, options, value, onChange, mode = 'r
     const m = menu.getBoundingClientRect();
     let x = r.left;
     let y = r.bottom + 6;
-    if (x + m.width > innerWidth - 8) x = r.right - m.width;
+    // passou da direita: alinha pela direita do gatilho; se ainda não couber (menu largo, em colunas), desliza só o necessário
+    if (x + m.width > innerWidth - 8) x = r.right - m.width >= 8 ? r.right - m.width : innerWidth - 8 - m.width;
     if (y + m.height > innerHeight - 8) y = r.top - m.height - 6;
     menu.style.translate = `${Math.round(Math.max(8, x))}px ${Math.round(Math.max(8, y))}px`;
   }
@@ -141,7 +156,12 @@ export function attachMenu(trigger, { label, options, value, onChange, mode = 'r
     if (!list.length) return;
     const i = list.indexOf(document.activeElement);
     const move = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: list.length - 1 }[event.key];
-    if (move !== undefined) {
+    const jump = rows ? { ArrowRight: i + rows, ArrowLeft: i - rows }[event.key] : undefined;
+    if (jump !== undefined) {
+      // ←/→ na grade: mesma linha da coluna vizinha (sem dar a volta)
+      event.preventDefault();
+      list[Math.min(Math.max(jump, 0), list.length - 1)].focus();
+    } else if (move !== undefined) {
       event.preventDefault();
       list[(move + list.length) % list.length].focus();
     } else if (event.key === 'Escape') {
