@@ -12,11 +12,6 @@
  *   const ok = await confirmModal({ title: 'Excluir projeto?', body: '…', confirmLabel: 'Excluir', tone: 'danger' }); // → boolean
  *
  *   const modal = createModal({ … });     // controle manual: modal.open(), modal.close(valor), modal.destroy()
- *
- * Declarativo:
- *   <button data-ds-modal-open="meu-modal">Abrir</button>
- *   <dialog class="ds-modal" id="meu-modal"> … <button data-ds-modal-close="ok">OK</button> </dialog>
- *   const unbind = bindModalTriggers(document);
  */
 import { icon } from '../icons/icons.js';
 import { msg } from './i18n.js';
@@ -185,22 +180,4 @@ export function confirmModal({ title, body, eyebrow, confirmLabel = msg('modal.c
       { label: confirmLabel, value: 'confirm', variant: danger ? 'danger' : 'primary', autofocus: !danger },
     ],
   }).then((value) => value === 'confirm');
-}
-
-/** Uso declarativo: botões com data-ds-modal-open="id-do-dialog". Devolve a função de limpeza. */
-export function bindModalTriggers(scope = document) {
-  const enhanced = new Map();
-  const onClick = (event) => {
-    const trigger = event.target.closest('[data-ds-modal-open]');
-    if (!trigger) return;
-    const dialog = document.getElementById(trigger.dataset.dsModalOpen);
-    if (!dialog) return;
-    if (!enhanced.has(dialog)) enhanced.set(dialog, enhanceModal(dialog, { dismissible: dialog.dataset.dismissible !== 'false' }));
-    enhanced.get(dialog).open();
-  };
-  scope.addEventListener('click', onClick);
-  return () => {
-    scope.removeEventListener('click', onClick);
-    enhanced.forEach((m) => m.destroy());
-  };
 }

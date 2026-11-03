@@ -51,11 +51,6 @@ const RELEASES = [
             'Panel: párrafo de introducción (ds-panel__lead) en el playground y las tarjetas predeterminada, elevada y clicable con ejemplo en vivo',
           ), '/componentes/painel'],
           ['melhoria', T(
-            'Modal: abrir pelo atributo data-ds-modal-open, sem JavaScript próprio (bindModalTriggers), com exemplo ao vivo',
-            'Modal: open via the data-ds-modal-open attribute, with no JavaScript of your own (bindModalTriggers), with a live example',
-            'Modal: abrir por el atributo data-ds-modal-open, sin JavaScript propio (bindModalTriggers), con ejemplo en vivo',
-          ), '/componentes/modal'],
-          ['melhoria', T(
             'Formulários: descrição de seção (ds-form__section-desc) e campos empilhados (ds-form__stack) nos exemplos',
             'Forms: section description (ds-form__section-desc) and stacked fields (ds-form__stack) in the examples',
             'Formularios: descripción de sección (ds-form__section-desc) y campos apilados (ds-form__stack) en los ejemplos',

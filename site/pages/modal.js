@@ -1,5 +1,5 @@
 import { icon } from '../../ds/icons/icons.js';
-import { openModal, confirmModal, modalContent, modalClasses, bindModalTriggers } from '../../ds/js/modal.js';
+import { openModal, confirmModal, modalContent, modalClasses } from '../../ds/js/modal.js';
 import { toast } from '../../ds/js/toast.js';
 import { mountDocNav } from '../doc-nav.js';
 import { playgroundMarkup, mountPlayground, mountCodeCopy, codeBlock, tokenTable, a11yList } from '../component-doc.js';
@@ -264,37 +264,6 @@ export default function renderModal(page) {
           )
           .join('')}
       </div>
-
-      <h3 class="doc-subhead">${L('Sem JavaScript próprio', 'No JavaScript of your own', 'Sin JavaScript propio')} <span class="doc-subhead__meta">bindModalTriggers</span></h3>
-      <div class="md-declarative">
-        <p class="md-declarative__text">${L(`Para um modal fixo, que já está no HTML: o botão aponta para o ${ic('&lt;dialog&gt;')} com ${ic('data-ds-modal-open')}, e os botões de dentro fecham com ${ic('data-ds-modal-close')}. Uma chamada de ${ic('bindModalTriggers')} liga todos da página, com o mesmo foco, saídas e movimento da API.`, `For a fixed modal that’s already in the HTML: the button points to the ${ic('&lt;dialog&gt;')} with ${ic('data-ds-modal-open')}, and the buttons inside close it with ${ic('data-ds-modal-close')}. One call to ${ic('bindModalTriggers')} wires every one on the page, with the same focus, exits, and motion as the API.`, `Para un modal fijo, que ya está en el HTML: el botón apunta al ${ic('&lt;dialog&gt;')} con ${ic('data-ds-modal-open')}, y los botones de dentro lo cierran con ${ic('data-ds-modal-close')}. Una llamada a ${ic('bindModalTriggers')} conecta todos los de la página, con el mismo foco, salidas y movimiento que la API.`)}</p>
-        <button type="button" class="ds-btn ds-btn--secondary" data-ds-modal-open="md-declarativo">${icon('arrow-up-right', { size: 18 })}${L('Abrir pelo atributo', 'Open via the attribute', 'Abrir por el atributo')}</button>
-        <dialog class="${modalClasses({ size: 'sm' })}" id="md-declarativo" aria-labelledby="md-declarativo-title">${modalContent({
-          id: 'md-declarativo',
-          eyebrow: projectEyebrow(),
-          title: L('Publicar alterações?', 'Publish changes?', '¿Publicar cambios?'),
-          body: L('Este modal estava no HTML da página. O botão só disse qual abrir.', 'This modal was in the page’s HTML. The button only said which one to open.', 'Este modal estaba en el HTML de la página. El botón solo dijo cuál abrir.'),
-          actions: [
-            { label: cancel(), value: 'cancel' },
-            { label: L('Publicar', 'Publish', 'Publicar'), value: 'confirm', variant: 'primary' },
-          ],
-        })}</dialog>
-      </div>
-      ${codeBlock(`<button class="ds-btn" data-ds-modal-open="${L('publicar', 'publish', 'publicar')}">${L('Publicar…', 'Publish…', 'Publicar…')}</button>
-
-<dialog class="ds-modal ds-modal--sm" id="${L('publicar', 'publish', 'publicar')}" aria-labelledby="${L('publicar', 'publish', 'publicar')}-title">
-  <header class="ds-modal__header">…</header>
-  <div class="ds-modal__body">…</div>
-  <footer class="ds-modal__footer">
-    <button class="ds-btn ds-btn--secondary" data-ds-modal-close="cancel">${cancel()}</button>
-    <button class="ds-btn ds-btn--primary" data-ds-modal-close="ok">${L('Publicar', 'Publish', 'Publicar')}</button>
-  </footer>
-</dialog>
-
-<script type="module">
-  import { bindModalTriggers } from './ds/js/modal.js';
-  bindModalTriggers(document); // ${L('devolve a função de limpeza', 'returns the cleanup function', 'devuelve la función de limpieza')}
-</script>`)}
     </section>
 
     <section class="doc-section" id="acessibilidade" aria-labelledby="a11y-title">
@@ -449,7 +418,6 @@ export function mount(root) {
     }
   };
   root.addEventListener('click', onClick);
-  const unbindTriggers = bindModalTriggers(root);
 
   const unmountCopy = mountCodeCopy(root);
   const unmountNav = mountDocNav(root);
@@ -459,7 +427,6 @@ export function mount(root) {
     root.removeEventListener('click', onClick);
     // fecha qualquer modal ainda aberto por esta página
     document.querySelectorAll('dialog.ds-modal[open]').forEach((d) => d.close());
-    unbindTriggers();
     unmountPlayground();
     unmountCopy();
     unmountNav();

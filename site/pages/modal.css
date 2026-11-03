@@ -348,21 +348,3 @@
     padding: var(--ds-space-300) var(--ds-space-150);
   }
 }
-
-/* Abrir pelo atributo (bindModalTriggers) */
-.md-declarative {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--ds-space-200) var(--ds-space-400);
-  margin-bottom: var(--ds-space-200);
-}
-
-.md-declarative__text {
-  flex: 1 1 420px;
-  max-width: 68ch;
-  color: var(--ds-color-fg-muted);
-  font: var(--ds-text-body-md);
-  letter-spacing: var(--ds-text-body-md-tracking);
-}
