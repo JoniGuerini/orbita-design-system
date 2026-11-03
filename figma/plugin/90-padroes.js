@@ -358,7 +358,7 @@
       box(c.name, { dir: 'H', gap: 'space/100', pad: 'space/100', w: 940, h: 520, fill: 'color/bg/app', radius: 'radius/3xl' }, c);
 
       // sidebar flutuante
-      var side = box('Sidebar', { dir: 'V', gap: 'space/100', pad: [0, 12, 12, 12], w: 232, fill: 'color/bg/sidebar', stroke: 'color/border/subtle', radius: 'radius/2xl', clip: true });
+      var side = box('Sidebar', { dir: 'V', gap: 'space/100', pad: [0, 12, 12, 12], w: 232, fill: 'color/bg/sidebar', stroke: 'color/border/subtle', radius: 'radius/xl', clip: true });
       var head = box('Cabeçalho', { dir: 'H', align: 'between', cross: 'center', h: 64, pad: [0, 4] });
       // logotipo: a chama e o nome, como a .ds-brand do site (chama de 24 px para texto de 28 → 18 para 21)
       var brand = box('Marca', { dir: 'H', gap: 'space/150', cross: 'center' });
@@ -399,7 +399,7 @@
       add(c, side, { fillH: true });
 
       // painel principal
-      var main = box('Painel principal', { dir: 'V', gap: 0, fill: 'color/bg/canvas', stroke: 'color/border/subtle', radius: 'radius/2xl', clip: true });
+      var main = box('Painel principal', { dir: 'V', gap: 0, fill: 'color/bg/canvas', stroke: 'color/border/subtle', radius: 'radius/xl', clip: true });
       var top = box('Topbar', { dir: 'H', gap: 'space/150', pad: [0, 16, 0, 24], cross: 'center', h: 56 });
       var crumbs = box('Trilha', { dir: 'H', gap: 6, cross: 'center' });
       add(crumbs, await text('Início', { style: 'label-sm', color: 'color/fg/muted' }));
