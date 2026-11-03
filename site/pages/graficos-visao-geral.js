@@ -461,9 +461,9 @@ export default function renderVisaoGeral(page) {
       <h3 class="doc-subhead">${L('Escalas', 'Scales', 'Escalas')} <span class="doc-subhead__meta">${L('um tom por trabalho · cada tema com os seus passos', 'one hue per job · each theme with its own steps', 'un tono por trabajo · cada tema con sus pasos')}</span></h3>
       <div class="gv-themes">
         ${[
+          ['refugio', 'mountain', 'Refúgio'],
           ['dark', 'moon', L('Escuro', 'Dark', 'Oscuro')],
           ['light', 'sun', L('Claro', 'Light', 'Claro')],
-          ['refugio', 'mountain', 'Refúgio'],
         ]
           .map(
             ([mode, glyph, label]) => `<div class="gv-theme" data-theme="${mode}">

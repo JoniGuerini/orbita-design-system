@@ -64,9 +64,9 @@ export function playgroundMarkup(id, { wide = false } = {}) {
     <div class="cd-playground__stage" data-stage data-theme="${th}">
       <div class="cd-playground__preview" data-preview></div>
       <div class="ds-segmented cd-playground__theme" role="radiogroup" aria-label="${t.stageTheme}">
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="${t.refugio}">${icon('mountain', { size: 16 })}</button>
         <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="${th === 'dark'}" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
         <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="${th === 'light'}" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="${t.refugio}">${icon('mountain', { size: 16 })}</button>
       </div>
     </div>
     <div class="cd-playground__controls" data-controls></div>

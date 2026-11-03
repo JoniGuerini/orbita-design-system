@@ -21,7 +21,7 @@ import { t, applyStrings } from './i18n.js';
  */
 const params = new URLSearchParams(location.search);
 const EMBED = params.has('embed');
-const THEMES = ['dark', 'light', 'refugio', 'system'];
+const THEMES = ['refugio', 'dark', 'light', 'system'];
 
 if (EMBED) {
   document.documentElement.dataset.embed = '';
@@ -147,9 +147,9 @@ const palette = createCommandPalette({
       hint: page.load ? undefined : t('soon'),
       perform: () => go(page.path),
     })),
+    { id: 'theme-refugio', label: t('useRefugio'), group: t('actions'), icon: 'mountain', keywords: ['refúgio', 'refugio', 'lume', 'ardósia', 'slate'], perform: () => applyTheme('refugio') },
     { id: 'theme-dark', label: t('useDark'), group: t('actions'), icon: 'moon', keywords: ['dark', 'escuro', 'oscuro'], perform: () => applyTheme('dark') },
     { id: 'theme-light', label: t('useLight'), group: t('actions'), icon: 'sun', keywords: ['light', 'claro'], perform: () => applyTheme('light') },
-    { id: 'theme-refugio', label: t('useRefugio'), group: t('actions'), icon: 'mountain', keywords: ['refúgio', 'refugio', 'lume', 'ardósia', 'slate'], perform: () => applyTheme('refugio') },
     { id: 'theme-system', label: t('useSystem'), group: t('actions'), icon: 'monitor', keywords: ['system', 'sistema', 'automático'], perform: () => applyTheme('system') },
     ...LOCALES.map((l) => ({ id: `locale-${l}`, label: `${t('language')}: ${LOCALE_NAMES[l]}`, group: t('actions'), icon: 'globe', keywords: ['idioma', 'language', 'lenguaje'], perform: () => applyLocale(l) })),
     { id: 'layout-sidebar', label: t('layoutSidebarTip'), group: t('actions'), icon: 'panel-left', keywords: ['layout', 'sidebar', 'lateral'], perform: () => shell.setLayout('sidebar') },

@@ -141,7 +141,7 @@ const COPY = T(
 const group = (id) => navigation.find((g) => g.id === id);
 const items = (id) => group(id).items;
 
-const THEME_ICONS = { dark: 'moon', light: 'sun', refugio: 'mountain', system: 'monitor' };
+const THEME_ICONS = { refugio: 'mountain', dark: 'moon', light: 'sun', system: 'monitor' };
 const themes = (c) => Object.entries(THEME_ICONS).map(([value, ic]) => ({ value, label: c.themes[value], icon: ic }));
 
 const colorCount = palettes.reduce((n, p) => n + p.steps.length, 0);

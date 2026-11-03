@@ -41,13 +41,13 @@ const COPY = T(
     head: { token: 'Token', dark: 'Escuro', light: 'Claro', refugio: 'Refúgio' },
     themes: {
       title: 'Temas',
-      desc: 'Escuro é o padrão da marca; claro, Refúgio e “seguir o sistema” vêm prontos. O Refúgio é o tema claro de ardósia e terracota do app Lume. Como os temas vivem em atributos, dá até para misturar: um bloco claro dentro de uma tela escura.',
+      desc: 'O Refúgio é o padrão: o tema claro de ardósia e terracota do app Lume. Escuro, claro e “seguir o sistema” vêm prontos. Como os temas vivem em atributos, dá até para misturar: um bloco claro dentro de uma tela escura.',
       dark: 'Escuro',
       light: 'Claro',
       refugio: 'Refúgio',
       default: 'padrão',
       card: ['Exemplo', 'Lançamento da versão 0.1', 'Os mesmos componentes e os mesmos tokens — só o tema muda.', 'Tom direto', 'Pronto', 'Revisar', 'Publicar', 'Cancelar'],
-      code: ['escuro (padrão)', 'claro', 'segue o sistema operacional', 'tema aninhado: só este bloco fica claro', 'claro, ardósia e terracota (app Lume)'],
+      code: ['escuro', 'claro', 'segue o sistema operacional', 'tema aninhado: só este bloco fica claro', 'padrão: claro, ardósia e terracota (app Lume)'],
     },
     contrast: {
       title: 'Contraste',
@@ -94,13 +94,13 @@ const COPY = T(
     head: { token: 'Token', dark: 'Dark', light: 'Light', refugio: 'Refúgio' },
     themes: {
       title: 'Themes',
-      desc: 'Dark is the brand default; light, Refúgio, and “match system” come ready. Refúgio is the Lume app’s light slate-and-terracotta theme. Since themes live in attributes, you can even mix them: a light block inside a dark screen.',
+      desc: 'Refúgio is the default: the Lume app’s light slate-and-terracotta theme. Dark, light, and “match system” come ready. Since themes live in attributes, you can even mix them: a light block inside a dark screen.',
       dark: 'Dark',
       light: 'Light',
       refugio: 'Refúgio',
       default: 'default',
       card: ['Example', 'Version 0.1 launch', 'The same components and the same tokens — only the theme changes.', 'Direct tone', 'Done', 'Review', 'Publish', 'Cancel'],
-      code: ['dark (default)', 'light', 'follows the operating system', 'nested theme: only this block turns light', 'light, slate and terracotta (Lume app)'],
+      code: ['dark', 'light', 'follows the operating system', 'nested theme: only this block turns light', 'default: light, slate and terracotta (Lume app)'],
     },
     contrast: {
       title: 'Contrast',
@@ -147,13 +147,13 @@ const COPY = T(
     head: { token: 'Token', dark: 'Oscuro', light: 'Claro', refugio: 'Refúgio' },
     themes: {
       title: 'Temas',
-      desc: 'Oscuro es el predeterminado de la marca; claro, Refúgio y “seguir el sistema” vienen listos. Refúgio es el tema claro de pizarra y terracota de la app Lume. Como los temas viven en atributos, hasta se pueden mezclar: un bloque claro dentro de una pantalla oscura.',
+      desc: 'Refúgio es el predeterminado: el tema claro de pizarra y terracota de la app Lume. Oscuro, claro y “seguir el sistema” vienen listos. Como los temas viven en atributos, hasta se pueden mezclar: un bloque claro dentro de una pantalla oscura.',
       dark: 'Oscuro',
       light: 'Claro',
       refugio: 'Refúgio',
       default: 'predeterminado',
       card: ['Ejemplo', 'Lanzamiento de la versión 0.1', 'Los mismos componentes y los mismos tokens — solo cambia el tema.', 'Tono directo', 'Listo', 'Revisar', 'Publicar', 'Cancelar'],
-      code: ['oscuro (predeterminado)', 'claro', 'sigue el sistema operativo', 'tema anidado: solo este bloque queda claro', 'claro, pizarra y terracota (app Lume)'],
+      code: ['oscuro', 'claro', 'sigue el sistema operativo', 'tema anidado: solo este bloque queda claro', 'predeterminado: claro, pizarra y terracota (app Lume)'],
     },
     contrast: {
       title: 'Contraste',
@@ -385,9 +385,9 @@ export default function renderCores(page) {
       </header>
       <div class="theme-previews">
         ${[
-          ['dark', th.dark, th.default],
+          ['refugio', th.refugio, th.default],
+          ['dark', th.dark, ''],
           ['light', th.light, ''],
-          ['refugio', th.refugio, ''],
         ]
           .map(
             ([mode, label, note]) => `<figure class="theme-preview">
@@ -414,9 +414,9 @@ export default function renderCores(page) {
           )
           .join('')}
       </div>
-      <pre class="ds-code theme-code"><code>&lt;html data-theme="dark"&gt;     <span class="ds-code__comment">&lt;!-- ${th.code[0]} --&gt;</span>
+      <pre class="ds-code theme-code"><code>&lt;html data-theme="refugio"&gt;  <span class="ds-code__comment">&lt;!-- ${th.code[4]} --&gt;</span>
+&lt;html data-theme="dark"&gt;     <span class="ds-code__comment">&lt;!-- ${th.code[0]} --&gt;</span>
 &lt;html data-theme="light"&gt;    <span class="ds-code__comment">&lt;!-- ${th.code[1]} --&gt;</span>
-&lt;html data-theme="refugio"&gt;  <span class="ds-code__comment">&lt;!-- ${th.code[4]} --&gt;</span>
 &lt;html data-theme="system"&gt;   <span class="ds-code__comment">&lt;!-- ${th.code[2]} --&gt;</span>
 
 &lt;section data-theme="light"&gt; <span class="ds-code__comment">&lt;!-- ${th.code[3]} --&gt;</span></code></pre>

@@ -1,11 +1,11 @@
 /**
- * Tema: 'dark' (padrão da marca), 'light', 'refugio' (claro, ardósia e terracota, do app Lume) ou 'system'.
+ * Tema: 'refugio' (padrão: claro, ardósia e terracota, do app Lume), 'dark', 'light' ou 'system'.
  * Aplica em <html data-theme="…"> e persiste em localStorage.
  */
 
 const KEY = 'ds-theme';
-const PREFERENCES = ['dark', 'light', 'refugio', 'system'];
-const DEFAULT = 'dark';
+const PREFERENCES = ['refugio', 'dark', 'light', 'system'];
+const DEFAULT = 'refugio';
 const root = document.documentElement;
 
 export function getThemePreference() {

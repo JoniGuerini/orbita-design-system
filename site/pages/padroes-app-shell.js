@@ -193,7 +193,7 @@ export default function renderAppShell(page) {
           ${segmented('layout', L('Layout do exemplo', 'Example layout', 'Diseño del ejemplo'), [{ value: 'sidebar', label: L('Sidebar', 'Sidebar', 'Sidebar'), icon: 'panel-left' }, { value: 'navbar', label: L('Navbar', 'Navbar', 'Navbar'), icon: 'panel-top' }], 'sidebar')}
           <button type="button" class="ds-btn ds-btn--secondary ds-btn--sm" data-demo-toggle disabled>${icon('panel-left', { size: 16 })}<span data-demo-toggle-label>${L('Recolher menu', 'Collapse menu', 'Contraer menú')}</span></button>
           <span class="pa-demo__spacer"></span>
-          ${segmented('theme', L('Tema do exemplo', 'Example theme', 'Tema del ejemplo'), [{ value: 'dark', label: L('Escuro', 'Dark', 'Oscuro'), icon: 'moon' }, { value: 'light', label: L('Claro', 'Light', 'Claro'), icon: 'sun' }, { value: 'refugio', label: 'Refúgio', icon: 'mountain' }], theme)}
+          ${segmented('theme', L('Tema do exemplo', 'Example theme', 'Tema del ejemplo'), [{ value: 'refugio', label: 'Refúgio', icon: 'mountain' }, { value: 'dark', label: L('Escuro', 'Dark', 'Oscuro'), icon: 'moon' }, { value: 'light', label: L('Claro', 'Light', 'Claro'), icon: 'sun' }], theme)}
           <button type="button" class="ds-icon-btn ds-icon-btn--muted" data-demo-reload aria-label="${L('Recarregar o exemplo', 'Reload the example', 'Recargar el ejemplo')}" data-ds-tooltip="${L('Recarregar o exemplo', 'Reload the example', 'Recargar el ejemplo')}">${icon('refresh', { size: 18 })}</button>
         </div>
         ${frame('live', L('Exemplo ao vivo do Lume', 'Live Lume example', 'Ejemplo en vivo de Lume'))}
