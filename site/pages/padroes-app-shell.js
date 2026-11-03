@@ -83,11 +83,13 @@ const frame = (kind, label) =>
 const skeleton = () => `<a class="ds-skip-link" href="#${L('conteudo', 'content', 'contenido')}">${L('Pular para o conteúdo', 'Skip to content', 'Saltar al contenido')}</a>
 
 <div class="ds-shell" id="shell">
+  <button class="ds-shell__edge" data-shell-toggle aria-controls="sidebar"><ds-icon name="chevron-left" size="16"></ds-icon></button>
   <aside class="ds-sidebar" id="sidebar" aria-label="${L('Barra lateral', 'Sidebar', 'Barra lateral')}">
     <div class="ds-sidebar__header">
       <a class="ds-brand" href="#/"><img class="ds-brand__mark" src="assets/favicon.svg" alt="">Lume</a>
       <button class="ds-icon-btn ds-icon-btn--outline ds-icon-btn--lg ds-sidebar__toggle"
               data-shell-toggle aria-controls="sidebar">
+        <img class="ds-sidebar__toggle-mark" src="assets/favicon.svg" alt="">
         <ds-icon name="panel-left" class="ds-sidebar__toggle-collapse"></ds-icon>
         <ds-icon name="x" class="ds-sidebar__toggle-close"></ds-icon>
       </button>
@@ -234,6 +236,7 @@ export default function renderAppShell(page) {
             <ul class="pa-state__list" role="list">
               <li>${L('Rótulos, títulos de grupo e o atalho da busca à vista.', 'Labels, group titles, and the search shortcut in view.', 'Etiquetas, títulos de grupo y el atajo de la búsqueda a la vista.')}</li>
               <li>${L('Sem tooltips — o nome já está escrito.', 'No tooltips — the name is already written.', 'Sin tooltips — el nombre ya está escrito.')}</li>
+              <li>${L('Para recolher, a aba na borda, na altura da marca: aparece com o mouse sobre a sidebar ou com o foco.', 'To collapse, the tab on the edge, level with the brand: it shows with the pointer over the sidebar or with focus.', 'Para contraer, la pestaña en el borde, a la altura de la marca: aparece con el puntero sobre la sidebar o con el foco.')}</li>
               <li>${L('O padrão para quem chega pela primeira vez.', 'The default for first-time visitors.', 'El predeterminado para quien llega por primera vez.')}</li>
             </ul>
           </div>
@@ -241,7 +244,7 @@ export default function renderAppShell(page) {
         <article class="pa-state">
           <div class="pa-state__art" aria-hidden="true">
             <div class="pa-mini" data-mode="collapsed">
-              <span class="pa-mini__brand"></span><span class="pa-mini__search"><i></i></span>
+              <span class="pa-mini__brand"><img src="assets/favicon.svg" alt=""></span><span class="pa-mini__search"><i></i></span>
               ${[1, 2, 3].map(() => '<span class="pa-mini__item"><i></i></span>').join('')}
               <span class="pa-mini__group"></span>
               ${[1, 2].map(() => '<span class="pa-mini__item"><i></i></span>').join('')}
@@ -253,6 +256,7 @@ export default function renderAppShell(page) {
               <li>${L('Só ícones; os textos somem por opacidade, sem mudar de lugar.', 'Icons only; the text fades out by opacity, without moving.', 'Solo íconos; los textos desaparecen por opacidad, sin cambiar de lugar.')}</li>
               <li>${L('Cada item ganha tooltip com o nome — e o atalho, quando tem.', 'Each item gets a tooltip with its name — and its shortcut, when it has one.', 'Cada elemento recibe un tooltip con el nombre — y el atajo, cuando lo tiene.')}</li>
               <li>${L('Títulos de grupo viram um fio divisor; a busca vira a lupa.', 'Group titles become a thin divider; search becomes the magnifier.', 'Los títulos de grupo se vuelven una línea divisoria; la búsqueda se vuelve la lupa.')}</li>
+              <li>${L('A chama fica no topo, maior; com o mouse ou o foco, vira o botão de expandir.', 'The flame stays at the top, larger; with the pointer or focus, it becomes the expand button.', 'La llama queda arriba, más grande; con el puntero o el foco, se vuelve el botón de expandir.')}</li>
             </ul>
           </div>
         </article>

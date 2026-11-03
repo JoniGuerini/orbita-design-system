@@ -306,6 +306,16 @@
   height: 11px;
 }
 
+/* recolhida, só a chama, um pouco maior — como na sidebar */
+.pa-mini[data-mode="collapsed"] .pa-mini__brand {
+  margin-left: 0;
+}
+
+.pa-mini[data-mode="collapsed"] .pa-mini__brand img {
+  width: 13px;
+  height: 13px;
+}
+
 .pa-mini__search,
 .pa-mini__item {
   display: flex;

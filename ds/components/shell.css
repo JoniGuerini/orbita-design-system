@@ -2,6 +2,7 @@
  * App shell — painéis flutuantes: sidebar recolhível + painel principal com topbar.
  *
  * <div class="ds-shell" data-sidebar="expanded|collapsed" data-mobile-open="true|false">
+ *   <button class="ds-shell__edge" data-shell-toggle>…</button>   (aba de recolher, na borda da sidebar)
  *   <aside class="ds-sidebar">…</aside>
  *   <div class="ds-shell__scrim"></div>
  *   <div class="ds-main"><div class="ds-main__scroll"><header class="ds-topbar">…</header><main class="ds-main__content">…</main></div></div>
@@ -56,15 +57,16 @@
   padding-inline: 15px;
 }
 
-/* Logotipo: a chama do Lume e o nome */
+/* Logotipo: a chama do Lume e o nome. A chama fica na coluna dos ícones (centro em x = 38 px)
+   e o nome alinha com os rótulos do menu — ao recolher, a chama não sai do lugar. */
 .ds-brand {
   position: absolute;
   top: 50%;
-  left: 20px;
+  left: 25px;
   translate: 0 -50%;
   display: inline-flex;
   align-items: center;
-  gap: var(--ds-space-100);
+  gap: var(--ds-space-150);
   color: var(--ds-color-fg-default);
   font: var(--ds-font-weight-bold) 1.75rem/1 var(--ds-font-family-display);
   letter-spacing: -0.045em;
@@ -89,7 +91,19 @@
   margin-inline-start: auto;
 }
 
-.ds-sidebar__toggle-close {
+.ds-sidebar__toggle-close,
+.ds-sidebar__toggle-mark {
+  display: none;
+}
+
+.ds-sidebar__toggle-mark {
+  width: 28px;
+  height: 28px;
+}
+
+/* Aba de recolher (desktop): presa na borda direita da sidebar, na altura do logotipo.
+   Aparece com o mouse sobre a sidebar ou com o foco; recolhida, quem expande é a chama. */
+.ds-shell__edge {
   display: none;
 }
 
@@ -443,6 +457,73 @@
 /* ───────── Desktop: modo recolhido ───────── */
 
 @media (min-width: 1024px) {
+  .ds-shell__edge {
+    position: fixed;
+    z-index: 2;
+    top: calc(var(--_gap) + 39px);
+    left: calc(var(--_gap) + var(--_sidebar-w));
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--ds-color-border-control);
+    border-radius: var(--ds-radius-full);
+    background: var(--ds-color-bg-raised);
+    color: var(--ds-color-fg-muted);
+    opacity: 0;
+    transition:
+      opacity var(--ds-duration-fast) var(--ds-easing-standard),
+      color var(--ds-duration-fast) var(--ds-easing-standard),
+      border-color var(--ds-duration-fast) var(--ds-easing-standard);
+  }
+
+  .ds-shell:has(.ds-sidebar:hover) .ds-shell__edge,
+  .ds-shell__edge:hover,
+  .ds-shell__edge:focus-visible {
+    opacity: 1;
+  }
+
+  .ds-shell__edge:hover {
+    border-color: var(--ds-color-border-strong);
+    color: var(--ds-color-fg-default);
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-shell__edge {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  /* aberta, o botão do cabeçalho sai de cena (quem recolhe é a aba) */
+  .ds-shell:not([data-sidebar="collapsed"]) .ds-sidebar__toggle {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  /* recolhida, ele fica no lugar da chama e mostra a chama até receber o mouse ou o foco */
+  .ds-shell[data-sidebar="collapsed"] .ds-sidebar__toggle {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    transition:
+      opacity var(--ds-duration-base) var(--ds-easing-standard) var(--ds-duration-fast),
+      background-color var(--ds-duration-fast) var(--ds-easing-standard),
+      border-color var(--ds-duration-fast) var(--ds-easing-standard);
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-sidebar__toggle:not(:hover, :focus-visible) {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-sidebar__toggle:not(:hover, :focus-visible) .ds-sidebar__toggle-collapse {
+    display: none;
+  }
+
+  .ds-shell[data-sidebar="collapsed"] .ds-sidebar__toggle:not(:hover, :focus-visible) .ds-sidebar__toggle-mark {
+    display: block;
+  }
+
   .ds-shell[data-sidebar="collapsed"] {
     --_sidebar-w: var(--ds-layout-sidebar-collapsed);
   }

@@ -53,6 +53,26 @@ const RELEASES = [
         ],
       },
       {
+        name: T('App shell', 'App shell', 'App shell'),
+        items: [
+          ['melhoria', T(
+            'Sidebar recolhida: a chama do Lume fica no topo, maior, e vira o botão de expandir ao receber o mouse ou o foco',
+            'Collapsed sidebar: the Lume flame stays at the top, larger, and becomes the expand button on hover or focus',
+            'Sidebar contraída: la llama de Lume queda arriba, más grande, y se vuelve el botón de expandir con el puntero o el foco',
+          ), '/padroes/app-shell'],
+          ['melhoria', T(
+            'O botão de recolher virou uma aba na borda da sidebar, na altura da marca, que aparece com o mouse ou o foco',
+            'The collapse button became a tab on the sidebar’s edge, level with the brand, shown on hover or focus',
+            'El botón de contraer pasó a ser una pestaña en el borde de la sidebar, a la altura de la marca, que aparece con el puntero o el foco',
+          ), '/padroes/app-shell'],
+          ['melhoria', T(
+            'A chama fica na coluna dos ícones e o nome alinha com os rótulos do menu',
+            'The flame sits in the icon column and the name lines up with the menu labels',
+            'La llama queda en la columna de los íconos y el nombre se alinea con las etiquetas del menú',
+          ), '/padroes/app-shell'],
+        ],
+      },
+      {
         name: T('Início', 'Home', 'Inicio'),
         items: [
           ['melhoria', T(

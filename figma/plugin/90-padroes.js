@@ -361,13 +361,11 @@
       var side = box('Sidebar', { dir: 'V', gap: 'space/100', pad: [0, 12, 12, 12], w: 232, fill: 'color/bg/sidebar', stroke: 'color/border/subtle', radius: 'radius/2xl', clip: true });
       var head = box('Cabeçalho', { dir: 'H', align: 'between', cross: 'center', h: 64, pad: [0, 4] });
       // logotipo: a chama e o nome, como a .ds-brand do site (chama de 24 px para texto de 28 → 18 para 21)
-      var brand = box('Marca', { dir: 'H', gap: 'space/100', cross: 'center' });
+      var brand = box('Marca', { dir: 'H', gap: 'space/150', cross: 'center' });
       add(brand, flame(18));
       add(brand, await text('Lume', { style: 'heading-md', weight: 'Bold', color: 'color/fg/default' }));
       add(head, brand);
-      var toggle = box('Recolher', { dir: 'H', align: 'center', cross: 'center', w: 36, h: 36, radius: 'radius/md', stroke: 'color/border/control' });
-      add(toggle, icon('panel-left', 18, 'color/fg/default'));
-      add(head, toggle);
+      // sem botão no cabeçalho: aberta, quem recolhe é a aba na borda, que só aparece com o mouse
       add(side, head, { fillW: true });
       var search = box('Busca', { dir: 'H', gap: 10, pad: [0, 12], cross: 'center', h: 40, radius: 'radius/md', stroke: 'color/border/control' });
       add(search, icon('search', 16, 'color/fg/subtle'));
