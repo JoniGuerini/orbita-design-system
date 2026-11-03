@@ -1,5 +1,6 @@
 import { icon } from '../../ds/icons/icons.js';
 import { tokens, contrast } from '../../ds/tokens.js';
+import { siteTheme, followSiteTheme } from '../component-doc.js';
 import { mountSelects, enhanceSelect } from '../../ds/js/select.js';
 import { barChart, meter } from '../../ds/js/charts.js';
 import { typingHtml } from '../../ds/js/composer.js';
@@ -298,10 +299,10 @@ function section(id, title, desc, body) {
   </section>`;
 }
 
-const themeSwitch = (label) => `<div class="ds-segmented ra-stage__theme" role="radiogroup" aria-label="${L('Tema do exemplo', 'Example theme', 'Tema del ejemplo')}: ${label}">
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="dark" aria-checked="true" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="light" aria-checked="false" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
-    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="refugio" aria-checked="false" aria-label="Refúgio">${icon('mountain', { size: 16 })}</button>
+const themeSwitch = (label, th = siteTheme()) => `<div class="ds-segmented ra-stage__theme" role="radiogroup" aria-label="${L('Tema do exemplo', 'Example theme', 'Tema del ejemplo')}: ${label}">
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="dark" aria-checked="${th === 'dark'}" aria-label="${L('Escuro', 'Dark', 'Oscuro')}">${icon('moon', { size: 16 })}</button>
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="light" aria-checked="${th === 'light'}" aria-label="${L('Claro', 'Light', 'Claro')}">${icon('sun', { size: 16 })}</button>
+    <button type="button" class="ds-segmented__item" role="radio" data-ra-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="Refúgio">${icon('mountain', { size: 16 })}</button>
   </div>`;
 
 const PRINCIPLES = () => [
@@ -410,7 +411,7 @@ export default function renderAcessibilidade(page) {
       L('Foco e teclado', 'Focus and keyboard', 'Foco y teclado'),
       L('Quem navega pelo teclado precisa saber onde está e chegar a tudo. Aperte Tab dentro do exemplo: todos os controles mostram o mesmo anel.', 'Keyboard users need to know where they are and reach everything. Press Tab inside the example: every control shows the same ring.', 'Quien navega con el teclado necesita saber dónde está y llegar a todo. Pulsa Tab dentro del ejemplo: todos los controles muestran el mismo anillo.'),
       `<div class="ra-focus">
-        <div class="ra-stage" data-ra-stage data-theme="dark">
+        <div class="ra-stage" data-ra-stage data-theme="${siteTheme()}">
           ${themeSwitch(L('foco', 'focus', 'foco'))}
           <div class="ra-focus__row">
             <button type="button" class="ds-btn ds-btn--primary" data-state="focus">${icon('plus', { size: 18 })}${L('Criar', 'Create', 'Crear')}</button>
@@ -670,6 +671,7 @@ export function mount(root) {
   };
   swap.addEventListener('click', onSwap);
   cleanups.push(() => swap.removeEventListener('click', onSwap));
+  cleanups.push(followSiteTheme(root, '[data-ra-stage]', 'ra-theme'));
 
   /* Palcos com tema próprio, chip e links internos */
   const onClick = (event) => {

@@ -10,6 +10,7 @@
 import { icon } from '../ds/icons/icons.js';
 import { tokens } from '../ds/tokens.js';
 import { attachMenu } from '../ds/js/menu.js';
+import { resolvedTheme } from '../ds/js/theme.js';
 import { copyText } from '../ds/js/toast.js';
 import { tr } from '../ds/js/i18n.js';
 import { T } from './i18n.js';
@@ -33,17 +34,39 @@ export function codeBlock(code, { label = tr(TEXT).copy } = {}) {
   </div>`;
 }
 
+/* ───────── Palcos com tema próprio ───────── */
+
+/** Tema em que os palcos de exemplo começam: o do site (Sistema vira Escuro ou Claro). */
+export const siteTheme = () => resolvedTheme();
+
+/**
+ * Os palcos (stageSelector) acompanham o tema do site quando ele muda; os botões [data-<attr>] do palco
+ * marcam o tema atual. Dá para trocar só o palco depois, pelo próprio seletor. Devolve a limpeza.
+ */
+export function followSiteTheme(root, stageSelector, attr) {
+  const onTheme = (event) => {
+    const theme = event.detail.resolved;
+    root.querySelectorAll(stageSelector).forEach((stage) => {
+      stage.dataset.theme = theme;
+      stage.querySelectorAll(`[data-${attr}]`).forEach((b) => b.setAttribute('aria-checked', String(b.getAttribute(`data-${attr}`) === theme)));
+    });
+  };
+  document.documentElement.addEventListener('ds:themechange', onTheme);
+  return () => document.documentElement.removeEventListener('ds:themechange', onTheme);
+}
+
 /* ───────── Playground ───────── */
 
 export function playgroundMarkup(id, { wide = false } = {}) {
   const t = tr(TEXT);
+  const th = siteTheme();
   return `<div class="cd-playground${wide ? ' cd-playground--wide' : ''}" data-playground="${id}">
-    <div class="cd-playground__stage" data-stage data-theme="dark">
+    <div class="cd-playground__stage" data-stage data-theme="${th}">
       <div class="cd-playground__preview" data-preview></div>
       <div class="ds-segmented cd-playground__theme" role="radiogroup" aria-label="${t.stageTheme}">
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="true" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="false" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
-        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="refugio" aria-checked="false" aria-label="${t.refugio}">${icon('mountain', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="dark" aria-checked="${th === 'dark'}" aria-label="${t.dark}">${icon('moon', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="light" aria-checked="${th === 'light'}" aria-label="${t.light}">${icon('sun', { size: 16 })}</button>
+        <button type="button" class="ds-segmented__item" role="radio" data-stage-theme="refugio" aria-checked="${th === 'refugio'}" aria-label="${t.refugio}">${icon('mountain', { size: 16 })}</button>
       </div>
     </div>
     <div class="cd-playground__controls" data-controls></div>
@@ -118,6 +141,7 @@ export function mountPlayground(root, { id, controls, text, render, code, mount 
     stage.querySelectorAll('[data-stage-theme]').forEach((b) => b.setAttribute('aria-checked', String(b === btn)));
   };
   stage.addEventListener('click', onStageTheme);
+  const unfollow = followSiteTheme(el, '[data-stage]', 'stage-theme');
 
   update();
 
@@ -126,6 +150,7 @@ export function mountPlayground(root, { id, controls, text, render, code, mount 
     menus.forEach((m) => m.destroy());
     input?.removeEventListener('input', onInput);
     stage.removeEventListener('click', onStageTheme);
+    unfollow();
   };
 }
 
