@@ -8,10 +8,37 @@ import { tr } from '../ds/js/i18n.js';
 
 const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
-export const CURRENT_VERSION = '0.11.0';
+export const CURRENT_VERSION = '0.11.1';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 const RELEASES = [
+  {
+    version: '0.11.1',
+    date: '2026-11-04',
+    title: T('Aviso de versão nova', 'New version notice', 'Aviso de versión nueva'),
+    summary: T(
+      'Quando sai uma versão nova com o site aberto, um cartão na sidebar avisa — e um clique atualiza a página.',
+      'When a new version ships while the site is open, a card in the sidebar lets you know — and one click reloads the page.',
+      'Cuando sale una versión nueva con el sitio abierto, una tarjeta en la sidebar avisa — y un clic recarga la página.',
+    ),
+    groups: [
+      {
+        name: T('Site', 'Site', 'Sitio'),
+        items: [
+          ['novo', T(
+            'Cartão “Nova versão disponível” acima do de novidades; clicar recarrega. Com a navbar ou no celular, o aviso vem num toast com “Atualizar”',
+            '“New version available” card above the what’s-new one; clicking reloads. With the navbar or on phones, the notice comes as a toast with “Reload”',
+            'Tarjeta “Nueva versión disponible” sobre la de novedades; al hacer clic recarga. Con la navbar o en el móvil, el aviso llega en un toast con “Recargar”',
+          ), '/'],
+          ['novo', T(
+            'O build publica version.json com a impressão digital do deploy; a aba confere a cada 5 minutos e quando você volta para ela',
+            'The build publishes version.json with the deploy’s fingerprint; the tab checks every 5 minutes and when you come back to it',
+            'El build publica version.json con la huella del deploy; la pestaña verifica cada 5 minutos y cuando vuelves a ella',
+          ), '/novidades'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.11.0',
     date: '2026-11-04',

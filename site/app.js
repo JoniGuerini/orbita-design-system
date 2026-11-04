@@ -13,6 +13,8 @@ import { createCommandPalette } from '../ds/js/command-palette.js';
 import { navigation, pages, findPage } from './nav.js';
 import { CURRENT_VERSION, SEEN_KEY } from './changelog.js';
 import { t, applyStrings } from './i18n.js';
+import { watchForUpdates } from './update.js';
+import { toast } from '../ds/js/toast.js';
 
 /*
  * Modo demonstração (?embed): o app roda dentro de um iframe nas páginas de documentação
@@ -81,12 +83,15 @@ const newsSeen = () => {
 // nos exemplos embutidos do App shell ele fica sempre, porque a anatomia aponta para ele
 const shortVersion = CURRENT_VERSION.replace(/\.0$/, '');
 function renderAccount() {
-  document.querySelectorAll('.ds-account').forEach((card) => {
+  document.querySelectorAll('.ds-account:not([data-update])').forEach((card) => {
     card.dataset.dsTooltip = t('accountTooltip', shortVersion);
     const title = card.querySelector('.ds-account__title');
     if (title) title.textContent = `Lume ${shortVersion}`;
-    const footer = card.closest('.ds-sidebar__footer');
-    if (footer) footer.hidden = !EMBED && newsSeen();
+    card.hidden = !EMBED && newsSeen();
+  });
+  // o rodapé some quando não sobra cartão nenhum (novidades vistas e sem versão nova)
+  document.querySelectorAll('.ds-sidebar__footer').forEach((footer) => {
+    footer.hidden = ![...footer.querySelectorAll('.ds-account')].some((card) => !card.hidden);
   });
 }
 renderAccount();
@@ -278,6 +283,24 @@ async function route() {
 
 addEventListener('hashchange', route);
 route();
+
+/* ───────── Versão nova no ar ───────── */
+
+// quando um deploy novo entra no ar com a aba aberta, o cartão “Nova versão disponível” aparece na
+// sidebar; clicar recarrega. Sem a sidebar à vista (navbar ou celular), o aviso vem num toast.
+if (!EMBED) {
+  watchForUpdates({
+    onUpdate() {
+      document.querySelectorAll('[data-update]').forEach((card) => (card.hidden = false));
+      renderAccount();
+      const sidebarInView = matchMedia('(min-width: 1024px)').matches && document.getElementById('shell').dataset.layout !== 'navbar';
+      if (!sidebarInView) toast(t('updateToast'), { icon: 'refresh', duration: Infinity, action: { label: t('updateButton'), onClick: () => location.reload() } });
+    },
+  });
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('[data-update]')) location.reload();
+  });
+}
 
 // a página que embute o app (mesma origem) controla a demonstração por aqui
 if (EMBED) window.lumeEmbed = { shell, palette, go, setTheme: embedTheme, setLocale: applyLocale, setLayout: shell.setLayout, root: document.getElementById('shell') };

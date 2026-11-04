@@ -309,6 +309,9 @@
 /* Rodapé — cartão de conta/versão */
 .ds-sidebar__footer {
   flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
   padding: var(--ds-space-100) var(--_inset) var(--_inset);
 }
 
@@ -340,6 +343,16 @@
 
 .ds-account:hover {
   color: var(--ds-color-fg-default);
+}
+
+/* versão do cartão como botão (ex.: “Nova versão disponível”) */
+button.ds-account {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
 }
 
 .ds-account:hover .ds-account__chevron {

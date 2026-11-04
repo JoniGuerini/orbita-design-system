@@ -45,6 +45,11 @@ http
   .createServer(async (req, res) => {
     try {
       const { pathname } = new URL(req.url, 'http://localhost');
+      // aviso de versão nova (site/update.js): no servidor local a impressão é fixa, então ele nunca aparece
+      if (pathname === '/version.json') {
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end('{"build":"dev"}');
+        return;
+      }
       let file = path.join(ROOT, decodeURIComponent(pathname));
       if (file !== ROOT && !file.startsWith(ROOT + path.sep)) {
         res.writeHead(403).end();
