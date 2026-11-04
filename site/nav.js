@@ -59,6 +59,7 @@ const RAW = [
       { label: T('Modal', 'Modal', 'Modal'), icon: 'dialog', path: '/componentes/modal', load: () => import('./pages/modal.js'), description: T('Interrompe para uma decisão ou tarefa curta, com confirmação destrutiva.', 'Interrupts for a decision or short task, with destructive confirmation.', 'Interrumpe para una decisión o tarea corta, con confirmación destructiva.') },
       { label: T('Toast', 'Toast', 'Toast'), icon: 'message-square', path: '/componentes/toast', load: () => import('./pages/toast.js'), description: T('Confirma o que aconteceu sem interromper; tons, desfazer e seis posições.', 'Confirms what happened without interrupting; tones, undo, and six positions.', 'Confirma lo que pasó sin interrumpir; tonos, deshacer y seis posiciones.') },
       { label: T('Tabela', 'Table', 'Tabla'), icon: 'table', path: '/componentes/tabela', load: () => import('./pages/tabela.js'), description: T('Dados em linhas e colunas, com ordenação e seleção.', 'Data in rows and columns, with sorting and selection.', 'Datos en filas y columnas, con orden y selección.') },
+      { label: T('Calendário', 'Calendar', 'Calendario'), icon: 'calendar', path: '/componentes/calendario', load: () => import('./pages/calendario.js'), description: T('Mês, semana e dia, com eventos e teclado.', 'Month, week, and day, with events and keyboard.', 'Mes, semana y día, con eventos y teclado.') },
     ].map((item) => ({ ...item, topics: COMPONENT_TOPICS })),
   },
   {

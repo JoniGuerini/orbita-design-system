@@ -66,7 +66,7 @@ site/                ← o site de documentação (usa o DS)
   brand.js           troca da cor da marca ao vivo (demonstração)
   chart-data.js      dados de exemplo (fixos) das páginas de gráficos
   pages/             páginas (cada uma com seu .css): home, primeiros-passos, novidades,
-                     8 fundamentos, 16 componentes, 7 de gráficos, 5 padrões, 4 recursos,
+                     8 fundamentos, 17 componentes, 7 de gráficos, 6 padrões, 4 recursos,
                      placeholder, 404
 ```
 
@@ -95,6 +95,18 @@ const chart = barChart(document.querySelector('#vendas'), {
 
 chart.update({ series: [{ name: 'Loja', values: [130, 170, 160] }] });
 chart.destroy();
+```
+
+### Calendário
+
+```js
+import { createCalendar } from './ds/js/calendar.js';   // mês, semana e dia, com eventos e teclado
+
+createCalendar(document.querySelector('#agenda'), {
+  view: 'month',
+  events: [{ id: 'a', title: 'Revisão do roteiro', start, end, tone: 'brand' }],
+  onEventClick: (event) => abrir(event.id),
+});
 ```
 
 ### Padrões

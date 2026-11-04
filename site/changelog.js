@@ -8,10 +8,42 @@ import { tr } from '../ds/js/i18n.js';
 
 const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
-export const CURRENT_VERSION = '0.11.1';
+export const CURRENT_VERSION = '0.12.0';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 const RELEASES = [
+  {
+    version: '0.12.0',
+    date: '2026-11-04',
+    title: T('Calendário', 'Calendar', 'Calendario'),
+    summary: T(
+      'Um componente novo: o calendário, com visões de mês, semana e dia, eventos e teclado.',
+      'A new component: the calendar, with month, week, and day views, events, and keyboard support.',
+      'Un componente nuevo: el calendario, con vistas de mes, semana y día, eventos y teclado.',
+    ),
+    groups: [
+      {
+        name: T('Componentes', 'Components', 'Componentes'),
+        items: [
+          ['novo', T(
+            'Calendário (createCalendar): mês, semana e dia, com “Hoje”, ‹ › e o seletor de visão',
+            'Calendar (createCalendar): month, week, and day, with “Today”, ‹ ›, and the view switch',
+            'Calendario (createCalendar): mes, semana y día, con “Hoy”, ‹ › y el selector de vista',
+          ), '/componentes/calendario'],
+          ['novo', T(
+            'Eventos com horário, de dia todo e sobrepostos, em seis tons; linha de agora na grade de horas',
+            'Timed, all-day, and overlapping events in six tones; a now line in the time grid',
+            'Eventos con horario, de todo el día y superpuestos, en seis tonos; línea de ahora en la cuadrícula de horas',
+          ), '/componentes/calendario'],
+          ['novo', T(
+            'Datas, nomes e o primeiro dia da semana no idioma atual; o mês é uma grade navegável pelo teclado',
+            'Dates, names, and the first day of the week in the current locale; the month is a keyboard-navigable grid',
+            'Fechas, nombres y el primer día de la semana en el idioma actual; el mes es una cuadrícula navegable con el teclado',
+          ), '/componentes/calendario'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.11.1',
     date: '2026-11-04',

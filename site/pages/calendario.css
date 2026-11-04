@@ -1,0 +1,127 @@
+/* Página: Componentes · Calendário (prefixo cl-) */
+
+.cl-cal {
+  width: 100%;
+}
+
+.cl-stat-text {
+  font: var(--ds-text-heading-md);
+  letter-spacing: var(--ds-text-heading-md-tracking);
+  text-transform: capitalize;
+}
+
+/* ───────── Exemplos de eventos (as classes do componente, fora da grade) ───────── */
+
+.cl-preview {
+  min-height: 132px;
+  /* o fundo do próprio calendário: os tons foram pensados sobre ele */
+  background: var(--ds-color-bg-surface);
+}
+
+.cl-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+  width: 100%;
+  max-width: 220px;
+}
+
+/* o bloco da grade de horas, solto: sem posição nem altura calculadas */
+.cl-block.ds-calendar__event {
+  position: static;
+  width: 100%;
+  height: auto;
+  min-height: 48px;
+}
+
+.cl-overlap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.cl-overlap .cl-block:last-child {
+  margin-top: 24px;
+}
+
+.cl-tones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.cl-tone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+  padding: var(--ds-space-200);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.cl-tone__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Teclado e API ───────── */
+
+.cl-keys {
+  --doc-table-cols: minmax(140px, 0.6fr) minmax(0, 1.4fr);
+}
+
+.cl-keys__keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-050);
+}
+
+.cl-keys__text,
+.cl-api__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.cl-api {
+  --doc-table-cols: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.8fr) minmax(0, 2fr);
+}
+
+.cl-methods {
+  --doc-table-cols: minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.cl-api__type {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-code-sm);
+  overflow-wrap: anywhere;
+}
+
+/* ───────── Telas menores ───────── */
+
+@media (max-width: 1023.98px) {
+  .cl-tones {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cl-tones {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cl-api .doc-table__head {
+    display: none;
+  }
+
+  .cl-api .doc-table__row,
+  .cl-methods .doc-table__row,
+  .cl-keys .doc-table__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ds-space-050);
+  }
+}
