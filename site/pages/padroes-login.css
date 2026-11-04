@@ -1,0 +1,371 @@
+/* Página: Padrões · Login e cadastro (prefixo lc-) */
+
+/* ───────── Palco: a tela de acesso, fora do app ───────── */
+
+.lc-stage {
+  border-radius: var(--ds-radius-2xl);
+  background: var(--ds-color-bg-app);
+  border: 1px solid var(--ds-color-border-subtle);
+  color: var(--ds-color-fg-default);
+  overflow: hidden;
+  transition: background-color var(--ds-duration-base) var(--ds-easing-standard);
+}
+
+.lc-stage__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-150);
+  padding: var(--ds-space-200);
+}
+
+.lc-segmented .ds-segmented__item {
+  padding-inline: var(--ds-space-150);
+  font: var(--ds-text-label-sm);
+}
+
+.lc-screen {
+  display: flex;
+  justify-content: center;
+  padding: var(--ds-space-400) var(--ds-space-300) var(--ds-space-800);
+}
+
+.lc-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-250);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--ds-space-500) var(--ds-space-500) var(--ds-space-400);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.lc-card[hidden],
+.lc-card__form[hidden],
+.lc-sent[hidden] {
+  display: none;
+}
+
+.lc-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-250);
+}
+
+.lc-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+  margin-bottom: var(--ds-space-100);
+}
+
+/* a marca de verdade: a chama e o nome em Geist Serif, como na sidebar */
+.lc-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+  margin-bottom: var(--ds-space-300);
+  color: var(--ds-color-fg-default);
+  font: var(--ds-font-weight-regular) 1.5rem/1 var(--ds-font-family-display);
+  letter-spacing: -0.02em;
+}
+
+.lc-brand__mark {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.lc-card__title {
+  font: var(--ds-text-heading-lg);
+  letter-spacing: var(--ds-text-heading-lg-tracking);
+}
+
+.lc-card__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.lc-card [data-lc-alert]:empty {
+  display: none;
+}
+
+/* “Esqueci a senha” embaixo do campo, à direita */
+.lc-password {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-100);
+}
+
+.lc-forgot {
+  align-self: flex-end;
+}
+
+.lc-submit {
+  width: 100%;
+  margin-top: var(--ds-space-050);
+}
+
+.lc-switch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-space-075);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+.lc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-radius-xs);
+  background: none;
+  color: var(--ds-color-fg-link);
+  font: inherit;
+  font-weight: var(--ds-font-weight-medium);
+  cursor: pointer;
+}
+
+.lc-link:hover {
+  color: var(--ds-color-fg-link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lc-legal {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-caption);
+  text-align: center;
+}
+
+.lc-legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ───────── Requisitos da senha ───────── */
+
+.lc-reqs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-050);
+  margin-top: calc(-1 * var(--ds-space-100));
+  padding: 0;
+  list-style: none;
+}
+
+.lc-req {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-075);
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-caption);
+  transition: color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.lc-req .ds-icon {
+  color: var(--ds-color-fg-subtle);
+  transition: color var(--ds-duration-fast) var(--ds-easing-standard);
+}
+
+.lc-req[data-met] {
+  color: var(--ds-color-fg-default);
+}
+
+.lc-req[data-met] .ds-icon {
+  color: var(--ds-color-success-fg);
+}
+
+/* ───────── Link enviado ───────── */
+
+.lc-sent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-100);
+  outline: none;
+}
+
+.lc-sent .lc-brand {
+  margin-bottom: var(--ds-space-200);
+}
+
+.lc-sent__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--ds-space-100);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-brand-subtle);
+  color: var(--ds-color-brand-fg);
+}
+
+.lc-sent .lc-submit {
+  margin-top: var(--ds-space-200);
+}
+
+/* Botão enviando */
+.lc-spin {
+  animation: lc-spin 0.9s linear infinite;
+}
+
+@keyframes lc-spin {
+  to { transform: rotate(1turn); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-spin {
+    animation: none;
+  }
+}
+
+[data-lc-submit][data-busy] {
+  cursor: progress;
+}
+
+/* ───────── Dicas abaixo do exemplo ───────── */
+
+.lc-tries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-100) var(--ds-space-300);
+  margin-top: var(--ds-space-200);
+  padding: 0;
+  list-style: none;
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+}
+
+.lc-tries li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-100);
+}
+
+.lc-tries .ds-icon {
+  flex: none;
+  color: var(--ds-color-fg-subtle);
+}
+
+/* ───────── Regras ───────── */
+
+.lc-rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-150);
+}
+
+.lc-rule {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ds-space-075);
+  padding: var(--ds-space-300);
+  border-radius: var(--ds-radius-xl);
+  background: var(--ds-color-bg-surface);
+  border: 1px solid var(--ds-color-border-subtle);
+}
+
+.lc-rule__icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: var(--ds-space-100);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-color-bg-muted);
+  color: var(--ds-color-fg-muted);
+}
+
+.lc-rule__title {
+  font: var(--ds-text-label-md);
+}
+
+.lc-rule__text {
+  color: var(--ds-color-fg-muted);
+  font: var(--ds-text-body-sm);
+  letter-spacing: var(--ds-text-body-sm-tracking);
+}
+
+/* ───────── Mensagens ───────── */
+
+.lc-writing__situation {
+  color: var(--ds-color-fg-subtle);
+  font: var(--ds-text-label-sm);
+}
+
+.lc-writing__bad,
+.lc-writing__good {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-100);
+  font: var(--ds-text-body-sm);
+}
+
+.lc-writing__bad {
+  color: var(--ds-color-fg-subtle);
+}
+
+.lc-writing__bad > span {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.lc-writing__bad .ds-icon,
+.lc-writing__good .ds-icon {
+  flex: none;
+  margin-top: 3px;
+}
+
+.lc-writing__bad .ds-icon {
+  color: var(--ds-color-danger-fg);
+}
+
+.lc-writing__good {
+  color: var(--ds-color-fg-default);
+}
+
+.lc-writing__good .ds-icon {
+  color: var(--ds-color-success-fg);
+}
+
+/* ───────── Telas menores ───────── */
+
+@media (max-width: 1199.98px) {
+  .lc-rules {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .lc-rules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lc-screen {
+    padding: var(--ds-space-200) var(--ds-space-150) var(--ds-space-400);
+  }
+
+  .lc-card {
+    padding: var(--ds-space-400) var(--ds-space-300) var(--ds-space-300);
+  }
+
+  .lc-writing .doc-table__head {
+    display: none;
+  }
+
+  .lc-writing .doc-table__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ds-space-075);
+  }
+}

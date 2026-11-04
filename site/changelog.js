@@ -8,10 +8,37 @@ import { tr } from '../ds/js/i18n.js';
 
 const T = (pt, en, es) => ({ 'pt-BR': pt, en, es });
 
-export const CURRENT_VERSION = '0.10.0';
+export const CURRENT_VERSION = '0.11.0';
 export const SEEN_KEY = 'ds-novidades-vista';
 
 const RELEASES = [
+  {
+    version: '0.11.0',
+    date: '2026-11-04',
+    title: T('Login e cadastro', 'Sign-in and sign-up', 'Inicio de sesión y registro'),
+    summary: T(
+      'Um padrão novo para as telas de acesso: entrar, criar conta e recuperar a senha, com exemplo ao vivo.',
+      'A new pattern for access screens: sign in, create an account, and reset the password, with a live example.',
+      'Un patrón nuevo para las pantallas de acceso: entrar, crear cuenta y recuperar la contraseña, con ejemplo en vivo.',
+    ),
+    groups: [
+      {
+        name: T('Padrões', 'Patterns', 'Patrones'),
+        items: [
+          ['novo', T(
+            'Login e cadastro: as três telas ligadas, com mostrar senha, requisitos que marcam enquanto você digita e erro que não entrega quem tem conta',
+            'Sign-in and sign-up: the three connected screens, with show password, requirements that check off as you type, and errors that don’t reveal who has an account',
+            'Inicio de sesión y registro: las tres pantallas conectadas, con mostrar contraseña, requisitos que se marcan mientras escribes y errores que no revelan quién tiene cuenta',
+          ), '/padroes/login'],
+          ['novo', T(
+            'Regras, mensagens (evite → prefira), acessibilidade com a WCAG 3.3.8 e o código do login',
+            'Rules, messages (avoid → prefer), accessibility with WCAG 3.3.8, and the sign-in code',
+            'Reglas, mensajes (evita → prefiere), accesibilidad con la WCAG 3.3.8 y el código del inicio de sesión',
+          ), '/padroes/login'],
+        ],
+      },
+    ],
+  },
   {
     version: '0.10.0',
     date: '2026-11-03',
